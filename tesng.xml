@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="UI_User_Test" parallel="false" thread-count="1">
+    <test name="UI_User_Test">
+        <parameter name="useGrid" value=" False"/>
+        <parameter name="browserName" value="chrome"/>
+        <classes>
+            <class name="UI_User_Test" />
+        </classes>
+    </test>
+</suite>
