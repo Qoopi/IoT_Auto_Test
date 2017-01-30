@@ -27,6 +27,7 @@ public class LogInPage {
         driver.findElement(new By.ByXPath("//*[@id=\"Email\"]")).sendKeys("kov.ossystem@gmail.com");
         driver.findElement(new By.ByXPath("//*[@id=\"next\"]")).click();
         driver.findElement(new By.ByXPath("//*[@id=\"Passwd\"]")).sendKeys("q125478963Q");
+        driver.findElement(new By.ByXPath("//*[@id=\"signIn\"]")).click();
 
 
 
