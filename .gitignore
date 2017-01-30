@@ -1,7 +1,6 @@
 .idea
+target
 *.iws
 *.iml
 *.ipr
-git
-target/generated-sources/
-target/generated-test-sources/
+
