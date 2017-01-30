@@ -1,7 +1,0 @@
-utils\TestListener.class
-utils\WebDriverFactory.class
-pageObjets\Dashboard.class
-utils\Utils.class
-utils\WaitsAsserts.class
-utils\WebDriverManager.class
-pageObjets\LogInPage.class
