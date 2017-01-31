@@ -2,6 +2,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pageObjets.Dashboard;
 import pageObjets.LogInPage;
+import pageObjets.UserList;
 import utils.TestListener;
 
 
@@ -16,37 +17,56 @@ public class UI_User_Test {
     }
 
     @Test(priority = 1)
-    public void checkOutUserList() {
+    public void openUserList() {
         Dashboard dashboard = new Dashboard();
         dashboard.openAdministration();
-        dashboard.openUserList();
+        UserList userList = new UserList();
+        userList.openUserList();
+    }
+    @Test(priority =2 )
+    public  void checkOutColumns(){
+        UserList userList = new UserList();
+        userList.openMenu();
+        userList.userNameColumCheck();
+        userList.emailColumCheck();
+        userList.activeColumCheck();
+        userList.adminGroupColumCheck();
+        userList.serviceColumCheck();
+        userList.updatedAtColumCheck();
+        userList.regTimeColumCheck();
+        userList.openUserList();
     }
 
     @Test(priority = 2)
-    public void checkOutService() {
-        Dashboard dashboard = new Dashboard();
-        dashboard.openMenu();
-        dashboard.addServices();
-        dashboard.openMenu();
-        dashboard.dismissService();
+    public void addColumnService() {
+        UserList userList = new UserList();
+        userList.openMenu();
+        userList.addServices();
     }
     @Test(priority = 3)
-    public void checkOutUpdatedAt(){
-         Dashboard dashboard = new Dashboard();
-         dashboard.openMenu();
-         dashboard.addUpdatedAt();
-         dashboard.openMenu();
-         dashboard.dismissUpdatedAt();
-}
+    public void addColumnUpdatedAt(){
+        UserList userList = new UserList();
+        userList.openMenu();
+        userList.addUpdatedAt();;
+    }
     @Test(priority = 4)
-    public void checkOutRegTime(){
-        Dashboard dashboard = new Dashboard();
-        dashboard.openMenu();
-        dashboard.addRegTime();
-        dashboard.openMenu();
-        dashboard.dismissRegTime();
+    public void addColumnRegTime(){
+        UserList userList = new UserList();
+        userList.openMenu();
+        userList.addRegTime();
+    }
+    @Test(dependsOnMethods = "addColumnRegTime")
+    public void dismissAddedColumns (){
+        UserList userList = new UserList();
+        userList.openMenu();
+        userList.dismissService();
 
-}
+        userList.openMenu();
+        userList.dismissUpdatedAt();
+
+        userList.openMenu();
+        userList.dismissRegTime();
+    }
 }
 
 

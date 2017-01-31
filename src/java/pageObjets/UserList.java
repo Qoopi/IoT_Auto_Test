@@ -2,33 +2,23 @@ package pageObjets;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import ru.yandex.qatools.allure.annotations.Step;
-import utils.WebDriverManager;
 import utils.WaitsAsserts;
+import utils.WebDriverManager;
+
+import java.sql.Driver;
 
 /**
- * Created by User on 27.01.2017.
+ * Created by User on 31.01.2017.
  */
-public class Dashboard {
-    WaitsAsserts waits_asserts = new WaitsAsserts();
-
+public class UserList {
+        WaitsAsserts waits_asserts = new WaitsAsserts();
     public WebDriver driver;
 
-    public Dashboard() {
-        this.driver = WebDriverManager.getDriver();
-    }
-
-    @Step
-    public void openAdministration() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[5]/span/div/div");
-        driver.findElement(new By.ByXPath("//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[5]/span/div/div")).click();
-
-    }
-
+    public UserList() {this.driver = WebDriverManager.getDriver();}
     @Step
     public void openUserList() {
+        waits_asserts.waitForClickableByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[5]/div");
         driver.findElement(new By.ByXPath("//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[5]/div/div[2]/span/div/div")).click();
     }
 
@@ -37,6 +27,34 @@ public class Dashboard {
         //open menu
         waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[1]/span/div/button");
         driver.findElement(new By.ByXPath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[1]/span/div/button")).click();
+    }@Step
+    public void userNameColumCheck() {
+        // Checkout User name column in menu
+        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div/div/div/div/div/div[1]/span/div/div/div", "User name");
+    }@Step
+    public void emailColumCheck() {
+        //Checkout Email column in menu
+        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div/div/div/div/div/div[2]/span/div/div/div", "Email");
+    }@Step
+    public void activeColumCheck() {
+        // Checkout Active column in menu
+        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div/div/div/div/div/div[3]/span/div/div/div", "Active");
+    }@Step
+    public void adminGroupColumCheck() {
+        // Checkout Admin Group column in menu
+        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div/div/div/div/div/div[4]/span/div/div/div", "Admin group");
+    }@Step
+    public void serviceColumCheck() {
+        // Checkout Service column in menu
+        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div/div/div/div/div/div[5]/span/div/div/div", "Service");
+    }@Step
+    public void updatedAtColumCheck() {
+        // Checkout Updated At column in menu
+        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div/div/div/div/div/div[5]/span/div/div/div", "Updated at");
+    }@Step
+    public void regTimeColumCheck() {
+        // Checkout Reg. Time column in menu
+        waits_asserts.assertTextByXpath(driver,"/html/body/div[5]/div/div/div/div/div/div[5]/span/div/div/div","Reg. time");
     }
 
     @Step
@@ -88,7 +106,7 @@ public class Dashboard {
         driver.findElement(new By.ByXPath("/html/body/div[5]/div/div/div/div/div/div[7]/span/div/div/span")).click();
         // wait for
         waits_asserts.sleep(1000);
-        waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[1]/table/thead/tr/th[6]/span/span[1]","Reg. time");
+        waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[1]/table/thead/tr/th[8]/span/span[1]","Reg. time");
         waits_asserts.sleep(1000);
     }
 
@@ -101,4 +119,5 @@ public class Dashboard {
         waits_asserts.sleep(1000);
 
     }
+
 }

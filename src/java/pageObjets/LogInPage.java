@@ -17,7 +17,8 @@ public class LogInPage {
     public void autoriseWithGoogle(){
 
         // open start page
-        driver.get("https://dashboard.dev.iotsyst.com/");
+        //driver.get("https://dashboard.dev.iotsyst.com/"); //dev
+        driver.get("https://dashboard.wstaging.iotsyst.com"); // stage
         // cheking out that we are ou the right page
         String title = "IoT Systems App"; // Expected title
         waits_asserts.assertByTitle(driver, title);
@@ -28,7 +29,8 @@ public class LogInPage {
         driver.findElement(new By.ByXPath("//*[@id=\"next\"]")).click();
         driver.findElement(new By.ByXPath("//*[@id=\"Passwd\"]")).sendKeys("q125478963Q");
         driver.findElement(new By.ByXPath("//*[@id=\"signIn\"]")).click();
-
+//        checkout admin acc
+        waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[1]/div/div[3]/div/div[2]/div[1]/div/p[2]/span","Administrator");
 
 
 
@@ -36,12 +38,6 @@ public class LogInPage {
     @Step("autoriseAWS")
     public void autoriseWithAWS(){
 
-    }
-    @Step("chekOutDashboard")
-    public void chekingOutDashboards(){
-        String text = "Dashboards";
-        String XPAth = ("//*[@id=\"naviCrumb\"]/span");
-        waits_asserts.assertTextByXpath(driver,XPAth, text);
     }
 
 }
