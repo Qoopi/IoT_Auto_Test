@@ -17,8 +17,8 @@ public class LogInPage {
     public void autoriseWithGoogle(){
 
         // open start page
-        //driver.get("https://dashboard.dev.iotsyst.com/"); //dev
-        driver.get("https://dashboard.wstaging.iotsyst.com"); // stage
+        driver.get("https://dashboard.dev.iotsyst.com/"); //dev
+        //driver.get("https://dashboard.wstaging.iotsyst.com"); // stage
         // cheking out that we are ou the right page
         String title = "IoT Systems App"; // Expected title
         waits_asserts.assertByTitle(driver, title);

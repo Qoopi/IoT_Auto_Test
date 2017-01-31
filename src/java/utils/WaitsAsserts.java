@@ -24,10 +24,17 @@ public class WaitsAsserts {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
     }
-
+    public void waitForVisibilityByCSS(WebDriver driver, String css) {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(css)));
+    }
     public void waitForClickableByXpath(WebDriver driver, String xpath) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+    }
+    public void waitForClickableByCSS(WebDriver driver, String css) {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(css)));
     }
     public static void  assertByTitle(WebDriver driver, String title) {
         String currentTitle = driver.getTitle();
@@ -35,11 +42,16 @@ public class WaitsAsserts {
 
     }
     public void assertTextByXpath(WebDriver driver, String XPath, String text){
-        driver.navigate().refresh();
+       // driver.navigate().refresh();
         waitForVisibilityByXpath(driver, XPath);
         String anElementTile = driver.findElement(By.xpath(XPath)).getText();
         assertTrue(anElementTile.contains(text));
 
     }
-
+    public void assertTextByCSS(WebDriver driver, String CSS, String text) {
+       // driver.navigate().refresh();
+        waitForVisibilityByXpath(driver, CSS);
+        String anElementTile = driver.findElement(By.cssSelector(CSS)).getText();
+        assertTrue(anElementTile.contains(text));
+    }
 }
