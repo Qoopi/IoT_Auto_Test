@@ -2,29 +2,17 @@ package pageObjets;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestResult;
 import ru.yandex.qatools.allure.annotations.Step;
-import utils.Utils;
 import utils.WaitsAsserts;
 import utils.WebDriverManager;
 
-import java.util.Date;
 
-
-/**
- * Created by User on 31.01.2017.
- */
 public class UserList {
-        WaitsAsserts waits_asserts = new WaitsAsserts();
-    public WebDriver driver;
+    private WaitsAsserts waits_asserts = new WaitsAsserts();
+    private WebDriver driver;
 
     public UserList() {this.driver = WebDriverManager.getDriver();}
-    @Step
-    public void openUserList() {
-        waits_asserts.waitForClickableByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[5]/div");
-        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[5]/div/div[2]/span/div/div")).click();
 
-    }
     @Step
     public void defaultColumnsCheck(){
         waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]");
@@ -61,7 +49,8 @@ public class UserList {
 
     @Step
     public void dismissService() {
-
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div[2]/div/div[2]/div/div[1]/span/div/button")).click();
+        waits_asserts.waitForVisibilityByXpath(driver,"/html/body/div[5]/div/div/div/div/div/div[6]/span/div");
         driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div/div/div[5]/span/div/div")).click();
         waits_asserts.sleep(1000);
     }
@@ -138,25 +127,25 @@ public class UserList {
     @Step
     public void markUser(){
         waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]");
-        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[7]/td[1]/div/input")).click();
-        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[8]/td[1]/div/input")).click();
-        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[9]/td[1]/div/input")).click();
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[4]/td[1]/div/input")).click();
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[10]/td[1]/div/input")).click();
     }
     @Step
-    public void deactivateSeveralUsers (){
+    public void deactivateSeveralUsers () {
         // Choosing two more users
-        waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]");
-
+        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]");
         // deactivating users
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/span/div/div/div/button/div/div")).click();
-
-        waits_asserts.waitForClickableByCSS(driver,"div.floatChild:nth-child(2) > span:nth-child(2) > div:nth-child(1) > button:nth-child(1)");
-
+        waits_asserts.waitForClickableByCSS(driver, "div.floatChild:nth-child(2) > span:nth-child(2) > div:nth-child(1) > button:nth-child(1)");
         driver.findElement(By.cssSelector("div.floatChild:nth-child(2) > span:nth-child(2) > div:nth-child(1) > button:nth-child(1)")).click();
-        // activating them back
+
+    }
+    @Step
+            public void activateUsersBack(){
        // waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/span/div/div/div/button/div/div");
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div[2]/div/div[2]/div/div[2]/span/div/div/div/button/div/span")).click();
-        waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div[2]/div/div[2]/div/div[2]/span/div[2]/div[1]/div[1]/span[2]/div/button/div/div");
-        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div[2]/div/div[2]/div/div[2]/span/div[2]/div[1]/div[1]/span[2]/div/button/div/div")).click();
+        waits_asserts.waitForClickableByCSS(driver, "div.floatChild:nth-child(2) > span:nth-child(2) > div:nth-child(1) > button:nth-child(1)");
+        //waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div[2]/div/div[2]/div/div[2]/span/div[2]/div[1]/div[1]/span[2]/div/button/div/div");
+        driver.findElement(By.cssSelector("div.floatChild:nth-child(1) > span:nth-child(2) > div:nth-child(1) > button:nth-child(1)")).click();
     }
 }

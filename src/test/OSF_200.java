@@ -12,7 +12,7 @@ import utils.Utils;
 
 
 @Listeners(TestListener.class)
-public class UI_User_Test {
+public class OSF_200 {
 
 
     @Test
@@ -26,14 +26,14 @@ public class UI_User_Test {
     public void openUserList() {
         Dashboard dashboard = new Dashboard();
         dashboard.openAdministration();
-        UserList userList = new UserList();
-        userList.openUserList();
+        dashboard.openUserList();
 
     }
-     @Test(priority =2 )
-    public  void checkDefaultColumns(){
-         UserList userList = new UserList();
-         userList.defaultColumnsCheck();
+
+    @Test(priority = 2)
+    public void checkDefaultColumns() {
+        UserList userList = new UserList();
+        userList.defaultColumnsCheck();
     }
 
     @Test(priority = 3)
@@ -41,36 +41,28 @@ public class UI_User_Test {
         UserList userList = new UserList();
         userList.openMenu();
         userList.addServices();
-        userList.dismissService();
     }
+
     @Test(priority = 4)
-    public void addColumnUpdatedAt(){
+    public void addColumnUpdatedAt() {
         UserList userList = new UserList();
         userList.openMenu();
         userList.addUpdatedAt();
     }
+
     @Test(priority = 5)
-    public void addColumnRegTime(){
+    public void addColumnRegTime() {
         UserList userList = new UserList();
         userList.openMenu();
         userList.addRegTime();
     }
+
     @Test(priority = 6)
-    public void markUser(){
+    public void markUser() {
         UserList userList = new UserList();
         userList.markUser();
         userList.deactivateSeveralUsers();
-    }
-    @Test(dependsOnMethods = "addColumnRegTime")
-    public void dismissAddedColumns (){
-        UserList userList = new UserList();
-        userList.dismissRegTime();
 
-
-
-       // userList.dismissUpdatedAt();
-
-        //userList.dismissService();
     }
 }
 

@@ -6,13 +6,9 @@ import ru.yandex.qatools.allure.annotations.Step;
 import utils.WebDriverManager;
 import utils.WaitsAsserts;
 
-/**
- * Created by User on 27.01.2017.
- */
 public class Dashboard {
-    WaitsAsserts waits_asserts = new WaitsAsserts();
-
-    public WebDriver driver;
+    private WaitsAsserts waits_asserts = new WaitsAsserts();
+    private WebDriver driver;
 
     public Dashboard() {
         this.driver = WebDriverManager.getDriver();
@@ -23,5 +19,15 @@ public class Dashboard {
         waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[5]/span/div/div");
         driver.findElement(new By.ByXPath("//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[5]/span/div/div")).click();
     }
+    @Step("Open Requests")
+    public void openRequests(){
+        waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[5]/div/div[1]/span/div/div");
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[5]/div/div[1]/span/div/div")).click();
+    }
+    @Step
+    public void openUserList() {
+        waits_asserts.waitForClickableByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[5]/div");
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[5]/div/div[2]/span/div/div")).click();
 
+    }
 }
