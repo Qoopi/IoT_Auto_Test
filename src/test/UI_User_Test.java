@@ -1,9 +1,14 @@
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pageObjets.Dashboard;
 import pageObjets.LogInPage;
 import pageObjets.UserList;
 import utils.TestListener;
+import utils.Utils;
+
+
 
 
 @Listeners(TestListener.class)
@@ -13,7 +18,8 @@ public class UI_User_Test {
     @Test
     public void Login() {
         LogInPage login = new LogInPage();
-        login.autoriseWithGoogle();
+        login.getToIoTPage();
+        login.enterGoogleCred();
     }
 
     @Test(priority = 1)
@@ -34,20 +40,14 @@ public class UI_User_Test {
     public void addColumnService() {
         UserList userList = new UserList();
         userList.openMenu();
-//        userList.userNameColumnCheck();
-//        userList.emailColumnCheck();
-//        userList.activeColumnCheck();
-//        userList.adminGroupColumnCheck();
-//        userList.serviceColumnCheck();
-//        userList.updatedAtColumnCheck();
-//        userList.regTimeColumnCheck();
         userList.addServices();
+        userList.dismissService();
     }
     @Test(priority = 4)
     public void addColumnUpdatedAt(){
         UserList userList = new UserList();
         userList.openMenu();
-        userList.addUpdatedAt();;
+        userList.addUpdatedAt();
     }
     @Test(priority = 5)
     public void addColumnRegTime(){
@@ -64,14 +64,13 @@ public class UI_User_Test {
     @Test(dependsOnMethods = "addColumnRegTime")
     public void dismissAddedColumns (){
         UserList userList = new UserList();
-        userList.openMenu();
         userList.dismissRegTime();
 
-        userList.openMenu();
-        userList.dismissUpdatedAt();
 
-        userList.openMenu();
-        userList.dismissService();
+
+       // userList.dismissUpdatedAt();
+
+        //userList.dismissService();
     }
 }
 

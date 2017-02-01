@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class TestListener implements ITestListener {
-
+    Utils utils= new Utils();
     private String params;
 
     private File captureScreenshot(WebDriver driver) {
@@ -43,31 +43,23 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-
-        System.out.println("============TEST STARTED============");
-
-
+        System.out.println("============Test started============");
     }
 
     @Override
     public void onTestSuccess(ITestResult tr) {
-        System.out.println("============TEST SUCCESS============");
+        System.out.println("============Test passed successful============");
         String pathSucceed = "target/screenshots/"+params+"/success/" + tr.getMethod().getMethodName() + ".png";
-
         File screen = captureScreenshot(WebDriverManager.getDriver());
-        try {
-            FileUtils.copyFile(screen, new File(pathSucceed));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        try {FileUtils.copyFile(screen, new File(pathSucceed));}
+        catch (IOException e) {e.printStackTrace();}
         System.out.println("Screesnshot captured for test case:" + tr.getMethod().getMethodName());
     }
 
 
     @Override
     public void onTestFailure(ITestResult tr) {
-        System.out.println("============TEST FAILED============");
+        System.out.println("============Test failed============");
         String pathFailed = "target/screenshots/"+params+"/failed/" + tr.getMethod().getMethodName() + ".png";
 
         File screen = captureScreenshot(WebDriverManager.getDriver());
@@ -82,19 +74,17 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-        System.out.println("============TEST SKIPPED============");
-
+        System.out.println("============Test skipped============");
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
-        System.out.println("======TEST FAILED BUT WITHIN SUCCESS PERCENTAGE========");
-
+        System.out.println("======Test failed, but that the expected result=======");
     }
 
     @Override
     public void onStart(ITestContext iTestContext) {
-        System.out.println("============STARTING TESTING============");
+        System.out.println("============Starting testing process============");
         String browserName = iTestContext.getCurrentXmlTest().getParameter("browserName");
         String useGrid = iTestContext.getCurrentXmlTest().getParameter("useGrid");
         Boolean boo = useGrid.contentEquals("true");
@@ -111,7 +101,7 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onFinish(ITestContext iTestContext) {
-        System.out.println("==========FINISHING TESTING============");
+        System.out.println("==========Finishing testing process ============");
         WebDriver driver = WebDriverManager.getDriver();
         WaitsAsserts waits = new WaitsAsserts();
         waits.sleep(5000);
