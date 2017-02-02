@@ -1,10 +1,10 @@
-package pageObjets;
+package ui.pageObjets;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ru.yandex.qatools.allure.annotations.Step;
-import utils.WaitsAsserts;
-import utils.WebDriverManager;
+import ui.utils.WaitsAsserts;
+import ui.utils.WebDriverManager;
 
 
 public class UserList {

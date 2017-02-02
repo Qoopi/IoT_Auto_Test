@@ -1,9 +1,4 @@
-package utils;
-
-/**
- * Created by User on 26.01.2017.
- */
-
+package ui.utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;

@@ -1,4 +1,4 @@
-package utils;
+package ui.utils;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class TestListener implements ITestListener {
-    Utils utils= new Utils();
+    uiUtils utils= new uiUtils();
     private String params;
 
     private File captureScreenshot(WebDriver driver) {
@@ -93,7 +93,7 @@ public class TestListener implements ITestListener {
         WebDriverManager.setWebDriver(driver);
 
 
-        Utils util = new Utils();
+        uiUtils util = new uiUtils();
         String currentDate = util.getTime();
 
         params = currentDate +"-"+browserName+"-grid-"+useGrid;

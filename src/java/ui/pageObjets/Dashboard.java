@@ -1,10 +1,10 @@
-package pageObjets;
+package ui.pageObjets;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ru.yandex.qatools.allure.annotations.Step;
-import utils.WebDriverManager;
-import utils.WaitsAsserts;
+import ui.utils.WebDriverManager;
+import ui.utils.WaitsAsserts;
 
 public class Dashboard {
     private WaitsAsserts waits_asserts = new WaitsAsserts();

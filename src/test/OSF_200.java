@@ -1,14 +1,9 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import pageObjets.Dashboard;
-import pageObjets.LogInPage;
-import pageObjets.UserList;
-import utils.TestListener;
-import utils.Utils;
-
-
+import ui.pageObjets.Dashboard;
+import ui.pageObjets.LogInPage;
+import ui.pageObjets.UserList;
+import ui.utils.TestListener;
 
 
 @Listeners(TestListener.class)

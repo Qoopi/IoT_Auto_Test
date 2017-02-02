@@ -1,8 +1,4 @@
-package utils;
-
-/**
- * Created by User on 26.01.2017.
- */
+package ui.utils;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

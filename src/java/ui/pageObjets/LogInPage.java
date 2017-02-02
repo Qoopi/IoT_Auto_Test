@@ -1,13 +1,13 @@
-package pageObjets;
+package ui.pageObjets;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ru.yandex.qatools.allure.annotations.Step;
-import utils.WebDriverManager;
-import utils.WaitsAsserts;
+import ui.utils.WebDriverManager;
+import ui.utils.WaitsAsserts;
 
 public class LogInPage {
-    WaitsAsserts  waits_asserts = new WaitsAsserts();
+    private WaitsAsserts  waits_asserts = new WaitsAsserts();
 
     private WebDriver driver;
 
