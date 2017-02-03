@@ -20,7 +20,7 @@ public class Requests {
         waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr/td[2]","Oleg Kutafin");
         waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr/td[3]","geloksmmm@gmail.com");
     }
-    @Step
+    @Step("Accept new User")
     public void acceptUser(){
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr/td[5]/div/button/div/span")).click();
         waits_asserts.waitForClickableByXpath(driver,"/html/body/div[5]/div/div/div/div/div/div[1]/span/div/div");

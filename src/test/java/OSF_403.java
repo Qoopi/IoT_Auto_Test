@@ -10,17 +10,17 @@ import ui.utils.TestListener;
 
 public class OSF_403 {
 
-    @Test
+        @Test
     public void LogInWithGoogle2() {
         LogInPage log = new LogInPage();
         log.getToIoTPage();
         log.enterGoogleCred2();
+        log.refresh();
         log.goToLogInPage();
     }
     @Test(priority = 1)
     public void LogInWithAdminAcc(){
         LogInPage log = new LogInPage();
-        log.getToIoTPage();
         log.enterGoogleCred();
 
     }

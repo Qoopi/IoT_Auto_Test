@@ -14,7 +14,7 @@ public class Dashboard {
         this.driver = WebDriverManager.getDriver();
     }
 
-    @Step
+    @Step("Open Administration menu")
     public void openAdministration() {
         waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[5]/span/div/div");
         driver.findElement(new By.ByXPath("//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[5]/span/div/div")).click();
@@ -24,7 +24,7 @@ public class Dashboard {
         waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[5]/div/div[1]/span/div/div");
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[5]/div/div[1]/span/div/div")).click();
     }
-    @Step
+    @Step("Open Users list")
     public void openUserList() {
         waits_asserts.waitForClickableByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[5]/div");
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[5]/div/div[2]/span/div/div")).click();

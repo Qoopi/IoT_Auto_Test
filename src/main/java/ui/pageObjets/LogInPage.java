@@ -6,6 +6,8 @@ import ru.yandex.qatools.allure.annotations.Step;
 import ui.utils.WebDriverManager;
 import ui.utils.WaitsAsserts;
 
+import java.net.URL;
+
 public class LogInPage {
     private WaitsAsserts  waits_asserts = new WaitsAsserts();
 
@@ -42,16 +44,23 @@ public class LogInPage {
         }
     @Step("Autorise with second Google Acc")
     public void enterGoogleCred2() {
-            //Click on button "Login with Google acc"|
-            driver.findElement(By.xpath("//*[@id=\"grey-background\"]/div[2]/div/div/div[3]/div/div[2]/div/a/div")).click();
-            //Google acc login
-            driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys(mail2);
-            driver.findElement(By.xpath("//*[@id=\"next\"]")).click();
-            driver.findElement(By.xpath("//*[@id=\"Passwd\"]")).sendKeys(pass2);
-            driver.findElement(By.xpath("//*[@id=\"signIn\"]")).click();
-            //Checkout of where we are
+        //Click on button "Login with Google acc"|
+        driver.findElement(By.xpath("//*[@id=\"grey-background\"]/div[2]/div/div/div[3]/div/div[2]/div/a/div")).click();
+        //Google acc login
+        driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys(mail2);
+        driver.findElement(By.xpath("//*[@id=\"next\"]")).click();
+        driver.findElement(By.xpath("//*[@id=\"Passwd\"]")).sendKeys(pass2);
+        driver.findElement(By.xpath("//*[@id=\"signIn\"]")).click();
+        //Checkout of where we are
+    }
+    @Step("Delet cookies")
+            public void refresh(){
+            String URL = "https://dashboard.dev.iotsyst.com/";
+            driver.navigate().to(URL);
+            driver.manage().deleteAllCookies();
+
         }
-    @Step
+    @Step("Get on log in page ")
     public void goToLogInPage(){
         driver.findElement(By.xpath("//*[@id=\"grey-background\"]/div[2]/div/div/div[3]/div/div[2]/a/span")).click();
     }

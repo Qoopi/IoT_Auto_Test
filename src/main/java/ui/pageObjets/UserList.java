@@ -13,7 +13,7 @@ public class UserList {
 
     public UserList() {this.driver = WebDriverManager.getDriver();}
 
-    @Step
+    @Step("Checking default columns")
     public void defaultColumnsCheck(){
         waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]");
         waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[1]/table/thead/tr/th[2]/span/span[1]","User name");
@@ -27,14 +27,14 @@ public class UserList {
 
     }
 
-    @Step
+    @Step("Open right menu")
     public void openMenu() {
         //open menu
         waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[1]/span/div/button");
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[1]/span/div/button")).click();
 
     }
-    @Step
+    @Step("Adding Service column")
     public void addServices() {
 
         //wait for Service
@@ -47,7 +47,7 @@ public class UserList {
         waits_asserts.sleep(1000);
     }
 
-    @Step
+    @Step("Dismiss Service columns")
     public void dismissService() {
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div[2]/div/div[2]/div/div[1]/span/div/button")).click();
         waits_asserts.waitForVisibilityByXpath(driver,"/html/body/div[5]/div/div/div/div/div/div[6]/span/div");
@@ -55,7 +55,7 @@ public class UserList {
         waits_asserts.sleep(1000);
     }
 
-    @Step
+    @Step("Add Update At column")
     public void addUpdatedAt() {
         // wait for
         waits_asserts.waitForVisibilityByXpath(driver, "/html/body/div[5]/div/div/div/div/div/div[6]/span/div/div");
@@ -66,7 +66,7 @@ public class UserList {
         waits_asserts.sleep(1000);
     }
 
-    @Step
+    @Step("Dismiss Update At column")
     public void dismissUpdatedAt() {
         // wait for
 
@@ -75,7 +75,7 @@ public class UserList {
         waits_asserts.sleep(1000);
     }
 
-    @Step
+    @Step("Add Reg. Time column")
     public void addRegTime() {
         // wait for
         waits_asserts.waitForVisibilityByXpath(driver,"/html/body/div[5]/div/div/div/div/div/div[7]/span/div/div");
@@ -86,7 +86,7 @@ public class UserList {
         waits_asserts.sleep(1000);
     }
 
-    @Step
+    @Step("Dismiss  Reg. Time column")
     public void dismissRegTime() {
        // waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div[2]/div/div[2]/div/div[1]/span/div/button/div/span");
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div[2]/div/div[2]/div/div[1]/span/div/button/div/span")).click();
@@ -124,13 +124,13 @@ public class UserList {
         waits_asserts.assertTextByXpath(driver,"/html/body/div[5]/div/div/div/div/div/div[5]/span/div/div/div","Reg. time");
     }
 
-    @Step
+    @Step("Mark some users")
     public void markUser(){
         waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]");
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[4]/td[1]/div/input")).click();
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[10]/td[1]/div/input")).click();
     }
-    @Step
+    @Step("Deactivate marked users")
     public void deactivateSeveralUsers () {
         // Choosing two more users
         waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]");
