@@ -53,7 +53,7 @@ public class TestListener implements ITestListener {
         File screen = captureScreenshot(WebDriverManager.getDriver());
         try {FileUtils.copyFile(screen, new File(pathSucceed));}
         catch (IOException e) {e.printStackTrace();}
-        System.out.println("Screesnshot captured for test case:" + tr.getMethod().getMethodName());
+        System.out.println("Screenshot captured for test case:" + tr.getMethod().getMethodName());
     }
 
 
@@ -69,7 +69,7 @@ public class TestListener implements ITestListener {
             e.printStackTrace();
         }
 
-        System.out.println("Screesnshot captured for test case:" + tr.getMethod().getMethodName());
+        System.out.println("Screenshot captured for test case:" + tr.getMethod().getMethodName());
     }
 
     @Override

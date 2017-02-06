@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import ru.yandex.qatools.allure.annotations.Step;
 import ui.utils.WaitsAsserts;
 import ui.utils.WebDriverManager;
+import ui.utils.uiUtils;
 
 
 public class UserList {
@@ -95,43 +96,33 @@ public class UserList {
     }
     // in PoPUp Menu
     @Step
-    public void userNameColumnCheck() {
+    public void checkingColumnsInPompUpMenu() {
         // Checkout User name column in menu
-        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div/div/div/div/div/div[1]/span/div/div/div", "User name");
-    }@Step
-    public void emailColumnCheck() {
+        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div", "User name");
         //Checkout Email column in menu
-        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div/div/div/div/div/div[2]/span/div/div/div", "Email");
-    }@Step
-    public void activeColumnCheck() {
+        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div", "Email");
         // Checkout Active column in menu
-        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div/div/div/div/div/div[3]/span/div/div/div", "Active");
-    }@Step
-    public void adminGroupColumnCheck() {
+        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div", "Active");
         // Checkout Admin Group column in menu
-        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div/div/div/div/div/div[4]/span/div/div/div", "Admin group");
-    }@Step
-    public void serviceColumnCheck() {
+        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div", "Admin group");
         // Checkout Service column in menu
-        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div/div/div/div/div/div[5]/span/div/div/div", "Service");
-    }@Step
-    public void updatedAtColumnCheck() {
+        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div", "Service");
         // Checkout Updated At column in menu
-        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div/div/div/div/div/div[5]/span/div/div/div", "Updated at");
-    }@Step
-    public void regTimeColumnCheck() {
+        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div", "Updated at");
         // Checkout Reg. Time column in menu
-        waits_asserts.assertTextByXpath(driver,"/html/body/div[5]/div/div/div/div/div/div[5]/span/div/div/div","Reg. time");
+        waits_asserts.assertTextByXpath(driver,"/html/body/div[5]/div","Reg. time");
     }
 
-    @Step("Mark some users")
-    public void markUser(){
+    @Step("Mark several users")
+    public void markSeveralUser(){
         waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]");
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[4]/td[1]/div/input")).click();
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[10]/td[1]/div/input")).click();
+        uiUtils utils = new uiUtils();
+        utils.makeScreenshot(driver,"Marked user string terned grey");
     }
     @Step("Deactivate marked users")
-    public void deactivateSeveralUsers () {
+    public void deactivateUsersWithHover () {
         // Choosing two more users
         waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]");
         // deactivating users
@@ -140,12 +131,25 @@ public class UserList {
         driver.findElement(By.cssSelector("div.floatChild:nth-child(2) > span:nth-child(2) > div:nth-child(1) > button:nth-child(1)")).click();
 
     }
-    @Step
-            public void activateUsersBack(){
-       // waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/span/div/div/div/button/div/div");
-        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div[2]/div/div[2]/div/div[2]/span/div/div/div/button/div/span")).click();
-        waits_asserts.waitForClickableByCSS(driver, "div.floatChild:nth-child(2) > span:nth-child(2) > div:nth-child(1) > button:nth-child(1)");
-        //waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div[2]/div/div[2]/div/div[2]/span/div[2]/div[1]/div[1]/span[2]/div/button/div/div");
-        driver.findElement(By.cssSelector("div.floatChild:nth-child(1) > span:nth-child(2) > div:nth-child(1) > button:nth-child(1)")).click();
+    @Step("Activate marked user with Active Column")
+    public void activateUserWithColumn(){
+        waits_asserts.waitForClickableByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[4]/td[4]");
+        driver.findElement(By.cssSelector("#root > div > div.content > div > div > div.table-paper > div > div:nth-child(3) > div:nth-child(2) > table > tbody > tr:nth-child(4) > td:nth-child(4) > span > svg")).click();
+        waits_asserts.waitForClickableByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[10]/td[4]");
+        driver.findElement(By.cssSelector("#root > div > div.content > div > div > div.table-paper > div > div:nth-child(3) > div:nth-child(2) > table > tbody > tr:nth-child(10) > td:nth-child(4) > span > svg")).click();
+    }
+    @Step("Found user to delete")
+    public void foudUserToDelete(){
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[1]/table/thead/tr/th[6]/span")).click();
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[1]/table/thead/tr/th[6]/span")).click();
+        waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[1]/td[3]");
+        waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[1]/td[3]","geloksmmm@gmail.com");
+    }
+    @Step("Delete choosen user")
+    public void deleteChoosenUser(){
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[1]/td[7]/div/button")).click();
+        waits_asserts.assertTextByXpath(driver,"/html/body/div[5]/div/div/div/div/div/div[2]/span/div/div","Delete");
+        driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div/div/div[2]/span/div/div")).click();
+
     }
 }

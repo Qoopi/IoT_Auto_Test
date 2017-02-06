@@ -22,9 +22,10 @@ public class Requests {
     }
     @Step("Accept new User")
     public void acceptUser(){
-        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr/td[5]/div/button/div/span")).click();
-        waits_asserts.waitForClickableByXpath(driver,"/html/body/div[5]/div/div/div/div/div/div[1]/span/div/div");
-        driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div/div/div[1]/span/div/div")).click();
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr/td[1]/div/input")).click();
+        waits_asserts.waitForClickableByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/span/div/div/div/button/div/div");
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/span/div/div/div/button/div/div")).click();
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/span/div[2]/div[1]/div[1]/span[2]/div/button/div/div/i")).click();
         waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr/td","Table is empty");
     }
 }

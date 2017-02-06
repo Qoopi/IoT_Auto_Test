@@ -26,11 +26,11 @@ public class LogInPage {
         driver.get("https://dashboard.dev.iotsyst.com/");                    //dev
         //driver.get("https://dashboard.wstaging.iotsyst.com");              // stage
 
-        // cheking out that we are ou the right page
+        // checking out that we are ou the right page
         waits_asserts.assertByTitle(driver, "IoT Systems App");
     }
 
-    @Step("Autorise with Google Acc")
+    @Step("Authorise with Google Acc, as admin")
     public void enterGoogleCred() {
             //Click on button "Login with Google acc"|
             driver.findElement(By.xpath("//*[@id=\"grey-background\"]/div[2]/div/div/div[3]/div/div[2]/div/a/div")).click();
@@ -42,7 +42,7 @@ public class LogInPage {
             //Checkout of where we are
             waits_asserts.assertTextByXpath(driver, "//*[@id=\"root\"]/div/div[1]/div/div[3]/div/div[2]/div[1]/div/p[2]/span", "Administrator");
         }
-    @Step("Autorise with second Google Acc")
+    @Step("Authorise with second Google Acc, as regular")
     public void enterGoogleCred2() {
         //Click on button "Login with Google acc"|
         driver.findElement(By.xpath("//*[@id=\"grey-background\"]/div[2]/div/div/div[3]/div/div[2]/div/a/div")).click();
@@ -51,13 +51,13 @@ public class LogInPage {
         driver.findElement(By.xpath("//*[@id=\"next\"]")).click();
         driver.findElement(By.xpath("//*[@id=\"Passwd\"]")).sendKeys(pass2);
         driver.findElement(By.xpath("//*[@id=\"signIn\"]")).click();
-        //Checkout of where we are
     }
-    @Step("Delet cookies")
+    @Step("Delete cookies")
             public void refresh(){
             String URL = "https://dashboard.dev.iotsyst.com/";
             driver.navigate().to(URL);
             driver.manage().deleteAllCookies();
+            driver.navigate().refresh();
 
         }
     @Step("Get on log in page ")
@@ -65,9 +65,14 @@ public class LogInPage {
         driver.findElement(By.xpath("//*[@id=\"grey-background\"]/div[2]/div/div/div[3]/div/div[2]/a/span")).click();
     }
 
-    @Step("Autorise with AWS")
+    @Step("Authorise with AWS")
     public void autoriseWithAWS(){
+        driver.findElement(By.xpath("//*[@id=\"grey-background\"]/div[2]/div/div/div[3]/div/div[1]/div/a/div/div")).click();
 
+        driver.findElement(By.xpath("//*[@id=\"ap_email\"]")).sendKeys(mail);
+        driver.findElement(By.xpath("//*[@id=\"ap_password\"]")).sendKeys(pass);
+        driver.findElement(By.xpath("//*[@id=\"signInSubmit\"]")).click();
+        waits_asserts.assertTextByXpath(driver, "//*[@id=\"root\"]/div/div[1]/div/div[3]/div/div[2]/div[1]/div/p[2]/span", "Regular");
     }
 
 }

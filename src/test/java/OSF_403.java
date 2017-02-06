@@ -1,8 +1,11 @@
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
 import ui.pageObjets.Dashboard;
 import ui.pageObjets.LogInPage;
 import ui.pageObjets.Requests;
+import ui.pageObjets.UserList;
 import ui.utils.TestListener;
 
 
@@ -10,32 +13,44 @@ import ui.utils.TestListener;
 
 public class OSF_403 {
 
-        @Test
-    public void LogInWithGoogle2() {
-        LogInPage log = new LogInPage();
-        log.getToIoTPage();
-        log.enterGoogleCred2();
-        log.refresh();
-        log.goToLogInPage();
-    }
-    @Test(priority = 1)
+    @Features("User Requests testing")
+    @Stories("User")
+        @Test(priority = 1)
     public void LogInWithAdminAcc(){
         LogInPage log = new LogInPage();
+        log.getToIoTPage();
         log.enterGoogleCred();
-
     }
 
-    @Test(priority = 2)
+    @Features("User Requests testing")
+    @Stories("User")
+        @Test(priority = 2)
     public void openRequests() {
         Dashboard dashboards = new Dashboard();
         dashboards.openAdministration();
         dashboards.openRequests();
     }
 
-    @Test(priority = 3)
+    @Features("User Requests testing")
+    @Stories("User")
+        @Test(priority = 3)
     public void checkExpectedRequest() {
         Requests requests = new Requests();
         requests.checkRequest();
-
+        requests.acceptUser();
     }
+    @Features("User Requests testing")
+    @Stories("User")
+        @Test(priority = 4)
+    public void deleteUser(){
+        Dashboard dashboard = new Dashboard();
+        dashboard.openUserList();
+
+        UserList user = new UserList();
+        user.openMenu();
+        user.addUpdatedAt();
+        user.foudUserToDelete();
+        user.deleteChoosenUser();
+    }
+
 }

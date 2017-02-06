@@ -14,11 +14,11 @@ import static ui.utils.WaitsAsserts.sleep;
 
 public class uiUtils {
 
-    public void makeScreenshot(WebDriver driver, String name,String date){
+    public void makeScreenshot(WebDriver driver, String name){
         sleep(1000);
         File screen = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(screen, new File("/target/screenshots/"+date+"/"+name+".png"));
+            FileUtils.copyFile(screen, new File("/target/screenshots/"+ getTime() +"/"+name+".png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

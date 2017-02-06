@@ -5,7 +5,7 @@
         <parameter name="browserName" value="chrome"></parameter>
         <parameter name="useGrid" value="False"></parameter>
         <classes>
-            <class name="OSF_200"/>
+            <class name="OSF_403"/>
         </classes>
     </test>
 </suite>
