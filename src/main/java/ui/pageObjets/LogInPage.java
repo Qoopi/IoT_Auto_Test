@@ -2,7 +2,10 @@ package ui.pageObjets;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import org.openqa.selenium.chrome.ChromeDriver;
 import ru.yandex.qatools.allure.annotations.Step;
+import ui.utils.WebDriverFactory;
 import ui.utils.WebDriverManager;
 import ui.utils.WaitsAsserts;
 
@@ -53,14 +56,21 @@ public class LogInPage {
         driver.findElement(By.xpath("//*[@id=\"signIn\"]")).click();
     }
     @Step("Delete cookies")
-            public void refresh(){
-            String URL = "https://dashboard.dev.iotsyst.com/";
-            driver.navigate().to(URL);
-            driver.manage().deleteAllCookies();
-            driver.navigate().refresh();
+    public void refresh(){
+        String URL = "https://dashboard.dev.iotsyst.com/";
+        driver.navigate().to(URL);
+        driver.manage().deleteAllCookies();
+        driver.navigate().refresh();
 
-        }
-    @Step("Get on log in page ")
+    }
+    @Step("Driver close and get new")
+    public void openNewDriver(){
+        driver.close();
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://dashboard.dev.iotsyst.com/");
+    }
+
+    @Step("Get back on log in page ")
     public void goToLogInPage(){
         driver.findElement(By.xpath("//*[@id=\"grey-background\"]/div[2]/div/div/div[3]/div/div[2]/a/span")).click();
     }

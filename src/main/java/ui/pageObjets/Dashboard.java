@@ -31,9 +31,15 @@ public class Dashboard {
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[5]/div/div[2]/span/div/div")).click();
         waits_asserts.assertTextByXpath(driver,"//*[@id=\"naviCrumb\"]","Registered and approved users");
     }
-    @Step("Open Equipment List")
-    public void openEquipmentList(){
+    @Step("Open Equipment List as Admin")
+    public void openEquipmentListAsAdmin(){
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[5]/div/div[3]/span/div/div")).click();
         waits_asserts.assertTextByXpath(driver,"//*[@id=\"naviCrumb\"]","Equipment list");
+    }
+    @Step("Open Equipment as Regular")
+    public void openEquipmentListAsRegular(){
+        waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[2]/span/div/div");
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[1]/div/div/div[1]/div[2]/span/div/div")).click();
+       // waits_asserts.assertTextByXpath(driver,"//*[@id=\"naviCrumb\"]/span","Equipment list");
     }
 }
