@@ -95,7 +95,6 @@ public class TestListener implements ITestListener {
 
         uiUtils util = new uiUtils();
         String currentDate = util.getTime();
-
         params = currentDate +"-"+browserName+"-grid-"+useGrid;
     }
 

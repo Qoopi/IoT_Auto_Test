@@ -1,11 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="OSF_403">
-    <test name="OSF_403">
+<suite name="UserStory">
+
+    <test name="Create New User">
+        <parameter name="browserName" value="chrome"></parameter>
+        <parameter name="useGrid" value="False"></parameter>
+        <classes>
+            <class name="CreateNewUser"/>
+        </classes>
+    </test>
+
+    <test name="OSF_199">
+        <parameter name="browserName" value="chrome"></parameter>
+        <parameter name="useGrid" value="False"></parameter>
+        <classes>
+            <class name="OSF_199_Accept_User"/>
+        </classes>
+    </test>
+
+    <test name="Equipment list check">
         <parameter name="browserName" value="chrome"></parameter>
         <parameter name="useGrid" value="False"></parameter>
         <classes>
             <class name="OSF_53"/>
         </classes>
     </test>
+
+
+    <test name="OSF403">
+        <parameter name="browserName" value="chrome"></parameter>
+        <parameter name="useGrid" value="False"></parameter>
+        <classes>
+            <class name="OSF_403"/>
+        </classes>
+    </test>
+
+    <test name="User List operations">
+        <parameter name="browserName" value="chrome"></parameter>
+        <parameter name="useGrid" value="False"></parameter>
+        <classes>
+            <class name="OSF_200"/>
+        </classes>
+    </test>
 </suite>
+

@@ -1,4 +1,3 @@
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
@@ -6,15 +5,13 @@ import ru.yandex.qatools.allure.annotations.Stories;
 import ui.pageObjets.Dashboard;
 import ui.pageObjets.LogInPage;
 import ui.pageObjets.Requests;
-import ui.pageObjets.UserList;
 import ui.utils.TestListener;
 
-
 @Listeners(TestListener.class)
-
-public class OSF_403 {
-
-    @BeforeTest
+public class OSF_199_Accept_User {
+    @Features("User Requests testing")
+    @Stories("User")
+    @Test(priority = 1)
     public void LogInWithAdminAcc() {
         LogInPage log = new LogInPage();
         log.getToIoTPage();
@@ -23,7 +20,7 @@ public class OSF_403 {
 
     @Features("User Requests testing")
     @Stories("User")
-    @Test
+    @Test(priority = 2)
     public void openRequests() {
         Dashboard dashboards = new Dashboard();
         dashboards.openAdministration();
@@ -32,16 +29,10 @@ public class OSF_403 {
 
     @Features("User Requests testing")
     @Stories("User")
-        @Test(priority = 1)
-    public void deleteUser(){
-        Dashboard dashboard = new Dashboard();
-        dashboard.openUserList();
-
-        UserList user = new UserList();
-        user.openMenu();
-        user.addUpdatedAt();
-        user.foundUserToDelete();
-        user.deleteChosenUser();
+    @Test(priority = 3)
+    public void checkExpectedRequest() {
+        Requests requests = new Requests();
+        requests.checkRequest();
+        requests.acceptUser();
     }
-
 }
