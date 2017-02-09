@@ -11,7 +11,7 @@ import ui.utils.TestListener;
 @Listeners(TestListener.class)
 public class OSF_200 {
 
-    @Features("User List Testing")
+    @Features("User List TestingUser")
     @Stories("User")
     @Test
     public void Login() {
@@ -52,14 +52,6 @@ public class OSF_200 {
         userList.openMenu();
         userList.addRegTime();
 
-        userList.openMenu();
-        userList.addRegTime();
-
-        userList.openMenu();
-        userList.addUpdatedAt();
-
-        userList.openMenu();
-        userList.addServices();
     }
     @Features("User List Testing")
     @Stories("User")

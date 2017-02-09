@@ -15,7 +15,7 @@ public class WebDriverFactory {
     public static WebDriver createInstance(String browserName, Boolean useGrid) {
         URL hostURL = null;
         try {
-            hostURL = new URL("http://127.0.0.1:4444/wd/hub");
+            hostURL = new URL("http://vzhost4:4444/wd/hub");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

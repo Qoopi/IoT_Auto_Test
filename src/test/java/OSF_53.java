@@ -19,8 +19,8 @@ public class OSF_53 {
         log.enterGoogleCred2();
     }
 
-    @Features("Equipment List Testing")
-    @Stories("User role: Regular")
+    @Features("Equipment list testing like regular")
+    @Stories("User")
     @Test
     public void checkEquipment(){
 
@@ -34,8 +34,8 @@ public class OSF_53 {
         equip.sortEquipByGroup();
         equip.sortEquipByUpdatedAt();
     }
-    @Features("Equipment List Testing")
-    @Stories("User role: Admin")
+    @Features("Equipment list testing like admin")
+    @Stories("User")
     @Test(priority = 1)
     public void openWithNewUser(){
 
@@ -44,8 +44,8 @@ public class OSF_53 {
         log.getToIoTPage();
         log.enterGoogleCred();
     }
-    @Features("Equipment List Testing")
-    @Stories("User role: Admin")
+    @Features("Equipment list testing like admin")
+    @Stories("User")
     @Test(priority = 2)
     public void checkEquipmentList(){
 

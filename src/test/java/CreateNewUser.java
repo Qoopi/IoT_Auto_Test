@@ -11,7 +11,7 @@ public class CreateNewUser {
     @Features("Create New User")
     @Stories("User")
     @Test
-    public void LogInWithAdminAcc() {
+    public void createNewUser() {
         LogInPage log = new LogInPage();
         log.getToIoTPage();
         log.enterGoogleCred2();

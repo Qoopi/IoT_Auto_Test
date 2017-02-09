@@ -40,11 +40,13 @@ public class LogInPage {
             //Google acc login
             driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys(mail);
             driver.findElement(By.xpath("//*[@id=\"next\"]")).click();
-            driver.findElement(By.xpath("//*[@id=\"Passwd\"]")).sendKeys(pass);
+            //driver.findElement(By.xpath("//*[@id=\"Passwd\"]")).sendKeys(pass);
+            driver.findElement(By.cssSelector("#Passwd")).sendKeys(pass);
             driver.findElement(By.xpath("//*[@id=\"signIn\"]")).click();
             //Checkout of where we are
             waits_asserts.assertTextByXpath(driver, "//*[@id=\"root\"]/div/div[1]/div/div[3]/div/div[2]/div[1]/div/p[2]/span", "Administrator");
         }
+
     @Step("Authorise with second Google Acc, as regular")
     public void enterGoogleCred2() {
         //Click on button "Login with Google acc"|
@@ -52,7 +54,8 @@ public class LogInPage {
         //Google acc login
         driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys(mail2);
         driver.findElement(By.xpath("//*[@id=\"next\"]")).click();
-        driver.findElement(By.xpath("//*[@id=\"Passwd\"]")).sendKeys(pass2);
+        //driver.findElement(By.xpath("//*[@id=\"Passwd\"]")).sendKeys(pass2);
+        driver.findElement(By.cssSelector("#Passwd")).sendKeys(pass2);
         driver.findElement(By.xpath("//*[@id=\"signIn\"]")).click();
     }
     @Step("Delete cookies")
@@ -67,7 +70,7 @@ public class LogInPage {
     public void openNewDriver(){
         driver.close();
         WebDriver driver = new ChromeDriver();
-        driver.get("https://dashboard.dev.iotsyst.com/");
+        driver.get("https://dashboard.dev.iotsyst.com/#/?_k=1ccout");
     }
 
     @Step("Get back on log in page ")
