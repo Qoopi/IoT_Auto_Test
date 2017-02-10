@@ -3,8 +3,8 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
-import ui.pageObjets.Dashboard;
-import ui.pageObjets.EquipmentList;
+import ui.pageObjets.dashboard.Dashboard;
+import ui.pageObjets.dashboard.Equipment;
 import ui.pageObjets.LogInPage;
 import ui.utils.TestListener;
 
@@ -25,9 +25,9 @@ public class OSF_53 {
     public void checkEquipment(){
 
         Dashboard dashboard = new Dashboard();
-        dashboard.openEquipmentListAsRegular();
+        dashboard.openEquipment();
 
-        EquipmentList equip = new EquipmentList();
+        Equipment equip = new Equipment();
         equip.sortEquipByName();
         equip.sortEquipById();
         equip.sortEquipByType();
@@ -53,7 +53,7 @@ public class OSF_53 {
         dashboard.openAdministration();
         dashboard.openEquipmentListAsAdmin();
 
-        EquipmentList equip = new EquipmentList();
+        Equipment equip = new Equipment();
         equip.sortEquipByName();
         equip.sortEquipById();
         equip.sortEquipByType();

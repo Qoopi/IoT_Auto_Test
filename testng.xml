@@ -28,7 +28,7 @@
 -->
     <test name="User List operations">
         <parameter name="browserName" value="chrome"></parameter>
-        <parameter name="useGrid" value="true"></parameter>
+        <parameter name="useGrid" value="false"></parameter>
         <classes>
             <class name="OSF_200"/>
         </classes>

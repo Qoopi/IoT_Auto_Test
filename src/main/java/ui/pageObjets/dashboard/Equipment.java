@@ -1,4 +1,4 @@
-package ui.pageObjets;
+package ui.pageObjets.dashboard;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,12 +7,12 @@ import ui.utils.WaitsAsserts;
 import ui.utils.WebDriverManager;
 import ui.utils.uiUtils;
 
-public class EquipmentList {
+public class Equipment {
     private WaitsAsserts waits_asserts = new WaitsAsserts();
     private uiUtils utils = new uiUtils();
     private WebDriver driver;
 
-    public EquipmentList() {this.driver = WebDriverManager.getDriver();}
+    public Equipment() {this.driver = WebDriverManager.getDriver();}
 
     @Step
     public void sortEquipByName() {

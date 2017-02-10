@@ -2,9 +2,9 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
-import ui.pageObjets.Dashboard;
+import ui.pageObjets.dashboard.Dashboard;
 import ui.pageObjets.LogInPage;
-import ui.pageObjets.Requests;
+import ui.pageObjets.administration.Requests;
 import ui.utils.TestListener;
 
 @Listeners(TestListener.class)

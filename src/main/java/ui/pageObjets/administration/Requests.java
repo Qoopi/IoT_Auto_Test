@@ -1,4 +1,4 @@
-package ui.pageObjets;
+package ui.pageObjets.administration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +14,7 @@ public class Requests {
 
 
 
-    @Step("Chcking out reuests")
+    @Step("Checking out requests")
     public  void checkRequest(){
         //Check out if there is expected user
         waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr/td[2]","Oleg Kutafin");
