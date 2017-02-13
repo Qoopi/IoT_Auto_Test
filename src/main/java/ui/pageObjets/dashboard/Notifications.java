@@ -68,5 +68,5 @@ public class Notifications {
 
         waits_asserts.assertTextByXpath(driver,"//*[@id=\"time_triggered_show_tab_col_btn\"]/div/div/div","Time triggered");
     }
-    //dfgdfgdfg
+
 }

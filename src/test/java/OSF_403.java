@@ -29,18 +29,6 @@ public class OSF_403 {
         dashboards.openRequests();
     }
 
-    @Features("User Requests testing")
-    @Stories("User")
-        @Test(priority = 1)
-    public void deleteUser(){
-        Dashboard dashboard = new Dashboard();
-        dashboard.openUserList();
 
-        UserList user = new UserList();
-        user.openMenu();
-        user.addUpdatedAt();
-        user.foundUserToDelete();
-        user.deleteChosenUser();
-    }
 
 }

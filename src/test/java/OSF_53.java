@@ -34,31 +34,5 @@ public class OSF_53 {
         equipment.sortEquipByGroup();
         equipment.sortEquipByUpdatedAt();
     }
-    @Features("Equipment list testing like admin")
-    @Stories("User")
-    @Test(priority = 1)
-    public void openWithNewUser(){
 
-        LogInPage log = new LogInPage();
-        log.openNewDriver();
-        log.getToIoTPage();
-        log.enterGoogleCred();
-    }
-    @Features("Equipment list testing like admin")
-    @Stories("User")
-    @Test(priority = 2)
-    public void checkEquipmentList(){
-
-        Dashboard dashboard = new Dashboard();
-        dashboard.openAdministration();
-        dashboard.openEquipmentListAsAdmin();
-
-        Equipment equip = new Equipment();
-        equip.sortEquipByName();
-        equip.sortEquipById();
-        equip.sortEquipByType();
-        equip.sortEquipByGroup();
-        equip.sortEquipByActive();
-
-    }
 }
