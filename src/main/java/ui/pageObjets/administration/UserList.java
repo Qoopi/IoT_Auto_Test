@@ -17,13 +17,13 @@ public class UserList {
     @Step("Checking default columns")
     public void defaultColumnsCheck(){
         waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]");
-        waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[1]/table/thead/tr/th[2]/span/span[1]","User name");
+        waits_asserts.assertTextByXpath(driver,"//*[@id=\"user_name_tab_col\"]/span/span[1]","User name");
 
-        waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[1]/table/thead/tr/th[3]/span/span[1]","Email");
+        waits_asserts.assertTextByXpath(driver,"//*[@id=\"email_tab_col\"]/span/span[1]","Email");
 
-        waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[1]/table/thead/tr/th[4]/span/span[1]","Active");
+        waits_asserts.assertTextByXpath(driver,"//*[@id=\"active_tab_col\"]/span/span[1]","Active");
 
-        waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[1]/table/thead/tr/th[5]/span/span[1]","Admin group");
+        waits_asserts.assertTextByXpath(driver,"//*[@id=\"admin_group_tab_col\"]/span/span[1]","Admin group");
 
 
     }
@@ -43,35 +43,46 @@ public class UserList {
         //add new column service
         driver.findElement(By.xpath("//*[@id=\"Service\"]")).click();
         waits_asserts.sleep(1000);
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[1]/table/thead/tr/th[6]/span/span[1]", "Service");
+        waits_asserts.assertTextByXpath(driver, "//*[@id=\"service_tab_col\"]/span/span[1]", "Service");
         waits_asserts.sleep(1000);
+        driver.findElement(By.xpath("//*[@id=\"service_tab_col\"]/span/span[1]")).click();
+        waits_asserts.sleep(1000);
+        driver.findElement(By.xpath("//*[@id=\"service_tab_col\"]/span/span[1]")).click();
     }
 
     @Step("Dismiss Service columns")
     public void dismissService() {
+        //Open menu
+        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[1]/span/div/button");
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div[2]/div/div[2]/div/div[1]/span/div/button")).click();
-        waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"Service\"]");
-        driver.findElement(By.xpath("//*[@id=\"Service\"]")).click();
+        //dismiss service column
+        waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"service_show_tab_col_btn\"]");
+        driver.findElement(By.xpath("//*[@id=\"service_show_tab_col_btn\"]")).click();
         waits_asserts.sleep(1000);
     }
 
     @Step("Add Update At column")
     public void addUpdatedAt() {
         // wait for
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"Updated_at\"]");
-        driver.findElement(By.xpath("//*[@id=\"Updated_at\"]")).click();
+        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"updated_at_show_tab_col_btn\"]");
+        driver.findElement(By.xpath("//*[@id=\"updated_at_show_tab_col_btn\"]")).click();
         //wait for
         waits_asserts.sleep(1000);
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[1]/table/thead/tr/th[7]/span/span[1]", "Updated at");
+        waits_asserts.assertTextByXpath(driver, "//*[@id=\"updated_at_tab_col\"]/span/span[1]", "Updated at");
         waits_asserts.sleep(1000);
+        driver.findElement(By.xpath("//*[@id=\"updated_at_tab_col\"]/span/span[1]")).click();
+        waits_asserts.sleep(1000);
+        driver.findElement(By.xpath("//*[@id=\"updated_at_tab_col\"]/span/span[1]")).click();
     }
 
     @Step("Dismiss Update At column")
     public void dismissUpdatedAt() {
+        //Open menu
+        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[1]/span/div/button");
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div[2]/div/div[2]/div/div[1]/span/div/button")).click();
-        // wait for
-        waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"Updated_at\"]");
-        driver.findElement(By.xpath("//*[@id=\"Updated_at\"]")).click();
+        //dismiss service column
+        waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"updated_at_show_tab_col_btn\"]");
+        driver.findElement(By.xpath("//*[@id=\"updated_at_show_tab_col_btn\"]")).click();
         //wait for
         waits_asserts.sleep(1000);
     }
@@ -79,39 +90,41 @@ public class UserList {
     @Step("Add Reg. Time column")
     public void addRegTime() {
         // wait for
-        waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"Reg._time\"]");
-        driver.findElement(By.xpath("//*[@id=\"Reg._time\"]")).click();
+        waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"reg._time_show_tab_col_btn\"]");
+        driver.findElement(By.xpath("//*[@id=\"reg._time_show_tab_col_btn\"]")).click();
         // wait for
         waits_asserts.sleep(1000);
-        waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[1]/table/thead/tr/th[8]/span/span[1]","Reg. time");
+        waits_asserts.assertTextByXpath(driver,"//*[@id=\"reg._time_tab_col\"]/span/span[1]","Reg. time");
         waits_asserts.sleep(1000);
     }
 
     @Step("Dismiss  Reg. Time column")
     public void dismissRegTime() {
-
+        //Open menu
+        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[1]/span/div/button");
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div[2]/div/div[2]/div/div[1]/span/div/button")).click();
-
-        driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div/div/div[7]/span/div/div/span")).click();
+        //dismiss Reg Time column
+        waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"reg._time_show_tab_col_btn\"]");
+        driver.findElement(By.xpath("//*[@id=\"reg._time_show_tab_col_btn\"]")).click();
 
     }
     // in PoPUp Menu
     @Step
     public void checkingColumnsInPompUpMenu() {
         // Checkout User name column in menu
-        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div", "User name");
+        waits_asserts.assertTextByXpath(driver, "//*[@id=\"user_name_show_tab_col_btn\"]/div/div/div", "User name");
         //Checkout Email column in menu
-        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div", "Email");
+        waits_asserts.assertTextByXpath(driver, "//*[@id=\"email_show_tab_col_btn\"]/div/div/div", "Email");
         // Checkout Active column in menu
-        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div", "Active");
+        waits_asserts.assertTextByXpath(driver, "//*[@id=\"active_show_tab_col_btn\"]/div/div/div", "Active");
         // Checkout Admin Group column in menu
-        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div", "Admin group");
+        waits_asserts.assertTextByXpath(driver, "//*[@id=\"admin_group_show_tab_col_btn\"]/div/div/div", "Admin group");
         // Checkout Service column in menu
-        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div", "Service");
+        waits_asserts.assertTextByXpath(driver, "//*[@id=\"service_show_tab_col_btn\"]/div/div/div", "Service");
         // Checkout Updated At column in menu
-        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div", "Updated at");
+        waits_asserts.assertTextByXpath(driver, "//*[@id=\"updated_at_show_tab_col_btn\"]/div/div/div", "Updated at");
         // Checkout Reg. Time column in menu
-        waits_asserts.assertTextByXpath(driver,"/html/body/div[5]/div","Reg. time");
+        waits_asserts.assertTextByXpath(driver,"//*[@id=\"reg._time_show_tab_col_btn\"]/div/div/div","Reg. time");
     }
 
     @Step("Mark several users")
