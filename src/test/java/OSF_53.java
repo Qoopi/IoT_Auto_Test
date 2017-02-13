@@ -27,12 +27,12 @@ public class OSF_53 {
         Dashboard dashboard = new Dashboard();
         dashboard.openEquipment();
 
-        Equipment equip = new Equipment();
-        equip.sortEquipByName();
-        equip.sortEquipById();
-        equip.sortEquipByType();
-        equip.sortEquipByGroup();
-        equip.sortEquipByUpdatedAt();
+        Equipment equipment = new Equipment();
+        equipment.sortEquipByName();
+        equipment.sortEquipById();
+        equipment.sortEquipByType();
+        equipment.sortEquipByGroup();
+        equipment.sortEquipByUpdatedAt();
     }
     @Features("Equipment list testing like admin")
     @Stories("User")

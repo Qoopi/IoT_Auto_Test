@@ -45,6 +45,7 @@ public class LogInPage {
             driver.findElement(By.xpath("//*[@id=\"signIn\"]")).click();
             //Checkout of where we are
             waits_asserts.assertTextByXpath(driver, "//*[@id=\"root\"]/div/div[1]/div/div[3]/div/div[2]/div[1]/div/p[2]/span", "Administrator");
+            waits_asserts.assertTextByXpath(driver, "//*[@id=\"naviCrumb\"]", "Dashboard");
         }
 
     @Step("Authorise with second Google Acc, as regular")
@@ -57,6 +58,7 @@ public class LogInPage {
         //driver.findElement(By.xpath("//*[@id=\"Passwd\"]")).sendKeys(pass2);
         driver.findElement(By.cssSelector("#Passwd")).sendKeys(pass2);
         driver.findElement(By.xpath("//*[@id=\"signIn\"]")).click();
+        waits_asserts.assertTextByXpath(driver, "//*[@id=\"naviCrumb\"]", "Dashboard");
     }
     @Step("Delete cookies")
     public void refresh(){

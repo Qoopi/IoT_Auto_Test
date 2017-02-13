@@ -18,7 +18,7 @@ public class Dashboard {
     public void openEquipment(){
         waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"equipment_main_menu_item\"]");
         driver.findElement(By.xpath("//*[@id=\"equipment_main_menu_item\"]")).click();
-        waits_asserts.assertTextByXpath(driver,"//*[@id=\"naviCrumb\"]/span","Equipment list");
+       // waits_asserts.assertTextByXpath(driver,"//*[@id=\"naviCrumb\"]/span","Equipment list");
     }
     @Step("Open Notifications")
     public void openNotifications(){
@@ -29,7 +29,7 @@ public class Dashboard {
             public void openNotificationsList(){
                 waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"notifications_list_main_menu_item\"]");
                 driver.findElement(By.xpath("//*[@id=\"notifications_list_main_menu_item\"]")).click();
-                waits_asserts.assertTextByXpath(driver,"//*[@id=\"notifications_list_main_menu_item\"]","Notification List");
+               // waits_asserts.assertTextByXpath(driver,"//*[@id=\"notifications_list_main_menu_item\"]/div/div/span","Notification List");
             }
             @Step("Open Notifications")
             public void openNotificationsRules(){
