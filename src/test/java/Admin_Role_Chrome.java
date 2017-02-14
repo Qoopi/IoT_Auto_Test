@@ -14,12 +14,14 @@ import ui.utils.TestListener;
 
 @Listeners(TestListener.class)
 public class Admin_Role_Chrome {
+
     @BeforeTest
     public void LogIn() {
         LogInPage log = new LogInPage();
         log.getToIoTPage();
         log.enterGoogleCred();
     }
+
 
     @Features("Admin role testing of functionality")
     @Stories("OSF-53 Equipment view")
@@ -94,39 +96,61 @@ public class Admin_Role_Chrome {
 
     @Features("Admin role testing of functionality")
     @Stories("OSF-200 User List")
-    @Test
+    @Test(priority = 2)
     public void checkDefaultColumns() {
         UserList userList = new UserList();
         userList.defaultColumnsCheck();
-        userList.openMenu();
+        Dashboard dashboard = new Dashboard();
+        dashboard.openMenu();
         userList.checkingColumnsInPompUpMenu();
     }
 
     @Features("Admin role testing of functionality")
     @Stories("OSF-200 User List")
-    @Test
+    @Test(priority = 3)
     public void addColumnsFromMenu() {
         UserList userList = new UserList();
 
         userList.addServices();
 
-        userList.openMenu();
+        Dashboard dashboard = new Dashboard();
+        dashboard.openMenu();
         userList.addUpdatedAt();
 
-        userList.openMenu();
+        dashboard.openMenu();
         userList.addRegTime();
 
     }
-
     @Features("Admin role testing of functionality")
     @Stories("OSF-200 User List")
-    @Test
+    @Test(priority = 4)
+    public void deleteColumns(){
+
+        LogInPage log = new LogInPage();
+        log.refresh();
+
+        Dashboard dashboard = new Dashboard();
+        dashboard.openMenu();
+        UserList userList = new UserList();
+        userList.dismissRegTime();
+
+
+        log.refresh();
+        dashboard.openMenu();
+        userList.dismissUpdatedAt();
+
+        log.refresh();
+        dashboard.openMenu();
+        userList.dismissService();
+    }
+    @Features("Admin role testing of functionality")
+    @Stories("OSF-200 User List")
+    @Test(priority = 5)
     public void markDeactivateSomeUser() {
         UserList userList = new UserList();
         userList.markSeveralUser();
         userList.deactivateUsersWithHover();
         userList.activateUserWithColumn();
-
     }
 
     @Features("Admin role testing of functionality")
@@ -148,9 +172,9 @@ public class Admin_Role_Chrome {
     public void deleteUser(){
         Dashboard dashboard = new Dashboard();
         dashboard.openUserList();
+        dashboard.openMenu();
 
         UserList user = new UserList();
-        user.openMenu();
         user.addUpdatedAt();
         user.foundUserToDelete();
         user.deleteChosenUser();

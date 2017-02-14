@@ -78,4 +78,13 @@ public class Dashboard {
                 driver.findElement(By.xpath("//*[@id=\"global_settings_main_menu_item\"]")).click();
                 waits_asserts.assertTextByXpath(driver,"//*[@id=\"naviCrumb\"]","Global Settings");
             }
+
+
+    @Step("Open right menu")
+    public void openMenu() {
+        //open menu
+        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[1]/span");
+        driver.findElement(By.xpath("//*[@id=\"table_menu_btn\"]")).click();
+
+    }
     }

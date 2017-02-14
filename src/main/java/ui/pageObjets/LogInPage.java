@@ -60,14 +60,9 @@ public class LogInPage {
         driver.findElement(By.xpath("//*[@id=\"signIn\"]")).click();
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"naviCrumb\"]", "Dashboard");
     }
-    @Step("Delete cookies")
-    public void refresh(){
-        String URL = "https://dashboard.dev.iotsyst.com/";
-        driver.navigate().to(URL);
-        driver.manage().deleteAllCookies();
-        driver.navigate().refresh();
+    @Step("Refresh browser")
+    public void refresh(){driver.navigate().refresh();}
 
-    }
     @Step("Driver close and get new")
     public void openNewDriver(){
         driver.close();

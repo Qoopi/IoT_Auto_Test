@@ -13,7 +13,7 @@ public class Notifications {
     private WebDriver driver;
 
     public Notifications() {this.driver = WebDriverManager.getDriver();}
-
+ // NOTIFICATION LIST
     @Step
     public void checkNameColumn(){
         waits_asserts.assertTextByXpath(driver,"//*[@id=\"name_tab_col\"]/span/span[1]","Name");
