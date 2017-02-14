@@ -23,9 +23,9 @@ public class Admin_Role_Chrome {
     }
 
 
-    @Features("Admin role testing of functionality")
+    @Features("Admin role testing of functionality ")
     @Stories("OSF-53 Equipment view")
-    @Test
+    @Test(priority = 1)
     public void EquipmentCheck() {
         Dashboard dashboard = new Dashboard();
         dashboard.openEquipment();
@@ -37,10 +37,39 @@ public class Admin_Role_Chrome {
         equipment.sortEquipByGroup();
         equipment.sortEquipByUpdatedAt();
     }
+    @Features("Admin role testing of functionality ")
+    @Stories("Equipment upper right menu columns check")
+    @Test(priority = 2)
+    public void checkUpperRightMenuInEquipment(){
+        Dashboard dashboard = new Dashboard();
+        dashboard.openMenu();
+        Equipment equipment = new Equipment();
+        equipment.checkEquipmentNameInMenu();
+        equipment.checkEquipmentTypeInMenu();
+        equipment.checkEquipmentIdInMenu();
+        equipment.checkEquipmentGroupInMenu();
+        equipment.checkEquipmentUpdatedAtInMenu();
+        equipment.checkEquipmentCreatedInMenu();
+
+
+    }
+    @Features("Admin role testing of functionality")
+    @Stories("Equipment view add column Created ")
+    @Test(priority = 3)
+    public void EquipmentAddColumn() {
+        Equipment equipment = new Equipment();
+        equipment.addCreatedColumn();
+
+        LogInPage log = new LogInPage();
+        log.refresh();
+        Dashboard dashboard = new Dashboard();
+        dashboard.openMenu();
+        equipment.dismissCreated();
+    }
 
     @Features("Admin role testing of functionality")
     @Stories("OSF-53 Equipment list view")
-    @Test
+    @Test(priority = 4)
     public void checkEquipmentList() {
 
         Dashboard dashboard = new Dashboard();
@@ -53,12 +82,18 @@ public class Admin_Role_Chrome {
         equip.sortEquipByType();
         equip.sortEquipByGroup();
         equip.sortEquipByActive();
+        equip.sortEquipByUpdatedAt();
 
+        dashboard.openMenu();
+        equip.addCreatedColumn();
+
+        dashboard.openMenu();
+        equip.dismissCreated();
     }
 
     @Features("Admin role testing of functionality")
     @Stories("Notifications lists view, default columns ")
-    @Test
+    @Test(priority = 5)
     public void NotificationsListDefaultColumns() {
         Dashboard dashboard = new Dashboard();
         dashboard.openNotifications();
@@ -74,7 +109,7 @@ public class Admin_Role_Chrome {
 
     @Features("Admin role testing of functionality")
     @Stories("Notifications lists view, columns in upper right menu")
-    @Test
+    @Test(priority = 6)
     public void NotificationsListRightMenu() {
         Notifications not = new Notifications();
         not.openMenu();
@@ -86,7 +121,7 @@ public class Admin_Role_Chrome {
 
     @Features("Admin role testing of functionality")
     @Stories("OSF-200 User List")
-    @Test(priority = 1)
+    @Test(priority = 7)
     public void openUserList() {
         Dashboard dashboard = new Dashboard();
         dashboard.openAdministration();
@@ -96,7 +131,7 @@ public class Admin_Role_Chrome {
 
     @Features("Admin role testing of functionality")
     @Stories("OSF-200 User List")
-    @Test(priority = 2)
+    @Test(priority = 8)
     public void checkDefaultColumns() {
         UserList userList = new UserList();
         userList.defaultColumnsCheck();
@@ -107,7 +142,7 @@ public class Admin_Role_Chrome {
 
     @Features("Admin role testing of functionality")
     @Stories("OSF-200 User List")
-    @Test(priority = 3)
+    @Test(priority = 9)
     public void addColumnsFromMenu() {
         UserList userList = new UserList();
 
@@ -123,7 +158,7 @@ public class Admin_Role_Chrome {
     }
     @Features("Admin role testing of functionality")
     @Stories("OSF-200 User List")
-    @Test(priority = 4)
+    @Test(priority = 10)
     public void deleteColumns(){
 
         LogInPage log = new LogInPage();
@@ -145,7 +180,7 @@ public class Admin_Role_Chrome {
     }
     @Features("Admin role testing of functionality")
     @Stories("OSF-200 User List")
-    @Test(priority = 5)
+    @Test(priority = 11)
     public void markDeactivateSomeUser() {
         UserList userList = new UserList();
         userList.markSeveralUser();
@@ -155,7 +190,7 @@ public class Admin_Role_Chrome {
 
     @Features("Admin role testing of functionality")
     @Stories("OSF-199 Request, accept request")
-    @Test
+    @Test(priority = 12)
     public void openRequests() {
 
         Dashboard dashboards = new Dashboard();
@@ -168,7 +203,7 @@ public class Admin_Role_Chrome {
     }
     @Features("Admin role testing of functionality")
     @Stories("OSF-403 Delete User")
-    @Test
+    @Test(priority = 13)
     public void deleteUser(){
         Dashboard dashboard = new Dashboard();
         dashboard.openUserList();

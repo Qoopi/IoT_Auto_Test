@@ -145,9 +145,9 @@ public class UserList {
     }
     @Step("Delete chosen user")
     public void deleteChosenUser(){
-        waits_asserts.sleep(10000);
-        waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[2]/td[3]","geloksmmm@gmail.com");
-        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[2]/td[7]/div/button")).click();
+        waits_asserts.sleep(1000);
+        waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[1]/td[3]","geloksmmm@gmail.com");
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[1]/td[7]/div/button")).click();
         waits_asserts.assertTextByXpath(driver,"/html/body/div[5]/div/div/div/div/div/div[2]/span/div/div","Delete");
         driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div/div/div[2]/span/div/div")).click();
 

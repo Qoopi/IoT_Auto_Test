@@ -1,47 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="UserStory">
+<suite name="Regression testing" parallel="tests" thread-count="2">
 
-  <!--  <test name="Create New User">
-        <parameter name="browserName" value="firefox"></parameter>
-        <parameter name="useGrid" value="False"></parameter>
-        <classes>
-            <class name="CreateNewUser"/>
-        </classes>
-    </test>-->
-
-   <!-- <test name="OSF_199">
-        <parameter name="browserName" value="firefox"></parameter>
-        <parameter name="useGrid" value="False"></parameter>
-        <classes>
-            <class name="OSF_199_Accept_User"/>
-        </classes>
-    </test>
-
-    <test name="Equipment list check">
-        <parameter name="browserName" value="firefox"></parameter>
-        <parameter name="useGrid" value="False"></parameter>
-        <classes>
-            <class name="OSF_53"/>
-        </classes>
-    </test>
--->
-    <test name="User List operations">
+    <test name="Admin Role Test">
         <parameter name="browserName" value="chrome"></parameter>
         <parameter name="useGrid" value="false"></parameter>
         <classes>
-            <class name="OSF_200"/>
+            <class name="Admin_Role_Chrome"/>
         </classes>
     </test>
 
-  <!--  <test name="OSF403">
+    <test name="Create new user">
         <parameter name="browserName" value="chrome"></parameter>
-        <parameter name="useGrid" value="False"></parameter>
+        <parameter name="useGrid" value="false"></parameter>
         <classes>
-            <class name="OSF_403"/>
+            <class name="CreateNewUser"/>
         </classes>
     </test>
--->
 
 </suite>
 

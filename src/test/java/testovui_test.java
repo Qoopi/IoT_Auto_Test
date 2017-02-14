@@ -12,7 +12,7 @@ import ui.utils.TestListener;
 
 
 @Listeners(TestListener.class)
-public class OSF_200 {
+public class testovui_test {
     @BeforeTest
     public void LogIn() {
         LogInPage log = new LogInPage();
@@ -20,9 +20,9 @@ public class OSF_200 {
         log.enterGoogleCred();
     }
 
-    @Features("Admin role testing of functionality")
+    @Features("Admin role testing of functionality ")
     @Stories("OSF-53 Equipment view")
-    @Test
+    @Test(priority = 1)
     public void EquipmentCheck() {
         Dashboard dashboard = new Dashboard();
         dashboard.openEquipment();
@@ -34,9 +34,9 @@ public class OSF_200 {
         equipment.sortEquipByGroup();
         equipment.sortEquipByUpdatedAt();
     }
-    @Features("Admin role testing of functionality")
-    @Stories("OSF-53 Equipment view upper right menu of table")
-    @Test
+    @Features("Admin role testing of functionality ")
+    @Stories("Equipment upper right menu columns check")
+    @Test(priority = 2)
     public void checkUpperRightMenuInEquipment(){
         Dashboard dashboard = new Dashboard();
         dashboard.openMenu();
@@ -45,14 +45,28 @@ public class OSF_200 {
         equipment.checkEquipmentTypeInMenu();
         equipment.checkEquipmentIdInMenu();
         equipment.checkEquipmentGroupInMenu();
+        equipment.checkEquipmentUpdatedAtInMenu();
         equipment.checkEquipmentCreatedInMenu();
 
 
     }
+    @Features("Admin role testing of functionality")
+    @Stories("Equipment view add column Created ")
+    @Test(priority = 3)
+    public void EquipmentAddColumn() {
+        Equipment equipment = new Equipment();
+        equipment.addCreatedColumn();
+
+        LogInPage log = new LogInPage();
+        log.refresh();
+        Dashboard dashboard = new Dashboard();
+        dashboard.openMenu();
+        equipment.dismissCreated();
+    }
 
     @Features("Admin role testing of functionality")
     @Stories("OSF-53 Equipment list view")
-    @Test
+    @Test(priority = 4)
     public void checkEquipmentList() {
 
         Dashboard dashboard = new Dashboard();
@@ -65,9 +79,16 @@ public class OSF_200 {
         equip.sortEquipByType();
         equip.sortEquipByGroup();
         equip.sortEquipByActive();
+        equip.sortEquipByUpdatedAt();
 
+        dashboard.openMenu();
+        equip.addCreatedColumn();
+
+        dashboard.openMenu();
+        equip.dismissCreated();
     }
 
-
-
 }
+
+
+
