@@ -50,7 +50,7 @@ public class Reports {
     public void checkRecipientsColumnInDropDownMenu(){
         waits_asserts.assertTextByXpath(driver,"//*[@id=\"recipients_show_tab_col_btn\"]/div/div/div","Recipients");
     }
-    @Step("Check out Recipients column in drop down menu")
+    @Step("Check out Excel Include column in drop down menu")
     public void checkExcelIncludedColumnInDropDownMenu(){
         waits_asserts.assertTextByXpath(driver,"//*[@id=\"excel_included_show_tab_col_btn\"]/div/div/div","Excel Included");
     }
@@ -59,21 +59,59 @@ public class Reports {
 
     @Step("Add Equipment Items column")
     public void addEquipmentItemColumn(){
-        waits_asserts.assertTextByXpath(driver,"//*[@id=\"equipment_items_show_tab_col_btn\"]/div/div/div","Equipment Items");
+        waits_asserts.assertTextByXpath(driver,"//*[@id=\"equipment_items_show_tab_col_btn\"]/div/div/div","Equipment items");
         driver.findElement(By.xpath("//*[@id=\"equipment_items_show_tab_col_btn\"]")).click();
     }
-            @Step
-            public void checkAddedEqipItem(){
+            @Step("Checking if the columns is presented in table")
+            public void checkAddedEquipItem(){
+                waits_asserts.assertTextByXpath(driver,"//*[@id=\"equipment_items_tab_col\"]/span/span[1]","Equipment items");
                 waits_asserts.waitForClickableByXpath(driver,"//*[@id=\"equipment_items_tab_col\"]/span/span[1]");
-                waits_asserts.assertTextByXpath(driver,"//*[@id=\"equipment_items_tab_col\"]/span/span[1]","Equipment Items");
                 driver.findElement(By.xpath("//*[@id=\"equipment_items_tab_col\"]/span/span[1]")).click();
                 waits_asserts.sleep(1000);
                 driver.findElement(By.xpath("//*[@id=\"equipment_items_tab_col\"]/span/span[1]")).click();
                 waits_asserts.sleep(1000);
             }
-            @Step
-            public void dismissEquipmetnItem(){
-                waits_asserts.assertTextByXpath(driver,"//*[@id=\"equipment_items_show_tab_col_btn\"]/div/div/div","Equipment Items");
+            @Step("Deleting column")
+            public void dismissEquipmentItem(){
+                waits_asserts.assertTextByXpath(driver,"//*[@id=\"equipment_items_show_tab_col_btn\"]/div/div/div","Equipment items");
                 driver.findElement(By.xpath("//*[@id=\"equipment_items_show_tab_col_btn\"]")).click();
             }
+    @Step("Add Recipients column")
+    public void addRecipients(){
+        waits_asserts.assertTextByXpath(driver,"//*[@id=\"recipients_show_tab_col_btn\"]/div/div/div","Recipients");
+        driver.findElement(By.xpath("//*[@id=\"recipients_show_tab_col_btn\"]")).click();
+    }
+            @Step("Checking if the columns is presented in table")
+            public void checkAddedRecipients(){
+                waits_asserts.assertTextByXpath(driver,"//*[@id=\"recipients_tab_col\"]/span/span[1]","Recipients");
+                waits_asserts.waitForClickableByXpath(driver,"//*[@id=\"recipients_tab_col\"]/span/span[1]");
+                driver.findElement(By.xpath("//*[@id=\"recipients_tab_col\"]/span/span[1]")).click();
+                waits_asserts.sleep(1000);
+                driver.findElement(By.xpath("//*[@id=\"recipients_tab_col\"]/span/span[1]")).click();
+                waits_asserts.sleep(1000);
+            }
+            @Step("Deleting Recipients column")
+            public void dismissRecipients(){
+                waits_asserts.assertTextByXpath(driver,"//*[@id=\"recipients_show_tab_col_btn\"]/div/div/div","Recipients");
+                driver.findElement(By.xpath("//*[@id=\"recipients_show_tab_col_btn\"]")).click();
+            }
+    @Step("Add Excel Included column")
+    public void addExcelIncluded(){
+        waits_asserts.assertTextByXpath(driver,"//*[@id=\"excel_included_show_tab_col_btn\"]/div/div/div","Excel Included");
+        driver.findElement(By.xpath("//*[@id=\"excel_included_show_tab_col_btn\"]")).click();
+    }
+            @Step("Checking if the columns is presented in table")
+            public void checkAddedExcelIncluded(){
+                waits_asserts.assertTextByXpath(driver,"//*[@id=\"excel_included_tab_col\"]/span/span[1]","Excel Included");
+                waits_asserts.waitForClickableByXpath(driver,"//*[@id=\"excel_included_tab_col\"]/span/span[1]");
+                driver.findElement(By.xpath("//*[@id=\"excel_included_tab_col\"]/span/span[1]")).click();
+                waits_asserts.sleep(1000);
+                driver.findElement(By.xpath("//*[@id=\"excel_included_tab_col\"]/span/span[1]")).click();
+                waits_asserts.sleep(1000);
+    }
+            @Step("Deleting Excel Included column")
+            public void dismissExcelIncluded(){
+                waits_asserts.assertTextByXpath(driver,"//*[@id=\"excel_included_show_tab_col_btn\"]/div/div/div","Excel Included");
+                driver.findElement(By.xpath("//*[@id=\"excel_included_show_tab_col_btn\"]")).click();
+    }
 }

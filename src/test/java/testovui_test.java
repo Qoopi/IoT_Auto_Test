@@ -3,11 +3,8 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
-import ui.pageObjets.administration.UserList;
 import ui.pageObjets.dashboard.Dashboard;
 import ui.pageObjets.LogInPage;
-import ui.pageObjets.dashboard.Equipment;
-import ui.pageObjets.dashboard.Notifications;
 import ui.pageObjets.dashboard.Reports;
 import ui.utils.TestListener;
 
@@ -34,7 +31,7 @@ public class testovui_test {
     }
     @Features("Admin role testing of functionality")
     @Stories("Report list testing")
-    @Test(priority = 8)
+    @Test(priority = 9)
     public void CheckAdditionalColumns() {
         Dashboard dash = new Dashboard();
         dash.openMenu();
@@ -45,6 +42,35 @@ public class testovui_test {
         reports.checkRecipientsColumnInDropDownMenu();
         reports.checkExcelIncludedColumnInDropDownMenu();
         reports.checkEquipmentItemsColumnInDropDownMenu();
+    }
+    @Features("Admin role testing of functionality")
+    @Stories("Report list testing")
+    @Test(priority = 10)
+    public void AddColumnsInReports() {
+        Reports reports = new Reports();
+        Dashboard dashboard = new Dashboard();
+
+        reports.addEquipmentItemColumn();
+        reports.checkAddedEquipItem();
+        dashboard.openMenu();
+        reports.addRecipients();
+        reports.checkAddedRecipients();
+        dashboard.openMenu();
+        reports.addExcelIncluded();
+        reports.checkAddedExcelIncluded();
+    }
+    @Features("Admin role testing of functionality")
+    @Stories("Report list testing")
+    @Test(priority = 11)
+    public void DismissColumnsInReports() {
+        Reports reports = new Reports();
+        Dashboard dashboard = new Dashboard();
+        dashboard.openMenu();
+        reports.dismissEquipmentItem();
+        dashboard.openMenu();
+        reports.dismissRecipients();
+        dashboard.openMenu();
+        reports.dismissExcelIncluded();
     }
 
 
