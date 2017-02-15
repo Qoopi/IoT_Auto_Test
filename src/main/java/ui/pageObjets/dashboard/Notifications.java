@@ -13,41 +13,37 @@ public class Notifications {
     private WebDriver driver;
 
     public Notifications() {this.driver = WebDriverManager.getDriver();}
- // NOTIFICATION LIST
-    @Step
+    /*Проверка стандартных колонок таблицы Notification List*/
+    @Step("Check out Name column")
     public void checkNameColumn(){
         waits_asserts.assertTextByXpath(driver,"//*[@id=\"name_tab_col\"]/span/span[1]","Name");
         driver.findElement(By.xpath("//*[@id=\"name_tab_col\"]/span/span[1]")).click();
         waits_asserts.sleep(1000);
         driver.findElement(By.xpath("//*[@id=\"name_tab_col\"]/span/span[1]")).click();
     }
-    @Step
+    @Step("Check out Message column")
     public void checkMessageColumn(){
         waits_asserts.assertTextByXpath(driver,"//*[@id=\"message_tab_col\"]/span/span[1]","Message");
         driver.findElement(By.xpath("//*[@id=\"message_tab_col\"]/span/span[1]")).click();
         waits_asserts.sleep(1000);
         driver.findElement(By.xpath("//*[@id=\"message_tab_col\"]/span/span[1]")).click();
     }
-    @Step
-    public void checkAcknowledgeColumns(){
+    @Step("Check out Acknowledge column")
+    public void checkAcknowledgeColumn(){
         waits_asserts.assertTextByXpath(driver,"//*[@id=\"acknowledged_tab_col\"]/span/span[1]","Acknowledged");
         driver.findElement(By.xpath("//*[@id=\"acknowledged_tab_col\"]/span/span[1]")).click();
         waits_asserts.sleep(1000);
         driver.findElement(By.xpath("//*[@id=\"acknowledged_tab_col\"]/span/span[1]")).click();
     }
-    @Step
-    public void checkTimeTriggeredColumns(){
+    @Step("Check out Time Triggered column")
+    public void checkTimeTriggeredColumn(){
         waits_asserts.assertTextByXpath(driver,"//*[@id=\"time_triggered_tab_col\"]/span/span[1]","Time triggered");
         driver.findElement(By.xpath("//*[@id=\"time_triggered_tab_col\"]/span/span[1]")).click();
         waits_asserts.sleep(1000);
         driver.findElement(By.xpath("//*[@id=\"time_triggered_tab_col\"]/span/span[1]")).click();
     }
 
-    @Step
-    public void openMenu(){
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[1]/span/div/button");
-        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[1]/span/div/button")).click();
-    }
+    /*Провека дополнительных колонок в таблицу Notification List*/
 
     @Step
     public void checkLeftMenuNameColumns(){
@@ -55,17 +51,14 @@ public class Notifications {
     }
     @Step
     public void checkLeftMenuMessageColumns(){
-
         waits_asserts.assertTextByXpath(driver,"//*[@id=\"message_show_tab_col_btn\"]/div/div/div","Message");
     }
     @Step
     public void checkLeftMenuAcknowledgeColumns(){
-
         waits_asserts.assertTextByXpath(driver,"//*[@id=\"acknowledged_show_tab_col_btn\"]/div/div/div","Acknowledge");
     }
     @Step
     public void checkLeftMenuTimeTriggeredColumns(){
-
         waits_asserts.assertTextByXpath(driver,"//*[@id=\"time_triggered_show_tab_col_btn\"]/div/div/div","Time triggered");
     }
 

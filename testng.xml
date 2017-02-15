@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Regression testing" parallel="tests" thread-count="2">
 
-    <test name="Admin Role Test">
+   <!-- <test name="Admin Role Test">
         <parameter name="browserName" value="chrome"></parameter>
         <parameter name="useGrid" value="false"></parameter>
         <classes>
@@ -16,7 +16,16 @@
         <classes>
             <class name="CreateNewUser"/>
         </classes>
+    </test>-->
+
+    <test name="Testing tests">
+        <parameter name="browserName" value="chrome"></parameter>
+        <parameter name="useGrid" value="false"></parameter>
+        <classes>
+            <class name="testovui_test"/>
+        </classes>
     </test>
+
 
 </suite>
 

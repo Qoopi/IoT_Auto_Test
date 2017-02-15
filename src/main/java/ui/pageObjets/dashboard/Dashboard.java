@@ -14,6 +14,8 @@ public class Dashboard {
         this.driver = WebDriverManager.getDriver();
     }
 
+    /*Меню IoT*/
+
     @Step("Open Equipment as Regular")
     public void openEquipment(){
         waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"equipment_main_menu_item\"]");
