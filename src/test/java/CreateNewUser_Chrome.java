@@ -7,7 +7,7 @@ import ui.utils.TestListener;
 
 @Listeners(TestListener.class)
 
-public class CreateNewUser {
+public class CreateNewUser_Chrome {
     @Features("Create New User")
     @Stories("User")
     @Test

@@ -1,7 +1,8 @@
 package api.utils;
 
 
-import api.json.GenerateJSON;
+import api.enums.Url;
+import api.json.PayloadJSON;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.response.Response;
@@ -21,10 +22,10 @@ import static com.jayway.restassured.RestAssured.given;
 
         public void authenticate(){
 
-            GenerateJSON JSON = new GenerateJSON();
+            PayloadJSON JSON = new PayloadJSON();
             String credentials = JSON.toString();
             createRequest(credentials)
-                    .post(api.enums.Url.LOGIN.getUri());
+                    .post(Url.MqTT.getUri());
 
 
             if (RestAssured.baseURI.contains("https://")){
