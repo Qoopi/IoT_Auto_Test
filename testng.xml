@@ -7,7 +7,7 @@
         <parameter name="browserName" value="chrome"></parameter>
         <parameter name="useGrid" value="false"></parameter>
         <classes>
-            <class name="Admin_Role_Chrome"/>
+            <class name="UI.Admin_Role_Chrome"/>
         </classes>
     </test>
 
@@ -15,7 +15,7 @@
         <parameter name="browserName" value="chrome"></parameter>
         <parameter name="useGrid" value="false"></parameter>
         <classes>
-            <class name="CreateNewUser_Chrome"/>
+            <class name="UI.CreateNewUser_Chrome"/>
         </classes>
     </test>
 -->
@@ -24,7 +24,7 @@
         <parameter name="browserName" value="firefox"></parameter>
         <parameter name="useGrid" value="false"></parameter>
         <classes>
-            <class name="Admin_Role_Firefox"/>
+            <class name="UI.Admin_Role_Firefox"/>
         </classes>
     </test>
 
@@ -32,7 +32,7 @@
         <parameter name="browserName" value="firefox"></parameter>
         <parameter name="useGrid" value="false"></parameter>
         <classes>
-            <class name="CreateNewUser_Firefox"/>
+            <class name="UI.CreateNewUser_Firefox"/>
         </classes>
     </test>-->
 

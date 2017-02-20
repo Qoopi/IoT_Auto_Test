@@ -6,7 +6,7 @@
         <parameter name="browserName" value="firefox"></parameter>
         <parameter name="useGrid" value="false"></parameter>
         <classes>
-            <class name="testovui_test"/>
+            <class name="UI.testovui_test"/>
         </classes>
     </test>
 </suite>

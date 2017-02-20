@@ -1,3 +1,5 @@
+package UI;
+
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -14,7 +16,7 @@ import ui.utils.TestListener;
 
 
 @Listeners(TestListener.class)
-public class Admin_Role_Firefox {
+public class Admin_Role_Chrome {
 
     @BeforeTest
     public void LogIn() {
@@ -54,7 +56,6 @@ public class Admin_Role_Firefox {
         equipment.checkEquipmentCreatedInMenu();
 
     }
-
     @Features("Admin role testing of functionality")
     @Stories("[OSF-53] Equipment, add column Created ")
     @Test(priority = 3)
@@ -68,7 +69,6 @@ public class Admin_Role_Firefox {
         dashboard.openMenu();
         equipment.dismissCreated();
     }
-
     @Features("Regression")
     @Stories("[OSF-53] Equipment view detail info")
     @Test(priority = 4)
@@ -78,7 +78,6 @@ public class Admin_Role_Firefox {
         equipment.checkEquipment();
 
     }
-
     @Features("Regression")
     @Stories("Notifications list default columns check")
     @Test(priority = 5)
@@ -119,7 +118,6 @@ public class Admin_Role_Firefox {
         reports.checkReportTitleColumn();
         reports.checkReportScheduleColumn();
     }
-
     @Features("Regression")
     @Stories("Report list additions columns in dropdown menu check")
     @Test(priority = 8)
@@ -134,7 +132,6 @@ public class Admin_Role_Firefox {
         reports.checkExcelIncludedColumnInDropDownMenu();
         reports.checkEquipmentItemsColumnInDropDownMenu();
     }
-
     @Features("Regression")
     @Stories("Report list add additional columns testing")
     @Test(priority = 9)
@@ -151,7 +148,6 @@ public class Admin_Role_Firefox {
         reports.addExcelIncluded();
         reports.checkAddedExcelIncluded();
     }
-
     @Features("Regression")
     @Stories("Report list dismiss additional columns ")
     @Test(priority = 10)
@@ -165,7 +161,6 @@ public class Admin_Role_Firefox {
         dashboard.openMenu();
         reports.dismissExcelIncluded();
     }
-
     @Features("Regression")
     @Stories("OSF-200 User List")
     @Test(priority = 11)
@@ -203,7 +198,6 @@ public class Admin_Role_Firefox {
         userList.addRegTime();
 
     }
-
     @Features("Regression")
     @Stories("OSF-200 User List")
     @Test(priority = 14)
@@ -235,7 +229,6 @@ public class Admin_Role_Firefox {
         userList.deactivateUsersWithHover();
         userList.activateUserWithColumn();
     }
-
     @Features("Regression")
     @Stories("OSF-199 Request, accept request")
     @Test(priority = 16)
@@ -249,7 +242,6 @@ public class Admin_Role_Firefox {
         requests.checkRequest();
         requests.acceptUser();
     }
-
     @Features("Regression")
     @Stories("OSF-403 Delete User")
     @Test(priority = 17)
@@ -263,7 +255,6 @@ public class Admin_Role_Firefox {
         user.foundUserToDelete();
         user.deleteChosenUser();
     }
-
     @Features("Regression")
     @Stories("[OSF-53] Equipment list, default columns check")
     @Test(priority = 18)
@@ -281,7 +272,6 @@ public class Admin_Role_Firefox {
         equip.sortEquipByActive();
         equip.sortEquipByUpdatedAt();
     }
-
     @Features("Regression")
     @Stories("[OSF-53] Equipment list, edit equip")
     @Test(priority = 19)
@@ -306,7 +296,6 @@ public class Admin_Role_Firefox {
         equipment.checkEquipmentUpdatedAtInMenu();
         equipment.checkEquipmentCreatedInMenu();
     }
-
     @Features("Regression")
     @Stories("[OSF-53] Equipment List add column Created ")
     @Test(priority = 21)

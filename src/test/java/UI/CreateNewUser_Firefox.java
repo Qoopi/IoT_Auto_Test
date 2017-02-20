@@ -1,3 +1,5 @@
+package UI;
+
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
@@ -7,7 +9,7 @@ import ui.utils.TestListener;
 
 @Listeners(TestListener.class)
 
-public class CreateNewUser_Chrome {
+public class CreateNewUser_Firefox {
     @Features("Create New User")
     @Stories("User")
     @Test

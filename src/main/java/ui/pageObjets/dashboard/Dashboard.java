@@ -49,7 +49,7 @@ public class Dashboard {
         waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"administration_main_menu_item\"]");
         driver.findElement(By.xpath("//*[@id=\"administration_main_menu_item\"]")).click();
     }
-            @Step("Open Requests")
+            @Step("Open AWS")
             public void openRequests(){
                 waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"requests_main_menu_item\"]");
                 driver.findElement(By.xpath("//*[@id=\"requests_main_menu_item\"]")).click();
@@ -85,6 +85,11 @@ public class Dashboard {
         //open menu
         waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"table_menu_btn\"]");
         driver.findElement(By.xpath("//*[@id=\"table_menu_btn\"]")).click();
+    }
 
+    @Step("Open dashboard table")
+    public void openDashboadr(){
+        waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[1]/div[1]/button");
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[1]/div[1]/button")).click();
     }
     }

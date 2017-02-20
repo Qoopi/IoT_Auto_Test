@@ -2,7 +2,7 @@ package api.enums;
 
 
 public enum  Url {
-     MqTT("https://console.aws.amazon.com/iotv2/home?region=us-east-1#/test"),
+     Equipment("https://qpo57tscm2.execute-api.us-east-1.amazonaws.com/wstaging/equipment"),
      SEARCH("/"), ;
     private String uri;
 
