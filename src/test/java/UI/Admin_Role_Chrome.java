@@ -105,7 +105,7 @@ public class Admin_Role_Chrome {
         not.checkLeftMenuAcknowledgeColumns();
         not.checkLeftMenuTimeTriggeredColumns();
     }
-       /*Notification Rules tests should be*/
+
 
     @Features("Regression")
     @Stories("Report list default columns testing")

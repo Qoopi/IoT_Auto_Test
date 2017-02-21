@@ -5,13 +5,13 @@ import api.utils.RequestSender;
 import org.testng.annotations.Test;
 
 public class API {
-    @Test
+   /* @Test
     public void getEquips(){
         AWS aws = new AWS();
         RequestSender requestSender = new RequestSender();
-        requestSender.createEmptyRequest();
-        aws.getEquipment();
-    }
+        requestSender.createRequest(aws.getEquipment());
+
+    }*/
 
 
 }
