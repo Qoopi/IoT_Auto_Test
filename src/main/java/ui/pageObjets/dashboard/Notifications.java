@@ -132,6 +132,7 @@ public class Notifications {
     }
 
     /*=================Поверка правил===================*/
+                 /*1st Step*/
 
     @Step("Click on the floating button")
     public void floatingButton(){
@@ -151,23 +152,83 @@ public class Notifications {
         waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/div/p/text()",
                 "The rule monitors whether the equipment has abnormal vibrations above the Alarm or Abort thresholds");
     }
-            @Step("Create Abnormal vibrations rule")
-            public void createRuleAbnormalVibration(){
-                 waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/div/div/div/button");
-                 driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/div/div/div/button")).click();
+    @Step("Create Abnormal vibrations rule")
+    public void createRuleAbnormalVibration(){
+                waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/div/div/div/button");
+                driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/div/div/div/button")).click();
                  //waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[1]/div[3]/span/text()");
                  //waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[1]/div[3]/span/text()","Main settings");
             }
-            @Step("Insert name of rule")
-            public void insertName(){
-                 driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/div")).click();
-                 waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/div");
-                 driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/div")).sendKeys("Abnormal vibration");
+
+            /*2nd Step "Main settings"*/
+
+    @Step("Insert name of rule")
+    public void insertName(){
+                driver.findElement(By.xpath("//*[@id=\"new_rule_name\"]")).click();
+                waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"new_rule_name\"]");
+                driver.findElement(By.xpath("//*[@id=\"new_rule_name\"]")).sendKeys("Abnormal vibration");
             }
-            @Step("Insert description of rule")
-            public void insertDescription(){
-                 //waits_asserts.waitForVisibilityByXpath(driver,"//*[@id="root"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[2]/div");
-                 driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[2]/div")).click();
-                 driver.findElement(By.xpath("//*[@id=\"undefined-undefined-Description-14899\"]")).sendKeys("Big BOOOM");
+    @Step("Insert description of rule")
+    public void insertDescription(){
+                driver.findElement(By.xpath("//*[@id=\"new_rule_description\"]")).click();
+                waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"new_rule_description\"]");
+                driver.findElement(By.xpath("//*[@id=\"new_rule_description\"]")).sendKeys("Big BOOOM");
             }
+    @Step("Step 3")
+    public void clickContinue(){
+                waits_asserts.waitForClickableByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[2]/span/div/button");
+                driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[2]/span/div/button")).click();
+            }
+
+            /*3-d Step "Select equipment"*/
+
+    @Step("Add equipment with floating button")
+    public void clickOnFloatingButton(){
+                waits_asserts.waitForClickableByXpath(driver,"//*[@id=\"add_equipments_float_btn\"]");
+                driver.findElement(By.xpath("//*[@id=\"add_equipments_float_btn\"]")).click();
+            }
+    @Step("Add from list")
+    public void chooseEquip(){
+                    waits_asserts.waitForClickableByXpath(driver,"/html/body/div[2]/div/div[1]/div/div/div[1]/span/div/div[3]/div[2]/table/tbody/tr[1]/td[1]");
+                    waits_asserts.assertTextByXpath(driver,"/html/body/div[2]/div/div[1]/div/div/div[1]/span/div/div[3]/div[2]/table/tbody/tr[1]/td[1]","Pump D13");
+                    driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div[1]/span/div/div[3]/div[2]/table/tbody/tr[1]/td[1]")).click();
+                    }
+    @Step("Click on button add")
+    public void clickAdd(){
+                    waits_asserts.waitForClickableByXpath(driver,"/html/body/div[2]/div/div[1]/div/div/div[2]/button[2]");
+                    driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div[2]/button[2]")).click();
+                    }
+    @Step("Check if the added Equipment is present")
+    public void checkAddedEquip(){
+        waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[2]/div/div[3]/div[2]/table/tbody/tr/td[1]","Pump D13");
+    }
+    @Step("Select chanel")
+    public void selectChannelCheck(){
+            driver.findElement(By.xpath("//*[@id=\"undefined-undefined-channel-41093\"]/div[1]/div[2]")).click();
+            waits_asserts.waitForVisibilityByXpath(driver,"/html/body/div[7]/div/div");
+            waits_asserts.assertTextByXpath(driver,"/html/body/div[7]/div/div/div/div[1]/span/div/div/div","Any");
+            waits_asserts.assertTextByXpath(driver,"/html/body/div[7]/div/div/div/div[2]/span/div/div/div","Main");
+            waits_asserts.assertTextByXpath(driver,"/html/body/div[7]/div/div/div/div[3]/span/div/div/div","Blower");
+
+        }
+    @Step("Select Main")
+    public void selectMain(){
+                driver.findElement(By.xpath("/html/body/div[7]/div/div/div/div[2]/span")).click();
+            }
+    @Step("Select Blower")
+    public void selectBlower(){
+                driver.findElement(By.xpath("/html/body/div[7]/div/div/div/div[3]/span")).click();
+            }
+
+            /*4-th Step "Notification settings"*/
+
+    @Step("Notification settings")
+    public void checkGlobalNotification(){
+        //waits_asserts.waitForClickableByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[2]/span/div/button/div/div");
+        //driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[2]/span/div/button/div/div")).click();
+        waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/h4/div");
+        waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/h4/div","Notification settings");
+        waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[2]/h4/div[1]","Send SMS notifications");
+        waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[3]/h4/div[2]","Send Email notifications");
+    }
 }

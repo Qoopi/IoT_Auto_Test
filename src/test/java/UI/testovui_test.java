@@ -57,6 +57,14 @@ public class testovui_test {
         not.createRuleAbnormalVibration();
         not.insertName();
         not.insertDescription();
+        not.clickContinue();
+        not.clickOnFloatingButton();
+        not.chooseEquip();
+        not.clickAdd();
+        not.checkAddedEquip();
+        not.clickContinue();
+        not.checkGlobalNotification();
+
     }
 
 }
