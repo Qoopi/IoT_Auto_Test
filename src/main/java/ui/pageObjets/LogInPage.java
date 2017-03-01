@@ -19,15 +19,15 @@ public class LogInPage {
    public LogInPage(){this.driver = WebDriverManager.getDriver();}
     private String mail = "kov.ossystem@gmail.com";
     private String mail2 = "geloksmmm@gmail.com";
-    private String pass = "q125478963Q";
-    private String pass2 = "Q125478963q";
+    private String pass = "QW125478963qw";
+    private String pass2 = "QW125478963qw";
 
 
     @Step("Get on Start Page")
     public void getToIoTPage(){
         // open start page
-        driver.get("https://dashboard.dev.iotsyst.com/");                    //dev
-        //driver.get("https://dashboard.wstaging.iotsyst.com");              // stage
+        //driver.get("https://dashboard.dev.iotsyst.com/");                    //dev
+        driver.get("https://dashboard.wstaging.iotsyst.com");              // stage
 
         // checking out that we are ou the right page
         waits_asserts.assertByTitle(driver, "IoT Systems App");
@@ -45,7 +45,7 @@ public class LogInPage {
             driver.findElement(By.xpath("//*[@id=\"Passwd\"]")).sendKeys(pass);
             driver.findElement(By.xpath("//*[@id=\"signIn\"]")).click();
             //Checkout of where we are
-            waits_asserts.assertTextByXpath(driver, "//*[@id=\"root\"]/div/div[1]/div/div[3]/div/div[2]/div[1]/div/p[2]/span", "Administrator");
+            //waits_asserts.assertTextByXpath(driver, "//*[@id=\"root\"]/div/div[1]/div/div[3]/div/div[2]/div[1]/div/p[2]/span", "Administrator");
             waits_asserts.assertTextByXpath(driver, "//*[@id=\"naviCrumb\"]", "Dashboard");
         }
 
@@ -56,10 +56,10 @@ public class LogInPage {
         //Google acc login
         driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys(mail2);
         driver.findElement(By.xpath("//*[@id=\"next\"]")).click();
-        //driver.findElement(By.xpath("//*[@id=\"Passwd\"]")).sendKeys(pass2);
+        waits_asserts.waitForVisibilityByCSS(driver,"#Passwd");
         driver.findElement(By.cssSelector("#Passwd")).sendKeys(pass2);
         driver.findElement(By.xpath("//*[@id=\"signIn\"]")).click();
-        //waits_asserts.assertTextByXpath(driver, "//*[@id=\"naviCrumb\"]", "Dashboard");
+        waits_asserts.assertTextByXpath(driver, "//*[@id=\"naviCrumb\"]", "Dashboard");
     }
     @Step("Refresh browser")
     public void refresh(){driver.navigate().refresh();}

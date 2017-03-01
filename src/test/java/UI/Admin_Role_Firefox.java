@@ -22,7 +22,7 @@ public class Admin_Role_Firefox {
     public void LogIn() {
         LogInPage log = new LogInPage();
         log.getToIoTPage();
-        log.enterGoogleCred();
+        log.enterGoogleCred2();
     }
 
     @Features("Regression")

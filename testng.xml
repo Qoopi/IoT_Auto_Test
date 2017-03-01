@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Regression testing" parallel="tests" thread-count="4">
-<!--
+
 
     <test name="Admin Role Chrome Test">
         <parameter name="browserName" value="chrome"></parameter>
@@ -11,22 +11,24 @@
         </classes>
     </test>
 
-    <test name="Create new user Chrome">
+   <!-- <test name="Create new user Chrome">
         <parameter name="browserName" value="chrome"></parameter>
         <parameter name="useGrid" value="false"></parameter>
         <classes>
             <class name="UI.CreateNewUser_Chrome"/>
         </classes>
-    </test>
--->
+    </test>-->
+
+<!--
 
     <test name="Admin Role Firefox Test">
         <parameter name="browserName" value="firefox"></parameter>
         <parameter name="useGrid" value="false"></parameter>
         <classes>
-            <class name="UI.testovui_test"/>
+            <class name="UI.Admin_Role_Firefox"/>
         </classes>
     </test>
+-->
 
    <!-- <test name="Create new user Firefox">
         <parameter name="browserName" value="firefox"></parameter>
