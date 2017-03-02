@@ -50,7 +50,7 @@ public class testovui_test {
     }
 
     @Features("Regression")
-    @Stories("Create new Rule Abnormal vibration ")
+    @Stories("Create new Rule Abnormal vibration,Chanel main ")
     @Test(priority = 3)
     public void CreateNewRule() {
         Notifications not = new Notifications();
@@ -65,6 +65,8 @@ public class testovui_test {
         not.chooseEquip();
         not.clickAdd();
         not.checkAddedEquip();
+        not.selectChannelCheck();
+        not.selectBlower();
         not.clickContinue2();
         not.checkGlobalNotification();
 
