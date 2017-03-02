@@ -1,4 +1,4 @@
-package ui.pageObjets.dashboard;
+package ui.pageObjets.dashboard.Equipments;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

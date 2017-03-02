@@ -1,4 +1,4 @@
-package ui.pageObjets.dashboard;
+package ui.pageObjets.dashboard.Notifications;
 
 
 import org.openqa.selenium.By;
@@ -205,15 +205,11 @@ public class Notifications {
 
         driver.findElement(By.xpath("//*[@id=\"continueundefined\"]")).click();
     }
-
+            /*KOSTblJIb*/
     public void clickContinue2() {
-
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.querySelector('#continueundefined').setAttribute('style','border: 10px;box-sizing: border-box;display: inline-block;font-family: Roboto, sans-serif;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);cursor: pointer;text-decoration: none;margin: 0px;padding: 0px;outline: none;font-size: inherit;font-weight: inherit;transform: translate(0px, 0px);position: relative;height: 36px;line-height: 36px;width: 100%;border-radius: 2px;transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;background-color: rgb(25, 118, 210);text-align: center;z-index: 100500');");
         waits_asserts.waitForClickableByXpath(driver, "//*[@id=\"continueundefined\"]");
-        JavascriptExecutor js = null;
-        if (driver instanceof JavascriptExecutor) {
-            js = (JavascriptExecutor) driver;
-        }
-        js.executeScript("return document.getElementByXpath('/html/body/div[2]/div/div[2]').remove();");
         driver.findElement(By.xpath("//*[@id=\"continueundefined\"]")).click();
     }
 
@@ -267,11 +263,9 @@ public class Notifications {
 
     @Step("Notification settings")
     public void checkGlobalNotification() {
-        //waits_asserts.waitForClickableByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[2]/span/div/button/div/div");
-        //driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[2]/span/div/button/div/div")).click();
         waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/h4/div");
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/h4/div", "Notification settings");
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[2]/h4/div[1]", "Send SMS notifications");
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[3]/h4/div[2]", "Send Email notifications");
+        waits_asserts.assertTextByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[3]/h4/div[1]", "Send Email notifications");
     }
 }

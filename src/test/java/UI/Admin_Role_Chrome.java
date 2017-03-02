@@ -8,10 +8,10 @@ import ru.yandex.qatools.allure.annotations.Stories;
 import ui.pageObjets.LogInPage;
 import ui.pageObjets.administration.Requests;
 import ui.pageObjets.administration.UserList;
-import ui.pageObjets.dashboard.Dashboard;
-import ui.pageObjets.dashboard.Equipment;
-import ui.pageObjets.dashboard.Notifications;
-import ui.pageObjets.dashboard.Reports;
+import ui.pageObjets.dashboard.Dasboards.Dashboard;
+import ui.pageObjets.dashboard.Equipments.Equipment;
+import ui.pageObjets.dashboard.Notifications.Notifications;
+import ui.pageObjets.dashboard.Reports.Reports;
 import ui.utils.TestListener;
 
 
