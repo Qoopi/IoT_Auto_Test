@@ -44,7 +44,7 @@ public class Admin_Role_Firefox {
     @Features("Regression")
     @Stories("[OSF-53] Equipment, columns menu check")
     @Test(priority = 2)
-    public void checkUpperRightMenuInEquipment(){
+    public void checkUpperRightMenuInEquipment() {
         Dashboard dashboard = new Dashboard();
         dashboard.openMenu();
         Equipment equipment = new Equipment();
@@ -209,7 +209,7 @@ public class Admin_Role_Firefox {
     @Features("Regression")
     @Stories("OSF-200 User List")
     @Test(priority = 14)
-    public void deleteColumnsFromUserList(){
+    public void deleteColumnsFromUserList() {
 
         LogInPage log = new LogInPage();
         log.refresh();
@@ -228,6 +228,7 @@ public class Admin_Role_Firefox {
         dashboard.openMenu();
         userList.dismissService();
     }
+
     @Features("Regression")
     @Stories("OSF-200 User List")
     @Test(priority = 15)
@@ -255,7 +256,7 @@ public class Admin_Role_Firefox {
     @Features("Regression")
     @Stories("OSF-403 Delete User")
     @Test(priority = 17)
-    public void deleteUser(){
+    public void deleteUser() {
         Dashboard dashboard = new Dashboard();
         dashboard.openUserList();
         dashboard.openMenu();

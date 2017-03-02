@@ -18,6 +18,7 @@ public class testovui_test {
         log.getToIoTPage();
         log.enterGoogleCred();
     }
+
     @Features("Regression")
     @Stories("Notifications Rule, default columns check")
     @Test(priority = 1)
@@ -30,6 +31,7 @@ public class testovui_test {
         not.checkMessage();
         not.checkActive();
     }
+
     @Features("Regression")
     @Stories("Notifications Rule, drop down menu with additional columns check")
     @Test(priority = 2)
@@ -46,6 +48,7 @@ public class testovui_test {
         not.checkDAMAcknowledgementLast();
 
     }
+
     @Features("Regression")
     @Stories("Create new Rule Abnormal vibration ")
     @Test(priority = 3)
@@ -62,7 +65,7 @@ public class testovui_test {
         not.chooseEquip();
         not.clickAdd();
         not.checkAddedEquip();
-        not.clickContinue();
+        not.clickContinue2();
         not.checkGlobalNotification();
 
     }

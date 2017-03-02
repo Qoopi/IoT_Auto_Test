@@ -44,7 +44,7 @@ public class Admin_Role_Chrome {
     @Features("Regression")
     @Stories("[OSF-53] Equipment, columns menu check")
     @Test(priority = 2)
-    public void checkUpperRightMenuInEquipment(){
+    public void checkUpperRightMenuInEquipment() {
         Dashboard dashboard = new Dashboard();
         dashboard.openMenu();
         Equipment equipment = new Equipment();
@@ -56,6 +56,7 @@ public class Admin_Role_Chrome {
         equipment.checkEquipmentCreatedInMenu();
 
     }
+
     @Features("Admin role testing of functionality")
     @Stories("[OSF-53] Equipment, add column Created ")
     @Test(priority = 3)
@@ -69,6 +70,7 @@ public class Admin_Role_Chrome {
         dashboard.openMenu();
         equipment.dismissCreated();
     }
+
     @Features("Regression")
     @Stories("[OSF-53] Equipment view detail info")
     @Test(priority = 4)
@@ -78,6 +80,7 @@ public class Admin_Role_Chrome {
         equipment.checkEquipment();
 
     }
+
     @Features("Regression")
     @Stories("Notifications list default columns check")
     @Test(priority = 5)
@@ -118,6 +121,7 @@ public class Admin_Role_Chrome {
         reports.checkReportTitleColumn();
         reports.checkReportScheduleColumn();
     }
+
     @Features("Regression")
     @Stories("Report list additions columns in dropdown menu check")
     @Test(priority = 8)
@@ -132,6 +136,7 @@ public class Admin_Role_Chrome {
         reports.checkExcelIncludedColumnInDropDownMenu();
         reports.checkEquipmentItemsColumnInDropDownMenu();
     }
+
     @Features("Regression")
     @Stories("Report list add additional columns testing")
     @Test(priority = 9)
@@ -148,6 +153,7 @@ public class Admin_Role_Chrome {
         reports.addExcelIncluded();
         reports.checkAddedExcelIncluded();
     }
+
     @Features("Regression")
     @Stories("Report list dismiss additional columns ")
     @Test(priority = 10)
@@ -161,6 +167,7 @@ public class Admin_Role_Chrome {
         dashboard.openMenu();
         reports.dismissExcelIncluded();
     }
+
     @Features("Regression")
     @Stories("OSF-200 User List")
     @Test(priority = 11)
@@ -198,10 +205,11 @@ public class Admin_Role_Chrome {
         userList.addRegTime();
 
     }
+
     @Features("Regression")
     @Stories("OSF-200 User List")
     @Test(priority = 14)
-    public void deleteColumnsFromUserList(){
+    public void deleteColumnsFromUserList() {
 
         LogInPage log = new LogInPage();
         log.refresh();
@@ -220,6 +228,7 @@ public class Admin_Role_Chrome {
         dashboard.openMenu();
         userList.dismissService();
     }
+
     @Features("Regression")
     @Stories("OSF-200 User List")
     @Test(priority = 15)
@@ -229,6 +238,7 @@ public class Admin_Role_Chrome {
         userList.deactivateUsersWithHover();
         userList.activateUserWithColumn();
     }
+
     @Features("Regression")
     @Stories("OSF-199 Request, accept request")
     @Test(priority = 16)
@@ -242,10 +252,11 @@ public class Admin_Role_Chrome {
         requests.checkRequest();
         requests.acceptUser();
     }
+
     @Features("Regression")
     @Stories("OSF-403 Delete User")
     @Test(priority = 17)
-    public void deleteUser(){
+    public void deleteUser() {
         Dashboard dashboard = new Dashboard();
         dashboard.openUserList();
         dashboard.openMenu();
@@ -255,6 +266,7 @@ public class Admin_Role_Chrome {
         user.foundUserToDelete();
         user.deleteChosenUser();
     }
+
     @Features("Regression")
     @Stories("[OSF-53] Equipment list, default columns check")
     @Test(priority = 18)
@@ -272,6 +284,7 @@ public class Admin_Role_Chrome {
         equip.sortEquipByActive();
         equip.sortEquipByUpdatedAt();
     }
+
     @Features("Regression")
     @Stories("[OSF-53] Equipment list, edit equip")
     @Test(priority = 19)
@@ -296,6 +309,7 @@ public class Admin_Role_Chrome {
         equipment.checkEquipmentUpdatedAtInMenu();
         equipment.checkEquipmentCreatedInMenu();
     }
+
     @Features("Regression")
     @Stories("[OSF-53] Equipment List add column Created ")
     @Test(priority = 21)
