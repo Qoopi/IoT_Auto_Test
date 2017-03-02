@@ -265,9 +265,10 @@ public class Notifications {
     }
 
     @Step("Select chanel")
-    public void selectChannelCheck() {
-        driver.findElement(By.xpath("//*[@id=\"undefined-undefined-channel-41093\"]/div[1]/div[2]")).click();
-        waits_asserts.waitForVisibilityByXpath(driver, "/html/body/div[7]/div/div");
+    public void selectChannelCheck() { JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.querySelector('#channel_select_rule').setAttribute('style','display: block;font-size: inherit;height: 100%;font-family: inherit;outline: none;position: relative;transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);padding: 0px;width: 100%;border: none;background-color: rgba(0, 0, 0, 0);color: rgba(0, 0, 0, 0.870588);cursor: initial;font-style: inherit;font-variant: inherit;font-weight: inherit;font-stretch: inherit;line-height: inherit;box-sizing: border-box;margin-top: 14px;z-index: 100500');");
+        driver.findElement(By.xpath("//*[@id='channel_select_rule']")).click();
+        waits_asserts.waitForVisibilityByXpath(driver, "/html/body/div[7]/div");
         waits_asserts.assertTextByXpath(driver, "/html/body/div[7]/div/div/div/div[1]/span/div/div/div", "Any");
         waits_asserts.assertTextByXpath(driver, "/html/body/div[7]/div/div/div/div[2]/span/div/div/div", "Main");
         waits_asserts.assertTextByXpath(driver, "/html/body/div[7]/div/div/div/div[3]/span/div/div/div", "Blower");
@@ -276,12 +277,15 @@ public class Notifications {
 
     @Step("Select Main")
     public void selectMain() {
-        driver.findElement(By.xpath("/html/body/div[7]/div/div/div/div[2]/span")).click();
+        driver.findElement(By.xpath("/html/body/div[7]/div/div/div/div[2]/span/div/div/div")).click();
     }
 
     @Step("Select Blower")
     public void selectBlower() {
-        driver.findElement(By.xpath("/html/body/div[7]/div/div/div/div[3]/span")).click();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.querySelector('#channel_select_rule').setAttribute('style','display: block;font-size: inherit;height: 100%;font-family: inherit;outline: none;position: relative;transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);padding: 0px;width: 100%;border: none;background-color: rgba(0, 0, 0, 0);color: rgba(0, 0, 0, 0.870588);cursor: initial;font-style: inherit;font-variant: inherit;font-weight: inherit;font-stretch: inherit;line-height: inherit;box-sizing: border-box;margin-top: 14px;z-index: 100500');");
+        driver.findElement(By.xpath("//*[@id='channel_select_rule']")).click();
+        driver.findElement(By.cssSelector("body > div:nth-child(14) > div > div > div > div:nth-child(3) > span > div > div > div")).click();
     }
 
             /*4-th Step "Notification settings"*/
