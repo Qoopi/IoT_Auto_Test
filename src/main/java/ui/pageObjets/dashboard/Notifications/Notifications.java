@@ -23,7 +23,7 @@ public class Notifications {
     public void checkNameColumn() {
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"name_tab_col\"]/span/span[1]", "Name");
         driver.findElement(By.xpath("//*[@id=\"name_tab_col\"]/span/span[1]")).click();
-        waits_asserts.sleep(1000);
+        WaitsAsserts.sleep(1000);
         driver.findElement(By.xpath("//*[@id=\"name_tab_col\"]/span/span[1]")).click();
     }
 
@@ -155,14 +155,17 @@ public class Notifications {
 
     @Step("Click on the floating button")
     public void floatingButton() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/span/div/div/div/button");
-        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/span/div/div/div/button/div/div")).click();
+        String floatingButtonClosed = "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/span/div/div/div/button";
+        waits_asserts.waitForVisibilityByXpath(driver, floatingButtonClosed);
+        WebElement element = driver.findElement(By.xpath(floatingButtonClosed));
+        element.click();
     }
 
     @Step("Click on the New rule button")
     public void createNewRule() {
         //waits_asserts.waitForVisibilityByCSS(driver,"#new_rule_float_btn");
         driver.findElement(By.cssSelector("#new_rule_float_btn")).click();
+        //driver.findElement(By.cssSelector(".mainButton")).click();
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/h3/span",
                 "Please, select the desired rule type");
     }
@@ -207,10 +210,23 @@ public class Notifications {
     }
             /*KOSTblJIb*/
     public void clickContinue2() {
+        //works with chrome
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.querySelector('#continueundefined').setAttribute('style','border: 10px;box-sizing: border-box;display: inline-block;font-family: Roboto, sans-serif;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);cursor: pointer;text-decoration: none;margin: 0px;padding: 0px;outline: none;font-size: inherit;font-weight: inherit;transform: translate(0px, 0px);position: relative;height: 36px;line-height: 36px;width: 100%;border-radius: 2px;transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;background-color: rgb(25, 118, 210);text-align: center;z-index: 100500');");
         waits_asserts.waitForClickableByXpath(driver, "//*[@id=\"continueundefined\"]");
         driver.findElement(By.xpath("//*[@id=\"continueundefined\"]")).click();
+
+
+        //works with FF
+//        waits_asserts.sleep(5500);
+//        driver.findElement(By.cssSelector("#continueundefined > div > div > span")).click();
+    }
+
+    public void clickContinue21(){
+        //use javascript to click element
+        WebElement element = driver.findElement(By.xpath("//*[@id=\"continueundefined\"]"));
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click()", element);
     }
 
             /*3-d Step "Select equipment"*/
@@ -237,6 +253,15 @@ public class Notifications {
     @Step("Check if the added Equipment is present")
     public void checkAddedEquip() {
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[2]/div/div[3]/div[2]/table/tbody/tr/td[1]", "Pump D13");
+    }
+
+    public void addChannel(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        //js.executeScript("document.querySelector('#channel_select_rule').setAttribute('style','display: block;font-size: inherit;height: 100%;font-family: inherit;outline: none;position: relative;transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);padding: 0px;width: 100%;border: none;background-color: rgba(0, 0, 0, 0);color: rgba(0, 0, 0, 0.870588);cursor: initial;font-style: inherit;font-variant: inherit;font-weight: inherit;font-stretch: inherit;line-height: inherit;box-sizing: border-box;margin-top: 14px;z-index: 100500');");
+        driver.findElement(By.xpath("//*[@id='channel_select_rule']")).click();
+        //js.executeScript("document.querySelector('#channel_select_rule > div:nth-child(1)').setAttribute('style','height: 100%;width: 100%; z-index: 0'');");
+//        driver.findElement(By.cssSelector("body > div:nth-child(14) > div > div > div > div:nth-child(2) > span > div > div > div")).click();
+        driver.findElement(By.cssSelector("body > div:nth-child(14) > div > div > div > div:nth-child(3) > span > div > div > div")).click();
     }
 
     @Step("Select chanel")
