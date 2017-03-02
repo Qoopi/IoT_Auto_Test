@@ -56,7 +56,6 @@ public class testovui_test {
         Notifications not = new Notifications();
         not.floatingButton();
         not.createNewRule();
-        //not.ruleCheck();
         not.createRuleAbnormalVibration();
         not.insertName();
         not.insertDescription();
@@ -66,8 +65,7 @@ public class testovui_test {
         not.clickAdd();
         not.checkAddedEquip();
         not.selectChannelCheck();
-        not.selectBlower();
-        not.clickContinue2();
+        not.clickContinue2Chrome();
         not.checkGlobalNotification();
 
     }

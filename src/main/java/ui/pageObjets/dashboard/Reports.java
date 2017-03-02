@@ -1,4 +1,4 @@
-package ui.pageObjets.dashboard.Reports;
+package ui.pageObjets.dashboard;
 
 
 import org.openqa.selenium.By;

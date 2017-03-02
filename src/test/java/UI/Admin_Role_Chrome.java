@@ -11,7 +11,7 @@ import ui.pageObjets.administration.UserList;
 import ui.pageObjets.dashboard.Dasboards.Dashboard;
 import ui.pageObjets.dashboard.Equipments.Equipment;
 import ui.pageObjets.dashboard.Notifications.Notifications;
-import ui.pageObjets.dashboard.Reports.Reports;
+import ui.pageObjets.dashboard.Reports;
 import ui.utils.TestListener;
 
 

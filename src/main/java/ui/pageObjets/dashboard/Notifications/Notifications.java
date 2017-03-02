@@ -19,11 +19,12 @@ public class Notifications {
     }
 
     /*Проверка стандартных колонок таблицы Notification List*/
+
     @Step("Check out Name column")
     public void checkNameColumn() {
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"name_tab_col\"]/span/span[1]", "Name");
         driver.findElement(By.xpath("//*[@id=\"name_tab_col\"]/span/span[1]")).click();
-        WaitsAsserts.sleep(1000);
+        waits_asserts.sleep(1000);
         driver.findElement(By.xpath("//*[@id=\"name_tab_col\"]/span/span[1]")).click();
     }
 
@@ -84,7 +85,7 @@ public class Notifications {
         driver.findElement(By.xpath("//*[@id=\"notification_subject_tab_col\"]/span/span[1]")).click();
     }
 
-    @Step("Check out Mesage column")
+    @Step("Check out Message column")
     public void checkMessage() {
         waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"message_tab_col\"]/span/span[1]");
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"message_tab_col\"]/span/span[1]", "Message");
@@ -210,24 +211,20 @@ public class Notifications {
         driver.findElement(By.xpath("//*[@id=\"continueundefined\"]")).click();
     }
             /*KOSTblJIb*/
-    public void clickContinue2() {
+
+    @Step("Step 3 Continue")
+    public void clickContinue2Chrome() {
         //works with chrome
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.querySelector('#continueundefined').setAttribute('style','border: 10px;box-sizing: border-box;display: inline-block;font-family: Roboto, sans-serif;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);cursor: pointer;text-decoration: none;margin: 0px;padding: 0px;outline: none;font-size: inherit;font-weight: inherit;transform: translate(0px, 0px);position: relative;height: 36px;line-height: 36px;width: 100%;border-radius: 2px;transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;background-color: rgb(25, 118, 210);text-align: center;z-index: 100500');");
         waits_asserts.waitForClickableByXpath(driver, "//*[@id=\"continueundefined\"]");
         driver.findElement(By.xpath("//*[@id=\"continueundefined\"]")).click();
-
-
-        //works with FF
-//        waits_asserts.sleep(5500);
-//        driver.findElement(By.cssSelector("#continueundefined > div > div > span")).click();
     }
-
-    public void clickContinue21(){
-        //use javascript to click element
-        WebElement element = driver.findElement(By.xpath("//*[@id=\"continueundefined\"]"));
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
-        executor.executeScript("arguments[0].click()", element);
+    @Step("Step 3 Continue")
+    public void clickContinue2FireFOx() {
+        //works with FF
+    waits_asserts.sleep(5500);
+     driver.findElement(By.cssSelector("#continueundefined > div > div > span")).click();
     }
 
             /*3-d Step "Select equipment"*/
