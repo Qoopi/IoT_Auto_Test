@@ -22,34 +22,38 @@ public class Notifications {
 
     @Step("Check out Name column")
     public void checkNameColumn() {
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"name_tab_col\"]/span/span[1]", "Name");
-        driver.findElement(By.xpath("//*[@id=\"name_tab_col\"]/span/span[1]")).click();
+        String nameColumn = "//*[@id='name_tab_col']/span/span[1]";
+        waits_asserts.assertTextByXpath(driver, nameColumn, "Name");
+        driver.findElement(By.xpath(nameColumn)).click();
         waits_asserts.sleep(1000);
-        driver.findElement(By.xpath("//*[@id=\"name_tab_col\"]/span/span[1]")).click();
+        driver.findElement(By.xpath(nameColumn)).click();
     }
 
     @Step("Check out Message column")
     public void checkMessageColumn() {
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"message_tab_col\"]/span/span[1]", "Message");
-        driver.findElement(By.xpath("//*[@id=\"message_tab_col\"]/span/span[1]")).click();
+        String messageColumn = "//*[@id='message_tab_col']/span/span[1]";
+        waits_asserts.assertTextByXpath(driver, messageColumn, "Message");
+        driver.findElement(By.xpath(messageColumn)).click();
         waits_asserts.sleep(1000);
-        driver.findElement(By.xpath("//*[@id=\"message_tab_col\"]/span/span[1]")).click();
+        driver.findElement(By.xpath(messageColumn)).click();
     }
 
     @Step("Check out Acknowledge column")
     public void checkAcknowledgeColumn() {
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"acknowledged_tab_col\"]/span/span[1]", "Acknowledged");
-        driver.findElement(By.xpath("//*[@id=\"acknowledged_tab_col\"]/span/span[1]")).click();
+        String acknowledgedColumn = "//*[@id=\"acknowledged_tab_col\"]/span/span[1]";
+        waits_asserts.assertTextByXpath(driver, acknowledgedColumn, "Acknowledged");
+        driver.findElement(By.xpath(acknowledgedColumn)).click();
         waits_asserts.sleep(1000);
-        driver.findElement(By.xpath("//*[@id=\"acknowledged_tab_col\"]/span/span[1]")).click();
+        driver.findElement(By.xpath(acknowledgedColumn)).click();
     }
 
     @Step("Check out Time Triggered column")
     public void checkTimeTriggeredColumn() {
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"time_triggered_tab_col\"]/span/span[1]", "Time triggered");
-        driver.findElement(By.xpath("//*[@id=\"time_triggered_tab_col\"]/span/span[1]")).click();
+        String timeTriggeredColumn = "//*[@id='time_triggered_tab_col']/span/span[1]";
+        waits_asserts.assertTextByXpath(driver, timeTriggeredColumn, "Time triggered");
+        driver.findElement(By.xpath(timeTriggeredColumn)).click();
         waits_asserts.sleep(1000);
-        driver.findElement(By.xpath("//*[@id=\"time_triggered_tab_col\"]/span/span[1]")).click();
+        driver.findElement(By.xpath(timeTriggeredColumn)).click();
     }
 
     /*Провека дополнительных колонок в таблицу Notification List*/
@@ -78,33 +82,36 @@ public class Notifications {
 
     @Step("Check out Notification Subject column")
     public void checkNotificationSubject() {
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"notification_subject_tab_col\"]/span/span[1]", "Notification subject");
-        waits_asserts.waitForClickableByXpath(driver, "//*[@id=\"notification_subject_tab_col\"]/span/span[1]");
-        driver.findElement(By.xpath("//*[@id=\"notification_subject_tab_col\"]/span/span[1]")).click();
-        waits_asserts.waitForClickableByXpath(driver, "//*[@id=\"notification_subject_tab_col\"]/span/span[1]");
-        driver.findElement(By.xpath("//*[@id=\"notification_subject_tab_col\"]/span/span[1]")).click();
+        String notificationSubjectColumn = "//*[@id=\"notification_subject_tab_col\"]/span/span[1]";
+        waits_asserts.assertTextByXpath(driver, notificationSubjectColumn, "Notification subject");
+        waits_asserts.waitForClickableByXpath(driver, notificationSubjectColumn);
+        driver.findElement(By.xpath(notificationSubjectColumn)).click();
+        waits_asserts.waitForClickableByXpath(driver, notificationSubjectColumn);
+        driver.findElement(By.xpath(notificationSubjectColumn)).click();
     }
 
     @Step("Check out Message column")
     public void checkMessage() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"message_tab_col\"]/span/span[1]");
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"message_tab_col\"]/span/span[1]", "Message");
+        String messageColumn = "//*[@id=\"message_tab_col\"]/span/span[1]";
+        waits_asserts.waitForVisibilityByXpath(driver, messageColumn);
+        waits_asserts.assertTextByXpath(driver, messageColumn, "Message");
 
-        waits_asserts.waitForClickableByXpath(driver, "//*[@id=\"message_tab_col\"]/span/span[1]");
-        driver.findElement(By.xpath("//*[@id=\"message_tab_col\"]/span/span[1]")).click();
-        waits_asserts.waitForClickableByXpath(driver, "//*[@id=\"message_tab_col\"]/span/span[1]");
-        driver.findElement(By.xpath("//*[@id=\"message_tab_col\"]/span/span[1]")).click();
+        waits_asserts.waitForClickableByXpath(driver, messageColumn);
+        driver.findElement(By.xpath(messageColumn)).click();
+        waits_asserts.waitForClickableByXpath(driver, messageColumn);
+        driver.findElement(By.xpath(messageColumn)).click();
     }
 
     @Step("Check out Active column")
     public void checkActive() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"active_tab_col\"]/span/span[1]");
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"active_tab_col\"]/span/span[1]", "Active");
+        String activeColumn = "//*[@id=\"active_tab_col\"]/span/span[1]";
+        waits_asserts.waitForVisibilityByXpath(driver, activeColumn);
+        waits_asserts.assertTextByXpath(driver, activeColumn, "Active");
 
-        waits_asserts.waitForClickableByXpath(driver, "//*[@id=\"active_tab_col\"]/span/span[1]");
-        driver.findElement(By.xpath("//*[@id=\"active_tab_col\"]/span/span[1]")).click();
-        waits_asserts.waitForClickableByXpath(driver, "//*[@id=\"active_tab_col\"]/span/span[1]");
-        driver.findElement(By.xpath("//*[@id=\"active_tab_col\"]/span/span[1]")).click();
+        waits_asserts.waitForClickableByXpath(driver, activeColumn);
+        driver.findElement(By.xpath(activeColumn)).click();
+        waits_asserts.waitForClickableByXpath(driver, activeColumn);
+        driver.findElement(By.xpath(activeColumn)).click();
     }
 
     /*Провека дополнительных колонок в таблицу Notification Rule*/
@@ -180,8 +187,9 @@ public class Notifications {
 
     @Step("Create Abnormal vibrations rule")
     public void createRuleAbnormalVibration() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/div/div/div/button");
-        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/div/div/div/button")).click();
+        String ruleCreateButton = "//*[@id='root']/div/div[4]/div/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/div/div/div/button";
+        waits_asserts.waitForVisibilityByXpath(driver, ruleCreateButton);
+        driver.findElement(By.xpath(ruleCreateButton)).click();
         //waits_asserts.waitForVisibilityByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[1]/div[3]/span/text()");
         //waits_asserts.assertTextByXpath(driver,"//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[1]/div[3]/span/text()","Main settings");
 
@@ -191,24 +199,25 @@ public class Notifications {
 
     @Step("Insert name of rule")
     public void insertName() {
-        driver.findElement(By.xpath("//*[@id=\"new_rule_name\"]")).click();
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"new_rule_name\"]");
-        driver.findElement(By.xpath("//*[@id=\"new_rule_name\"]")).sendKeys("Abnormal vibration");
+        String ruleNameField = "//*[@id='new_rule_name']";
+        driver.findElement(By.xpath(ruleNameField)).click();
+        waits_asserts.waitForVisibilityByXpath(driver, ruleNameField);
+        driver.findElement(By.xpath(ruleNameField)).sendKeys("Abnormal vibration");
     }
 
     @Step("Insert description of rule")
     public void insertDescription() {
-        driver.findElement(By.xpath("//*[@id=\"new_rule_description\"]")).click();
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"new_rule_description\"]");
-        driver.findElement(By.xpath("//*[@id=\"new_rule_description\"]")).sendKeys("Big BOOOM");
+        String descriptionField = "//*[@id='new_rule_description']";
+        driver.findElement(By.xpath(descriptionField)).click();
+        waits_asserts.waitForVisibilityByXpath(driver, descriptionField);
+        driver.findElement(By.xpath(descriptionField)).sendKeys("Big BOOOM");
     }
 
     @Step("Step 3")
     public void clickContinue() {
-
-        waits_asserts.waitForClickableByXpath(driver, "//*[@id=\"continueundefined\"]");
-
-        driver.findElement(By.xpath("//*[@id=\"continueundefined\"]")).click();
+        String continueButton = "//*[@id='continueundefined']";
+        waits_asserts.waitForClickableByXpath(driver, continueButton);
+        driver.findElement(By.xpath(continueButton)).click();
     }
             /*KOSTblJIb*/
 
@@ -231,21 +240,24 @@ public class Notifications {
 
     @Step("Add equipment with floating button")
     public void clickOnFloatingButton() {
-        waits_asserts.waitForClickableByXpath(driver, "//*[@id=\"add_equipments_float_btn\"]");
-        driver.findElement(By.xpath("//*[@id=\"add_equipments_float_btn\"]")).click();
+        String floatingButton = "//*[@id='add_equipments_float_btn']";
+        waits_asserts.waitForClickableByXpath(driver, floatingButton);
+        driver.findElement(By.xpath(floatingButton)).click();
     }
 
     @Step("Add from list")
     public void chooseEquip() {
-        waits_asserts.waitForClickableByXpath(driver, "/html/body/div[2]/div/div[1]/div/div/div[1]/span/div/div[3]/div[2]/table/tbody/tr[1]/td[1]");
-        waits_asserts.assertTextByXpath(driver, "/html/body/div[2]/div/div[1]/div/div/div[1]/span/div/div[3]/div[2]/table/tbody/tr[1]/td[1]", "Pump D13");
-        driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div[1]/span/div/div[3]/div[2]/table/tbody/tr[1]/td[1]")).click();
+        String equip = "/html/body/div[2]/div/div[1]/div/div/div[1]/span/div/div[3]/div[2]/table/tbody/tr[1]/td[1]";
+        waits_asserts.waitForClickableByXpath(driver, equip);
+        waits_asserts.assertTextByXpath(driver, equip, "Pump D13");
+        driver.findElement(By.xpath(equip)).click();
     }
 
     @Step("Click on button add")
     public void clickAdd() {
-        waits_asserts.waitForClickableByXpath(driver, "/html/body/div[2]/div/div[1]/div/div/div[2]/button[2]");
-        driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div[2]/button[2]")).click();
+        String addButton = "/html/body/div[2]/div/div[1]/div/div/div[2]/button[2]";
+        waits_asserts.waitForClickableByXpath(driver, addButton);
+        driver.findElement(By.xpath(addButton)).click();
     }
 
     @Step("Check if the added Equipment is present")
