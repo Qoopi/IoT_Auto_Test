@@ -21,18 +21,20 @@ public class Reports {
 
     @Step("Check out Report Title column|+sort")
     public void checkReportTitleColumn() {
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"report_title_tab_col\"]/span/span[1]", "Report title");
-        driver.findElement(By.xpath("//*[@id=\"report_title_tab_col\"]/span/span[1]")).click();
+        String reportColumn = "//*[@id=\"report_title_tab_col\"]/span/span[1]";
+        waits_asserts.assertTextByXpath(driver, reportColumn, "Report title");
+        driver.findElement(By.xpath(reportColumn)).click();
         waits_asserts.sleep(1000);
-        driver.findElement(By.xpath("//*[@id=\"report_title_tab_col\"]/span/span[1]")).click();
+        driver.findElement(By.xpath(reportColumn)).click();
     }
 
     @Step("Check out Report Schedule column|+sort")
     public void checkReportScheduleColumn() {
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"report_schedule_tab_col\"]/span/span[1]", "Report schedule");
-        driver.findElement(By.xpath("//*[@id=\"report_schedule_tab_col\"]/span/span[1]")).click();
+        String reportScheduleColumn = "//*[@id=\"report_schedule_tab_col\"]/span/span[1]";
+        waits_asserts.assertTextByXpath(driver, reportScheduleColumn, "Report schedule");
+        driver.findElement(By.xpath(reportScheduleColumn)).click();
         waits_asserts.sleep(1000);
-        driver.findElement(By.xpath("//*[@id=\"report_schedule_tab_col\"]/span/span[1]")).click();
+        driver.findElement(By.xpath(reportScheduleColumn)).click();
     }
 
             /*Проверка дополнительных колонок в таблице*/
@@ -72,11 +74,12 @@ public class Reports {
 
     @Step("Checking if the columns is presented in table")
     public void checkAddedEquipItem() {
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"equipment_items_tab_col\"]/span/span[1]", "Equipment items");
-        waits_asserts.waitForClickableByXpath(driver, "//*[@id=\"equipment_items_tab_col\"]/span/span[1]");
-        driver.findElement(By.xpath("//*[@id=\"equipment_items_tab_col\"]/span/span[1]")).click();
+        String equipmentColumn = "//*[@id=\"equipment_items_tab_col\"]/span/span[1]";
+        waits_asserts.assertTextByXpath(driver, equipmentColumn, "Equipment items");
+        waits_asserts.waitForClickableByXpath(driver, equipmentColumn);
+        driver.findElement(By.xpath(equipmentColumn)).click();
         waits_asserts.sleep(1000);
-        driver.findElement(By.xpath("//*[@id=\"equipment_items_tab_col\"]/span/span[1]")).click();
+        driver.findElement(By.xpath(equipmentColumn)).click();
         waits_asserts.sleep(1000);
     }
 
@@ -94,11 +97,12 @@ public class Reports {
 
     @Step("Checking if the columns is presented in table")
     public void checkAddedRecipients() {
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"recipients_tab_col\"]/span/span[1]", "Recipients");
-        waits_asserts.waitForClickableByXpath(driver, "//*[@id=\"recipients_tab_col\"]/span/span[1]");
-        driver.findElement(By.xpath("//*[@id=\"recipients_tab_col\"]/span/span[1]")).click();
+        String recepientsColumn = "//*[@id=\"recipients_tab_col\"]/span/span[1]";
+        waits_asserts.assertTextByXpath(driver, recepientsColumn, "Recipients");
+        waits_asserts.waitForClickableByXpath(driver, recepientsColumn);
+        driver.findElement(By.xpath(recepientsColumn)).click();
         waits_asserts.sleep(1000);
-        driver.findElement(By.xpath("//*[@id=\"recipients_tab_col\"]/span/span[1]")).click();
+        driver.findElement(By.xpath(recepientsColumn)).click();
         waits_asserts.sleep(1000);
     }
 
@@ -116,11 +120,12 @@ public class Reports {
 
     @Step("Checking if the columns is presented in table")
     public void checkAddedExcelIncluded() {
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"excel_included_tab_col\"]/span/span[1]", "Excel Included");
-        waits_asserts.waitForClickableByXpath(driver, "//*[@id=\"excel_included_tab_col\"]/span/span[1]");
-        driver.findElement(By.xpath("//*[@id=\"excel_included_tab_col\"]/span/span[1]")).click();
+        String excelIncludedColumn = "//*[@id=\"excel_included_tab_col\"]/span/span[1]";
+        waits_asserts.assertTextByXpath(driver, excelIncludedColumn, "Excel Included");
+        waits_asserts.waitForClickableByXpath(driver, excelIncludedColumn);
+        driver.findElement(By.xpath(excelIncludedColumn)).click();
         waits_asserts.sleep(1000);
-        driver.findElement(By.xpath("//*[@id=\"excel_included_tab_col\"]/span/span[1]")).click();
+        driver.findElement(By.xpath(excelIncludedColumn)).click();
         waits_asserts.sleep(1000);
     }
 
