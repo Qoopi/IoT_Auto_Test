@@ -54,6 +54,7 @@ public class Admin_Role_Chrome {
         equipment.checkEquipmentGroupInMenu();
         equipment.checkEquipmentUpdatedAtInMenu();
         equipment.checkEquipmentCreatedInMenu();
+        dashboard.closeMenu();
 
     }
 
@@ -61,12 +62,13 @@ public class Admin_Role_Chrome {
     @Stories("[OSF-53] Equipment, add column Created ")
     @Test(priority = 3)
     public void EquipmentAddColumn() {
-        Equipment equipment = new Equipment();
-        equipment.addCreatedColumn();
-
-        LogInPage log = new LogInPage();
-        log.refresh();
         Dashboard dashboard = new Dashboard();
+        Equipment equipment = new Equipment();
+        LogInPage log = new LogInPage();
+
+        dashboard.openMenu();
+        equipment.addCreatedColumn();
+        log.refresh();
         dashboard.openMenu();
         equipment.dismissCreated();
     }
@@ -135,6 +137,8 @@ public class Admin_Role_Chrome {
         reports.checkRecipientsColumnInDropDownMenu();
         reports.checkExcelIncludedColumnInDropDownMenu();
         reports.checkEquipmentItemsColumnInDropDownMenu();
+
+        dash.closeMenu();
     }
 
     @Features("Regression")
@@ -143,6 +147,8 @@ public class Admin_Role_Chrome {
     public void AddColumnsInReports() {
         Reports reports = new Reports();
         Dashboard dashboard = new Dashboard();
+
+        dashboard.openMenu();
 
         reports.addEquipmentItemColumn();
         reports.checkAddedEquipItem();
@@ -183,10 +189,12 @@ public class Admin_Role_Chrome {
     @Test(priority = 12)
     public void checkDefaultColumnsOfUserList() {
         UserList userList = new UserList();
-        userList.defaultColumnsCheck();
         Dashboard dashboard = new Dashboard();
+
         dashboard.openMenu();
         userList.checkingColumnsInPompUpMenu();
+        userList.defaultColumnsCheck();
+        dashboard.closeMenu();
     }
 
     @Features("Regression")
@@ -194,15 +202,21 @@ public class Admin_Role_Chrome {
     @Test(priority = 13)
     public void addColumnsToUserList() {
         UserList userList = new UserList();
-
-        userList.addServices();
-
         Dashboard dashboard = new Dashboard();
-        dashboard.openMenu();
-        userList.addUpdatedAt();
 
         dashboard.openMenu();
-        userList.addRegTime();
+        userList.clickMenuService();
+        userList.checkServiceColumn();
+
+        dashboard.openMenu();
+        userList.clickMenuUpdated();
+        userList.checkUpdatedColumn();
+        //userList.addUpdatedAt();
+
+        dashboard.openMenu();
+        userList.clickMenuRegTime();
+        userList.checkColumnRegTime();
+        //userList.addRegTime();
 
     }
 
@@ -210,23 +224,25 @@ public class Admin_Role_Chrome {
     @Stories("OSF-200 User List")
     @Test(priority = 14)
     public void deleteColumnsFromUserList() {
-
         LogInPage log = new LogInPage();
+        Dashboard dashboard = new Dashboard();
+        UserList userList = new UserList();
+
         log.refresh();
 
-        Dashboard dashboard = new Dashboard();
         dashboard.openMenu();
-        UserList userList = new UserList();
-        userList.dismissRegTime();
-
+        userList.clickMenuRegTime();
+        //userList.dismissRegTime();
 
         //log.refresh();
         dashboard.openMenu();
-        userList.dismissUpdatedAt();
+        userList.clickMenuUpdated();
+        //userList.dismissUpdatedAt();
 
         //log.refresh();
         dashboard.openMenu();
-        userList.dismissService();
+        userList.clickMenuService();
+        //userList.dismissService();
     }
 
     @Features("Regression")
@@ -243,14 +259,13 @@ public class Admin_Role_Chrome {
     @Stories("OSF-199 Request, accept request")
     @Test(priority = 16)
     public void openRequests() {
-
         Dashboard dashboards = new Dashboard();
+        Requests requests = new Requests();
+
         dashboards.openAdministration();
         dashboards.openRequests();
-
-        Requests requests = new Requests();
-        requests.checkRequest();
-        requests.acceptUser();
+        requests.checkRequest(); //как, если нет реквеста
+        requests.acceptUser(); //падает на этом шаге хотя и чекнуть не должно было
     }
 
     @Features("Regression")
@@ -308,6 +323,7 @@ public class Admin_Role_Chrome {
         equipment.checkEquipmentActiveInMenu();
         equipment.checkEquipmentUpdatedAtInMenu();
         equipment.checkEquipmentCreatedInMenu();
+        dashboard.closeMenu();
     }
 
     @Features("Regression")
@@ -316,6 +332,7 @@ public class Admin_Role_Chrome {
     public void EquipmentListAddColumn() {
         Dashboard dashboard = new Dashboard();
         Equipment equip = new Equipment();
+        dashboard.openMenu();
         equip.addCreatedColumn();
 
         dashboard.openMenu();

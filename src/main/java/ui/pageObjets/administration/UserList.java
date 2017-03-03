@@ -38,19 +38,41 @@ public class UserList {
         //add new column service
         driver.findElement(By.xpath("//*[@id=\"service_show_tab_col_btn\"]")).click();
         waits_asserts.sleep(1000);
+    }
+
+    @Step("Adding Service columns")
+    public void clickMenuService() {
+        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"service_show_tab_col_btn\"]");
+        driver.findElement(By.xpath("//*[@id=\"service_show_tab_col_btn\"]")).click();
+        waits_asserts.sleep(1000);
+    }
+
+    @Step("Checking Service column")
+    public void checkServiceColumn(){
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"service_tab_col\"]/span/span[1]", "Service");
         waits_asserts.sleep(1000);
         driver.findElement(By.xpath("//*[@id=\"service_tab_col\"]/span/span[1]")).click();
         waits_asserts.sleep(1000);
         driver.findElement(By.xpath("//*[@id=\"service_tab_col\"]/span/span[1]")).click();
-    }
-
-    @Step("Dismiss Service columns")
-    public void dismissService() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"service_show_tab_col_btn\"]");
-        driver.findElement(By.xpath("//*[@id=\"service_show_tab_col_btn\"]")).click();
         waits_asserts.sleep(1000);
     }
+
+
+    public void clickMenuUpdated(){
+        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"updated_at_show_tab_col_btn\"]");
+        driver.findElement(By.xpath("//*[@id=\"updated_at_show_tab_col_btn\"]")).click();
+        waits_asserts.sleep(1000);
+    }
+
+    public void checkUpdatedColumn(){
+        waits_asserts.assertTextByXpath(driver, "//*[@id=\"updated_at_tab_col\"]/span/span[1]", "Updated at");
+        waits_asserts.sleep(1000);
+        driver.findElement(By.xpath("//*[@id=\"updated_at_tab_col\"]/span/span[1]")).click();
+        waits_asserts.sleep(1000);
+        driver.findElement(By.xpath("//*[@id=\"updated_at_tab_col\"]/span/span[1]")).click();
+        waits_asserts.sleep(1000);
+    }
+
 
     @Step("Add Update At column")
     public void addUpdatedAt() {
@@ -68,9 +90,26 @@ public class UserList {
 
     @Step("Dismiss Update At column")
     public void dismissUpdatedAt() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"updated_at_show_tab_col_btn\"]");
-        driver.findElement(By.xpath("//*[@id=\"updated_at_show_tab_col_btn\"]")).click();
+        String updatedAtButton2 = "//*[@id=\"updated_at_show_tab_col_btn\"]/div/div/div";
+        String updatedAtButton = "//*[@id=\"updated_at_show_tab_col_btn\"]";
+        waits_asserts.waitForVisibilityByXpath(driver, updatedAtButton);
+        driver.findElement(By.xpath(updatedAtButton)).click();
         //wait for
+        waits_asserts.sleep(1000);
+    }
+
+    public void clickMenuRegTime(){
+        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"reg._time_show_tab_col_btn\"]");
+        driver.findElement(By.xpath("//*[@id=\"reg._time_show_tab_col_btn\"]")).click();
+        waits_asserts.sleep(1000);
+    }
+
+    public void checkColumnRegTime(){
+        waits_asserts.assertTextByXpath(driver, "//*[@id=\"reg._time_tab_col\"]/span/span[1]", "Reg. time");
+        waits_asserts.sleep(1000);
+        driver.findElement(By.xpath("//*[@id=\"reg._time_tab_col\"]/span/span[1]")).click();
+        waits_asserts.sleep(1000);
+        driver.findElement(By.xpath("//*[@id=\"reg._time_tab_col\"]/span/span[1]")).click();
         waits_asserts.sleep(1000);
     }
 
@@ -92,6 +131,7 @@ public class UserList {
     public void dismissRegTime() {
         waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"reg._time_show_tab_col_btn\"]");
         driver.findElement(By.xpath("//*[@id=\"reg._time_show_tab_col_btn\"]")).click();
+        waits_asserts.sleep(500);
 
     }
 

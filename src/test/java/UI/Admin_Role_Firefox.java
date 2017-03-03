@@ -226,7 +226,8 @@ public class Admin_Role_Firefox {
 
         //log.refresh();
         dashboard.openMenu();
-        userList.dismissService();
+        userList.clickMenuService();
+        //userList.dismissService();
     }
 
     @Features("Regression")

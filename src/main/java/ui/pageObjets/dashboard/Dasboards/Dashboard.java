@@ -1,7 +1,9 @@
 package ui.pageObjets.dashboard.Dasboards;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import ru.yandex.qatools.allure.annotations.Step;
 import ui.utils.WebDriverManager;
 import ui.utils.WaitsAsserts;
@@ -105,8 +107,17 @@ public class Dashboard {
     public void openMenu() {
         //open menu
         String openMenuButton = "//*[@id=\"table_menu_btn\"]";
+        //String openMenuButton = "//*[@id=\"table_menu_btn\"]/div/span";
         waits_asserts.waitForVisibilityByXpath(driver, openMenuButton);
         driver.findElement(By.xpath(openMenuButton)).click();
+        waits_asserts.sleep(500);
+    }
+
+    @Step("Close menu")
+    public void closeMenu(){
+        Actions action = new Actions(driver);
+        action.sendKeys(Keys.ESCAPE).build().perform();
+        waits_asserts.sleep(500);
     }
 
     @Step("Open dashboard table")

@@ -138,8 +138,8 @@ public class Equipment {
     public void viewEquip() {
         waits_asserts.waitForClickableByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[1]/td[7]/div/button");
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[1]/td[7]/div/button")).click();
-        waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div/div/div/div/div/div/span/div/div/span", "View");
-        driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div/div/div/span")).click();
+        waits_asserts.assertTextByXpath(driver, "/html/body/div[7]/div/div/div/div/div/div/span/div/div/span", "View");
+        driver.findElement(By.xpath("/html/body/div[7]/div/div/div/div/div/div/span/div/div/span")).click();
     }
 
     @Step("Checking out if we are on the right place")

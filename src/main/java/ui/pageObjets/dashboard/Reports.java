@@ -70,6 +70,7 @@ public class Reports {
     public void addEquipmentItemColumn() {
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"equipment_items_show_tab_col_btn\"]/div/div/div", "Equipment items");
         driver.findElement(By.xpath("//*[@id=\"equipment_items_show_tab_col_btn\"]")).click();
+        waits_asserts.sleep(1000);
     }
 
     @Step("Checking if the columns is presented in table")
@@ -87,12 +88,14 @@ public class Reports {
     public void dismissEquipmentItem() {
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"equipment_items_show_tab_col_btn\"]/div/div/div", "Equipment items");
         driver.findElement(By.xpath("//*[@id=\"equipment_items_show_tab_col_btn\"]")).click();
+        waits_asserts.sleep(1000);
     }
 
     @Step("Add Recipients column")
     public void addRecipients() {
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"recipients_show_tab_col_btn\"]/div/div/div", "Recipients");
         driver.findElement(By.xpath("//*[@id=\"recipients_show_tab_col_btn\"]")).click();
+        waits_asserts.sleep(1000);
     }
 
     @Step("Checking if the columns is presented in table")
@@ -110,12 +113,14 @@ public class Reports {
     public void dismissRecipients() {
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"recipients_show_tab_col_btn\"]/div/div/div", "Recipients");
         driver.findElement(By.xpath("//*[@id=\"recipients_show_tab_col_btn\"]")).click();
+        waits_asserts.sleep(1000);
     }
 
     @Step("Add Excel Included column")
     public void addExcelIncluded() {
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"excel_included_show_tab_col_btn\"]/div/div/div", "Excel Included");
         driver.findElement(By.xpath("//*[@id=\"excel_included_show_tab_col_btn\"]")).click();
+        waits_asserts.sleep(1000);
     }
 
     @Step("Checking if the columns is presented in table")
@@ -133,5 +138,6 @@ public class Reports {
     public void dismissExcelIncluded() {
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"excel_included_show_tab_col_btn\"]/div/div/div", "Excel Included");
         driver.findElement(By.xpath("//*[@id=\"excel_included_show_tab_col_btn\"]")).click();
+        waits_asserts.sleep(1000);
     }
 }
