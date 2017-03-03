@@ -124,19 +124,20 @@ public class Notifications {
     }
 
 
-    //TODO
+
 
     @Step("Checking dropdown menu column Message")
     public void checkDDMMessage() {
-        String messageShowButton = "";
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"message_show_tab_col_btn\"]/div/div/div");
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"message_show_tab_col_btn\"]/div/div/div", "Message");
+        String messageShowButton = "//*[@id=\"message_show_tab_col_btn\"]/div/div/div";
+        waits_asserts.waitForVisibilityByXpath(driver,messageShowButton);
+        waits_asserts.assertTextByXpath(driver, messageShowButton, "Message");
     }
 
     @Step("Checking dropdown menu column Active")
     public void checkDDMActive() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"message_show_tab_col_btn\"]/div/div/div");
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"message_show_tab_col_btn\"]/div/div/div", "Message");
+        String activeShowTabCol = "//*[@id=\"active_show_tab_col_btn\"]/div/div/div";
+        waits_asserts.waitForVisibilityByXpath(driver,  activeShowTabCol);
+        waits_asserts.assertTextByXpath(driver,  activeShowTabCol, "Active");
     }
 
     @Step("Checking dropdown menu column Rule type")
