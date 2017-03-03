@@ -161,6 +161,7 @@ public class UserList {
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[10]/td[1]/div/input")).click();
         uiUtils utils = new uiUtils();
         utils.makeScreenshot(driver, "Marked user string terned grey");
+        waits_asserts.sleep(500);
     }
 
     @Step("Deactivate marked users")
@@ -171,6 +172,7 @@ public class UserList {
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[2]/span/div/div/div/button/div/div")).click();
         waits_asserts.waitForClickableByCSS(driver, "div.floatChild:nth-child(2) > span:nth-child(2) > div:nth-child(1) > button:nth-child(1)");
         driver.findElement(By.cssSelector("div.floatChild:nth-child(2) > span:nth-child(2) > div:nth-child(1) > button:nth-child(1)")).click();
+        waits_asserts.sleep(500);
 
     }
 
@@ -180,6 +182,7 @@ public class UserList {
         driver.findElement(By.cssSelector("#root > div > div.content > div > div > div.table-paper > div > div:nth-child(3) > div:nth-child(2) > table > tbody > tr:nth-child(4) > td:nth-child(4) > span > svg")).click();
         waits_asserts.waitForClickableByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[10]/td[4]");
         driver.findElement(By.cssSelector("#root > div > div.content > div > div > div.table-paper > div > div:nth-child(3) > div:nth-child(2) > table > tbody > tr:nth-child(10) > td:nth-child(4) > span > svg")).click();
+        waits_asserts.sleep(500);
     }
 
     @Step("Found user to delete")
@@ -188,6 +191,7 @@ public class UserList {
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[1]/table/thead/tr/th[6]/span")).click();
         waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[1]/td[3]");
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[1]/td[3]", "geloksmmm@gmail.com");
+        waits_asserts.sleep(500);
     }
 
     @Step("Delete chosen user")
@@ -197,6 +201,7 @@ public class UserList {
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[1]/td[7]/div/button")).click();
         waits_asserts.assertTextByXpath(driver, "/html/body/div[5]/div/div/div/div/div/div[2]/span/div/div", "Delete");
         driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div/div/div[2]/span/div/div")).click();
+        waits_asserts.sleep(500);
 
     }
 

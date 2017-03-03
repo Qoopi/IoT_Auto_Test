@@ -243,8 +243,7 @@ public class Admin_Role_Firefox {
     @Features("Regression")
     @Stories("OSF-199 Request, accept request")
     @Test(priority = 16)
-    public void openRequests() {
-
+    public void checkRequests() {
         Dashboard dashboards = new Dashboard();
         dashboards.openAdministration();
         dashboards.openRequests();
@@ -272,12 +271,15 @@ public class Admin_Role_Firefox {
     @Stories("[OSF-53] Equipment list, default columns check")
     @Test(priority = 18)
     public void checkEquipmentList() {
-
         Dashboard dashboard = new Dashboard();
+        Equipment equip = new Equipment();
+        LogInPage log = new LogInPage();
+
+        log.refresh();
+
         dashboard.openAdministration();
         dashboard.openEquipmentListAsAdmin();
 
-        Equipment equip = new Equipment();
         equip.sortEquipByName();
         equip.sortEquipById();
         equip.sortEquipByType();
@@ -309,6 +311,7 @@ public class Admin_Role_Firefox {
         equipment.checkEquipmentActiveInMenu();
         equipment.checkEquipmentUpdatedAtInMenu();
         equipment.checkEquipmentCreatedInMenu();
+        dashboard.closeMenu();
     }
 
     @Features("Regression")
@@ -317,6 +320,7 @@ public class Admin_Role_Firefox {
     public void EquipmentListAddColumn() {
         Dashboard dashboard = new Dashboard();
         Equipment equip = new Equipment();
+        dashboard.openMenu();
         equip.addCreatedColumn();
 
         dashboard.openMenu();

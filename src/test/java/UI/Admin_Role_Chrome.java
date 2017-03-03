@@ -30,9 +30,9 @@ public class Admin_Role_Chrome {
     @Test(priority = 1)
     public void EquipmentCheck() {
         Dashboard dashboard = new Dashboard();
-        dashboard.openEquipment();
-
         Equipment equipment = new Equipment();
+
+        dashboard.openEquipment();
         equipment.sortEquipByName();
         equipment.sortEquipById();
         equipment.sortEquipByType();
@@ -46,8 +46,9 @@ public class Admin_Role_Chrome {
     @Test(priority = 2)
     public void checkUpperRightMenuInEquipment() {
         Dashboard dashboard = new Dashboard();
-        dashboard.openMenu();
         Equipment equipment = new Equipment();
+
+        dashboard.openMenu();
         equipment.checkEquipmentNameInMenu();
         equipment.checkEquipmentTypeInMenu();
         equipment.checkEquipmentIdInMenu();
@@ -88,10 +89,10 @@ public class Admin_Role_Chrome {
     @Test(priority = 5)
     public void NotificationsListDefaultColumns() {
         Dashboard dashboard = new Dashboard();
+        Notifications not = new Notifications();
+
         dashboard.openNotifications();
         dashboard.openNotificationsList();
-
-        Notifications not = new Notifications();
         not.checkNameColumn();
         not.checkMessageColumn();
         not.checkAcknowledgeColumn();
@@ -103,8 +104,9 @@ public class Admin_Role_Chrome {
     @Test(priority = 6)
     public void NotificationsListRightMenu() {
         Dashboard dash = new Dashboard();
-        dash.openMenu();
         Notifications not = new Notifications();
+
+        dash.openMenu();
         not.checkLeftMenuNameColumns();
         not.checkLeftMenuMessageColumns();
         not.checkLeftMenuAcknowledgeColumns();
@@ -117,9 +119,9 @@ public class Admin_Role_Chrome {
     @Test(priority = 7)
     public void CheckOutReportsDefaultColumns() {
         Dashboard dash = new Dashboard();
-        dash.openReports();
-
         Reports reports = new Reports();
+
+        dash.openReports();
         reports.checkReportTitleColumn();
         reports.checkReportScheduleColumn();
     }
@@ -129,15 +131,14 @@ public class Admin_Role_Chrome {
     @Test(priority = 8)
     public void CheckAdditionalColumns() {
         Dashboard dash = new Dashboard();
-        dash.openMenu();
-
         Reports reports = new Reports();
+
+        dash.openMenu();
         reports.checkReportTitleColumnInDropDownMenu();
         reports.checkReportScheduleColumnInDropDownMenu();
         reports.checkRecipientsColumnInDropDownMenu();
         reports.checkExcelIncludedColumnInDropDownMenu();
         reports.checkEquipmentItemsColumnInDropDownMenu();
-
         dash.closeMenu();
     }
 
@@ -149,7 +150,6 @@ public class Admin_Role_Chrome {
         Dashboard dashboard = new Dashboard();
 
         dashboard.openMenu();
-
         reports.addEquipmentItemColumn();
         reports.checkAddedEquipItem();
         dashboard.openMenu();
@@ -166,6 +166,7 @@ public class Admin_Role_Chrome {
     public void DismissColumnsInReports() {
         Reports reports = new Reports();
         Dashboard dashboard = new Dashboard();
+
         dashboard.openMenu();
         reports.dismissEquipmentItem();
         dashboard.openMenu();
@@ -211,12 +212,10 @@ public class Admin_Role_Chrome {
         dashboard.openMenu();
         userList.clickMenuUpdated();
         userList.checkUpdatedColumn();
-        //userList.addUpdatedAt();
 
         dashboard.openMenu();
         userList.clickMenuRegTime();
         userList.checkColumnRegTime();
-        //userList.addRegTime();
 
     }
 
@@ -228,21 +227,14 @@ public class Admin_Role_Chrome {
         Dashboard dashboard = new Dashboard();
         UserList userList = new UserList();
 
-        log.refresh();
+        log.refresh();//is it necessary?
 
         dashboard.openMenu();
         userList.clickMenuRegTime();
-        //userList.dismissRegTime();
-
-        //log.refresh();
         dashboard.openMenu();
         userList.clickMenuUpdated();
-        //userList.dismissUpdatedAt();
-
-        //log.refresh();
         dashboard.openMenu();
         userList.clickMenuService();
-        //userList.dismissService();
     }
 
     @Features("Regression")
@@ -257,7 +249,7 @@ public class Admin_Role_Chrome {
 
     @Features("Regression")
     @Stories("OSF-199 Request, accept request")
-    @Test(priority = 16)
+    //@Test(priority = 16)
     public void openRequests() {
         Dashboard dashboards = new Dashboard();
         Requests requests = new Requests();
@@ -270,16 +262,18 @@ public class Admin_Role_Chrome {
 
     @Features("Regression")
     @Stories("OSF-403 Delete User")
-    @Test(priority = 17)
+    //@Test(priority = 17)
     public void deleteUser() {
         Dashboard dashboard = new Dashboard();
+        UserList user = new UserList();
         dashboard.openUserList();
         dashboard.openMenu();
 
-        UserList user = new UserList();
         user.addUpdatedAt();
         user.foundUserToDelete();
         user.deleteChosenUser();
+        dashboard.openMenu();
+        user.clickMenuUpdated();
     }
 
     @Features("Regression")
@@ -288,10 +282,10 @@ public class Admin_Role_Chrome {
     public void checkEquipmentList() {
 
         Dashboard dashboard = new Dashboard();
+        Equipment equip = new Equipment();
         dashboard.openAdministration();
         dashboard.openEquipmentListAsAdmin();
 
-        Equipment equip = new Equipment();
         equip.sortEquipByName();
         equip.sortEquipById();
         equip.sortEquipByType();
@@ -314,8 +308,9 @@ public class Admin_Role_Chrome {
     @Test(priority = 20)
     public void checkUpperRightMenuInEquipmentList() {
         Dashboard dashboard = new Dashboard();
-        dashboard.openMenu();
         Equipment equipment = new Equipment();
+
+        dashboard.openMenu();
         equipment.checkEquipmentNameInMenu();
         equipment.checkEquipmentTypeInMenu();
         equipment.checkEquipmentIdInMenu();
@@ -332,9 +327,9 @@ public class Admin_Role_Chrome {
     public void EquipmentListAddColumn() {
         Dashboard dashboard = new Dashboard();
         Equipment equip = new Equipment();
+
         dashboard.openMenu();
         equip.addCreatedColumn();
-
         dashboard.openMenu();
         equip.dismissCreated();
     }
