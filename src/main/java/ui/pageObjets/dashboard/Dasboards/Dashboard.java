@@ -18,88 +18,101 @@ public class Dashboard {
 
     @Step("Open Equipment as Regular")
     public void openEquipment() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"equipment_main_menu_item\"]");
-        driver.findElement(By.xpath("//*[@id=\"equipment_main_menu_item\"]")).click();
+        String equipMainMenu = "//*[@id=\"equipment_main_menu_item\"]";
+        waits_asserts.waitForVisibilityByXpath(driver, equipMainMenu);
+        driver.findElement(By.xpath(equipMainMenu)).click();
         // waits_asserts.assertTextByXpath(driver,"//*[@id=\"naviCrumb\"]/span","Equipment list");
     }
 
     @Step("Open Notifications")
     public void openNotifications() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"notifications_main_menu_item\"]");
-        driver.findElement(By.xpath("//*[@id=\"notifications_main_menu_item\"]")).click();
+        String notificationMainMenu = "//*[@id=\"notifications_main_menu_item\"]";
+        waits_asserts.waitForVisibilityByXpath(driver, notificationMainMenu);
+        driver.findElement(By.xpath(notificationMainMenu)).click();
     }
 
     @Step("Open Notifications")
     public void openNotificationsList() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"notifications_list_main_menu_item\"]");
-        driver.findElement(By.xpath("//*[@id=\"notifications_list_main_menu_item\"]")).click();
+        String notificationsListMainMenu = "//*[@id=\"notifications_list_main_menu_item\"]";
+        waits_asserts.waitForVisibilityByXpath(driver, notificationsListMainMenu);
+        driver.findElement(By.xpath(notificationsListMainMenu)).click();
         // waits_asserts.assertTextByXpath(driver,"//*[@id=\"notifications_list_main_menu_item\"]/div/div/span","Notification List");
     }
 
     @Step("Open Notifications")
     public void openNotificationsRules() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"notification_rules_main_menu_item\"]");
-        driver.findElement(By.xpath("//*[@id=\"notification_rules_main_menu_item\"]")).click();
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"notification_rules_main_menu_item\"]", "Notification Rules");
+        String notificationRulesMainMenu = "//*[@id=\"notification_rules_main_menu_item\"]";
+        waits_asserts.waitForVisibilityByXpath(driver, notificationRulesMainMenu);
+        driver.findElement(By.xpath(notificationRulesMainMenu)).click();
+        waits_asserts.assertTextByXpath(driver, notificationRulesMainMenu, "Notification Rules");
     }
 
     @Step("Open Reports")
     public void openReports() {
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"reports_main_menu_item\"]", "Reports");
-        driver.findElement(By.xpath("//*[@id=\"reports_main_menu_item\"]")).click();
+        String reportsMainMenu = "//*[@id=\"reports_main_menu_item\"]";
+        waits_asserts.assertTextByXpath(driver, reportsMainMenu, "Reports");
+        driver.findElement(By.xpath(reportsMainMenu)).click();
     }
 
     @Step("Open Administration menu")
     public void openAdministration() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"administration_main_menu_item\"]");
-        driver.findElement(By.xpath("//*[@id=\"administration_main_menu_item\"]")).click();
+        String administrationMainMenu = "//*[@id=\"administration_main_menu_item\"]";
+        waits_asserts.waitForVisibilityByXpath(driver, administrationMainMenu);
+        driver.findElement(By.xpath(administrationMainMenu)).click();
     }
 
     @Step("Open AWS")
     public void openRequests() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"requests_main_menu_item\"]");
-        driver.findElement(By.xpath("//*[@id=\"requests_main_menu_item\"]")).click();
+        String requestsMainMenu = "//*[@id=\"requests_main_menu_item\"]";
+        waits_asserts.waitForVisibilityByXpath(driver, requestsMainMenu);
+        driver.findElement(By.xpath(requestsMainMenu)).click();
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"naviCrumb\"]", "Pending");
     }
 
     @Step("Open Users list")
     public void openUserList() {
-        waits_asserts.waitForClickableByXpath(driver, "//*[@id=\"user_list_main_menu_item\"]");
-        driver.findElement(By.xpath("//*[@id=\"user_list_main_menu_item\"]")).click();
+        String userListMainMenu = "//*[@id=\"user_list_main_menu_item\"]";
+        waits_asserts.waitForClickableByXpath(driver, userListMainMenu);
+        driver.findElement(By.xpath(userListMainMenu)).click();
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"naviCrumb\"]", "Registered and approved users");
     }
 
     @Step("Open Equipment List as Admin")
     public void openEquipmentListAsAdmin() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"equipment_list_main_menu_item\"]");
-        driver.findElement(By.xpath("//*[@id=\"equipment_list_main_menu_item\"]")).click();
+        String equipmentListMainMenu = "//*[@id=\"equipment_list_main_menu_item\"]";
+        waits_asserts.waitForVisibilityByXpath(driver, equipmentListMainMenu);
+        driver.findElement(By.xpath(equipmentListMainMenu)).click();
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"naviCrumb\"]", "Equipment list");
     }
 
     @Step("Open Access to Skedler")
     public void opernReportAdmin() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"reports_main_menu_item\"]");
-        driver.findElement(By.xpath("//*[@id=\"reports_main_menu_item\"]")).click();
+        String reportsMainMenu = "//*[@id=\"reports_main_menu_item\"]";
+        waits_asserts.waitForVisibilityByXpath(driver, reportsMainMenu);
+        driver.findElement(By.xpath(reportsMainMenu)).click();
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"naviCrumb\"]", "Admin reports");
     }
 
     @Step("Open Global Settings")
     public void openGlobalSettings() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"global_settings_main_menu_item\"]");
-        driver.findElement(By.xpath("//*[@id=\"global_settings_main_menu_item\"]")).click();
+        String globalSettingsMainMenu = "//*[@id=\"global_settings_main_menu_item\"]";
+        waits_asserts.waitForVisibilityByXpath(driver, globalSettingsMainMenu);
+        driver.findElement(By.xpath(globalSettingsMainMenu)).click();
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"naviCrumb\"]", "Global Settings");
     }
 
     @Step("Open right menu")
     public void openMenu() {
         //open menu
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"table_menu_btn\"]");
-        driver.findElement(By.xpath("//*[@id=\"table_menu_btn\"]")).click();
+        String openMenuButton = "//*[@id=\"table_menu_btn\"]";
+        waits_asserts.waitForVisibilityByXpath(driver, openMenuButton);
+        driver.findElement(By.xpath(openMenuButton)).click();
     }
 
     @Step("Open dashboard table")
     public void openDashboadr() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[1]/div[1]/button");
-        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[1]/div[1]/button")).click();
+        String openDashboardButton = "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[1]/div[1]/button";
+        waits_asserts.waitForVisibilityByXpath(driver, openDashboardButton);
+        driver.findElement(By.xpath(openDashboardButton)).click();
     }
 }

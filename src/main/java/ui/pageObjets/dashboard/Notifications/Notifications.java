@@ -128,6 +128,7 @@ public class Notifications {
 
     @Step("Checking dropdown menu column Message")
     public void checkDDMMessage() {
+        String messageShowButton = "";
         waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"message_show_tab_col_btn\"]/div/div/div");
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"message_show_tab_col_btn\"]/div/div/div", "Message");
     }
