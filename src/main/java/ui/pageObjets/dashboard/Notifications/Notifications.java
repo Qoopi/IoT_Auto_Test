@@ -118,9 +118,13 @@ public class Notifications {
 
     @Step("Checking dropdown menu column Notification Subject")
     public void checkDDMNotificationSubject() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"notification_subject_show_tab_col_btn\"]/div/div/div");
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"notification_subject_show_tab_col_btn\"]/div/div/div", "Notification subject");
+        String notificationSubjectShowButton = "//*[@id=\"notification_subject_show_tab_col_btn\"]/div/div/div";
+        waits_asserts.waitForVisibilityByXpath(driver, notificationSubjectShowButton);
+        waits_asserts.assertTextByXpath(driver, notificationSubjectShowButton, "Notification subject");
     }
+
+
+    //TODO
 
     @Step("Checking dropdown menu column Message")
     public void checkDDMMessage() {
@@ -136,26 +140,30 @@ public class Notifications {
 
     @Step("Checking dropdown menu column Rule type")
     public void checkDDMRuleType() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"rule_type_show_tab_col_btn\"]/div/div/div");
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"rule_type_show_tab_col_btn\"]/div/div/div", "Rule type");
+        String ruleTypeShowButton = "//*[@id=\"rule_type_show_tab_col_btn\"]/div/div/div";
+        waits_asserts.waitForVisibilityByXpath(driver, ruleTypeShowButton);
+        waits_asserts.assertTextByXpath(driver, ruleTypeShowButton, "Rule type");
     }
 
     @Step("Checking dropdown menu column Id")
     public void checkDDMId() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"id_show_tab_col_btn\"]/div/div/div");
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"id_show_tab_col_btn\"]/div/div/div", "Id");
+        String idShowButton = "//*[@id=\"id_show_tab_col_btn\"]/div/div/div";
+        waits_asserts.waitForVisibilityByXpath(driver, idShowButton);
+        waits_asserts.assertTextByXpath(driver, idShowButton, "Id");
     }
 
     @Step("Checking dropdown menu column Trigger again after")
     public void checkDDMTriggerAgainAfter() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"trigger_again after_show_tab_col_btn\"]/div/div/div");
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"trigger_again after_show_tab_col_btn\"]/div/div/div", "Trigger again after");
+        String triggerAgainAfterButton = "//*[@id=\"trigger_again after_show_tab_col_btn\"]/div/div/div";
+        waits_asserts.waitForVisibilityByXpath(driver, triggerAgainAfterButton);
+        waits_asserts.assertTextByXpath(driver, triggerAgainAfterButton, "Trigger again after");
     }
 
     @Step("Checking dropdown menu column Acknowledgement last")
     public void checkDAMAcknowledgementLast() {
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"acknowledgement_lasts_show_tab_col_btn\"]/div/div/div");
-        waits_asserts.assertTextByXpath(driver, "//*[@id=\"acknowledgement_lasts_show_tab_col_btn\"]/div/div/div", "Acknowledgement last");
+        String acknowledgementLastsShowButton = "//*[@id=\"acknowledgement_lasts_show_tab_col_btn\"]/div/div/div";
+        waits_asserts.waitForVisibilityByXpath(driver, acknowledgementLastsShowButton);
+        waits_asserts.assertTextByXpath(driver, acknowledgementLastsShowButton, "Acknowledgement last");
     }
 
     /*=================Поверка правил===================*/
