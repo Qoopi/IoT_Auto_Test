@@ -147,14 +147,43 @@ public class Dashboard {
     }
 
     public void checkMenuNotificationRules(){
-        String notificationSubject = "";
-        String message = "";
-        String active = "";
-        String ruleType = "";
-        String id = "";
-        String triggerAgainAfter = "";
-        String acknowledgementLasts = "";
+        String notificationSubject = "#notification_subject_show_tab_col_btn > div > div > svg";
+        String message = "#message_show_tab_col_btn > div > div > svg";
+        String active = "#active_show_tab_col_btn > div > div > svg";
+        String ruleType = "#rule_type_show_tab_col_btn > div > div > svg";
+        String id = "#id_show_tab_col_btn > div > div > svg";
+        String triggerAgainAfter = "#trigger_again\\20 after_show_tab_col_btn > div > div > svg";
+        String acknowledgementLasts = "#acknowledgement_lasts_show_tab_col_btn > div > div > svg";
     }
+
+    public void checkMenuAdministrationRequests(){
+        String userName = "#user_name_show_tab_col_btn > div > div > svg";
+        String email = "#email_show_tab_col_btn > div > div > svg";
+        String adminGroup = "#admin_group_show_tab_col_btn > div > div > svg";
+        String service = "#service_show_tab_col_btn > div > div > svg";
+        String updatedAt = "#updated_at_show_tab_col_btn > div > div > svg";
+        String regTime = "#reg\\2e _time_show_tab_col_btn > div > div > svg";
+    }
+
+    public void checkMenuAdministrationUserList(){
+        String userName = "#user_name_show_tab_col_btn > div > div > svg";
+        String email = "#email_show_tab_col_btn > div > div > svg";
+        String adminGroup = "#admin_group_show_tab_col_btn > div > div > svg";
+        String service = "#service_show_tab_col_btn > div > div > svg";
+        String updatedAt = "#updated_at_show_tab_col_btn > div > div > svg";
+        String regTime = "#reg\\2e _time_show_tab_col_btn > div > div > svg";
+    }
+
+    public void checkMenuAdministrationEquipmentList(){
+        String equipmentName = "#equipment_name_show_tab_col_btn > div > div > svg";
+        String equipmentId = "#equipment_id_show_tab_col_btn > div > div > svg";
+        String equipmentType = "#equipment_type_show_tab_col_btn > div > div > svg";
+        String group = "#group_show_tab_col_btn > div > div > svg";
+        String active = "#active_show_tab_col_btn > div > div > svg";
+        String updatedAt = "#updated_at_show_tab_col_btn > div > div > svg";
+        String created = "#created_show_tab_col_btn > div > div > svg";
+    }
+
 
     @Step("Close menu")
     public void closeMenu(){
