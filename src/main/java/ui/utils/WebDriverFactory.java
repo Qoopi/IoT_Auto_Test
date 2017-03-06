@@ -3,6 +3,7 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -27,7 +28,7 @@ public class WebDriverFactory {
                 capability.setBrowserName("firefox");
                 capability.setPlatform(Platform.LINUX);
             }
-            if (browserName.toLowerCase().contains("internet")) {
+            if (browserName.toLowerCase().contains("ie")) {
                 capability = DesiredCapabilities.internetExplorer();
             }
             if (browserName.toLowerCase().contains("chrome")) {
@@ -42,8 +43,13 @@ public class WebDriverFactory {
                 driver = new FirefoxDriver();
                 System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
             }
-            if (browserName.toLowerCase().contains("internet")) {
-                System.out.println("OOOOOPS! Not configured yet");
+            if (browserName.toLowerCase().contains("ie32")) {
+                System.setProperty("webdriver.ie.driver", "IEDriverServer32.exe");
+                driver = new InternetExplorerDriver();
+            }
+            if (browserName.toLowerCase().contains("ie64")) {
+                System.setProperty("webdriver.ie.driver", "IEDriverServer64.exe");
+                driver = new InternetExplorerDriver();
             }
             if (browserName.toLowerCase().contains("chrome")) {
                 driver = new ChromeDriver();
