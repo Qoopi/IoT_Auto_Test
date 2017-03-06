@@ -37,9 +37,8 @@ public class UiUtils {
 
     public boolean checkActiveCSS(WebDriver driver, String css){
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-        System.out.println(css);
         boolean exists = !driver.findElements(By.cssSelector(css)).isEmpty();
-        System.out.println(exists);
+        System.out.println(exists + " <====> " + css);
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         return exists;
     }
