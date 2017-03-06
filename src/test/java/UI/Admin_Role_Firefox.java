@@ -5,6 +5,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
+import ui.pageObjets.DDMenus;
 import ui.pageObjets.LogInPage;
 import ui.pageObjets.administration.Requests;
 import ui.pageObjets.administration.UserList;
@@ -23,6 +24,18 @@ public class Admin_Role_Firefox {
         LogInPage log = new LogInPage();
         log.getToIoTPage();
         log.enterGoogleCred2();
+    }
+
+    @Features("Regression")
+    @Stories("[OSF-53] Equipment view")
+    @Test(priority = 1)
+    public void checkWhatIsActiveInDDMenu(){
+        Dashboard dashboard = new Dashboard();
+        dashboard.openEquipment();
+        dashboard.openMenu();
+        DDMenus ddm = new DDMenus();
+        ddm.checkMenuEquipment();
+        dashboard.closeMenu();
     }
 
     @Features("Regression")

@@ -4,6 +4,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
+import ui.pageObjets.DDMenus;
 import ui.pageObjets.dashboard.Dasboards.Dashboard;
 import ui.pageObjets.LogInPage;
 import ui.pageObjets.dashboard.Notifications.Notifications;
@@ -18,7 +19,17 @@ public class testovui_test {
         log.getToIoTPage();
         log.enterGoogleCred();
     }
-
+    @Features("Regression")
+    @Stories("[OSF-53] Equipment view")
+    @Test
+    public void checkWhatIsActiveInDDMenu(){
+        Dashboard dashboard = new Dashboard();
+        dashboard.openEquipment();
+        dashboard.openMenu();
+        DDMenus ddm = new DDMenus();
+        ddm.checkMenuEquipment();
+        dashboard.closeMenu();
+    }
     @Features("Regression")
     @Stories("Notifications Rule, default columns check")
     @Test(priority = 1)

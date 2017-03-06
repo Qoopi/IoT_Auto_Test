@@ -114,75 +114,7 @@ public class Dashboard {
         waits_asserts.sleep(500);
     }
 
-    public void checkMenuReports(){
-        String reportsTitle = "#report_title_show_tab_col_btn > div > div > svg";
-        String reportsSchedule = "#report_schedule_show_tab_col_btn > div > div > svg";
-        String equipmentItems = "#equipment_items_show_tab_col_btn > div > div > svg";
-        String recipients = "#recipients_show_tab_col_btn > div > div > svg";
-        String excelIncluded = "#excel_included_show_tab_col_btn > div > div > svg";
-        UiUtils uiUtils = new UiUtils();
 
-        uiUtils.checkActiveCSS(driver, reportsTitle);
-        uiUtils.checkActiveCSS(driver, reportsSchedule);
-        uiUtils.checkActiveCSS(driver, equipmentItems);
-        uiUtils.checkActiveCSS(driver, recipients);
-        uiUtils.checkActiveCSS(driver, excelIncluded);
-    }
-
-    public void checkMenuEquipment(){
-        String equipmentName = "#equipment_name_show_tab_col_btn > div > div > svg";
-        String equipmentId = "#equipment_id_show_tab_col_btn > div > div > svg";
-        String equipmentType = "#equipment_type_show_tab_col_btn > div > div > svg";
-        String group = "#group_show_tab_col_btn > div > div > svg";
-        String updatedAt = "#updated_at_show_tab_col_btn > div > div > svg";
-        String created = "#created_show_tab_col_btn > div > div > svg";
-    }
-
-    public void checkMenuNotificationList(){
-        String name = "#name_show_tab_col_btn > div > div > svg";
-        String message = "#message_show_tab_col_btn > div > div > svg";
-        String acknowledged = "#acknowledged_show_tab_col_btn > div > div > svg";
-        String timeTriggered = "#time_triggered_show_tab_col_btn > div > div > svg";
-
-    }
-
-    public void checkMenuNotificationRules(){
-        String notificationSubject = "#notification_subject_show_tab_col_btn > div > div > svg";
-        String message = "#message_show_tab_col_btn > div > div > svg";
-        String active = "#active_show_tab_col_btn > div > div > svg";
-        String ruleType = "#rule_type_show_tab_col_btn > div > div > svg";
-        String id = "#id_show_tab_col_btn > div > div > svg";
-        String triggerAgainAfter = "#trigger_again\\20 after_show_tab_col_btn > div > div > svg";
-        String acknowledgementLasts = "#acknowledgement_lasts_show_tab_col_btn > div > div > svg";
-    }
-
-    public void checkMenuAdministrationRequests(){
-        String userName = "#user_name_show_tab_col_btn > div > div > svg";
-        String email = "#email_show_tab_col_btn > div > div > svg";
-        String adminGroup = "#admin_group_show_tab_col_btn > div > div > svg";
-        String service = "#service_show_tab_col_btn > div > div > svg";
-        String updatedAt = "#updated_at_show_tab_col_btn > div > div > svg";
-        String regTime = "#reg\\2e _time_show_tab_col_btn > div > div > svg";
-    }
-
-    public void checkMenuAdministrationUserList(){
-        String userName = "#user_name_show_tab_col_btn > div > div > svg";
-        String email = "#email_show_tab_col_btn > div > div > svg";
-        String adminGroup = "#admin_group_show_tab_col_btn > div > div > svg";
-        String service = "#service_show_tab_col_btn > div > div > svg";
-        String updatedAt = "#updated_at_show_tab_col_btn > div > div > svg";
-        String regTime = "#reg\\2e _time_show_tab_col_btn > div > div > svg";
-    }
-
-    public void checkMenuAdministrationEquipmentList(){
-        String equipmentName = "#equipment_name_show_tab_col_btn > div > div > svg";
-        String equipmentId = "#equipment_id_show_tab_col_btn > div > div > svg";
-        String equipmentType = "#equipment_type_show_tab_col_btn > div > div > svg";
-        String group = "#group_show_tab_col_btn > div > div > svg";
-        String active = "#active_show_tab_col_btn > div > div > svg";
-        String updatedAt = "#updated_at_show_tab_col_btn > div > div > svg";
-        String created = "#created_show_tab_col_btn > div > div > svg";
-    }
 
 
     @Step("Close menu")

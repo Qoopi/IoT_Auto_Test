@@ -5,6 +5,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
+import ui.pageObjets.DDMenus;
 import ui.pageObjets.LogInPage;
 import ui.pageObjets.administration.Requests;
 import ui.pageObjets.administration.UserList;
@@ -24,10 +25,20 @@ public class Admin_Role_Chrome {
         log.getToIoTPage();
         log.enterGoogleCred();
     }
-
+    @Features("Regression")
+    @Stories("[OSF-53] Equipment, what element is active in DDMenu")
+    @Test(priority = 1)
+    public void checkWhatIsActiveInDDMenuEquipment(){
+        Dashboard dashboard = new Dashboard();
+        dashboard.openEquipment();
+        dashboard.openMenu();
+        DDMenus ddm = new DDMenus();
+        ddm.checkMenuEquipment();
+        dashboard.closeMenu();
+    }
     @Features("Regression")
     @Stories("[OSF-53] Equipment view")
-    @Test(priority = 1)
+    @Test(priority = 2)
     public void EquipmentCheck() {
         Dashboard dashboard = new Dashboard();
         Equipment equipment = new Equipment();
@@ -43,7 +54,7 @@ public class Admin_Role_Chrome {
 
     @Features("Regression")
     @Stories("[OSF-53] Equipment, columns menu check")
-    @Test(priority = 2)
+    @Test(priority = 3)
     public void checkUpperRightMenuInEquipment() {
         Dashboard dashboard = new Dashboard();
         Equipment equipment = new Equipment();
@@ -61,7 +72,7 @@ public class Admin_Role_Chrome {
 
     @Features("Admin role testing of functionality")
     @Stories("[OSF-53] Equipment, add column Created ")
-    @Test(priority = 3)
+    @Test(priority = 4)
     public void EquipmentAddColumn() {
         Dashboard dashboard = new Dashboard();
         Equipment equipment = new Equipment();
@@ -76,7 +87,7 @@ public class Admin_Role_Chrome {
 
     @Features("Regression")
     @Stories("[OSF-53] Equipment view detail info")
-    @Test(priority = 4)
+    @Test(priority = 5)
     public void viewEquipInfo() {
         Equipment equipment = new Equipment();
         equipment.viewEquip();
@@ -85,14 +96,23 @@ public class Admin_Role_Chrome {
     }
 
     @Features("Regression")
-    @Stories("Notifications list default columns check")
-    @Test(priority = 5)
-    public void NotificationsListDefaultColumns() {
+    @Stories("[OSF-53] Notification Lit, what element is active in DDMenu")
+    @Test(priority = 6)
+    public void checkWhatIsActiveInDDMenuNotificationsList(){
         Dashboard dashboard = new Dashboard();
-        Notifications not = new Notifications();
-
         dashboard.openNotifications();
         dashboard.openNotificationsList();
+        dashboard.openMenu();
+        DDMenus ddm = new DDMenus();
+        ddm.checkMenuNotificationList();
+        dashboard.closeMenu();
+    }
+    @Features("Regression")
+    @Stories("Notifications list default columns check")
+    @Test(priority = 7)
+    public void notificationsListDefaultColumns() {
+
+        Notifications not = new Notifications();
         not.checkNameColumn();
         not.checkMessageColumn();
         not.checkAcknowledgeColumn();
@@ -101,7 +121,7 @@ public class Admin_Role_Chrome {
 
     @Features("Regression")
     @Stories("Notifications lists, dropdown menu check")
-    @Test(priority = 6)
+    @Test(priority = 8)
     public void NotificationsListRightMenu() {
         Dashboard dash = new Dashboard();
         Notifications not = new Notifications();
@@ -113,10 +133,20 @@ public class Admin_Role_Chrome {
         not.checkLeftMenuTimeTriggeredColumns();
     }
 
-
+    @Features("Regression")
+    @Stories("[OSF-53] Reports, what element is active in DDMenu")
+    @Test(priority = 9)
+    public void checkWhatIsActiveInDDMenuReport(){
+        Dashboard dashboard = new Dashboard();
+        dashboard.openReports();
+        dashboard.openMenu();
+        DDMenus ddm = new DDMenus();
+        ddm.checkMenuReports();
+        dashboard.closeMenu();
+    }
     @Features("Regression")
     @Stories("Report list default columns testing")
-    @Test(priority = 7)
+    @Test(priority = 10)
     public void CheckOutReportsDefaultColumns() {
         Dashboard dash = new Dashboard();
         Reports reports = new Reports();
@@ -128,7 +158,7 @@ public class Admin_Role_Chrome {
 
     @Features("Regression")
     @Stories("Report list additions columns in dropdown menu check")
-    @Test(priority = 8)
+    @Test(priority = 11)
     public void CheckAdditionalColumns() {
         Dashboard dash = new Dashboard();
         Reports reports = new Reports();
@@ -144,7 +174,7 @@ public class Admin_Role_Chrome {
 
     @Features("Regression")
     @Stories("Report list add additional columns testing")
-    @Test(priority = 9)
+    @Test(priority = 12)
     public void AddColumnsInReports() {
         Reports reports = new Reports();
         Dashboard dashboard = new Dashboard();
@@ -162,7 +192,7 @@ public class Admin_Role_Chrome {
 
     @Features("Regression")
     @Stories("Report list dismiss additional columns ")
-    @Test(priority = 10)
+    @Test(priority = 13)
     public void DismissColumnsInReports() {
         Reports reports = new Reports();
         Dashboard dashboard = new Dashboard();
@@ -176,18 +206,21 @@ public class Admin_Role_Chrome {
     }
 
     @Features("Regression")
-    @Stories("OSF-200 User List")
-    @Test(priority = 11)
-    public void openUserList() {
+    @Stories("OSF-200 User List, what element is active in DDMenu")
+    @Test(priority = 14)
+    public void openUserListActiveColumns() {
         Dashboard dashboard = new Dashboard();
         dashboard.openAdministration();
         dashboard.openUserList();
-
+        dashboard.openMenu();
+        DDMenus ddm = new DDMenus();
+        ddm.checkMenuAdministrationUserList();
+        dashboard.closeMenu();
     }
 
     @Features("Regression")
     @Stories("OSF-200 User List")
-    @Test(priority = 12)
+    @Test(priority = 15)
     public void checkDefaultColumnsOfUserList() {
         UserList userList = new UserList();
         Dashboard dashboard = new Dashboard();
@@ -200,7 +233,7 @@ public class Admin_Role_Chrome {
 
     @Features("Regression")
     @Stories("OSF-200 User List")
-    @Test(priority = 13)
+    @Test(priority = 16)
     public void addColumnsToUserList() {
         UserList userList = new UserList();
         Dashboard dashboard = new Dashboard();
@@ -221,7 +254,7 @@ public class Admin_Role_Chrome {
 
     @Features("Regression")
     @Stories("OSF-200 User List")
-    @Test(priority = 14)
+    @Test(priority = 17)
     public void deleteColumnsFromUserList() {
         LogInPage log = new LogInPage();
         Dashboard dashboard = new Dashboard();
@@ -239,7 +272,7 @@ public class Admin_Role_Chrome {
 
     @Features("Regression")
     @Stories("OSF-200 User List")
-    @Test(priority = 15)
+    @Test(priority = 18)
     public void markToDeactivateSomeUser() {
         UserList userList = new UserList();
         userList.markSeveralUser();
@@ -249,7 +282,7 @@ public class Admin_Role_Chrome {
 
     @Features("Regression")
     @Stories("OSF-199 Request, accept request")
-    //@Test(priority = 16)
+    //@Test(priority = 19)
     public void openRequests() {
         Dashboard dashboards = new Dashboard();
         Requests requests = new Requests();
@@ -262,7 +295,7 @@ public class Admin_Role_Chrome {
 
     @Features("Regression")
     @Stories("OSF-403 Delete User")
-    //@Test(priority = 17)
+    //@Test(priority = 20)
     public void deleteUser() {
         Dashboard dashboard = new Dashboard();
         UserList user = new UserList();
@@ -277,13 +310,26 @@ public class Admin_Role_Chrome {
     }
 
     @Features("Regression")
+    @Stories("OSF-200 User List, what element is active in DDMenu")
+    @Test(priority = 21)
+    public void checkWhatIsActiveInDDMenuEquipmentList() {
+        Dashboard dashboard = new Dashboard();
+        dashboard.openAdministration();
+        dashboard.openEquipmentListAsAdmin();
+        dashboard.openMenu();
+        DDMenus ddm = new DDMenus();
+        ddm.checkMenuAdministrationEquipmentList();
+        dashboard.closeMenu();
+    }
+
+    @Features("Regression")
     @Stories("[OSF-53] Equipment list, default columns check")
-    @Test(priority = 18)
+    @Test(priority = 22)
     public void checkEquipmentList() {
 
         Dashboard dashboard = new Dashboard();
         Equipment equip = new Equipment();
-        dashboard.openAdministration();
+        //dashboard.openAdministration();
         dashboard.openEquipmentListAsAdmin();
 
         equip.sortEquipByName();
@@ -296,7 +342,7 @@ public class Admin_Role_Chrome {
 
     @Features("Regression")
     @Stories("[OSF-53] Equipment list, edit equip")
-    @Test(priority = 19)
+    @Test(priority = 23)
     public void checkEditEquip() {
         Equipment equip = new Equipment();
         equip.editEquip();
@@ -305,7 +351,7 @@ public class Admin_Role_Chrome {
 
     @Features("Regression")
     @Stories("[OSF-53] Equipment List, dropdown menu check")
-    @Test(priority = 20)
+    @Test(priority = 24)
     public void checkUpperRightMenuInEquipmentList() {
         Dashboard dashboard = new Dashboard();
         Equipment equipment = new Equipment();
@@ -323,7 +369,7 @@ public class Admin_Role_Chrome {
 
     @Features("Regression")
     @Stories("[OSF-53] Equipment List add column Created ")
-    @Test(priority = 21)
+    @Test(priority = 25)
     public void EquipmentListAddColumn() {
         Dashboard dashboard = new Dashboard();
         Equipment equip = new Equipment();
