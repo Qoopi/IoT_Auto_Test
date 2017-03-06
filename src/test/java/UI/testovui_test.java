@@ -78,7 +78,6 @@ public class testovui_test {
         not.selectChannelCheck();
         not.clickContinue2Chrome();
         not.checkGlobalNotification();
-
     }
 
 }

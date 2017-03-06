@@ -1,6 +1,7 @@
 package ui.pageObjets.dashboard.Dasboards;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -8,6 +9,9 @@ import ru.yandex.qatools.allure.annotations.Step;
 import ui.utils.UiUtils;
 import ui.utils.WebDriverManager;
 import ui.utils.WaitsAsserts;
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class Dashboard {
     private WaitsAsserts waits_asserts = new WaitsAsserts();
@@ -23,8 +27,10 @@ public class Dashboard {
     public void openEquipment() {
         String equipMainMenu = "//*[@id=\"equipment_main_menu_item\"]";
         waits_asserts.waitForVisibilityByXpath(driver, equipMainMenu);
+
         driver.findElement(By.xpath(equipMainMenu)).click();
         // waits_asserts.assertTextByXpath(driver,"//*[@id=\"naviCrumb\"]/span","Equipment list");
+
     }
 
     @Step("Open Notifications")
@@ -121,6 +127,19 @@ public class Dashboard {
     public void closeMenu(){
         Actions action = new Actions(driver);
         action.sendKeys(Keys.ESCAPE).build().perform();
+        waits_asserts.sleep(500);
+    }
+
+    @Step("Close menu")
+    public void closeMenuFF(){
+        Robot r = null;
+        try {
+            r = new Robot();
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
+        r.keyPress(KeyEvent.VK_ESCAPE);
+        r.keyRelease(KeyEvent.VK_ESCAPE);
         waits_asserts.sleep(500);
     }
 

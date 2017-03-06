@@ -3,6 +3,8 @@ package ui.utils;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -42,4 +44,19 @@ public class UiUtils {
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         return exists;
     }
+
+
+    public void changeFocusFF(){
+        WaitsAsserts waitsAsserts = new WaitsAsserts();
+        Robot r = null;
+        try {
+            r = new Robot();
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
+        r.keyPress(KeyEvent.VK_ENTER);
+        r.keyRelease(KeyEvent.VK_ENTER);
+        waitsAsserts.sleep(500);
+    }
+
 }

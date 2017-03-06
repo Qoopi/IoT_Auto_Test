@@ -14,6 +14,7 @@ import ui.pageObjets.dashboard.Equipments.Equipment;
 import ui.pageObjets.dashboard.Notifications.Notifications;
 import ui.pageObjets.dashboard.Reports;
 import ui.utils.TestListener;
+import ui.utils.UiUtils;
 
 
 @Listeners(TestListener.class)
@@ -24,28 +25,28 @@ public class Admin_Role_Firefox {
         LogInPage log = new LogInPage();
         log.getToIoTPage();
         log.enterGoogleCred2();
+        UiUtils uiUtils = new UiUtils();
+        uiUtils.changeFocusFF();
     }
-
     @Features("Regression")
-    @Stories("[OSF-53] Equipment view")
+    @Stories("[OSF-53] Equipment, what element is active in DDMenu")
     @Test(priority = 1)
-    public void checkWhatIsActiveInDDMenu(){
+    public void checkWhatIsActiveInDDMenuEquipment(){
         Dashboard dashboard = new Dashboard();
         dashboard.openEquipment();
         dashboard.openMenu();
         DDMenus ddm = new DDMenus();
         ddm.checkMenuEquipment();
-        dashboard.closeMenu();
+        dashboard.closeMenuFF();
     }
-
     @Features("Regression")
     @Stories("[OSF-53] Equipment view")
-    @Test(priority = 1)
+    @Test(priority = 2)
     public void EquipmentCheck() {
         Dashboard dashboard = new Dashboard();
-        dashboard.openEquipment();
-
         Equipment equipment = new Equipment();
+
+        dashboard.openEquipment();
         equipment.sortEquipByName();
         equipment.sortEquipById();
         equipment.sortEquipByType();
@@ -56,37 +57,40 @@ public class Admin_Role_Firefox {
 
     @Features("Regression")
     @Stories("[OSF-53] Equipment, columns menu check")
-    @Test(priority = 2)
+    @Test(priority = 3)
     public void checkUpperRightMenuInEquipment() {
         Dashboard dashboard = new Dashboard();
-        dashboard.openMenu();
         Equipment equipment = new Equipment();
+
+        dashboard.openMenu();
         equipment.checkEquipmentNameInMenu();
         equipment.checkEquipmentTypeInMenu();
         equipment.checkEquipmentIdInMenu();
         equipment.checkEquipmentGroupInMenu();
         equipment.checkEquipmentUpdatedAtInMenu();
         equipment.checkEquipmentCreatedInMenu();
+        dashboard.closeMenuFF();
 
     }
 
     @Features("Admin role testing of functionality")
     @Stories("[OSF-53] Equipment, add column Created ")
-    @Test(priority = 3)
+    @Test(priority = 4)
     public void EquipmentAddColumn() {
-        Equipment equipment = new Equipment();
-        equipment.addCreatedColumn();
-
-        LogInPage log = new LogInPage();
-        log.refresh();
         Dashboard dashboard = new Dashboard();
+        Equipment equipment = new Equipment();
+        LogInPage log = new LogInPage();
+
+        dashboard.openMenu();
+        equipment.addCreatedColumn();
+        //log.refresh();
         dashboard.openMenu();
         equipment.dismissCreated();
     }
 
     @Features("Regression")
     @Stories("[OSF-53] Equipment view detail info")
-    @Test(priority = 4)
+    @Test(priority = 5)
     public void viewEquipInfo() {
         Equipment equipment = new Equipment();
         equipment.viewEquip();
@@ -95,12 +99,21 @@ public class Admin_Role_Firefox {
     }
 
     @Features("Regression")
-    @Stories("Notifications list default columns check")
-    @Test(priority = 5)
-    public void NotificationsListDefaultColumns() {
+    @Stories("[OSF-53] Notification Lit, what element is active in DDMenu")
+    @Test(priority = 6)
+    public void checkWhatIsActiveInDDMenuNotificationsList(){
         Dashboard dashboard = new Dashboard();
         dashboard.openNotifications();
         dashboard.openNotificationsList();
+        dashboard.openMenu();
+        DDMenus ddm = new DDMenus();
+        ddm.checkMenuNotificationList();
+        dashboard.closeMenuFF();
+    }
+    @Features("Regression")
+    @Stories("Notifications list default columns check")
+    @Test(priority = 7)
+    public void notificationsListDefaultColumns() {
 
         Notifications not = new Notifications();
         not.checkNameColumn();
@@ -111,52 +124,65 @@ public class Admin_Role_Firefox {
 
     @Features("Regression")
     @Stories("Notifications lists, dropdown menu check")
-    @Test(priority = 6)
+    @Test(priority = 8)
     public void NotificationsListRightMenu() {
         Dashboard dash = new Dashboard();
-        dash.openMenu();
         Notifications not = new Notifications();
+
+        dash.openMenu();
         not.checkLeftMenuNameColumns();
         not.checkLeftMenuMessageColumns();
         not.checkLeftMenuAcknowledgeColumns();
         not.checkLeftMenuTimeTriggeredColumns();
     }
-       /*Notification Rules tests should be*/
 
     @Features("Regression")
+    @Stories("[OSF-53] Reports, what element is active in DDMenu")
+    @Test(priority = 9)
+    public void checkWhatIsActiveInDDMenuReport(){
+        Dashboard dashboard = new Dashboard();
+        dashboard.openReports();
+        dashboard.openMenu();
+        DDMenus ddm = new DDMenus();
+        ddm.checkMenuReports();
+        dashboard.closeMenuFF();
+    }
+    @Features("Regression")
     @Stories("Report list default columns testing")
-    @Test(priority = 7)
+    @Test(priority = 10)
     public void CheckOutReportsDefaultColumns() {
         Dashboard dash = new Dashboard();
-        dash.openReports();
-
         Reports reports = new Reports();
+
+        dash.openReports();
         reports.checkReportTitleColumn();
         reports.checkReportScheduleColumn();
     }
 
     @Features("Regression")
     @Stories("Report list additions columns in dropdown menu check")
-    @Test(priority = 8)
+    @Test(priority = 11)
     public void CheckAdditionalColumns() {
         Dashboard dash = new Dashboard();
-        dash.openMenu();
-
         Reports reports = new Reports();
+
+        dash.openMenu();
         reports.checkReportTitleColumnInDropDownMenu();
         reports.checkReportScheduleColumnInDropDownMenu();
         reports.checkRecipientsColumnInDropDownMenu();
         reports.checkExcelIncludedColumnInDropDownMenu();
         reports.checkEquipmentItemsColumnInDropDownMenu();
+        dash.closeMenuFF();
     }
 
     @Features("Regression")
     @Stories("Report list add additional columns testing")
-    @Test(priority = 9)
+    @Test(priority = 12)
     public void AddColumnsInReports() {
         Reports reports = new Reports();
         Dashboard dashboard = new Dashboard();
 
+        dashboard.openMenu();
         reports.addEquipmentItemColumn();
         reports.checkAddedEquipItem();
         dashboard.openMenu();
@@ -169,10 +195,11 @@ public class Admin_Role_Firefox {
 
     @Features("Regression")
     @Stories("Report list dismiss additional columns ")
-    @Test(priority = 10)
+    @Test(priority = 13)
     public void DismissColumnsInReports() {
         Reports reports = new Reports();
         Dashboard dashboard = new Dashboard();
+
         dashboard.openMenu();
         reports.dismissEquipmentItem();
         dashboard.openMenu();
@@ -182,70 +209,73 @@ public class Admin_Role_Firefox {
     }
 
     @Features("Regression")
-    @Stories("OSF-200 User List")
-    @Test(priority = 11)
-    public void openUserList() {
+    @Stories("OSF-200 User List, what element is active in DDMenu")
+    @Test(priority = 14)
+    public void openUserListActiveColumns() {
         Dashboard dashboard = new Dashboard();
         dashboard.openAdministration();
         dashboard.openUserList();
-
-    }
-
-    @Features("Regression")
-    @Stories("OSF-200 User List")
-    @Test(priority = 12)
-    public void checkDefaultColumnsOfUserList() {
-        UserList userList = new UserList();
-        userList.defaultColumnsCheck();
-        Dashboard dashboard = new Dashboard();
         dashboard.openMenu();
-        userList.checkingColumnsInPompUpMenu();
-    }
-
-    @Features("Regression")
-    @Stories("OSF-200 User List")
-    @Test(priority = 13)
-    public void addColumnsToUserList() {
-        UserList userList = new UserList();
-
-        userList.addServices();
-
-        Dashboard dashboard = new Dashboard();
-        dashboard.openMenu();
-        userList.addUpdatedAt();
-
-        dashboard.openMenu();
-        userList.addRegTime();
-
-    }
-
-    @Features("Regression")
-    @Stories("OSF-200 User List")
-    @Test(priority = 14)
-    public void deleteColumnsFromUserList() {
-
-        LogInPage log = new LogInPage();
-        log.refresh();
-
-        Dashboard dashboard = new Dashboard();
-        dashboard.openMenu();
-        UserList userList = new UserList();
-        userList.dismissRegTime();
-
-
-        //log.refresh();
-        dashboard.openMenu();
-        userList.dismissUpdatedAt();
-
-        //log.refresh();
-        dashboard.openMenu();
-        userList.clickMenuService();
-        //userList.dismissService();
+        DDMenus ddm = new DDMenus();
+        ddm.checkMenuAdministrationUserList();
+        dashboard.closeMenuFF();
     }
 
     @Features("Regression")
     @Stories("OSF-200 User List")
     @Test(priority = 15)
+    public void checkDefaultColumnsOfUserList() {
+        UserList userList = new UserList();
+        Dashboard dashboard = new Dashboard();
+
+        dashboard.openMenu();
+        userList.checkingColumnsInPompUpMenu();
+        userList.defaultColumnsCheck();
+        dashboard.closeMenuFF();
+    }
+
+    @Features("Regression")
+    @Stories("OSF-200 User List")
+    @Test(priority = 16)
+    public void addColumnsToUserList() {
+        UserList userList = new UserList();
+        Dashboard dashboard = new Dashboard();
+
+        dashboard.openMenu();
+        userList.clickMenuService();
+        userList.checkServiceColumn();
+
+        dashboard.openMenu();
+        userList.clickMenuUpdated();
+        userList.checkUpdatedColumn();
+
+        dashboard.openMenu();
+        userList.clickMenuRegTime();
+        userList.checkColumnRegTime();
+
+    }
+
+    @Features("Regression")
+    @Stories("OSF-200 User List")
+    @Test(priority = 17)
+    public void deleteColumnsFromUserList() {
+        LogInPage log = new LogInPage();
+        Dashboard dashboard = new Dashboard();
+        UserList userList = new UserList();
+
+        log.refresh();//is it necessary?
+
+        dashboard.openMenu();
+        userList.clickMenuRegTime();
+        dashboard.openMenu();
+        userList.clickMenuUpdated();
+        dashboard.openMenu();
+        userList.clickMenuService();
+    }
+
+    @Features("Regression")
+    @Stories("OSF-200 User List")
+    @Test(priority = 18)
     public void markToDeactivateSomeUser() {
         UserList userList = new UserList();
         userList.markSeveralUser();
@@ -255,42 +285,54 @@ public class Admin_Role_Firefox {
 
     @Features("Regression")
     @Stories("OSF-199 Request, accept request")
-    //@Test(priority = 16)
-    public void checkRequests() {
+    //@Test(priority = 19)
+    public void openRequests() {
         Dashboard dashboards = new Dashboard();
+        Requests requests = new Requests();
+
         dashboards.openAdministration();
         dashboards.openRequests();
-
-        Requests requests = new Requests();
-        requests.checkRequest();
-        requests.acceptUser();
+        requests.checkRequest(); //как, если нет реквеста
+        requests.acceptUser(); //падает на этом шаге хотя и чекнуть не должно было
     }
 
     @Features("Regression")
     @Stories("OSF-403 Delete User")
-    //@Test(priority = 17)
+    //@Test(priority = 20)
     public void deleteUser() {
         Dashboard dashboard = new Dashboard();
+        UserList user = new UserList();
         dashboard.openUserList();
         dashboard.openMenu();
 
-        UserList user = new UserList();
         user.addUpdatedAt();
         user.foundUserToDelete();
         user.deleteChosenUser();
+        dashboard.openMenu();
+        user.clickMenuUpdated();
+    }
+
+    @Features("Regression")
+    @Stories("OSF-200 User List, what element is active in DDMenu")
+    @Test(priority = 21)
+    public void checkWhatIsActiveInDDMenuEquipmentList() {
+        Dashboard dashboard = new Dashboard();
+        dashboard.openAdministration();
+        dashboard.openEquipmentListAsAdmin();
+        dashboard.openMenu();
+        DDMenus ddm = new DDMenus();
+        ddm.checkMenuAdministrationEquipmentList();
+        dashboard.closeMenuFF();
     }
 
     @Features("Regression")
     @Stories("[OSF-53] Equipment list, default columns check")
-    @Test(priority = 18)
+    @Test(priority = 22)
     public void checkEquipmentList() {
+
         Dashboard dashboard = new Dashboard();
         Equipment equip = new Equipment();
-        LogInPage log = new LogInPage();
-
-        log.refresh();
-
-        dashboard.openAdministration();
+        //dashboard.openAdministration();
         dashboard.openEquipmentListAsAdmin();
 
         equip.sortEquipByName();
@@ -303,7 +345,7 @@ public class Admin_Role_Firefox {
 
     @Features("Regression")
     @Stories("[OSF-53] Equipment list, edit equip")
-    @Test(priority = 19)
+    @Test(priority = 23)
     public void checkEditEquip() {
         Equipment equip = new Equipment();
         equip.editEquip();
@@ -312,11 +354,12 @@ public class Admin_Role_Firefox {
 
     @Features("Regression")
     @Stories("[OSF-53] Equipment List, dropdown menu check")
-    @Test(priority = 20)
+    @Test(priority = 24)
     public void checkUpperRightMenuInEquipmentList() {
         Dashboard dashboard = new Dashboard();
-        dashboard.openMenu();
         Equipment equipment = new Equipment();
+
+        dashboard.openMenu();
         equipment.checkEquipmentNameInMenu();
         equipment.checkEquipmentTypeInMenu();
         equipment.checkEquipmentIdInMenu();
@@ -324,18 +367,18 @@ public class Admin_Role_Firefox {
         equipment.checkEquipmentActiveInMenu();
         equipment.checkEquipmentUpdatedAtInMenu();
         equipment.checkEquipmentCreatedInMenu();
-        //dashboard.closeMenu(); //не срабатывает на firefox, из-за этого в падает след тест
+        dashboard.closeMenuFF();
     }
 
     @Features("Regression")
     @Stories("[OSF-53] Equipment List add column Created ")
-    @Test(priority = 21)
+    @Test(priority = 25)
     public void EquipmentListAddColumn() {
         Dashboard dashboard = new Dashboard();
         Equipment equip = new Equipment();
-        //dashboard.openMenu(); //закоменчено со строкой 314, из-за незакрытого меню убивает тест (закрывает equipment name)
-        equip.addCreatedColumn();
 
+        dashboard.openMenu();
+        equip.addCreatedColumn();
         dashboard.openMenu();
         equip.dismissCreated();
     }
