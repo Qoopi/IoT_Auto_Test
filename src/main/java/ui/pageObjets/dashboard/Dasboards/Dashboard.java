@@ -114,20 +114,46 @@ public class Dashboard {
         waits_asserts.sleep(500);
     }
 
-    public void checkMenu(){
-        String reportsTitleActive = "//*[@id=\"report_title_show_tab_col_btn\"]/div/div/svg";
-        String reportsScheduleActive = "//*[@id=\"report_schedule_show_tab_col_btn\"]/div/div/svg";
-        String equipmentItemsActive = "//*[@id=\"equipment_items_show_tab_col_btn\"]/div/div/svg";
-        String recipientsActive = "//*[@id=\"recipients_show_tab_col_btn\"]/div/div/svg";
-        String excelIncludedActive = "//*[@id=\"excel_included_show_tab_col_btn\"]/div/div/svg";
+    public void checkMenuReports(){
+        String reportsTitle = "#report_title_show_tab_col_btn > div > div > svg";
+        String reportsSchedule = "#report_schedule_show_tab_col_btn > div > div > svg";
+        String equipmentItems = "#equipment_items_show_tab_col_btn > div > div > svg";
+        String recipients = "#recipients_show_tab_col_btn > div > div > svg";
+        String excelIncluded = "#excel_included_show_tab_col_btn > div > div > svg";
         UiUtils uiUtils = new UiUtils();
 
-        uiUtils.checkActive(driver, reportsTitleActive);
-        uiUtils.checkActive(driver, reportsScheduleActive);
-        uiUtils.checkActive(driver, equipmentItemsActive);
-        uiUtils.checkActive(driver, recipientsActive);
-        uiUtils.checkActive(driver, excelIncludedActive);
-        uiUtils.checkActive(driver, "//*[@id=\"report_title_show_tab_col_btn\"]/div/div/svg/path");
+        uiUtils.checkActiveCSS(driver, reportsTitle);
+        uiUtils.checkActiveCSS(driver, reportsSchedule);
+        uiUtils.checkActiveCSS(driver, equipmentItems);
+        uiUtils.checkActiveCSS(driver, recipients);
+        uiUtils.checkActiveCSS(driver, excelIncluded);
+    }
+
+    public void checkMenuEquipment(){
+        String equipmentName = "#equipment_name_show_tab_col_btn > div > div > svg";
+        String equipmentId = "#equipment_id_show_tab_col_btn > div > div > svg";
+        String equipmentType = "#equipment_type_show_tab_col_btn > div > div > svg";
+        String group = "#group_show_tab_col_btn > div > div > svg";
+        String updatedAt = "#updated_at_show_tab_col_btn > div > div > svg";
+        String created = "#created_show_tab_col_btn > div > div > svg";
+    }
+
+    public void checkMenuNotificationList(){
+        String name = "#name_show_tab_col_btn > div > div > svg";
+        String message = "#message_show_tab_col_btn > div > div > svg";
+        String acknowledged = "#acknowledged_show_tab_col_btn > div > div > svg";
+        String timeTriggered = "#time_triggered_show_tab_col_btn > div > div > svg";
+
+    }
+
+    public void checkMenuNotificationRules(){
+        String notificationSubject = "";
+        String message = "";
+        String active = "";
+        String ruleType = "";
+        String id = "";
+        String triggerAgainAfter = "";
+        String acknowledgementLasts = "";
     }
 
     @Step("Close menu")

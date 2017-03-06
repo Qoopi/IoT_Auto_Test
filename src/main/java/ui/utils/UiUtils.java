@@ -35,18 +35,10 @@ public class UiUtils {
         return today;
     }
 
-    public void menuReports(){
-        String reportsTitleActive = "//*[@id=\"report_title_show_tab_col_btn\"]/div/div/svg";
-        String reportsScheduleActive = "//*[@id=\"report_schedule_show_tab_col_btn\"]/div/div/svg";
-        String equipmentItemsActive = "//*[@id=\"equipment_items_show_tab_col_btn\"]/div/div/svg";
-        String recipientsActive = "//*[@id=\"recipients_show_tab_col_btn\"]/div/div/svg";
-        String excelIncludedActive = "//*[@id=\"excel_included_show_tab_col_btn\"]/div/div/svg";
-    }
-
-    public boolean checkActive(WebDriver driver, String xpath){
+    public boolean checkActiveCSS(WebDriver driver, String css){
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-        System.out.println(xpath);
-        boolean exists = !driver.findElements(By.xpath(xpath)).isEmpty();
+        System.out.println(css);
+        boolean exists = !driver.findElements(By.cssSelector(css)).isEmpty();
         System.out.println(exists);
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         return exists;
