@@ -242,7 +242,7 @@ public class Admin_Role_Firefox {
 
     @Features("Regression")
     @Stories("OSF-199 Request, accept request")
-    @Test(priority = 16)
+    //@Test(priority = 16)
     public void checkRequests() {
         Dashboard dashboards = new Dashboard();
         dashboards.openAdministration();
@@ -255,7 +255,7 @@ public class Admin_Role_Firefox {
 
     @Features("Regression")
     @Stories("OSF-403 Delete User")
-    @Test(priority = 17)
+    //@Test(priority = 17)
     public void deleteUser() {
         Dashboard dashboard = new Dashboard();
         dashboard.openUserList();

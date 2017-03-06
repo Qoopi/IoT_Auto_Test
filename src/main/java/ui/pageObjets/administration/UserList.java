@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import ru.yandex.qatools.allure.annotations.Step;
 import ui.utils.WaitsAsserts;
 import ui.utils.WebDriverManager;
-import ui.utils.uiUtils;
+import ui.utils.UiUtils;
 
 
 public class UserList {
@@ -159,7 +159,7 @@ public class UserList {
         waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]");
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[4]/td[1]/div/input")).click();
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[10]/td[1]/div/input")).click();
-        uiUtils utils = new uiUtils();
+        UiUtils utils = new UiUtils();
         utils.makeScreenshot(driver, "Marked user string terned grey");
         waits_asserts.sleep(500);
     }

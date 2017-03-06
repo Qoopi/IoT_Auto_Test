@@ -19,16 +19,15 @@
         </classes>
     </test>-->
 
-<!--
 
-    <test name="Admin Role Firefox Test">
-        <parameter name="browserName" value="firefox"></parameter>
-        <parameter name="useGrid" value="false"></parameter>
-        <classes>
-            <class name="UI.Admin_Role_Firefox"/>
-        </classes>
-    </test>
--->
+    <!--<test name="Admin Role Firefox Test">-->
+        <!--<parameter name="browserName" value="firefox"></parameter>-->
+        <!--<parameter name="useGrid" value="false"></parameter>-->
+        <!--<classes>-->
+            <!--<class name="UI.Admin_Role_Firefox"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+
 
    <!-- <test name="Create new user Firefox">
         <parameter name="browserName" value="firefox"></parameter>

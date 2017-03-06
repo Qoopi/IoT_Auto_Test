@@ -5,11 +5,11 @@ import org.openqa.selenium.WebDriver;
 import ru.yandex.qatools.allure.annotations.Step;
 import ui.utils.WaitsAsserts;
 import ui.utils.WebDriverManager;
-import ui.utils.uiUtils;
+import ui.utils.UiUtils;
 
 public class Equipment {
     private WaitsAsserts waits_asserts = new WaitsAsserts();
-    private uiUtils utils = new uiUtils();
+    private UiUtils utils = new UiUtils();
     private WebDriver driver;
 
     public Equipment() {

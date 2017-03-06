@@ -5,6 +5,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import ru.yandex.qatools.allure.annotations.Step;
+import ui.utils.UiUtils;
 import ui.utils.WebDriverManager;
 import ui.utils.WaitsAsserts;
 
@@ -111,6 +112,22 @@ public class Dashboard {
         waits_asserts.waitForVisibilityByXpath(driver, openMenuButton);
         driver.findElement(By.xpath(openMenuButton)).click();
         waits_asserts.sleep(500);
+    }
+
+    public void checkMenu(){
+        String reportsTitleActive = "//*[@id=\"report_title_show_tab_col_btn\"]/div/div/svg";
+        String reportsScheduleActive = "//*[@id=\"report_schedule_show_tab_col_btn\"]/div/div/svg";
+        String equipmentItemsActive = "//*[@id=\"equipment_items_show_tab_col_btn\"]/div/div/svg";
+        String recipientsActive = "//*[@id=\"recipients_show_tab_col_btn\"]/div/div/svg";
+        String excelIncludedActive = "//*[@id=\"excel_included_show_tab_col_btn\"]/div/div/svg";
+        UiUtils uiUtils = new UiUtils();
+
+        uiUtils.checkActive(driver, reportsTitleActive);
+        uiUtils.checkActive(driver, reportsScheduleActive);
+        uiUtils.checkActive(driver, equipmentItemsActive);
+        uiUtils.checkActive(driver, recipientsActive);
+        uiUtils.checkActive(driver, excelIncludedActive);
+        uiUtils.checkActive(driver, "//*[@id=\"report_title_show_tab_col_btn\"]/div/div/svg/path");
     }
 
     @Step("Close menu")

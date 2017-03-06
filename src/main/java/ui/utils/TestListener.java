@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class TestListener implements ITestListener {
-    uiUtils utils= new uiUtils();
+    UiUtils utils= new UiUtils();
     private String params;
 
     private File captureScreenshot(WebDriver driver) {
@@ -93,7 +93,7 @@ public class TestListener implements ITestListener {
         WebDriverManager.setWebDriver(driver);
 
 
-        uiUtils util = new uiUtils();
+        UiUtils util = new UiUtils();
         String currentDate = util.getTime();
         params = currentDate +"-"+browserName+"-grid-"+useGrid;
     }
