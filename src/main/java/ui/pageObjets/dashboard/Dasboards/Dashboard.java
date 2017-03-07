@@ -13,7 +13,7 @@ import ui.utils.WaitsAsserts;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class Dashboard {
+public class Dashboard{
     private WaitsAsserts waits_asserts = new WaitsAsserts();
     private WebDriver driver;
 
@@ -118,9 +118,8 @@ public class Dashboard {
         waits_asserts.waitForVisibilityByXpath(driver, openMenuButton);
         driver.findElement(By.xpath(openMenuButton)).click();
         waits_asserts.sleep(500);
+
     }
-
-
 
 
     @Step("Close menu")
@@ -132,15 +131,21 @@ public class Dashboard {
 
     @Step("Close menu")
     public void closeMenuFF(){
-        Robot r = null;
-        try {
-            r = new Robot();
-        } catch (AWTException e) {
-            e.printStackTrace();
+        UiUtils uiUtils = new UiUtils();
+        if (uiUtils.isDDMenuOpenFF(driver)) {
+            Robot r = null;
+            try {
+                r = new Robot();
+            } catch (AWTException e) {
+                e.printStackTrace();
+            }
+            r.keyPress(KeyEvent.VK_ESCAPE);
+            r.keyRelease(KeyEvent.VK_ESCAPE);
+            waits_asserts.sleep(500);
         }
-        r.keyPress(KeyEvent.VK_ESCAPE);
-        r.keyRelease(KeyEvent.VK_ESCAPE);
-        waits_asserts.sleep(500);
+        else{
+            System.out.println("Sorry, looks like menu is already closed");
+        }
     }
 
     @Step("Open dashboard table")

@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
 import ui.pageObjets.DDMenus;
+import ui.pageObjets.DDMenusChrome;
 import ui.pageObjets.LogInPage;
 import ui.pageObjets.administration.Requests;
 import ui.pageObjets.administration.UserList;
@@ -32,7 +33,7 @@ public class Admin_Role_Chrome {
         Dashboard dashboard = new Dashboard();
         dashboard.openEquipment();
         dashboard.openMenu();
-        DDMenus ddm = new DDMenus();
+        DDMenus ddm = new DDMenusChrome();
         ddm.checkMenuEquipment();
         dashboard.closeMenu();
     }
@@ -103,7 +104,7 @@ public class Admin_Role_Chrome {
         dashboard.openNotifications();
         dashboard.openNotificationsList();
         dashboard.openMenu();
-        DDMenus ddm = new DDMenus();
+        DDMenus ddm = new DDMenusChrome();
         ddm.checkMenuNotificationList();
         dashboard.closeMenu();
     }
@@ -140,7 +141,7 @@ public class Admin_Role_Chrome {
         Dashboard dashboard = new Dashboard();
         dashboard.openReports();
         dashboard.openMenu();
-        DDMenus ddm = new DDMenus();
+        DDMenus ddm = new DDMenusChrome();
         ddm.checkMenuReports();
         dashboard.closeMenu();
     }
@@ -213,7 +214,7 @@ public class Admin_Role_Chrome {
         dashboard.openAdministration();
         dashboard.openUserList();
         dashboard.openMenu();
-        DDMenus ddm = new DDMenus();
+        DDMenus ddm = new DDMenusChrome();
         ddm.checkMenuAdministrationUserList();
         dashboard.closeMenu();
     }
@@ -317,7 +318,7 @@ public class Admin_Role_Chrome {
         dashboard.openAdministration();
         dashboard.openEquipmentListAsAdmin();
         dashboard.openMenu();
-        DDMenus ddm = new DDMenus();
+        DDMenus ddm = new DDMenusChrome();
         ddm.checkMenuAdministrationEquipmentList();
         dashboard.closeMenu();
     }

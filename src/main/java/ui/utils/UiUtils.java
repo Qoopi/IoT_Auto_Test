@@ -19,6 +19,9 @@ import static ui.utils.WaitsAsserts.sleep;
 
 public class UiUtils {
 
+    private String ddMenuButtonXpath = "//*[@id=\"table_menu_btn\"]";
+    private String ddMenuWindowCss = "body > div:nth-child(14) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)";
+
     public void makeScreenshot(WebDriver driver, String name){
         sleep(1000);
         File screen = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
@@ -63,21 +66,67 @@ public class UiUtils {
 
     //check expected condition (true/false) and if css presented or not click xpath or not
     public void checkDefaultItem(WebDriver driver, String cssActive, String cssButton, boolean expectedStatus){
-        String menuButton = "//*[@id=\"table_menu_btn\"]";
-        String menu = "body > div:nth-child(14) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)";
-        if(!driver.findElement(By.cssSelector(menu)).isDisplayed()){
-            driver.findElement(By.xpath(menuButton)).click();
+        WaitsAsserts waitsAsserts = new WaitsAsserts();
+        //String menuButton = "//*[@id=\"table_menu_btn\"]";
+        waitsAsserts.sleep(700);
+        if(isDDMenuOpen(driver)){
+            System.out.println("Menu is open, performing check");
+        }
+        else{
             System.out.println("Menu is closed, opening...");
         }
         if (checkActiveCSS(driver, cssActive) != expectedStatus){
             System.out.println("Status is not as expected, clicking on: "+cssButton);
-            WaitsAsserts waitsAsserts = new WaitsAsserts();
             driver.findElement(By.cssSelector(cssButton)).click();
             waitsAsserts.sleep(700);
         }
         else{
             System.out.println("Status corresponds to expected, doing nothing :"+cssButton);
         }
+    }
+
+    public void checkDefaultItemFF(WebDriver driver, String cssActive, String cssButton, boolean expectedStatus){
+        WaitsAsserts waitsAsserts = new WaitsAsserts();
+        //String menuButton = "//*[@id=\"table_menu_btn\"]";
+        //String menu = "body > div:nth-child(14) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)";
+        waitsAsserts.sleep(700);
+        if(isDDMenuOpenFF(driver)){
+            System.out.println("Menu is open, performing check");
+        }
+        else{
+            driver.findElement(By.xpath(ddMenuButtonXpath)).click();
+            System.out.println("Menu is closed, opening...");
+        }
+        if (checkActiveCSS(driver, cssActive) != expectedStatus){
+            System.out.println("Status is not as expected, clicking on: "+cssButton);
+            driver.findElement(By.cssSelector(cssButton)).click();
+            waitsAsserts.sleep(700);
+        }
+        else{
+            System.out.println("Status corresponds to expected, doing nothing :"+cssButton);
+        }
+    }
+
+    public boolean isDDMenuOpen(WebDriver driver){
+        if (isElementClickableLong(driver, ddMenuButtonXpath)){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    public boolean isDDMenuOpenFF(WebDriver driver){
+        driver.manage().timeouts().implicitlyWait(700, TimeUnit.MILLISECONDS);
+        if(!driver.findElements(By.cssSelector(ddMenuWindowCss)).isEmpty()){
+            driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+            return true;
+        }
+        else {
+            driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+            return false;
+        }
+
     }
 
     public boolean isElementClickable(WebDriver driver, String xpath){
@@ -89,6 +138,16 @@ public class UiUtils {
             return true;
         } catch(Exception e){
             driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+            return false;
+        }
+    }
+
+    public boolean isElementClickableLong(WebDriver driver, String xpath){
+        WebElement imgElement = driver.findElement(By.xpath(xpath));
+        try {
+            imgElement.click();
+            return true;
+        } catch(Exception e){
             return false;
         }
     }

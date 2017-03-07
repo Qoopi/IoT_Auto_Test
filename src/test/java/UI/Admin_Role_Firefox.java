@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
 import ui.pageObjets.DDMenus;
+import ui.pageObjets.DDMenusFirefox;
 import ui.pageObjets.LogInPage;
 import ui.pageObjets.administration.Requests;
 import ui.pageObjets.administration.UserList;
@@ -35,7 +36,7 @@ public class Admin_Role_Firefox {
         Dashboard dashboard = new Dashboard();
         dashboard.openEquipment();
         dashboard.openMenu();
-        DDMenus ddm = new DDMenus();
+        DDMenus ddm = new DDMenusFirefox();
         ddm.checkMenuEquipment();
        // dashboard.closeMenuFF();
     }
@@ -107,7 +108,7 @@ public class Admin_Role_Firefox {
         dashboard.openNotifications();
         dashboard.openNotificationsList();
         dashboard.openMenu();
-        DDMenus ddm = new DDMenus();
+        DDMenus ddm = new DDMenusFirefox();
         ddm.checkMenuNotificationList();
         dashboard.closeMenuFF();
     }
@@ -144,7 +145,7 @@ public class Admin_Role_Firefox {
         Dashboard dashboard = new Dashboard();
         dashboard.openReports();
         dashboard.openMenu();
-        DDMenus ddm = new DDMenus();
+        DDMenus ddm = new DDMenusFirefox();
         ddm.checkMenuReports();
         dashboard.closeMenuFF();
     }
@@ -217,7 +218,7 @@ public class Admin_Role_Firefox {
         dashboard.openAdministration();
         dashboard.openUserList();
         dashboard.openMenu();
-        DDMenus ddm = new DDMenus();
+        DDMenus ddm = new DDMenusFirefox();
         ddm.checkMenuAdministrationUserList();
         dashboard.closeMenuFF();
     }
@@ -321,7 +322,7 @@ public class Admin_Role_Firefox {
         dashboard.openAdministration();
         dashboard.openEquipmentListAsAdmin();
         dashboard.openMenu();
-        DDMenus ddm = new DDMenus();
+        DDMenus ddm = new DDMenusFirefox();
         ddm.checkMenuAdministrationEquipmentList();
         dashboard.closeMenuFF();
     }
