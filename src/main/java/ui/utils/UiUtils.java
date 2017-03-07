@@ -2,6 +2,8 @@ package ui.utils;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import ui.pageObjets.dashboard.Dasboards.Dashboard;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -40,7 +42,7 @@ public class UiUtils {
     public boolean checkActiveCSS(WebDriver driver, String css){
         driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
         boolean exists = !driver.findElements(By.cssSelector(css)).isEmpty();
-        System.out.println(exists + " <====> " + css);
+        //System.out.println(exists + " <====> " + css);
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         return exists;
     }
@@ -57,6 +59,36 @@ public class UiUtils {
         r.keyPress(KeyEvent.VK_ENTER);
         r.keyRelease(KeyEvent.VK_ENTER);
         waitsAsserts.sleep(500);
+    }
+
+    //check expected condition (true/false) and if css presented or not click xpath or not
+    public void checkDefaultItem(WebDriver driver, String cssActive, String cssButton, boolean expectedStatus){
+        String menuButton = "//*[@id=\"table_menu_btn\"]";
+        if(isElementClickable(driver, menuButton)){
+            System.out.println("Menu is closed, opening...");
+        }
+        if (checkActiveCSS(driver, cssActive) != expectedStatus){
+            System.out.println("Status is not as expected, clicking on: "+cssButton);
+            WaitsAsserts waitsAsserts = new WaitsAsserts();
+            driver.findElement(By.cssSelector(cssButton)).click();
+            waitsAsserts.sleep(700);
+        }
+        else{
+            System.out.println("Status corresponds to expected, doing nothing :"+cssButton);
+        }
+    }
+
+    public boolean isElementClickable(WebDriver driver, String xpath){
+        driver.manage().timeouts().implicitlyWait(700, TimeUnit.MILLISECONDS);
+        WebElement imgElement = driver.findElement(By.xpath(xpath));
+        try {
+            imgElement.click();
+            driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+            return true;
+        } catch(Exception e){
+            driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+            return false;
+        }
     }
 
 }
