@@ -136,14 +136,17 @@ public class Equipment {
 
     @Step("Look for additional info of equip")
     public void viewEquip() {
+        waits_asserts.sleep(700);
         waits_asserts.waitForClickableByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[1]/td[7]/div/button");
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[1]/td[7]/div/button")).click();
         waits_asserts.assertTextByXpath(driver, "/html/body/div[7]/div/div/div/div/div/div/span/div/div/span", "View");
+        //waits_asserts.assertTextByXpath(driver, "html/body/div[7]/div/div/div/div/div/div/span/div/div/span/text()", "View");
         driver.findElement(By.xpath("/html/body/div[7]/div/div/div/div/div/div/span/div/div/span")).click();
     }
 
     @Step("Checking out if we are on the right place")
     public void checkEquipment() {
+        waits_asserts.sleep(700);
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div[1]/h3/span/span", "Edit equipment information");
         waits_asserts.waitForClickableByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div[2]/div[2]/span/div/button/div/div");
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div[2]/div[2]/span/div/button/div/div")).click();

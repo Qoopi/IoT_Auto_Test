@@ -64,7 +64,9 @@ public class UiUtils {
     //check expected condition (true/false) and if css presented or not click xpath or not
     public void checkDefaultItem(WebDriver driver, String cssActive, String cssButton, boolean expectedStatus){
         String menuButton = "//*[@id=\"table_menu_btn\"]";
-        if(isElementClickable(driver, menuButton)){
+        String menu = "body > div:nth-child(14) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)";
+        if(!driver.findElement(By.cssSelector(menu)).isDisplayed()){
+            driver.findElement(By.xpath(menuButton)).click();
             System.out.println("Menu is closed, opening...");
         }
         if (checkActiveCSS(driver, cssActive) != expectedStatus){

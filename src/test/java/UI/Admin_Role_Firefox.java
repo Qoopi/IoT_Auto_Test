@@ -37,7 +37,7 @@ public class Admin_Role_Firefox {
         dashboard.openMenu();
         DDMenus ddm = new DDMenus();
         ddm.checkMenuEquipment();
-        dashboard.closeMenuFF();
+       // dashboard.closeMenuFF();
     }
     @Features("Regression")
     @Stories("[OSF-53] Equipment view")
@@ -93,6 +93,7 @@ public class Admin_Role_Firefox {
     @Test(priority = 5)
     public void viewEquipInfo() {
         Equipment equipment = new Equipment();
+
         equipment.viewEquip();
         equipment.checkEquipment();
 
@@ -154,7 +155,7 @@ public class Admin_Role_Firefox {
         Dashboard dash = new Dashboard();
         Reports reports = new Reports();
 
-        dash.openReports();
+        //dash.openReports();
         reports.checkReportTitleColumn();
         reports.checkReportScheduleColumn();
     }
