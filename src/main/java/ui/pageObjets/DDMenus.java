@@ -16,10 +16,13 @@ public class DDMenus {
     public DDMenus() {
         this.driver = WebDriverManager.getDriver();
     }
+
     @Step("Checkout active columns statement in Reports")
     public void checkMenuReports(){
+        //below is on by default
         String reportsTitle = "#report_title_show_tab_col_btn > div > div > svg";
         String reportsSchedule = "#report_schedule_show_tab_col_btn > div > div > svg";
+        //below is off by default
         String equipmentItems = "#equipment_items_show_tab_col_btn > div > div > svg";
         String recipients = "#recipients_show_tab_col_btn > div > div > svg";
         String excelIncluded = "#excel_included_show_tab_col_btn > div > div > svg";
@@ -33,11 +36,13 @@ public class DDMenus {
     }
     @Step("Checkout active columns statement in Equipment")
     public void checkMenuEquipment(){
+        //below is on by default
         String equipmentName = "#equipment_name_show_tab_col_btn > div > div > svg";
         String equipmentId = "#equipment_id_show_tab_col_btn > div > div > svg";
         String equipmentType = "#equipment_type_show_tab_col_btn > div > div > svg";
         String group = "#group_show_tab_col_btn > div > div > svg";
         String updatedAt = "#updated_at_show_tab_col_btn > div > div > svg";
+        //below is off by default
         String created = "#created_show_tab_col_btn > div > div > svg";
 
         UiUtils uiUtils = new UiUtils();
@@ -50,6 +55,7 @@ public class DDMenus {
     }
     @Step("Checkout active columns statement in Notification List")
     public void checkMenuNotificationList(){
+        //below is on by default
         String name = "#name_show_tab_col_btn > div > div > svg";
         String message = "#message_show_tab_col_btn > div > div > svg";
         String acknowledged = "#acknowledged_show_tab_col_btn > div > div > svg";
@@ -64,9 +70,11 @@ public class DDMenus {
     }
     @Step("Checkout active columns statement in Notification Rules")
     public void checkMenuNotificationRules(){
+        //below is on by default
         String notificationSubject = "#notification_subject_show_tab_col_btn > div > div > svg";
         String message = "#message_show_tab_col_btn > div > div > svg";
         String active = "#active_show_tab_col_btn > div > div > svg";
+        //below is off by default
         String ruleType = "#rule_type_show_tab_col_btn > div > div > svg";
         String id = "#id_show_tab_col_btn > div > div > svg";
         String triggerAgainAfter = "#trigger_again\\20 after_show_tab_col_btn > div > div > svg";
@@ -83,9 +91,11 @@ public class DDMenus {
     }
     @Step("Checkout active columns statement in Administration menu - Requests")
     public void checkMenuAdministrationRequests(){
+        //below is on by default
         String userName = "#user_name_show_tab_col_btn > div > div > svg";
         String email = "#email_show_tab_col_btn > div > div > svg";
         String adminGroup = "#admin_group_show_tab_col_btn > div > div > svg";
+        //below is off by default
         String service = "#service_show_tab_col_btn > div > div > svg";
         String updatedAt = "#updated_at_show_tab_col_btn > div > div > svg";
         String regTime = "#reg\\2e _time_show_tab_col_btn > div > div > svg";
@@ -100,9 +110,12 @@ public class DDMenus {
     }
     @Step("Checkout active columns statement in Administration menu - User List")
     public void checkMenuAdministrationUserList(){
+        //below is on by default
         String userName = "#user_name_show_tab_col_btn > div > div > svg";
         String email = "#email_show_tab_col_btn > div > div > svg";
         String adminGroup = "#admin_group_show_tab_col_btn > div > div > svg";
+        String active = "#active_show_tab_col_btn > div > div > svg";
+        //below is off by default
         String service = "#service_show_tab_col_btn > div > div > svg";
         String updatedAt = "#updated_at_show_tab_col_btn > div > div > svg";
         String regTime = "#reg\\2e _time_show_tab_col_btn > div > div > svg";
@@ -111,18 +124,21 @@ public class DDMenus {
         uiUtils.checkActiveCSS(driver, userName);
         uiUtils.checkActiveCSS(driver, email);
         uiUtils.checkActiveCSS(driver, adminGroup);
+        uiUtils.checkActiveCSS(driver, active);
         uiUtils.checkActiveCSS(driver, service);
         uiUtils.checkActiveCSS(driver, updatedAt);
         uiUtils.checkActiveCSS(driver, regTime);
     }
     @Step("Checkout active columns statement in Administration menu - Equipment List")
     public void checkMenuAdministrationEquipmentList(){
+        //below is on by default
         String equipmentName = "#equipment_name_show_tab_col_btn > div > div > svg";
         String equipmentId = "#equipment_id_show_tab_col_btn > div > div > svg";
         String equipmentType = "#equipment_type_show_tab_col_btn > div > div > svg";
         String group = "#group_show_tab_col_btn > div > div > svg";
         String active = "#active_show_tab_col_btn > div > div > svg";
         String updatedAt = "#updated_at_show_tab_col_btn > div > div > svg";
+        //below is off by default
         String created = "#created_show_tab_col_btn > div > div > svg";
 
         UiUtils uiUtils = new UiUtils();
