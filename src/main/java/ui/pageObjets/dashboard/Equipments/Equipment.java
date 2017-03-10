@@ -154,10 +154,12 @@ public class Equipment {
 
     @Step("Look for additional info of equip in Equip List")
     public void editEquip() {
-        waits_asserts.waitForClickableByXpath(driver, "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[1]/td[8]");
-        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[1]/td[8]/div/button")).click();
-        waits_asserts.assertTextByXpath(driver, "/html/body/div[7]/div/div/div/div/div/div/span/div/div/span", "Edit");
-        driver.findElement(By.xpath("/html/body/div[7]/div/div/div/div/div/div/span/div/div/span")).click();
+        String button = ".//*[@id='root']/div/div[4]/div/div/div[2]/div/div[3]/div[2]/table/tbody/tr[1]/td[8]/div/button";
+        String ppButton = "html/body/div[7]/div/div/div/div/div/div/span/div/div";
+        waits_asserts.waitForClickableByXpath(driver, button);
+        driver.findElement(By.xpath(button)).click();
+        waits_asserts.assertTextByXpath(driver, ppButton, "Edit");
+        driver.findElement(By.xpath(ppButton)).click();
     }
 
     @Step("Checking out if we are on the right place")
