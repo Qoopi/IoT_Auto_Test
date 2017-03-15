@@ -19,8 +19,8 @@ public class JMeterFromExistingJMX {
         StandardJMeterEngine jmeter = new StandardJMeterEngine();
 
         // Initialize Properties, logging, locale, etc.
-        JMeterUtils.loadJMeterProperties("src/main/java/load/apache-jmeter-3.1/bin/jmeter.properties");
-        JMeterUtils.setJMeterHome("src/main/java/load/apache-jmeter-3.1");
+        JMeterUtils.loadJMeterProperties("src/main/resources/apache-jmeter-3.1/bin/jmeter.properties");
+        JMeterUtils.setJMeterHome("src/main/resources/apache-jmeter-3.1");
 //        JMeterUtils.initLogging();// you can comment this line out to see extra log messages of i.e. DEBUG level
         JMeterUtils.initLocale();
 
@@ -28,7 +28,7 @@ public class JMeterFromExistingJMX {
         SaveService.loadProperties();
 
         // Load existing .jmx Test Plan
-        FileInputStream in = new FileInputStream("src/main/java/load/records/RecordTest0903.jmx");
+        FileInputStream in = new FileInputStream("src/main/resources/records/RecordTest0903.jmx");
         HashTree testPlanTree = SaveService.loadTree(in);
         in.close();
 

@@ -17,7 +17,7 @@ public class JMeterFromScratch {
         StandardJMeterEngine jmeter = new StandardJMeterEngine();
 
         //JMeter initialization (properties, log levels, locale, etc)
-        JMeterUtils.loadJMeterProperties("src/main/java/load/apache-jmeter-3.1/bin/jmeter.properties");
+        JMeterUtils.loadJMeterProperties("src/main/resources/apache-jmeter-3.1/bin/jmeter.properties");
         JMeterUtils.initLogging();// you can comment this line out to see extra log messages of i.e. DEBUG level
         JMeterUtils.initLocale();
 
