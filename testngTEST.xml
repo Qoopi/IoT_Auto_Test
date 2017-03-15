@@ -6,7 +6,7 @@
         <parameter name="browserName" value="chrome"/>
         <parameter name="useGrid" value="false"></parameter>
         <classes>
-            <class name="UI.testovui_test"/>
+            <class name="load.PageBootSpeed"/>
         </classes>
     </test>
 </suite>

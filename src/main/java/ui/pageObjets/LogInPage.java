@@ -2,14 +2,11 @@ package ui.pageObjets;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 import org.openqa.selenium.chrome.ChromeDriver;
 import ru.yandex.qatools.allure.annotations.Step;
-import ui.utils.WebDriverFactory;
-import ui.utils.WebDriverManager;
+import ui.utils.SessionStorage;
 import ui.utils.WaitsAsserts;
-
-import java.net.URL;
+import ui.utils.WebDriverManager;
 
 public class LogInPage {
     private WaitsAsserts waits_asserts = new WaitsAsserts();
@@ -90,6 +87,21 @@ public class LogInPage {
         driver.findElement(By.xpath("//*[@id=\"ap_password\"]")).sendKeys(pass);
         driver.findElement(By.xpath("//*[@id=\"signInSubmit\"]")).click();
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"root\"]/div/div[1]/div/div[3]/div/div[2]/div[1]/div/p[2]/span", "Regular");
+    }
+
+    public void getRequestSigns(){
+        SessionStorage sessionStorage = new SessionStorage(driver);
+        String currentTime = sessionStorage.getItemFromSessionStorage("ZD-currentTime");
+        String accessKey = sessionStorage.getItemFromSessionStorage("access_key_id");
+        String secretKey = sessionStorage.getItemFromSessionStorage("secret_access_key");
+        String token = sessionStorage.getItemFromSessionStorage("session_token");
+
+        System.out.println(currentTime);
+        System.out.println(accessKey);
+        System.out.println(secretKey);
+        System.out.println(token);
+
+
     }
 
 }
