@@ -13,6 +13,6 @@ public class PageBootSpeed {
         LogInPage log = new LogInPage();
         log.getToIoTPage();
         log.enterGoogleCred();
-
+        log.getRequestSigns();
     }
 }
