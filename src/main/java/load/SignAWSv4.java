@@ -14,6 +14,10 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import javax.net.ssl.SSLContext;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
@@ -31,12 +35,14 @@ public class SignAWSv4 extends RequestSender {
     private static final int API_GATEWAY_HOST_PORT = 443;
 
 
+
+
     @BeforeClass
     public void setUpBaseApiGateway() throws NoSuchAlgorithmException {
         // Set the host, port, and base path
-        RestAssured.baseURI = API_GATEWAY_HOST_URL;
-        RestAssured.port = API_GATEWAY_HOST_PORT;
-        RestAssured.basePath = "dev";
+        //RestAssured.baseURI = API_GATEWAY_HOST_URL;
+        //RestAssured.port = API_GATEWAY_HOST_PORT;
+        //RestAssured.basePath = "dev";
 
         // Use our custom socket factory
         SSLSocketFactory customSslFactory = new GatewaySslSocketFactory(
@@ -46,23 +52,33 @@ public class SignAWSv4 extends RequestSender {
         RestAssured.config.getHttpClientConfig().reuseHttpClientInstance();
     }
 
-    public void start(){
-        //https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread
+    @Test
+    public void parseForCanonicalRequest() throws MalformedURLException, URISyntaxException {
+        //GET https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread
+//        String method1 = method;
+//        String url1 = url;
 
-        String serviceName1 = "execute-api";
-        String regionName1 = "us-east-1";
-        String host1 = "60sglz9l5h."+serviceName1+"."+regionName1+".amazonaws.com";
-        String method1 = "GET";
-        String cannonicalUri1 = "/dev/notification?status=unread";
-        String cannonicalQueryString1 = "";
-        String signedHeaders1 = "host;x-amz-date";
-        String algoritm1 = "AWS4-HMAC-SHA256";
-        String access_key_id1 = "ASIAJLKZL5IDT2F22H5A";
-        String secret_access_key = "1DpQqJfd9Wo8liYeRVEhfUZnfKFPFyy8coJJS7JD";
-        String session_token = "FQoDYXdzEOr//////////wEaDM5li2qK2gXNuDGaSCLmA4P8OeHnLSUDbV7cE5/tQqnZ+WLO6vkJR/AMpN5nmLb9QZ44cynqPoQDhmggyn32Z98+o7UVCOaxJLH7mNIdkI0BCQG1VFMDmeRk6aVC/JL86I25kVdvA9dOf+uIeZTJIX5oEfjNCcPVpUGnOiZJDgpuisSa6pGVwyKy/gSJBo8ZS9YfEHhbfgGvwREBhBj9LRi+6sRYUW+dtdBDaDIBPUln4702MgpSmZFklS1mAoUjAYiM1BVkvb1Sidq49JsyTHjrj6d0lW5EofxfLJbKtP7wOBULeM+4me6lX8Rc+7gHokZdmdWZOftG6+c/2ST5brUw9GxxQ1QUxyA06pXDhypsQ+bZfJnmJal3ZYm82XZ9qctWq9OvxJPynWRCgHJ4bQrMkQKiTVt6pX8yFD2jDGSnnyJuswX/opKmS4HKYgTrV3zYdsRdXEv3uibFouTQaikYxrULJdlIKaO+5eB5Tu9G1MDpdeXHlsh6Q9NMoMymTfFtpVVTX90PCHYbalmM+xl9E7mZK82ZaB7NO6pnTPHufgTA7wUzWG6vh2G/Zd4QY0a0oMTda47C6WDVeWkwpiLYbvF9+iA4w6Md0eOqIExCYuNLmzogno+z7ouG7zUfNM4vtDEk3DesXO9mRTD9UQKwGr6AqCibrKnGBQ==";
-        Date date1 = new Date();
+        String sUrl = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread";
 
-        //generateSign(date1, secret_access_key);
+        URL url = new URL(sUrl);
+        String host = url.getHost();
+        String path = url.getPath();
+        String queryString = url.getQuery();
+
+        if (!sUrl.contains("60sglz9l5h.execute-api.us-east-1.amazonaws.com")){
+            System.out.println("Looks like you using unknown URL, check it!");
+        }
+
+        System.out.println(host);
+        System.out.println(path);
+        System.out.println(queryString);
+
+
+        String serviceName = "execute-api";
+        String regionName = "us-east-1";
+        //String host = "60sglz9l5h."+serviceName+"."+regionName+".amazonaws.com";
+        //String cannonicalUri = "/dev/notification";
+        //String cannonicalQueryString = "status=unread";
 
     }
 
@@ -139,41 +155,14 @@ public class SignAWSv4 extends RequestSender {
 
     }
 
-    @Test
-    private void javaGeneratorTest() throws Exception {
-        /*
-        Test data:
-        key = 'wJalrXUtnFEMI/K7MDENG+bPxRfiCYEXAMPLEKEY'
-        dateStamp = '20120215'
-        regionName = 'us-east-1'
-        serviceName = 'iam'
-        Output should be:
-        kSecret  = '41575334774a616c725855746e46454d492f4b374d44454e472b62507852666943594558414d504c454b4559'
-        kDate    = '969fbb94feb542b71ede6f87fe4d5fa29c789342b0f407474670f0c2489e0a0d'
-        kRegion  = '69daa0209cd9c5ff5c8ced464a696fd4252e981430b10e3d3fd8e2f197d7a70c'
-        kService = 'f72cfd46f26bc4643f06a11eabb6c0ba18780c19a8da0c31ace671265e3c87fa'
-        kSigning = 'f4780e2d9f65fa895f9c67b32ce1baf0b0d8a43505a000a1a9e090d414db404d'
-         */
-
-        byte[] kSigning = getSignatureKey("wJalrXUtnFEMI/K7MDENG+bPxRfiCYEXAMPLEKEY", "20120215", "us-east-1", "iam");
-        String kS = String.format("%064x", new java.math.BigInteger(1, kSigning));
-        System.out.println(kS);
-        /*
-        Output is: f4780e2d9f65fa895f9c67b32ce1baf0b0d8a43505a000a1a9e090d414db404d
-        Expected : f4780e2d9f65fa895f9c67b32ce1baf0b0d8a43505a000a1a9e090d414db404d
-        Method getSignatureKey works as expected
-        */
-    }
-
-
     private String generateSign(Date date, String key, String secretKey) {
         //GET https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread
         String method = "GET";
         String serviceName = "execute-api";
         String regionName = "us-east-1";
         String host = "60sglz9l5h."+serviceName+"."+regionName+".amazonaws.com";
-        String cannonicalUri = "/dev/notification";
-        String cannonicalQueryString = "status=unread";
+        String canonicalUri = "/dev/notification";
+        String canonicalQueryString = "status=unread";
 
         String signedHeaders = "host;x-amz-date";
         String algoritm = "AWS4-HMAC-SHA256";
@@ -187,7 +176,7 @@ public class SignAWSv4 extends RequestSender {
         String credentialScope = dateStamp+"/"+regionName+"/"+serviceName+"/"+"aws4_request";
         String canonicalHeaders = "host:"+host+"\n"+"x-amz-date:"+amzDate+"\n";
         String payloadHash = SHA256("");
-        String cannonicalRequest = method+"\n"+cannonicalUri+"\n"+cannonicalQueryString+"\n"+canonicalHeaders+"\n"+signedHeaders+"\n"+payloadHash;
+        String canonicalRequest = method+"\n"+canonicalUri+"\n"+canonicalQueryString+"\n"+canonicalHeaders+"\n"+signedHeaders+"\n"+payloadHash;
 
         byte[] signingKey = new byte[0];
         try {
@@ -196,7 +185,7 @@ public class SignAWSv4 extends RequestSender {
             e.printStackTrace();
         }
 
-        String stringToSign = algoritm+"\n"+amzDate+"\n"+credentialScope+"\n"+SHA256(cannonicalRequest);
+        String stringToSign = algoritm+"\n"+amzDate+"\n"+credentialScope+"\n"+SHA256(canonicalRequest);
 
         byte[] si = new byte[0];
         try {
@@ -218,7 +207,6 @@ public class SignAWSv4 extends RequestSender {
         SimpleDateFormat f = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'");
         f.setTimeZone(TimeZone.getTimeZone("GMT"));
         String xAmzDate = f.format(date);
-        //System.out.println(xAmzDate);
         return xAmzDate;
     }
 
@@ -226,7 +214,6 @@ public class SignAWSv4 extends RequestSender {
         SimpleDateFormat f = new SimpleDateFormat("yyyyMMdd");
         f.setTimeZone(TimeZone.getTimeZone("GMT"));
         String dateStamp = f.format(date);
-        //System.out.println(dateStamp);
         return dateStamp;
     }
 
@@ -245,7 +232,7 @@ public class SignAWSv4 extends RequestSender {
             e.printStackTrace();
         }
         try {
-            md.update(text.getBytes("UTF-8")); // Change this to "UTF-16" if needed
+            md.update(text.getBytes("UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
