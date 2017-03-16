@@ -27,11 +27,12 @@ public class SignAWSv4 extends RequestSender {
     static String secretAccessKey = "+gkpt6pXam39g+2ColHNkNs/rGWKZY/N109bYm8G";
     static String sessionToken = "FQoDYXdzEPH//////////wEaDGxbfyyxMAJ6v31EaiLmA6wY2OcV5o5Dc/VaOj834RAdK6nBDPKV2OnRr5qBqqUVRzu791pf1jynfi+SCpfQnd91GmnTZwOzXcKlcZ2YmDtAd7+0Gg8eWtPmZKSiVQtDNXxu/mq5jgEGNKSGB4i4GvEff6F6SFYldvOl4iqQgUEtYNlaogPZvFPHLniP/c1oInp07KNstm7UUeD/JiapHkCQ1gSkmfwCHyUXavSTliU8FccNUvG/uTJ8QMHHwUsOy9J2rRsfQn40jKxBh2E8uxfWHpbGSbnmBY5u54BDVCi5snLo9K2mmNVdsV/fL/AtIxgRh87wAS0/c8CQP0c47cqo8ow/xhDos6Rxg7hxbbfst2petykQR5Dd1bzJuoAjOjntsPJ7qToC/hCEH0R0pT9GdCssYGZtHICnA81/AWPo15zQtlYtpGdRgyOmBahl+2uH1/Fu4jJvtqeuzIaikwPB/F+c7OWOl/v5xoxbdgk01XV2mmyq+wHbarbEEXHLnggKcyDvXTKsBZwTUY5OH2IBLW1XEKDZy/SP4WvG0Qt9oSWKz5NPZK/NDso5zwVzEodbAxpupQ6sDv4BK3bc5T8/lC38K3OF52yXpEHcaTBgSfjbg3uDJZWReAQRNznbvqxu5NbPBr+M4nj9rcuvary4stadICiJ3arGBQ==";
 
+    public static final String API_GATEWAY_HOST_URL = "https://4********r.execute-api.us-east-1.amazonaws.com";
+    private static final int API_GATEWAY_HOST_PORT = 443;
+
 
     @BeforeClass
     public void setUpBaseApiGateway() throws NoSuchAlgorithmException {
-        String API_GATEWAY_HOST_URL = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
-        int API_GATEWAY_HOST_PORT = 443;
         // Set the host, port, and base path
         RestAssured.baseURI = API_GATEWAY_HOST_URL;
         RestAssured.port = API_GATEWAY_HOST_PORT;
