@@ -7,6 +7,8 @@ import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 import load.objects.AWSCredentials;
 
+import java.util.Map;
+
 import static com.jayway.restassured.RestAssured.given;
 
 public class RequestSender {
@@ -87,6 +89,11 @@ public class RequestSender {
             }
         }
 
+    // этот метод сможет добавлять столько угодно хедеров из Map
+        public RequestSender addHeaders(Map<String, ?> map) {
+            requestSpecification.headers(map);
+            return this;
+        }
 
         // этот метод сможет добавлять столько угодно хедеров
         public RequestSender addHeader(String headerName, String headerValue) {
