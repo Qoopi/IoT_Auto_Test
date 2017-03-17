@@ -5,6 +5,7 @@ import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
+import load.objects.AWSCredentials;
 
 import static com.jayway.restassured.RestAssured.given;
 
@@ -14,6 +15,8 @@ public class RequestSender {
         private final static ContentType CONTENT_TYPE = ContentType.JSON;
         public RequestSpecification requestSpecification = null;
         public Response response = null;
+
+        public static AWSCredentials awsCredentials = new AWSCredentials();
 
         public RequestSender(){
         }

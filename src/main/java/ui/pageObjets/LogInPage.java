@@ -8,6 +8,8 @@ import ui.utils.SessionStorage;
 import ui.utils.WaitsAsserts;
 import ui.utils.WebDriverManager;
 
+import static api.utils.RequestSender.awsCredentials;
+
 public class LogInPage {
     private WaitsAsserts waits_asserts = new WaitsAsserts();
 
@@ -91,17 +93,18 @@ public class LogInPage {
 
     public void getRequestSigns(){
         SessionStorage sessionStorage = new SessionStorage(driver);
-        String currentTime = sessionStorage.getItemFromSessionStorage("ZD-currentTime");
         String accessKey = sessionStorage.getItemFromSessionStorage("access_key_id");
         String secretKey = sessionStorage.getItemFromSessionStorage("secret_access_key");
         String token = sessionStorage.getItemFromSessionStorage("session_token");
 
-        System.out.println(currentTime);
+
+        awsCredentials.setAccessKeyId(accessKey);
+        awsCredentials.setSecretAccessKey(secretKey);
+        awsCredentials.setSessionToken(token);
+
         System.out.println(accessKey);
         System.out.println(secretKey);
         System.out.println(token);
-
-
     }
 
 }

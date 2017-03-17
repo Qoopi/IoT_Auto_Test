@@ -14,5 +14,10 @@ public class PageBootSpeed {
         log.getToIoTPage();
         log.enterGoogleCred();
         log.getRequestSigns();
+
+
+        SignAWSv4 signAWSv4 = new SignAWSv4();
+        signAWSv4.setUpBaseApiGateway();
+        signAWSv4.checkResponse();
     }
 }

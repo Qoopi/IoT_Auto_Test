@@ -1,6 +1,6 @@
 package load.objects;
 
-public class URIAWS {
+public class AWSURI {
     private String method;
     private String serviceName;
     private String regionName;
@@ -8,6 +8,19 @@ public class URIAWS {
     private String canonicalUri;
     private String canonicalQueryString;
     private String fullURL;
+
+    @Override
+    public String toString() {
+        return "AWSURI{" +
+                "method='" + method + '\'' +
+                ", serviceName='" + serviceName + '\'' +
+                ", regionName='" + regionName + '\'' +
+                ", host='" + host + '\'' +
+                ", canonicalUri='" + canonicalUri + '\'' +
+                ", canonicalQueryString='" + canonicalQueryString + '\'' +
+                ", fullURL='" + fullURL + '\'' +
+                '}';
+    }
 
     public String getMethod() {
         return method;
