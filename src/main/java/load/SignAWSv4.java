@@ -87,8 +87,7 @@ public class SignAWSv4 extends RequestSender {
         return awsuri;
     }
 
-    @Test
-    public void checkResponse(){
+    public void checkExpiredCredentials(){
         for (int i = 0; i<100; i++) {
             Date date = new Date();
             String auth = generateSign(date, parseForCanonicalRequest("GET", "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread"));
@@ -109,6 +108,9 @@ public class SignAWSv4 extends RequestSender {
                     .get("https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread");
 
             System.out.println("==================================");
+            if (response.statusCode()!=200){
+                System.out.println(response.headers().toString());
+            }
             System.out.println(response.statusCode());
             System.out.println(response.asString());
             System.out.println("==================================");
@@ -120,7 +122,7 @@ public class SignAWSv4 extends RequestSender {
             }
 
             try {
-                Thread.sleep(20000);
+                Thread.sleep(20000);//default 20000
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -141,6 +143,7 @@ public class SignAWSv4 extends RequestSender {
                 e.printStackTrace();
             }
             JSONObject creds = (JSONObject) json.get("creds");
+            //write new creds to credential storage
             awsCredentials.setAccessKeyId(creds.get("accessKeyId").toString());
             awsCredentials.setSecretAccessKey(creds.get("secretAccessKey").toString());
             awsCredentials.setSessionToken(creds.get("sessionToken").toString());
@@ -164,7 +167,6 @@ public class SignAWSv4 extends RequestSender {
         String amzDate = getAmzDate(date);
         String dateStamp = getDateStamp(date);
 
-
         String credentialScope = dateStamp+"/"+regionName+"/"+serviceName+"/"+"aws4_request";
         String canonicalHeaders = "host:"+host+"\n"+"x-amz-date:"+amzDate+"\n";
         String payloadHash = SHA256("");
@@ -186,7 +188,6 @@ public class SignAWSv4 extends RequestSender {
             e.printStackTrace();
         }
         String signature = String.format("%064x", new java.math.BigInteger(1, si));
-
         String authorizationHeader = algoritm+" "+"Credential="+access_key_id+"/"+credentialScope+", "+"SignedHeaders="+signedHeaders+", "+"Signature="+signature;
 
         System.out.println(amzDate);

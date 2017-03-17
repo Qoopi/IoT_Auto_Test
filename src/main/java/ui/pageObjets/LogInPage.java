@@ -92,19 +92,18 @@ public class LogInPage {
     }
 
     public void getRequestSigns(){
+        //get aws credential from browser session storage after login and write to aws credential storage
         SessionStorage sessionStorage = new SessionStorage(driver);
         String accessKey = sessionStorage.getItemFromSessionStorage("access_key_id");
         String secretKey = sessionStorage.getItemFromSessionStorage("secret_access_key");
         String token = sessionStorage.getItemFromSessionStorage("session_token");
 
-
         awsCredentials.setAccessKeyId(accessKey);
         awsCredentials.setSecretAccessKey(secretKey);
         awsCredentials.setSessionToken(token);
 
-        System.out.println(accessKey);
-        System.out.println(secretKey);
-        System.out.println(token);
+        //close browser (for load tests we don't need it anymore)
+        driver.quit();
     }
 
 }

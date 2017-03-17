@@ -18,6 +18,6 @@ public class PageBootSpeed {
 
         SignAWSv4 signAWSv4 = new SignAWSv4();
         signAWSv4.setUpBaseApiGateway();
-        signAWSv4.checkResponse();
+        signAWSv4.checkExpiredCredentials();
     }
 }
