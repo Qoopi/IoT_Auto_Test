@@ -1,5 +1,6 @@
 package load;
 
+import api.utils.RequestManager;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ui.pageObjets.LogInPage;
@@ -18,6 +19,8 @@ public class PageBootSpeed {
 
         SignAWSv4 signAWSv4 = new SignAWSv4();
         signAWSv4.setUpBaseApiGateway();
-        signAWSv4.checkExpiredCredentials();
+
+        RequestManager requestManager = new RequestManager();
+        requestManager.someRequest();
     }
 }

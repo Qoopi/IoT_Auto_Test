@@ -21,6 +21,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TimeZone;
 
 
@@ -28,8 +30,41 @@ public class SignAWSv4 extends RequestSender {
     public static final String API_GATEWAY_HOST_URL = "https://4********r.execute-api.us-east-1.amazonaws.com";
     private static final int API_GATEWAY_HOST_PORT = 443;
 
+    public Map launch(String method, String url){
+        Date date = new Date();
+        AWSURI awsuri = parseForCanonicalRequest(method, url);
+        String sign = generateSign(date, awsuri);
+        Map<String, ?> map = generateAuthHeaders(date, sign);
+        return map;
+    }
 
-    @BeforeClass
+    private Map generateAuthHeaders(Date date, String sign){
+        Map<String, String> map = new HashMap();
+        String amzDate = getAmzDate(date);
+
+        map.put("x-amz-date", amzDate);
+        map.put("Authorization", sign);
+        map.put("x-amz-security-token", awsCredentials.getSessionToken());
+
+        return map;
+    }
+
+    public Map standardHeaders(){
+        Map<String, String> map = new HashMap();
+        map.put("Connection", "keep-alive");
+        map.put("Referer", "https://dashboard.dev.iotsyst.com/");
+        map.put("Accept", "*/*");
+        map.put("Content-Type", "application/json");
+        map.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36");
+        map.put("Accept-Language", "en-US,en;q=0.8");
+        map.put("Accept-Encoding", "gzip, deflate, sdch, br");
+        map.put("Origin", "https://dashboard.dev.iotsyst.com");
+
+        return map;
+    }
+
+
+    @BeforeClass //это вынести по ходу в listener для api/load тестов
     public void setUpBaseApiGateway(){
         // Set the host, port, and base path
         //RestAssured.baseURI = API_GATEWAY_HOST_URL;

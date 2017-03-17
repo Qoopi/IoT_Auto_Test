@@ -14,7 +14,7 @@ import java.util.Collections;
 
 public class GatewaySslSocketFactory extends SSLSocketFactory {
 
-    GatewaySslSocketFactory(SSLContext sslContext, X509HostnameVerifier hostnameVerifier) {
+    public GatewaySslSocketFactory(SSLContext sslContext, X509HostnameVerifier hostnameVerifier) {
         super(sslContext, hostnameVerifier);
     }
 
