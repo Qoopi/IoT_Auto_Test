@@ -3,6 +3,7 @@ package load;
 import api.utils.RequestSender;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.config.SSLConfig;
+import load.objects.URIAWS;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -15,7 +16,6 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.net.ssl.SSLContext;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.security.MessageDigest;
@@ -53,19 +53,20 @@ public class SignAWSv4 extends RequestSender {
     }
 
     @Test
-    public void parseForCanonicalRequest() throws MalformedURLException, URISyntaxException {
+    public URIAWS parseForCanonicalRequest(String method, String url) throws MalformedURLException, URISyntaxException {
         //GET https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread
 //        String method1 = method;
 //        String url1 = url;
 
-        String sUrl = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread";
+        //String sUrl = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread";
+        URIAWS uriaws = new URIAWS();
 
-        URL url = new URL(sUrl);
-        String host = url.getHost();
-        String path = url.getPath();
-        String queryString = url.getQuery();
+        URL uri = new URL(url);
+        String host = uri.getHost();
+        String path = uri.getPath();
+        String queryString = uri.getQuery();
 
-        if (!sUrl.contains("60sglz9l5h.execute-api.us-east-1.amazonaws.com")){
+        if (!url.contains("60sglz9l5h.execute-api.us-east-1.amazonaws.com")){
             System.out.println("Looks like you using unknown URL, check it!");
         }
 
@@ -76,10 +77,21 @@ public class SignAWSv4 extends RequestSender {
 
         String serviceName = "execute-api";
         String regionName = "us-east-1";
-        //String host = "60sglz9l5h."+serviceName+"."+regionName+".amazonaws.com";
-        //String cannonicalUri = "/dev/notification";
-        //String cannonicalQueryString = "status=unread";
 
+        uriaws.setMethod(method);
+        uriaws.setCanonicalUri(path);
+        uriaws.setCanonicalQueryString(queryString);
+        uriaws.setHost(host);
+        uriaws.setServiceName(serviceName);
+        uriaws.setRegionName(regionName);
+        uriaws.setFullURL(url);
+
+
+        //String host = "60sglz9l5h."+serviceName+"."+regionName+".amazonaws.com";
+        //String canonicalUri = "/dev/notification";
+        //String canonicalQueryString = "status=unread";
+
+        return uriaws;
     }
 
     @Test
