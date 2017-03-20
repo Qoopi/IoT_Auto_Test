@@ -1,19 +1,10 @@
 package load;
 
 import api.utils.RequestSender;
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.config.SSLConfig;
 import load.objects.AWSURI;
-import org.apache.http.conn.ssl.SSLSocketFactory;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import javax.net.ssl.SSLContext;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -27,27 +18,30 @@ import java.util.TimeZone;
 
 
 public class SignAWSv4 extends RequestSender {
-    public static final String API_GATEWAY_HOST_URL = "https://4********r.execute-api.us-east-1.amazonaws.com";
-    private static final int API_GATEWAY_HOST_PORT = 443;
 
-    public Map launch(String method, String url){
+
+    public Map allHeaders(String method, String url){
+        Map<String, String> authHeaders = authHeaders(method, url);
+        Map<String, String> headers = standardHeaders();
+
+        Map<String, String> map3 = new HashMap<>();
+        map3.putAll(authHeaders);
+        map3.putAll(headers);
+    return map3;
+    }
+
+    public Map authHeaders(String method, String url){
         Date date = new Date();
         AWSURI awsuri = parseForCanonicalRequest(method, url);
         String sign = generateSign(date, awsuri);
-        Map<String, ?> map = generateAuthHeaders(date, sign);
-        return map;
-    }
-
-    private Map generateAuthHeaders(Date date, String sign){
         Map<String, String> map = new HashMap();
         String amzDate = getAmzDate(date);
-
         map.put("x-amz-date", amzDate);
         map.put("Authorization", sign);
         map.put("x-amz-security-token", awsCredentials.getSessionToken());
-
         return map;
     }
+
 
     public Map standardHeaders(){
         Map<String, String> map = new HashMap();
@@ -64,34 +58,7 @@ public class SignAWSv4 extends RequestSender {
     }
 
 
-    @BeforeClass //это вынести по ходу в listener для api/load тестов
-    public void setUpBaseApiGateway(){
-        // Set the host, port, and base path
-        //RestAssured.baseURI = API_GATEWAY_HOST_URL;
-        //RestAssured.port = API_GATEWAY_HOST_PORT;
-        //RestAssured.basePath = "dev";
-
-        // Use our custom socket factory
-        SSLSocketFactory customSslFactory = null;
-        try {
-            customSslFactory = new GatewaySslSocketFactory(
-                    SSLContext.getDefault(), SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        RestAssured.config = RestAssured.config().sslConfig(
-                SSLConfig.sslConfig().sslSocketFactory(customSslFactory));
-        RestAssured.config.getHttpClientConfig().reuseHttpClientInstance();
-    }
-
-    @Test
-    public void test(){
-       AWSURI uriaws =  parseForCanonicalRequest("GET", "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread");
-        System.out.println(uriaws.toString());
-    }
-
-
-    private AWSURI parseForCanonicalRequest(String method, String url){
+    public AWSURI parseForCanonicalRequest(String method, String url){
         AWSURI awsuri = new AWSURI();
 
         URL uri = null;
@@ -122,71 +89,8 @@ public class SignAWSv4 extends RequestSender {
         return awsuri;
     }
 
-    public void checkExpiredCredentials(){
-        for (int i = 0; i<100; i++) {
-            Date date = new Date();
-            String auth = generateSign(date, parseForCanonicalRequest("GET", "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread"));
-            String amzDate = getAmzDate(date);
 
-            createRequestSpecification()
-                    .addHeader("Connection", "keep-alive")
-                    .addHeader("Referer", "https://dashboard.dev.iotsyst.com/")
-                    .addHeader("Accept", "*/*")
-                    .addHeader("Content-Type", "application/json")
-                    .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36")
-                    .addHeader("Accept-Language", "en-US,en;q=0.8")
-                    .addHeader("Accept-Encoding", "gzip, deflate, sdch, br")
-                    .addHeader("Origin", "https://dashboard.dev.iotsyst.com")
-                    .addHeader("x-amz-date", amzDate)
-                    .addHeader("x-amz-security-token", awsCredentials.getSessionToken())
-                    .addHeader("Authorization", auth)
-                    .get("https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread");
-
-            System.out.println("==================================");
-            if (response.statusCode()!=200){
-                System.out.println(response.headers().toString());
-            }
-            System.out.println(response.statusCode());
-            System.out.println(response.asString());
-            System.out.println("==================================");
-
-            String jsonString = response.asString();
-
-            if (jsonString.contains("\"expired\":true")) {
-                parseNewCreds(jsonString);
-            }
-
-            try {
-                Thread.sleep(20000);//default 20000
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-    }
-
-
-    private void parseNewCreds(String jsonString){
-        //parse new credentials from jsonstring and write to awsCredentials
-        if (jsonString.contains("\"expired\":true")) {
-            JSONParser parser = new JSONParser();
-            JSONObject json = null;
-            try {
-                json = (JSONObject) parser.parse(jsonString);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            JSONObject creds = (JSONObject) json.get("creds");
-            //write new creds to credential storage
-            awsCredentials.setAccessKeyId(creds.get("accessKeyId").toString());
-            awsCredentials.setSecretAccessKey(creds.get("secretAccessKey").toString());
-            awsCredentials.setSessionToken(creds.get("sessionToken").toString());
-        }
-
-    }
-
-    private String generateSign(Date date, AWSURI awsuri) {
+    public String generateSign(Date date, AWSURI awsuri) {
         String method = awsuri.getMethod();
         String serviceName = awsuri.getServiceName();
         String regionName = awsuri.getRegionName();
@@ -231,7 +135,7 @@ public class SignAWSv4 extends RequestSender {
         return authorizationHeader;
     }
 
-    private String getAmzDate(Date date) {
+    public String getAmzDate(Date date) {
         SimpleDateFormat f = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'");
         f.setTimeZone(TimeZone.getTimeZone("GMT"));
         String xAmzDate = f.format(date);

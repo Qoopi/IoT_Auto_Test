@@ -28,7 +28,7 @@ public class JMeterFromExistingJMX {
         SaveService.loadProperties();
 
         // Load existing .jmx Test Plan
-        FileInputStream in = new FileInputStream("src/main/resources/records/RecordTest0903.jmx");
+        FileInputStream in = new FileInputStream("src/main/resources/jmeter-records/RecordTest0903.jmx");
         HashTree testPlanTree = SaveService.loadTree(in);
         in.close();
 
