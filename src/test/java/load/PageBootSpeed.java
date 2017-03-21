@@ -16,6 +16,8 @@ public class PageBootSpeed {
         log.getToIoTPage();
         log.enterGoogleCred();
         log.getRequestSigns();
+        RequestManager requestManager = new RequestManager();
+        requestManager.writeCredsTofile();
 
     }
 

@@ -11,6 +11,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.net.ssl.SSLContext;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -106,12 +108,23 @@ public class RequestManager extends SignAWSv4{
             awsCredentials.setAccessKeyId(creds.get("accessKeyId").toString());
             awsCredentials.setSecretAccessKey(creds.get("secretAccessKey").toString());
             awsCredentials.setSessionToken(creds.get("sessionToken").toString());
+
+            writeCredsTofile();
         }
 
     }
 
-    private void getDashboard(){
-
+    public void writeCredsTofile(){
+        PrintWriter out = null;
+        try {
+            out = new PrintWriter("creds.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        out.write("AccessKeyId "+awsCredentials.getAccessKeyId()+"\r\n");
+        out.write("SecretAccessKey "+awsCredentials.getSecretAccessKey()+"\r\n");
+        out.write("SessionToken "+awsCredentials.getSessionToken()+"\r\n");
+        out.close();
     }
 
 
