@@ -72,6 +72,8 @@ public class RequestManager extends SignAWSv4{
             System.out.println("Time diff: "+(endTime-startTime));//не подходит, учитывает и время отработки метода
             System.out.println("==================================");
 
+
+
             String jsonString = response.asString();
 
             if (jsonString.contains("\"expired\":true")) {
