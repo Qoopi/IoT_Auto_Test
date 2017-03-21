@@ -7,11 +7,26 @@ import java.util.{Date, TimeZone}
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
+import scala.io.Source
+
 class SignAWSv4 extends AWSCredentials {
 
-  setAccessKeyId("ASIAIGCMSP6UMELOXIGA")
-  setSecretAccessKey("ASIAIGCMSP6UMELOXIGA")
-  setSessionToken("ASIAIGCMSP6UMELOXIGA")
+  setAccessKeyId("ASIAIYSX3BWOL2OVWPWA")
+  setSecretAccessKey("43fSPzYhdqyEP3Pr4h19A7+pJjQwNHMRd2mNsgpE")
+  setSessionToken("FQoDYXdzEHcaDJRe9HJRRcGQ8cVJzSLmAz4xs91/hApVt1aMt/GH2ozOrNGcG/mLlonKlWgM3l+gtyCb5sSXApO+ypy+LbwtXKGkfWC/TrDYHg86NeUALT9x3oMC7MCDJD4KrSyM6BdYfCKjwylLIL1Dafp10tiosa3XP+sNJ1cK72EGgEhYFt4iAobTz6qvCafHcpBz8pi49VADy9R6MlxCQ/Gsuzk/yjx2krVjnX1SiFeH7mktO7v1VS1CBO6qnww1gqK5YHeJ4HB7nrZliudOEFcWbY/M5P5bedNhPMhdvevbrDs/OkLP5pZYgh/uybepQnkqyqRjdfuwm1LHVDfDqswm8TPEgtheDUubhdyh5qTp5OAwalTAKghyaZVHcOSLKsSUHDtbPTIWXth1u1UPSXmebLDdhe3SihZv0shww0AeqrKnPdoGTjODPR80d9hyP5uBKL+aDEsbDQcEt6dm3b5J1ZIS5b0nKOoFt52iag8yXk2n0UWDXUnF2AjF1N+EPC0eCiq8rbAyVD8/rP4dFfg9pUrdlxTXfBBWVMU8MHsDEnu0I6zzjOOsATMaU2sMA6zhsB2dFglBk5Vc8WpBm2i8texklV7IwI5F6nsWzwCv0iEjysoej58OqYvqxHr7c7ZNjIexoO3d0Nw7NkxGBfx+B3OvVt2ZCtquMSjl3MTGBQ==")
+
+
+  //проверить этот метод и реализовать что-то на его основе, если он работает
+  def readCreds(): Unit ={
+    Source
+      .fromFile("files/ChargeNames")
+      .getLines
+      .foreach { line =>
+        //do stuff with line like
+        println(line)
+      }
+  }
+
 
   def allHeaders(method: String, url: String): Map[String, String] = {
     val map3 = standardHeaders++authHeaders(method, url)

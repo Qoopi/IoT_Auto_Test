@@ -50,5 +50,5 @@ class RecordedSimulation1 extends Simulation {
           .get("/dev/dashboard/b84d8e45-2d79-42e6-ad54-6569ae6b08a0")
           .headers(headers_3)))
 
-  setUp(scn.inject(atOnceUsers(1))).protocols(httpProtocol)
+  setUp(scn.inject(atOnceUsers(10))).protocols(httpProtocol)
 }
