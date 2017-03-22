@@ -83,7 +83,7 @@ public class RequestManager extends SignAWSv4{
             }
 
             try {
-                Thread.sleep(20000);//default 20000
+                Thread.sleep(50000);//default 20000
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
