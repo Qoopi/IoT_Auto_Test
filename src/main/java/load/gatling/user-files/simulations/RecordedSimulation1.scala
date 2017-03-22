@@ -34,21 +34,16 @@ class RecordedSimulation1 extends Simulation {
   val uri1 = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev"
 
   val aws: SignAWSv4 = new SignAWSv4
+  val list = aws.readCredsFromFile()
   val map = aws.allHeaders("GET", "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread")
 
   val scn = scenario("RecordedSimulation1")
     .exec(http("request_0")
       .options("/dev/notification?status=unread")
       .headers(map)
-      .resources(http("request_1")
-        .options("/dev/dashboard/b84d8e45-2d79-42e6-ad54-6569ae6b08a0")
-        .headers(headers_0),
-        http("request_2")
+      .resources(http("request_2")
           .get("/dev/notification?status=unread")
-          .headers(map),
-        http("request_3")
-          .get("/dev/dashboard/b84d8e45-2d79-42e6-ad54-6569ae6b08a0")
-          .headers(headers_3)))
+          .headers(map)))
 
-  setUp(scn.inject(atOnceUsers(10))).protocols(httpProtocol)
+  setUp(scn.inject(atOnceUsers(100))).protocols(httpProtocol)
 }

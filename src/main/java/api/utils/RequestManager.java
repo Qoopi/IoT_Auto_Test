@@ -121,9 +121,9 @@ public class RequestManager extends SignAWSv4{
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        out.write("AccessKeyId "+awsCredentials.getAccessKeyId()+"\r\n");
-        out.write("SecretAccessKey "+awsCredentials.getSecretAccessKey()+"\r\n");
-        out.write("SessionToken "+awsCredentials.getSessionToken()+"\r\n");
+        out.write("AccessKeyId,"+awsCredentials.getAccessKeyId()+"\r\n");
+        out.write("SecretAccessKey,"+awsCredentials.getSecretAccessKey()+"\r\n");
+        out.write("SessionToken,"+awsCredentials.getSessionToken()+"\r\n");
         out.close();
     }
 

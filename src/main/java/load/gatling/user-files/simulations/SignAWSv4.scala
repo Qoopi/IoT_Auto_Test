@@ -11,16 +11,26 @@ import scala.io.Source
 
 class SignAWSv4 extends AWSCredentials {
 
-  setAccessKeyId("ASIAIYSX3BWOL2OVWPWA")
-  setSecretAccessKey("43fSPzYhdqyEP3Pr4h19A7+pJjQwNHMRd2mNsgpE")
-  setSessionToken("FQoDYXdzEHcaDJRe9HJRRcGQ8cVJzSLmAz4xs91/hApVt1aMt/GH2ozOrNGcG/mLlonKlWgM3l+gtyCb5sSXApO+ypy+LbwtXKGkfWC/TrDYHg86NeUALT9x3oMC7MCDJD4KrSyM6BdYfCKjwylLIL1Dafp10tiosa3XP+sNJ1cK72EGgEhYFt4iAobTz6qvCafHcpBz8pi49VADy9R6MlxCQ/Gsuzk/yjx2krVjnX1SiFeH7mktO7v1VS1CBO6qnww1gqK5YHeJ4HB7nrZliudOEFcWbY/M5P5bedNhPMhdvevbrDs/OkLP5pZYgh/uybepQnkqyqRjdfuwm1LHVDfDqswm8TPEgtheDUubhdyh5qTp5OAwalTAKghyaZVHcOSLKsSUHDtbPTIWXth1u1UPSXmebLDdhe3SihZv0shww0AeqrKnPdoGTjODPR80d9hyP5uBKL+aDEsbDQcEt6dm3b5J1ZIS5b0nKOoFt52iag8yXk2n0UWDXUnF2AjF1N+EPC0eCiq8rbAyVD8/rP4dFfg9pUrdlxTXfBBWVMU8MHsDEnu0I6zzjOOsATMaU2sMA6zhsB2dFglBk5Vc8WpBm2i8texklV7IwI5F6nsWzwCv0iEjysoej58OqYvqxHr7c7ZNjIexoO3d0Nw7NkxGBfx+B3OvVt2ZCtquMSjl3MTGBQ==")
+//  setAccessKeyId("ASIAIYSX3BWOL2OVWPWA")
+//  setSecretAccessKey("43fSPzYhdqyEP3Pr4h19A7+pJjQwNHMRd2mNsgpE")
+//  setSessionToken("FQoDYXdzEHcaDJRe9HJRRcGQ8cVJzSLmAz4xs91/hApVt1aMt/GH2ozOrNGcG/mLlonKlWgM3l+gtyCb5sSXApO+ypy+LbwtXKGkfWC/TrDYHg86NeUALT9x3oMC7MCDJD4KrSyM6BdYfCKjwylLIL1Dafp10tiosa3XP+sNJ1cK72EGgEhYFt4iAobTz6qvCafHcpBz8pi49VADy9R6MlxCQ/Gsuzk/yjx2krVjnX1SiFeH7mktO7v1VS1CBO6qnww1gqK5YHeJ4HB7nrZliudOEFcWbY/M5P5bedNhPMhdvevbrDs/OkLP5pZYgh/uybepQnkqyqRjdfuwm1LHVDfDqswm8TPEgtheDUubhdyh5qTp5OAwalTAKghyaZVHcOSLKsSUHDtbPTIWXth1u1UPSXmebLDdhe3SihZv0shww0AeqrKnPdoGTjODPR80d9hyP5uBKL+aDEsbDQcEt6dm3b5J1ZIS5b0nKOoFt52iag8yXk2n0UWDXUnF2AjF1N+EPC0eCiq8rbAyVD8/rP4dFfg9pUrdlxTXfBBWVMU8MHsDEnu0I6zzjOOsATMaU2sMA6zhsB2dFglBk5Vc8WpBm2i8texklV7IwI5F6nsWzwCv0iEjysoej58OqYvqxHr7c7ZNjIexoO3d0Nw7NkxGBfx+B3OvVt2ZCtquMSjl3MTGBQ==")
 
 
   //проверить этот метод и реализовать что-то на его основе, если он работает
-  def readFile(): List[String] = {
-    val filename = "creds.txt"
-    val lines = Source.fromFile(filename).getLines.toList
-    lines
+  def readCredsFromFile(){ //берет файл из корня проекта, разбирает его в map (файл генерится jav'ой), сетит ключи и юзает их
+    val filename = "../../../../../../creds.txt"
+    val keyValuePairs = Source.fromFile(filename, "UTF8")
+      .getLines.map(_.stripLineEnd.split(",", -1))
+      .map(fields => fields(0) -> fields(1)).toList
+
+    val map = Map(keyValuePairs : _*)
+
+    val accessKey = map("AccessKeyId")
+    val secretAccessKey = map("SecretAccessKey")
+    val sessionToken = map("SessionToken")
+    setAccessKeyId(accessKey)
+    setSecretAccessKey(secretAccessKey)
+    setSessionToken(sessionToken)
   }
 
   def allHeaders(method: String, url: String): Map[String, String] = {
