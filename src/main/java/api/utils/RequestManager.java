@@ -69,9 +69,6 @@ public class RequestManager extends SignAWSv4{
             System.out.println(response.statusCode());
             System.out.println(response.asString());
             System.out.println("Time: "+response.timeIn(TimeUnit.MILLISECONDS)+" ms.");
-            System.out.println("Time start: "+startTime);//не подходит, учитывает и время отработки метода
-            System.out.println("Time stop: "+endTime);//не подходит, учитывает и время отработки метода
-            System.out.println("Time diff: "+(endTime-startTime));//не подходит, учитывает и время отработки метода
             System.out.println("==================================");
 
 

@@ -12,6 +12,14 @@ class RecordedSimulation1 extends Simulation {
     .acceptLanguageHeader("en-US,en;q=0.8")
     .userAgentHeader("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36")
 
+  val httpProtocolDash = http
+    .baseURL("https://dashboard.dev.iotsyst.com")
+    .inferHtmlResources()
+    .acceptHeader("*/*")
+    .acceptEncodingHeader("gzip, deflate, sdch")
+    .acceptLanguageHeader("en-US,en;q=0.8")
+    .userAgentHeader("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36")
+
   val headers_0 = Map(
     "Access-Control-Request-Headers" -> "authorization, content-type, x-amz-date, x-amz-security-token",
     "Access-Control-Request-Method" -> "GET",
@@ -45,5 +53,8 @@ class RecordedSimulation1 extends Simulation {
           .get("/dev/notification?status=unread")
           .headers(map)))
 
-  setUp(scn.inject(atOnceUsers(100))).protocols(httpProtocol)
+  val users = scenario("getNotification").exec(Notification.scn)
+  val getDash = scenario ("getDashboardFiles").exec(Dashboard.scn)
+  val getDash2 = scenario("get Dash 2 ").exec(Dash2.scn)
+  setUp(getDash2.inject(atOnceUsers(100))).protocols(httpProtocol)
 }
