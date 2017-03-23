@@ -31,13 +31,14 @@ object Dash2{
   val aws: SignAWSv4 = new SignAWSv4
   val list = aws.readCredsFromFile()
   val map = aws.allHeaders("GET", "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/chart/Thing-000013-i3?channelIdx=1&startDate=1490189802247&type=2")
+  val feeder = Iterator.continually(aws.readCredsFromFile(), aws.allHeaders(" "," "))
 
-  val scn = scenario("RecordedSimulation1")
-    .exec(http("request_0")
+  val scn = repeat(5) {
+    exec(http("request_0")
       .options("/dev/chart/Thing-000013-i3?channelIdx=1&startDate=1490189802247&type=2")
       .headers(map)
       .resources(http("request_2")
         .get("/dev/chart/Thing-000013-i3?channelIdx=1&startDate=1490189802247&type=2")
-        .headers(map)))
-
+        .headers(map))).pause(1)
+  }
 }

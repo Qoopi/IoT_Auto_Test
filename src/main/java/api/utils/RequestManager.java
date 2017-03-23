@@ -24,12 +24,27 @@ public class RequestManager extends SignAWSv4{
     //headers
     public void someRequest(){
         String method = "GET";
-        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread";
-        Map<String,?> authHeaders = authHeaders(method, url);
+        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/chart/Thing-000013-i3?channelIdx=1&startDate=1490189802247&type=2";
         Map<String,?> standardHeaders = standardHeaders();
 
-        createEmptyRequestWithHeaders(authHeaders).addHeaders(standardHeaders).get(url);
-        System.out.println(response.asString());
+
+        for (int i = 0; i<10000; i++) {
+            Map<String, ?> authHeaders = authHeaders(method, url);
+
+            long startTime = System.currentTimeMillis();
+            createEmptyRequestWithHeaders(authHeaders).addHeaders(standardHeaders).get(url);
+            long endTime = System.currentTimeMillis();
+
+
+            System.out.println("==================================");
+            if (response.statusCode() != 200) {
+                System.out.println(response.headers().toString());
+            }
+            System.out.println(response.statusCode());
+            System.out.println(response.asString());
+            System.out.println("Time: " + response.timeIn(TimeUnit.MILLISECONDS) + " ms.");
+            System.out.println("==================================");
+        }
     }
 
 
@@ -54,7 +69,7 @@ public class RequestManager extends SignAWSv4{
         String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread";
         Map<String,?> standardHeaders = standardHeaders();
 
-        for (int i = 0; i<100; i++) {
+        for (int i = 0; i<10000; i++) {
             Map<String,?> authHeaders = authHeaders(method, url);
 
             long startTime = System.currentTimeMillis();
@@ -78,12 +93,12 @@ public class RequestManager extends SignAWSv4{
             if (jsonString.contains("\"expired\":true")) {
                 parseNewCreds(jsonString);
             }
-
-            try {
-                Thread.sleep(50000);//default 20000
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//
+//            try {
+//                Thread.sleep(1);//default 20000
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
 
         }
 

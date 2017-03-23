@@ -23,9 +23,79 @@ public class PageBootSpeed {
 
     @Test
     public void checkNewCreds(){
-        SignAWSv4 signAWSv4 = new SignAWSv4();
         RequestManager requestManager = new RequestManager();
         requestManager.setUpBaseApiGateway();
         requestManager.checkExpiredCredentials();
     }
+
+    @Test
+    public void checkNewCreds1(){
+        RequestManager requestManager = new RequestManager();
+        requestManager.setUpBaseApiGateway();
+        requestManager.someRequest();
+    }
+
+    @Test
+    public void checkNewCreds2(){
+        RequestManager requestManager = new RequestManager();
+        requestManager.setUpBaseApiGateway();
+        requestManager.someRequest();
+    }
+
+    @Test
+    public void checkNewCreds3(){
+        RequestManager requestManager = new RequestManager();
+        requestManager.setUpBaseApiGateway();
+        requestManager.someRequest();
+    }
+
+    @Test
+    public void checkNewCreds4(){
+        RequestManager requestManager = new RequestManager();
+        requestManager.setUpBaseApiGateway();
+        requestManager.someRequest();
+    }
+
+    @Test
+    public void checkNewCreds5(){
+        RequestManager requestManager = new RequestManager();
+        requestManager.setUpBaseApiGateway();
+        requestManager.someRequest();
+    }
+
+    @Test
+    public void checkNewCreds6(){
+        RequestManager requestManager = new RequestManager();
+        requestManager.setUpBaseApiGateway();
+        requestManager.someRequest();
+    }
+
+    @Test
+    public void checkNewCreds7(){
+        RequestManager requestManager = new RequestManager();
+        requestManager.setUpBaseApiGateway();
+        requestManager.someRequest();
+    }
+
+    @Test
+    public void checkNewCreds8(){
+        RequestManager requestManager = new RequestManager();
+        requestManager.setUpBaseApiGateway();
+        requestManager.someRequest();
+    }
+
+    @Test
+    public void checkNewCreds9(){
+        RequestManager requestManager = new RequestManager();
+        requestManager.setUpBaseApiGateway();
+        requestManager.someRequest();
+    }
+
+    @Test
+    public void checkNewCreds10(){
+        RequestManager requestManager = new RequestManager();
+        requestManager.setUpBaseApiGateway();
+        requestManager.someRequest();
+    }
+
 }
