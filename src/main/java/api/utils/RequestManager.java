@@ -24,7 +24,7 @@ public class RequestManager extends SignAWSv4{
     //headers
     public void someRequest(){
         String method = "GET";
-        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/chart/Thing-000013-i3?channelIdx=1&startDate=1490189802247&type=2";
+        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/chart/Thing-000013-i4?channelIdx=1&startDate=1490189802247&type=2";
         Map<String,?> standardHeaders = standardHeaders();
 
 

@@ -34,6 +34,7 @@ class SignAWSv4 extends AWSCredentials {
   }
 
   def allHeaders(method: String, url: String): Map[String, String] = {
+    readCredsFromFile()
     val map3 = standardHeaders++authHeaders(method, url)
     map3
   }

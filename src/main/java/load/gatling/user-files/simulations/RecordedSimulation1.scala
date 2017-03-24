@@ -114,6 +114,8 @@ class RecordedSimulation1 extends Simulation {
         .headers(Headers.buildStandardHeaders))
     .pause(1)
 })
+
+  val getDash4 = scenario("get Dash 4").exec(Dash3.scn)
 //
 //  var head1 = new SignAWSv4()
 //  val getDash4 = scenario("get Dash 2 ").exec(repeat (150){
@@ -149,6 +151,6 @@ class RecordedSimulation1 extends Simulation {
 ////  setUp(unixTime.inject(rampUsers(5) over(5)))
 //
 
-  setUp(getDash3.inject(rampUsers(100) over (1))).protocols(httpProtocol)
+  setUp(getDash4.inject(rampUsers(1000) over (1))).protocols(httpProtocol)
 //  setUp(getDash3.inject(rampUsers(100) over (1))).protocols(httpProtocol)
 }

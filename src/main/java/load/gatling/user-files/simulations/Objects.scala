@@ -30,15 +30,21 @@ object Dash2{
 
   val aws: SignAWSv4 = new SignAWSv4
   val list = aws.readCredsFromFile()
-  val map = aws.allHeaders("GET", "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/chart/Thing-000013-i3?channelIdx=1&startDate=1490189802247&type=2")
-  val feeder = Iterator.continually(aws.readCredsFromFile(), aws.allHeaders(" "," "))
+  val map = aws.allHeaders("GET", "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/chart/Thing-000013-i4?channelIdx=1&startDate=1490189802247&type=2")
 
   val scn = repeat(5) {
     exec(http("request_0")
-      .options("/dev/chart/Thing-000013-i3?channelIdx=1&startDate=1490189802247&type=2")
+      .options("/dev/chart/Thing-000013-i4?channelIdx=1&startDate=1490189802247&type=2")
       .headers(map)
       .resources(http("request_2")
-        .get("/dev/chart/Thing-000013-i3?channelIdx=1&startDate=1490189802247&type=2")
+        .get("/dev/chart/Thing-000013-i4?channelIdx=1&startDate=1490189802247&type=2")
         .headers(map))).pause(1)
   }
+}
+
+object Dash3{
+  val aws: SignAWSv4 = new SignAWSv4
+  val list = aws.readCredsFromFile()
+  val map = aws.allHeaders("GET", "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/chart/Thing-000013-i4?channelIdx=1&startDate=1490189802247&type=2")
+  val scn = repeat(2){exec(http("get dash").get("https://dashboard.dev.iotsyst.com")).pause(1)}
 }
