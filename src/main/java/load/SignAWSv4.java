@@ -20,6 +20,8 @@ import java.util.TimeZone;
 public class SignAWSv4 extends RequestSender {
 
 
+
+
     public Map allHeaders(String method, String url){
         Map<String, String> authHeaders = authHeaders(method, url);
         Map<String, String> headers = standardHeaders();
