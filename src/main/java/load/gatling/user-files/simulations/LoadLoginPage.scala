@@ -112,8 +112,8 @@ class LoadLoginPage extends Simulation {
 
 
 
-	val repeats = 5
-	val users = 100
+	val repeats = 1
+	val users = 1
 
 
 	val scn = scenario("LoadLoginPage").exec( repeat(repeats){
