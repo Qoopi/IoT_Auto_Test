@@ -22,13 +22,12 @@ public class RequestManager extends SignAWSv4{
     //method
     //request url
     //headers
-    public void someRequest(){
+    public void getChart(int repeats, int timeBetweenRequests){
         String method = "GET";
         String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/chart/Thing-000013-i4?channelIdx=1&startDate=1490189802247&type=2";
         Map<String,?> standardHeaders = standardHeaders();
 
-
-        for (int i = 0; i<10000; i++) {
+        for (int i = 0; i<repeats; i++) {
             Map<String, ?> authHeaders = authHeaders(method, url);
 
             long startTime = System.currentTimeMillis();
@@ -44,6 +43,13 @@ public class RequestManager extends SignAWSv4{
             System.out.println(response.asString());
             System.out.println("Time: " + response.timeIn(TimeUnit.MILLISECONDS) + " ms.");
             System.out.println("==================================");
+
+            try {
+                Thread.sleep(timeBetweenRequests);//default 20000
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
@@ -64,12 +70,12 @@ public class RequestManager extends SignAWSv4{
 
 
 
-    public void checkExpiredCredentials(){
+    public void checkExpiredCredentials(int repeats, int timeBetweenRequests){
         String method = "GET";
         String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread";
         Map<String,?> standardHeaders = standardHeaders();
 
-        for (int i = 0; i<10000; i++) {
+        for (int i = 0; i<repeats; i++) {
             Map<String,?> authHeaders = authHeaders(method, url);
 
             long startTime = System.currentTimeMillis();
@@ -93,12 +99,12 @@ public class RequestManager extends SignAWSv4{
             if (jsonString.contains("\"expired\":true")) {
                 parseNewCreds(jsonString);
             }
-//
-//            try {
-//                Thread.sleep(1);//default 20000
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
+
+            try {
+                Thread.sleep(timeBetweenRequests);//default 20000
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
         }
 
