@@ -51,6 +51,11 @@ public class RequestManager extends SignAWSv4{
     }
 
 
+    public void loadLoginPage(){
+
+    }
+
+
     public void setUpBaseApiGateway(){ //это вынести по ходу в listener для api/load тестов
         // Use our custom socket factory
         SSLSocketFactory customSslFactory = null;
