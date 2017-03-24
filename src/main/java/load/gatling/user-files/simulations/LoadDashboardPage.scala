@@ -157,79 +157,85 @@ class LoadDashboardPage extends Simulation {
 		"Pragma" -> "no-cache",
 		"User-Agent" -> "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36")
 
-	val scn = scenario("LoadDashboardPage")
-		.exec(http("request_0")
+
+	val repeats = 5
+	val users = 100
+
+
+	val scn = scenario("LoadDashboardPage").exec( repeat(repeats){
+		exec(http("request_0")
 			.get("/")
 			.headers(headers_0))
-		.pause(3)
-		.exec(http("request_1")
-			.get("/paths.json")
-			.headers(headers_1)
-			.resources(http("request_2")
-			.get(uri3 + "")
-			.headers(headers_2),
-            http("request_3")
-			.get(uri9 + "/webfontloader/1.6.24/webfontloader.js")
-			.headers(headers_3),
-            http("request_4")
-			.get(uri6 + "")
-			.headers(headers_3),
-            http("request_5")
-			.get(uri7 + "?10a8403")
-			.headers(headers_5),
-            http("request_6")
-			.options(uri1 + "/notification?status=unread")
-			.headers(headers_6),
-            http("request_7")
-			.options(uri1 + "/dashboard/acadcc02-8979-4a9a-ad06-308c37291792")
-			.headers(headers_6),
-            http("request_8")
-			.options(uri1 + "/equipment_models?availables=true")
-			.headers(headers_6),
-            http("request_9")
-			.get(uri4 + "/fonts/Material-Design-Iconic-Font.woff2?v=2.2.0")
-			.headers(headers_9),
-            http("request_10")
-			.get("/99fc0816a09395454061301fefa42bf1.ttf?10a8403")
-			.headers(headers_10),
-            http("request_11")
-			.get("/54a91b0619ccf9373d525109268219dc.ttf?10a8403")
-			.headers(headers_10),
-            http("request_12")
-			.get(uri9 + "/05f7c8a54f.css")
-			.headers(headers_12),
-            http("request_13")
-			.get(uri9 + "/releases/v4.6.3/css/font-awesome-css.min.css")
-			.headers(headers_12),
-            http("request_14")
-			.get(uri5 + "/config")
-			.headers(headers_10),
-            http("request_15")
-			.get(uri9 + "/releases/v4.6.3/fonts/fontawesome-webfont.woff2")
-			.headers(headers_15),
-            http("request_16")
-			.get(uri1 + "/notification?status=unread")
-			.headers(headers_16_aws),
-            http("request_17")
-			.get(uri1 + "/equipment_models?availables=true")
-			.headers(headers_17_aws),
-            http("request_18")
-			.options(uri5 + "/blips")
-			.headers(headers_18),
-            http("request_19")
-			.options(uri5 + "/identify")
-			.headers(headers_18),
-            http("request_20")
-			.get(uri1 + "/dashboard/acadcc02-8979-4a9a-ad06-308c37291792")
-			.headers(headers_20_aws),
-            http("request_21")
-			.post(uri5 + "/blips")
-			.headers(headers_21)
-			.body(RawFileBody("RecordedSimulation_0021_request.txt")),
-            http("request_22")
-			.post(uri5 + "/identify")
-			.headers(headers_21)
-			.body(RawFileBody("RecordedSimulation_0022_request.txt"))))
+			.pause(3)
+			.exec(http("request_1")
+				.get("/paths.json")
+				.headers(headers_1)
+				.resources(http("request_2")
+					.get(uri3 + "")
+					.headers(headers_2),
+					http("request_3")
+						.get(uri9 + "/webfontloader/1.6.24/webfontloader.js")
+						.headers(headers_3),
+					http("request_4")
+						.get(uri6 + "")
+						.headers(headers_3),
+					http("request_5")
+						.get(uri7 + "?10a8403")
+						.headers(headers_5),
+					http("request_6")
+						.options(uri1 + "/notification?status=unread")
+						.headers(headers_6),
+					http("request_7")
+						.options(uri1 + "/dashboard/acadcc02-8979-4a9a-ad06-308c37291792")
+						.headers(headers_6),
+					http("request_8")
+						.options(uri1 + "/equipment_models?availables=true")
+						.headers(headers_6),
+					http("request_9")
+						.get(uri4 + "/fonts/Material-Design-Iconic-Font.woff2?v=2.2.0")
+						.headers(headers_9),
+					http("request_10")
+						.get("/99fc0816a09395454061301fefa42bf1.ttf?10a8403")
+						.headers(headers_10),
+					http("request_11")
+						.get("/54a91b0619ccf9373d525109268219dc.ttf?10a8403")
+						.headers(headers_10),
+					http("request_12")
+						.get(uri9 + "/05f7c8a54f.css")
+						.headers(headers_12),
+					http("request_13")
+						.get(uri9 + "/releases/v4.6.3/css/font-awesome-css.min.css")
+						.headers(headers_12),
+					http("request_14")
+						.get(uri5 + "/config")
+						.headers(headers_10),
+					http("request_15")
+						.get(uri9 + "/releases/v4.6.3/fonts/fontawesome-webfont.woff2")
+						.headers(headers_15),
+					http("request_16")
+						.get(uri1 + "/notification?status=unread")
+						.headers(headers_16_aws),
+					http("request_17")
+						.get(uri1 + "/equipment_models?availables=true")
+						.headers(headers_17_aws),
+					http("request_18")
+						.options(uri5 + "/blips")
+						.headers(headers_18),
+					http("request_19")
+						.options(uri5 + "/identify")
+						.headers(headers_18),
+					http("request_20")
+						.get(uri1 + "/dashboard/acadcc02-8979-4a9a-ad06-308c37291792")
+						.headers(headers_20_aws),
+					http("request_21")
+						.post(uri5 + "/blips")
+						.headers(headers_21)
+						.body(RawFileBody("RecordedSimulation_0021_request.txt")),
+					http("request_22")
+						.post(uri5 + "/identify")
+						.headers(headers_21)
+						.body(RawFileBody("RecordedSimulation_0022_request.txt"))))
+	})
 
-	setUp(scn.inject(atOnceUsers(10))).protocols(httpProtocol)
+	setUp(scn.inject(atOnceUsers(users))).protocols(httpProtocol)
 }

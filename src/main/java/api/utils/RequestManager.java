@@ -30,10 +30,7 @@ public class RequestManager extends SignAWSv4{
         for (int i = 0; i<repeats; i++) {
             Map<String, ?> authHeaders = authHeaders(method, url);
 
-            long startTime = System.currentTimeMillis();
             createEmptyRequestWithHeaders(authHeaders).addHeaders(standardHeaders).get(url);
-            long endTime = System.currentTimeMillis();
-
 
             System.out.println("==================================");
             if (response.statusCode() != 200) {
@@ -45,7 +42,7 @@ public class RequestManager extends SignAWSv4{
             System.out.println("==================================");
 
             try {
-                Thread.sleep(timeBetweenRequests);//default 20000
+                Thread.sleep(timeBetweenRequests);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

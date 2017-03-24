@@ -110,78 +110,85 @@ class LoadLoginPage extends Simulation {
     val uri7 = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
     val uri8 = "https://use.fontawesome.com"
 
-	val scn = scenario("logiPageDownload")
-		.exec(http("request_0")
+
+
+	val repeats = 5
+	val users = 100
+
+
+	val scn = scenario("LoadLoginPage").exec( repeat(repeats){
+		exec(http("request_0")
 			.get("/")
 			.headers(headers_0))
-		.pause(11)
-		.exec(http("request_1")
-			.get(uri7 + "")
-			.headers(headers_1)
-			.resources(http("request_2")
-			.get(uri3 + "")
-			.headers(headers_2),
-            http("request_3")
-			.get("/bundle.js")
-			.headers(headers_3),
-            http("request_4")
-			.get(uri8 + "/05f7c8a54f.js")
-			.headers(headers_4),
-            http("request_5")
-			.get("/ZenDeskWidgetScript.js")
-			.headers(headers_3),
-            http("request_6")
-			.get(uri7 + "")
-			.headers(headers_6)))
-		.pause(1)
-		.exec(http("request_7")
-			.get("/paths.json")
-			.headers(headers_7)
-			.resources(http("request_8")
-			.get(uri2 + "")
-			.headers(headers_3),
-            http("request_9")
-			.get(uri8 + "/webfontloader/1.6.24/webfontloader.js")
-			.headers(headers_4),
-            http("request_10")
-			.get(uri5 + "")
-			.headers(headers_4),
-            http("request_11")
-			.get(uri8 + "/05f7c8a54f.css")
-			.headers(headers_2),
-            http("request_12")
-			.get(uri8 + "/releases/v4.6.3/css/font-awesome-css.min.css")
-			.headers(headers_2),
-            http("request_13")
-			.get(uri8 + "/releases/v4.6.3/fonts/fontawesome-webfont.woff2")
-			.headers(headers_13),
-            http("request_14")
-			.get(uri6 + "/c0f68f659e74333fd659f0ed158e7bed.svg?10a8403")
-			.headers(headers_14),
-            http("request_15")
-			.get(uri6 + "/IoT-LoginPage-Background.png?10a8403")
-			.headers(headers_14),
-            http("request_16")
-			.get("/54a91b0619ccf9373d525109268219dc.ttf?10a8403")
-			.headers(headers_16),
-            http("request_17")
-			.get(uri4 + "/config")
-			.headers(headers_16)))
-		.pause(1)
-		.exec(http("request_18")
-			.options(uri4 + "/blips")
-			.headers(headers_18)
-			.resources(http("request_19")
-			.options(uri4 + "/blips")
-			.headers(headers_18),
-            http("request_20")
-			.post(uri4 + "/blips")
-			.headers(headers_20)
-			.body(RawFileBody("RecordedSimulation_0020_request.txt")),
-            http("request_21")
-			.post(uri4 + "/blips")
-			.headers(headers_20)
-			.body(RawFileBody("RecordedSimulation_0021_request.txt"))))
+			.pause(11)
+			.exec(http("request_1")
+				.get(uri7 + "")
+				.headers(headers_1)
+				.resources(http("request_2")
+					.get(uri3 + "")
+					.headers(headers_2),
+					http("request_3")
+						.get("/bundle.js")
+						.headers(headers_3),
+					http("request_4")
+						.get(uri8 + "/05f7c8a54f.js")
+						.headers(headers_4),
+					http("request_5")
+						.get("/ZenDeskWidgetScript.js")
+						.headers(headers_3),
+					http("request_6")
+						.get(uri7 + "")
+						.headers(headers_6)))
+			.pause(1)
+			.exec(http("request_7")
+				.get("/paths.json")
+				.headers(headers_7)
+				.resources(http("request_8")
+					.get(uri2 + "")
+					.headers(headers_3),
+					http("request_9")
+						.get(uri8 + "/webfontloader/1.6.24/webfontloader.js")
+						.headers(headers_4),
+					http("request_10")
+						.get(uri5 + "")
+						.headers(headers_4),
+					http("request_11")
+						.get(uri8 + "/05f7c8a54f.css")
+						.headers(headers_2),
+					http("request_12")
+						.get(uri8 + "/releases/v4.6.3/css/font-awesome-css.min.css")
+						.headers(headers_2),
+					http("request_13")
+						.get(uri8 + "/releases/v4.6.3/fonts/fontawesome-webfont.woff2")
+						.headers(headers_13),
+					http("request_14")
+						.get(uri6 + "/c0f68f659e74333fd659f0ed158e7bed.svg?10a8403")
+						.headers(headers_14),
+					http("request_15")
+						.get(uri6 + "/IoT-LoginPage-Background.png?10a8403")
+						.headers(headers_14),
+					http("request_16")
+						.get("/54a91b0619ccf9373d525109268219dc.ttf?10a8403")
+						.headers(headers_16),
+					http("request_17")
+						.get(uri4 + "/config")
+						.headers(headers_16)))
+			.pause(1)
+			.exec(http("request_18")
+				.options(uri4 + "/blips")
+				.headers(headers_18)
+				.resources(http("request_19")
+					.options(uri4 + "/blips")
+					.headers(headers_18),
+					http("request_20")
+						.post(uri4 + "/blips")
+						.headers(headers_20)
+						.body(RawFileBody("RecordedSimulation_0020_request.txt")),
+					http("request_21")
+						.post(uri4 + "/blips")
+						.headers(headers_20)
+						.body(RawFileBody("RecordedSimulation_0021_request.txt"))))
+	})
 
-	setUp(scn.inject(atOnceUsers(10))).protocols(httpProtocol)
+	setUp(scn.inject(atOnceUsers(users))).protocols(httpProtocol)
 }
