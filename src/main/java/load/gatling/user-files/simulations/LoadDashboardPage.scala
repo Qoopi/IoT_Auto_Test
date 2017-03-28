@@ -158,9 +158,9 @@ class LoadDashboardPage extends Simulation {
 		"User-Agent" -> "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36")
 
 
-	val repeats = 10 //should not be zero
-	val users = 50
-	val rampUsersDelay = 5
+	val repeats = 1 //should not be zero
+	val users = 1
+	val rampUsersDelay = 1
 
 
 	val scn = scenario("LoadDashboardPage").exec( repeat(repeats){

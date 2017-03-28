@@ -52,8 +52,90 @@ public class RequestManager extends SignAWSv4{
     }
 
 
-    public void loadLoginPage(){
+    public void loadDashboardPage(int repeats, int timeBetweenRequests) {
 
+        String url = "https://dashboard.dev.iotsyst.com";
+        String urlUseFont = "https://use.fontawesome.com";
+        String urlAPIGateWay = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev";
+        String urlCloudFront = "https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0";
+
+        String url1 = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css";
+        String url2 = "https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css";
+        String url3 = "https://cdn.fontawesome.com/js/stats.js";
+        String url4 = "https://assets.zendesk.com/embeddable_framework/main.js";
+        String url5 = "https://d30q8hmeeybh67.cloudfront.net/iotLogo_white.png";
+        String url12 = "https://d30q8hmeeybh67.cloudfront.net/c0f68f659e74333fd659f0ed158e7bed.svg?457b5ac";
+
+        String url6 = url + "/bundle.js";
+        String url7 = url + "/ZenDeskWidgetScript.js";
+        String url8 = url + "/paths.json";
+        String url22 = url + "/99fc0816a09395454061301fefa42bf1.ttf?457b5ac";
+        String url23 = url + "/54a91b0619ccf9373d525109268219dc.ttf?457b5ac";
+
+        String url9 = urlUseFont + "/05f7c8a54f.js";
+        String url10 = urlUseFont + "/05f7c8a54f.css";
+        String url11 = urlUseFont + "/webfontloader/1.6.24/webfontloader.js";
+        String url13 = urlUseFont + "/releases/v4.6.3/css/font-awesome-css.min.css";
+        String url14 = urlUseFont + "/releases/v4.6.3/fonts/fontawesome-webfont.woff2";
+
+        String url15 = urlAPIGateWay + "/menu";
+        String url16 = urlAPIGateWay + "/global_settings";
+        String url17 = urlAPIGateWay + "/profile";
+        String url18 = urlAPIGateWay + "/notification?status=unread";
+        String url19 = urlAPIGateWay + "/dashboard/48bd96f7-de8a-478b-993e-b6f5af3178a1";
+        String url20 = urlAPIGateWay + "/equipment_models?availables=true";
+
+        String url21 = urlCloudFront + "/fonts/Material-Design-Iconic-Font.woff2?v=2.2.0";
+
+        Map<String, ?> standardHeaders = standardHeaders();
+
+        for (int i = 0; i < repeats; i++) {
+            createEmptyRequestWithHeaders(standardHeaders).get(url);
+            createEmptyRequestWithHeaders(standardHeaders).get(url1);
+            createEmptyRequestWithHeaders(standardHeaders).get(url2);
+            createEmptyRequestWithHeaders(standardHeaders).get(url6);
+            createEmptyRequestWithHeaders(standardHeaders).get(url9);
+            createEmptyRequestWithHeaders(standardHeaders).get(url7);
+            createEmptyRequestWithHeaders(standardHeaders).get(url8);
+            createEmptyRequestWithHeaders(standardHeaders).get(url3);
+            createEmptyRequestWithHeaders(standardHeaders).get(url4);
+            createEmptyRequestWithHeaders(standardHeaders).get(url10);
+            createEmptyRequestWithHeaders(standardHeaders).get(url13);
+            createEmptyRequestWithHeaders(standardHeaders).get(url14);
+            createEmptyRequestWithHeaders(standardHeaders).options(url15);
+            createEmptyRequestWithHeaders(standardHeaders).options(url16);
+            createEmptyRequestWithHeaders(standardHeaders).get(url12);
+            createEmptyRequestWithHeaders(standardHeaders).get(url5);
+            createEmptyRequestWithHeaders(standardHeaders).get(url21);
+            createEmptyRequestWithHeaders(standardHeaders).get(url22);
+            createEmptyRequestWithHeaders(standardHeaders).get(url23);
+            createEmptyRequestWithHeaders(standardHeaders).get(url16);
+            createEmptyRequestWithHeaders(standardHeaders).get(url15);
+            createEmptyRequestWithHeaders(standardHeaders).options(url17);
+            createEmptyRequestWithHeaders(standardHeaders).get(url17);
+            createEmptyRequestWithHeaders(standardHeaders).get(url18);
+            //createEmptyRequestWithHeaders(standardHeaders).get(url19);
+            createEmptyRequestWithHeaders(standardHeaders).get(url20);
+            createEmptyRequestWithHeaders(authHeaders("GET", url18)).addHeaders(standardHeaders).get(url18);
+            createEmptyRequestWithHeaders(authHeaders("GET", url20)).addHeaders(standardHeaders).get(url20);
+            //createEmptyRequestWithHeaders(authHeaders("GET", url19)).addHeaders(standardHeaders).get(url19);
+            System.out.println("==================================");
+            if (response.statusCode() != 200) {
+                System.out.println(response.headers().toString());
+            }
+            System.out.println(response.statusCode());
+            System.out.println(response.asString());
+            System.out.println("Time: " + response.timeIn(TimeUnit.MILLISECONDS) + " ms.");
+            System.out.println("==================================");
+
+            try {
+                Thread.sleep(timeBetweenRequests);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+
+        }
     }
 
 
