@@ -32,7 +32,7 @@ public class SignAWSv4 extends RequestSender {
     return map3;
     }
 
-    public Map authHeaders(String method, String url){
+    public Map<String, String> authHeaders(String method, String url){
         Date date = new Date();
         AWSURI awsuri = parseForCanonicalRequest(method, url);
         String sign = generateSign(date, awsuri);
@@ -45,7 +45,7 @@ public class SignAWSv4 extends RequestSender {
     }
 
 
-    public Map standardHeaders(){
+    public Map<String, String> standardHeaders(){
         Map<String, String> map = new HashMap();
         map.put("Connection", "keep-alive");
         map.put("Referer", "https://dashboard.dev.iotsyst.com/");
@@ -131,8 +131,8 @@ public class SignAWSv4 extends RequestSender {
         String signature = String.format("%064x", new java.math.BigInteger(1, si));
         String authorizationHeader = algoritm+" "+"Credential="+access_key_id+"/"+credentialScope+", "+"SignedHeaders="+signedHeaders+", "+"Signature="+signature;
 
-        System.out.println(amzDate);
-        System.out.println(authorizationHeader);
+//        System.out.println(amzDate);
+//        System.out.println(authorizationHeader);
 
         return authorizationHeader;
     }

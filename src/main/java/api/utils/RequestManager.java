@@ -14,6 +14,7 @@ import javax.net.ssl.SSLContext;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -112,6 +113,66 @@ public class RequestManager extends SignAWSv4{
 
     }
 
+    public void canvasDashboardRefreshCycle(){ //creates 1/min 2/min 12/min cycles
+        int minutesOfRun = 5;
+
+        long startDate = 1490627550017L;
+        String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
+        String chartUpdate = uri+"/dev/chart/Thing-000013-i4?channelIdx=1&startDate="+startDate+"&type=2";
+        String dashboardInfo = uri+"/dev/dashboard/a36d7666-2e0c-4f01-9663-6d726264dc04";
+        String notificationUnread = uri +"/dev/notification?status=unread";
+
+        Map<String,String> standardHeaders = standardHeaders();
+        Map<String, String> notificationUnreadHeaders = null;
+        Map<String, String> dashboardInfoHeaders = null;
+        Map<String, String> chartUpdateHeaders = null;
+
+        System.out.println(LocalDateTime.now()+": Started");
+        //2 1min requests on start here
+        notificationUnreadHeaders = authHeaders("GET", notificationUnread);
+        createEmptyRequestWithHeaders(standardHeaders).options(notificationUnread);
+        createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnread);
+        //2 30 sec requests on start here
+        dashboardInfoHeaders = authHeaders("GET", dashboardInfo);
+        createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfo);
+        createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfo);
+
+        for (int i2 = 0; i2<minutesOfRun; i2++) {
+            for (int i1 = 0; i1 < 2; i1++) {
+                for (int i = 0; i < 6; i++) {
+                    System.out.println(LocalDateTime.now()+": 5 sec cycle");
+                    //6 requests every 5 sec here (1 sec cut for response)
+                    chartUpdateHeaders = authHeaders("GET", chartUpdate);
+                    createEmptyRequestWithHeaders(standardHeaders).options(chartUpdate);
+                    createEmptyRequestWithHeaders(standardHeaders).options(chartUpdate);
+                    createEmptyRequestWithHeaders(standardHeaders).options(chartUpdate);
+                    createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdate);
+                    createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdate);
+                    createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdate);
+                    sleep(4000);
+                }
+                System.out.println(LocalDateTime.now()+": 30 sec cycle");
+                //2requests every 30 sec here
+                dashboardInfoHeaders = authHeaders("GET", dashboardInfo);
+                createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfo);
+                createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfo);
+            }
+            System.out.println(LocalDateTime.now()+": 1 min cycle");
+            //2 requests every 1 min here
+            notificationUnreadHeaders = authHeaders("GET", notificationUnread);
+            createEmptyRequestWithHeaders(standardHeaders).options(notificationUnread);
+            createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnread);
+        }
+    }
+
+
+    private void sleep(int mills){
+        try {
+            Thread.sleep(mills);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void parseNewCreds(String jsonString){
         //parse new credentials from jsonstring and write to awsCredentials

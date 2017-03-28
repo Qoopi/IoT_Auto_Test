@@ -166,6 +166,7 @@ class ChartRefreshing extends Simulation {
 		"x-amz-date" -> "20170327T151339Z",
 		"x-amz-security-token" -> "FQoDYXdzEBgaDJzWEoueemDLPwUn0SLmA7CMwgRbCgTmdoBQGdjtuyifyetkcoDNdFqBwq6b7AmMLB+R87oA2+bnkCtyY/ZxBwqSah09F57dbYCSFYHXG4We3h7CcjTL9i9SC1GrXuqiS0xlzFxuKNxgTeV8i51EeFqW1hdxI/q63XpTcvYhfgMm2w3Vxh8b7EmxWVPtfr7svgnox0Dd1fb+YJtfAwAgmengc4WfWYkQyOKtvCC0vrfz2efZdWbvrhXdtHV26cpO1UXbcr5j884isiwSF4grEvIQLjGVXhVNxl3yJEIQtldUD7mhS6GFcZy2osTwiPlIXKlDO2NuZzP5oNvvIOWzCqFZ6IcoTZ997nKsvH6P314bZQv8rrpHSdUm8mH24qP7Kr4XiEWfCXcMY+zD/QRxATqgUlF9s+2BQzQ0LqeV98NkQ7CwkdXAJtj7+GJzS0uRuuO1lzxll96RQAxuEE8guZk5Au/aoFfxX4ufONfF8LRTUOp32al59G5DCy0FK17BRjhoqy/irwnmM1pOItZWQO/+g6Fiui3v50tTwiHB/KrnCVef53d6U/WM8W5LXeIjTks6hZlZYh0vWddN8YxnuH2LrMX5dn1S4OK7h/TzPPUueLIKCHHxExw4Vs5Ptw0x2m9qWLnB/I11M6L1BjjnAH5binNKxiit1uTGBQ==")
 
+
     val uri1 = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev"
 
 	val scn = scenario("RecordedSimulation")

@@ -25,7 +25,8 @@ public class PageBootSpeed {
     @Test
     public void checkNewCreds(){
         RequestManager requestManager = new RequestManager();
-        requestManager.checkExpiredCredentials(10000, 20000);
+//        requestManager.checkExpiredCredentials(10000, 20000);
+        requestManager.canvasDashboardRefreshCycle();
     }
 
     @Test
