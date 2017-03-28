@@ -22,12 +22,9 @@ class KickUsers extends Simulation{
 
 
   val scn = scenario("LoadDashboardPage").exec(repeat(repeats){
-            exec(http("request_16")
-            .get(uri1 + "/notification?status=unread") //AWS notifications + check expired creds
-            .headers(headers_16_aws))
-//            exec(http("request_17")
-//            .get(uri1 + "/equipment_models?availables=true") //AWS
-//            .headers(headers_17_aws)).pause(2)
+            exec(http("options_notif_unread").options(uri1 + "/notification?status=unread").headers(headers_16_aws))//AWS notifications + check expired creds
+            exec(http("get_notif_unread").get(uri1 + "/notification?status=unread").headers(headers_16_aws))//AWS notifications + check expired creds = drops authorization
+//            exec(http("request_17").get(uri1 + "/equipment_models?availables=true").headers(headers_17_aws)).pause(2)
   })
 
 
