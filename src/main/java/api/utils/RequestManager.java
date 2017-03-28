@@ -5,14 +5,14 @@ import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.config.SSLConfig;
 import load.GatewaySslSocketFactory;
 import load.SignAWSv4;
+import org.apache.commons.io.output.TeeOutputStream;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.net.ssl.SSLContext;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -85,16 +85,16 @@ public class RequestManager extends SignAWSv4{
             createEmptyRequestWithHeaders(authHeaders).addHeaders(standardHeaders).get(url);
             long endTime = System.currentTimeMillis();
 
-
-            System.out.println("==================================");
-            if (response.statusCode()!=200){
-                System.out.println(response.headers().toString());
-            }
-            System.out.println(response.statusCode());
-            System.out.println(response.asString());
-            System.out.println("Time: "+response.timeIn(TimeUnit.MILLISECONDS)+" ms.");
-            System.out.println("==================================");
-
+//
+//            System.out.println("==================================");
+//            if (response.statusCode()!=200){
+//                System.out.println(response.headers().toString());
+//            }
+//            System.out.println(response.statusCode());
+//            System.out.println(response.asString());
+//            System.out.println("Time: "+response.timeIn(TimeUnit.MILLISECONDS)+" ms.");
+//            System.out.println("==================================");
+//
 
 
             String jsonString = response.asString();
@@ -113,21 +113,30 @@ public class RequestManager extends SignAWSv4{
 
     }
 
-    public void canvasDashboardRefreshCycle(){ //creates 1/min 2/min 12/min cycles
-        int minutesOfRun = 5;
+    public void canvasDashboardRefreshCycle(int operatingTimeMins) { //creates 1/min 2/min 12/min cycles
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream("RAlog_"+".txt");
+            TeeOutputStream myOut = new TeeOutputStream(System.out, fos);
+            PrintStream ps = new PrintStream(myOut);
+            System.setOut(ps);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         long startDate = 1490627550017L;
         String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
-        String chartUpdate = uri+"/dev/chart/Thing-000013-i4?channelIdx=1&startDate="+startDate+"&type=2";
-        String dashboardInfo = uri+"/dev/dashboard/a36d7666-2e0c-4f01-9663-6d726264dc04";
-        String notificationUnread = uri +"/dev/notification?status=unread";
+        String chartUpdate = uri + "/dev/chart/Thing-000013-i4?channelIdx=1&startDate=" + startDate + "&type=2";
+        String dashboardInfo = uri + "/dev/dashboard/a36d7666-2e0c-4f01-9663-6d726264dc04";
+        String notificationUnread = uri + "/dev/notification?status=unread";
 
-        Map<String,String> standardHeaders = standardHeaders();
+        Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> notificationUnreadHeaders = null;
         Map<String, String> dashboardInfoHeaders = null;
         Map<String, String> chartUpdateHeaders = null;
 
-        System.out.println(LocalDateTime.now()+": Started");
+        System.out.println("TIME : HTTP STATUS CODE : RESPONSE TIME : URL");
+        System.out.println(LocalDateTime.now() + ": Started");
         //2 1min requests on start here
         notificationUnreadHeaders = authHeaders("GET", notificationUnread);
         createEmptyRequestWithHeaders(standardHeaders).options(notificationUnread);
@@ -137,10 +146,10 @@ public class RequestManager extends SignAWSv4{
         createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfo);
         createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfo);
 
-        for (int i2 = 0; i2<minutesOfRun; i2++) {
+        for (int i2 = 0; i2 < operatingTimeMins; i2++) {
             for (int i1 = 0; i1 < 2; i1++) {
                 for (int i = 0; i < 6; i++) {
-                    System.out.println(LocalDateTime.now()+": 5 sec cycle");
+//                    System.out.println(LocalDateTime.now() + ": 5 sec cycle");
                     //6 requests every 5 sec here (1 sec cut for response)
                     chartUpdateHeaders = authHeaders("GET", chartUpdate);
                     createEmptyRequestWithHeaders(standardHeaders).options(chartUpdate);
@@ -151,18 +160,29 @@ public class RequestManager extends SignAWSv4{
                     createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdate);
                     sleep(4000);
                 }
-                System.out.println(LocalDateTime.now()+": 30 sec cycle");
+//                System.out.println(LocalDateTime.now() + ": 30 sec cycle");
                 //2requests every 30 sec here
                 dashboardInfoHeaders = authHeaders("GET", dashboardInfo);
                 createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfo);
                 createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfo);
             }
-            System.out.println(LocalDateTime.now()+": 1 min cycle");
+//            System.out.println(LocalDateTime.now() + ": 1 min cycle");
             //2 requests every 1 min here
             notificationUnreadHeaders = authHeaders("GET", notificationUnread);
             createEmptyRequestWithHeaders(standardHeaders).options(notificationUnread);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnread);
         }
+
+
+        try {
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void streamToFileOpen(String file){
+
     }
 
 

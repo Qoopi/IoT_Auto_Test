@@ -5,6 +5,7 @@ import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 import load.objects.AWSCredentials;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 
 import static com.jayway.restassured.RestAssured.given;
@@ -52,26 +53,31 @@ public class RequestSender {
 
         RequestSender post(String uri) {
             response = requestSpecification.post(uri);
+            System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+uri);
             return this;
         }
 
         RequestSender options(String uri) {
             response = requestSpecification.options(uri);
+            System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+uri);
             return this;
         }
 
         RequestSender delete(String uri){
             response = requestSpecification.delete(uri);
+            System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+uri);
             return this;
         }
 
         public RequestSender get(String uri){
             response = requestSpecification.get(uri);
+            System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+uri);
             return this;
         }
 
         RequestSender put(String uri) {
             response = requestSpecification.put(uri);
+            System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+uri);
             return this;
         }
 

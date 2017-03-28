@@ -19,14 +19,13 @@ public class PageBootSpeed {
         RequestManager requestManager = new RequestManager();
         requestManager.writeCredsTofile();
         requestManager.setUpBaseApiGateway();
-
     }
 
     @Test
     public void checkNewCreds(){
         RequestManager requestManager = new RequestManager();
 //        requestManager.checkExpiredCredentials(10000, 20000);
-        requestManager.canvasDashboardRefreshCycle();
+        requestManager.canvasDashboardRefreshCycle(2);
     }
 
     @Test
