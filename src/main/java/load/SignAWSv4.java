@@ -71,7 +71,10 @@ public class SignAWSv4 extends RequestSender {
         }
         String host = uri.getHost();
         String path = uri.getPath();
-        String queryString = uri.getQuery();
+        String queryString = "";
+        if (uri.getQuery()!=null){
+            queryString=uri.getQuery();
+        }
 
         if (!url.contains("60sglz9l5h.execute-api.us-east-1.amazonaws.com")){
             System.out.println("Looks like you using unknown URL, check it!");
