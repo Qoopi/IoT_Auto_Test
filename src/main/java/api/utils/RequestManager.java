@@ -53,6 +53,18 @@ public class RequestManager extends SignAWSv4{
 
 
     public void loadDashboardPage(int repeats, int timeBetweenRequests) {
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream("RAlog_"+".txt");
+            TeeOutputStream myOut = new TeeOutputStream(System.out, fos);
+            PrintStream ps = new PrintStream(myOut);
+            System.setOut(ps);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+
 
         String url = "https://dashboard.dev.iotsyst.com";
         String urlUseFont = "https://use.fontawesome.com";
@@ -119,14 +131,14 @@ public class RequestManager extends SignAWSv4{
             createEmptyRequestWithHeaders(authHeaders("GET", url18)).addHeaders(standardHeaders).get(url18);
             createEmptyRequestWithHeaders(authHeaders("GET", url20)).addHeaders(standardHeaders).get(url20);
             //createEmptyRequestWithHeaders(authHeaders("GET", url19)).addHeaders(standardHeaders).get(url19);
-            System.out.println("==================================");
-            if (response.statusCode() != 200) {
-                System.out.println(response.headers().toString());
-            }
-            System.out.println(response.statusCode());
-            System.out.println(response.asString());
-            System.out.println("Time: " + response.timeIn(TimeUnit.MILLISECONDS) + " ms.");
-            System.out.println("==================================");
+//            System.out.println("==================================");
+//            if (response.statusCode() != 200) {
+//                System.out.println(response.headers().toString());
+//            }
+//            System.out.println(response.statusCode());
+//            System.out.println(response.asString());
+//            System.out.println("Time: " + response.timeIn(TimeUnit.MILLISECONDS) + " ms.");
+//            System.out.println("==================================");
 
             try {
                 Thread.sleep(timeBetweenRequests);
@@ -135,6 +147,13 @@ public class RequestManager extends SignAWSv4{
             }
 
 
+
+
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -261,10 +280,6 @@ public class RequestManager extends SignAWSv4{
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private void streamToFileOpen(String file){
-
     }
 
 

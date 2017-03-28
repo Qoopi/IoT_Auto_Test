@@ -24,6 +24,13 @@ public class LoadDashboardPage {
         requestManager.setUpBaseApiGateway();
 
     }
+
+    @Test
+    public void checkNewCreds(){
+        RequestManager requestManager = new RequestManager();
+        requestManager.checkExpiredCredentials(10000, 20000);
+    }
+
     @Test
     public void loadLoginPage (){
     RequestManager requestManager = new RequestManager();
