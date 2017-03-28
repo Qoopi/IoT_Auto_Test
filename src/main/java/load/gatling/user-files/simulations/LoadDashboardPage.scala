@@ -9,7 +9,7 @@ class LoadDashboardPage extends Simulation {
 
 	val httpProtocol = http
 		.baseURL("https://dashboard.dev.iotsyst.com")
-		.inferHtmlResources()
+		.inferHtmlResources().disableCaching
 
 
 	val uri1 = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev"
@@ -158,8 +158,9 @@ class LoadDashboardPage extends Simulation {
 		"User-Agent" -> "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36")
 
 
-	val repeats = 1 //should not be zero
-	val users = 1
+	val repeats = 10 //should not be zero
+	val users = 50
+	val rampUsersDelay = 5
 
 
 	val scn = scenario("LoadDashboardPage").exec( repeat(repeats){
@@ -224,9 +225,9 @@ class LoadDashboardPage extends Simulation {
 					http("request_19")
 						.options(uri5 + "/identify")
 						.headers(headers_18),
-					http("request_20")
-						.get(uri1 + "/dashboard/acadcc02-8979-4a9a-ad06-308c37291792") //AWS
-						.headers(headers_20_aws),
+//					http("request_20")
+//						.get(uri1 + "/dashboard/acadcc02-8979-4a9a-ad06-308c37291792") //AWS
+//						.headers(headers_20_aws),
 					http("request_21")
 						.post(uri5 + "/blips")
 						.headers(headers_21)
@@ -237,5 +238,6 @@ class LoadDashboardPage extends Simulation {
 						.body(RawFileBody("RecordedSimulation_0022_request.txt"))))
 	})
 
-	setUp(scn.inject(atOnceUsers(users))).protocols(httpProtocol)
+//	setUp(scn.inject(atOnceUsers(users))).protocols(httpProtocol)
+	setUp(scn.inject(rampUsers(users) over (rampUsersDelay seconds))).protocols(httpProtocol)
 }

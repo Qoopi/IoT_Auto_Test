@@ -9,7 +9,7 @@ class LoadLoginPage extends Simulation {
 
 	val httpProtocol = http
 		.baseURL("https://dashboard.dev.iotsyst.com")
-		.inferHtmlResources()
+		.inferHtmlResources().disableCaching
 
 	val headers_0 = Map(
 		"Accept" -> "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -112,8 +112,9 @@ class LoadLoginPage extends Simulation {
 
 
 
-	val repeats = 1 //should not be zero
-	val users = 1
+	val repeats = 10 //should not be zero
+	val users = 50
+	val rampUsersDelay = 5
 
 
 	val scn = scenario("LoadLoginPage").exec( repeat(repeats){
@@ -190,5 +191,6 @@ class LoadLoginPage extends Simulation {
 						.body(RawFileBody("RecordedSimulation_0021_request.txt"))))
 	})
 
-	setUp(scn.inject(atOnceUsers(users))).protocols(httpProtocol)
+//	setUp(scn.inject(atOnceUsers(users))).protocols(httpProtocol)
+	setUp(scn.inject(rampUsers(users) over (rampUsersDelay seconds))).protocols(httpProtocol)
 }
