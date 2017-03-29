@@ -53,31 +53,31 @@ public class RequestSender {
 
         RequestSender post(String uri) {
             response = requestSpecification.post(uri);
-            System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+uri);
+            System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+"POST    : "+uri);
             return this;
         }
 
         RequestSender options(String uri) {
             response = requestSpecification.options(uri);
-            System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+uri);
+            System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+"OPTIONS : "+uri);
             return this;
         }
 
         RequestSender delete(String uri){
             response = requestSpecification.delete(uri);
-            System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+uri);
+            System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+"DELETE  : "+uri);
             return this;
         }
 
         public RequestSender get(String uri){
             response = requestSpecification.get(uri);
-            System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+uri);
+            System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+"GET     : "+uri);
             return this;
         }
 
         RequestSender put(String uri) {
             response = requestSpecification.put(uri);
-            System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+uri);
+            System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+"PUT     : "+uri);
             return this;
         }
 

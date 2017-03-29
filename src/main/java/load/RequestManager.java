@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class RequestManager extends SignAWSv4{
+    FileOutputStream fos = null;
 
     //method
     //request url
@@ -213,17 +214,6 @@ public class RequestManager extends SignAWSv4{
     }
 
     public void canvasDashboardRefreshCycle(int operatingTimeMins) {
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream("RAlog_"+".txt");
-            TeeOutputStream myOut = new TeeOutputStream(System.out, fos);
-            PrintStream ps = new PrintStream(myOut);
-            System.setOut(ps);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-
         //в зависимости от времени меняется startDate
         //в зависимости от юзера и дашборда меняется chartUpdate и dashboardInfo
         long startDate = 1490627550017L;
@@ -233,12 +223,6 @@ public class RequestManager extends SignAWSv4{
         String notificationUnread = uri + "/dev/notification?status=unread";
 
         canvasChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
-
-        try {
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 
@@ -248,7 +232,7 @@ public class RequestManager extends SignAWSv4{
         Map<String, String> dashboardInfoHeaders = null;
         Map<String, String> chartUpdateHeaders = null;
 
-        System.out.println("TIME : HTTP STATUS CODE : RESPONSE TIME : URL");
+        System.out.println("TIME : HTTP STATUS CODE : RESPONSE TIME : METHOD : URL");
         System.out.println(LocalDateTime.now() + ": Started");
         //2 1min requests on start here
         notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
@@ -288,6 +272,28 @@ public class RequestManager extends SignAWSv4{
         }
 
 
+    }
+
+    public void startLog(String file){
+        try {
+            fos = new FileOutputStream(file);
+            TeeOutputStream myOut = new TeeOutputStream(System.out, fos);
+            PrintStream ps = new PrintStream(myOut);
+            System.setOut(ps);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+
+    }
+
+    public void stopLog(){
+        try {
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
