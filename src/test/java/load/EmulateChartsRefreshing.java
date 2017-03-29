@@ -31,7 +31,7 @@ public class EmulateChartsRefreshing {
     @Test
     public void refreshDashboard1(){
         RequestManager requestManager = new RequestManager();
-        requestManager.startLog("RAlog"+".txt");
+        requestManager.startLog("RAlog.txt");
         requestManager.canvasDashboardRefreshCycle(2);
         requestManager.stopLog();
     }

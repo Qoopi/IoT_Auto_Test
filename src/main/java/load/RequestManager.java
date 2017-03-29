@@ -17,11 +17,8 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class RequestManager extends SignAWSv4{
-    FileOutputStream fos = null;
+    private FileOutputStream fos = null;
 
-    //method
-    //request url
-    //headers
     public void getChart(int repeats, int timeBetweenRequests){
         String method = "GET";
         String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/chart/Thing-000013-i4?channelIdx=1&startDate=1490189802247&type=2";
@@ -41,30 +38,13 @@ public class RequestManager extends SignAWSv4{
             System.out.println("Time: " + response.timeIn(TimeUnit.MILLISECONDS) + " ms.");
             System.out.println("==================================");
 
-            try {
-                Thread.sleep(timeBetweenRequests);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            sleep(timeBetweenRequests);
 
         }
     }
 
 
     public void loadDashboardPage(int repeats, int timeBetweenRequests) {
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream("RAlog_"+".txt");
-            TeeOutputStream myOut = new TeeOutputStream(System.out, fos);
-            PrintStream ps = new PrintStream(myOut);
-            System.setOut(ps);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-
-
-
         String url = "https://dashboard.dev.iotsyst.com";
         String urlUseFont = "https://use.fontawesome.com";
         String urlAPIGateWay = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev";
@@ -138,26 +118,13 @@ public class RequestManager extends SignAWSv4{
 //            System.out.println(response.asString());
 //            System.out.println("Time: " + response.timeIn(TimeUnit.MILLISECONDS) + " ms.");
 //            System.out.println("==================================");
-
-            try {
-                Thread.sleep(timeBetweenRequests);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-
-
-
-            try {
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            sleep(timeBetweenRequests);
         }
     }
 
 
-    public void setUpBaseApiGateway(){ //это вынести по ходу в listener для api/load тестов
+    public void setUpBaseApiGateway(){
+        //это вынести по ходу в listener для api/load тестов
         // Use our custom socket factory
         SSLSocketFactory customSslFactory = null;
         try {
@@ -203,12 +170,7 @@ public class RequestManager extends SignAWSv4{
                 parseNewCreds(jsonString);
             }
 
-            try {
-                Thread.sleep(timeBetweenRequests);//default 20000
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
+            sleep(timeBetweenRequests);
         }
 
     }
@@ -227,6 +189,7 @@ public class RequestManager extends SignAWSv4{
 
 
     public void canvasChartRefreshTemplate(int operatingTimeMins, String chartUpdateUrl, String dashboardInfoUrl, String notificationUnreadUrl){
+        //циклы заключены внутри этого метода, чтоб не создавать новые обьекты каждый раз, когда нужно запустить минутный цикл
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> notificationUnreadHeaders = null;
         Map<String, String> dashboardInfoHeaders = null;
@@ -243,11 +206,10 @@ public class RequestManager extends SignAWSv4{
         createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
         createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
 
-        //циклы заключены внутри этого метода, чтоб не создавать новые обьекты каждый раз, когда нужно запустить минутный цикл
         for (int i2 = 0; i2 < operatingTimeMins; i2++) {
             for (int i1 = 0; i1 < 2; i1++) {
                 for (int i = 0; i < 6; i++) {
-//                    System.out.println(LocalDateTime.now() + ": 5 sec cycle");
+                    //5 sec cycle
                     //6 requests every 5 sec here (1 sec cut for response)
                     chartUpdateHeaders = authHeaders("GET", chartUpdateUrl);
                     createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
@@ -258,13 +220,13 @@ public class RequestManager extends SignAWSv4{
                     createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
                     sleep(4000);
                 }
-//                System.out.println(LocalDateTime.now() + ": 30 sec cycle");
-                //2requests every 30 sec here
+                //30 sec cycle
+                //2 requests every 30 sec here
                 dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
                 createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
                 createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
             }
-//            System.out.println(LocalDateTime.now() + ": 1 min cycle");
+            //1 min cycle
             //2 requests every 1 min here
             notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
@@ -272,37 +234,6 @@ public class RequestManager extends SignAWSv4{
         }
 
 
-    }
-
-    public void startLog(String file){
-        try {
-            fos = new FileOutputStream(file);
-            TeeOutputStream myOut = new TeeOutputStream(System.out, fos);
-            PrintStream ps = new PrintStream(myOut);
-            System.setOut(ps);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-
-
-    }
-
-    public void stopLog(){
-        try {
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    private void sleep(int mills){
-        try {
-            Thread.sleep(mills);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     private void parseNewCreds(String jsonString){
@@ -337,6 +268,33 @@ public class RequestManager extends SignAWSv4{
         out.write("SecretAccessKey,"+awsCredentials.getSecretAccessKey()+"\r\n");
         out.write("SessionToken,"+awsCredentials.getSessionToken()+"\r\n");
         out.close();
+    }
+
+    public void startLog(String file){
+        try {
+            fos = new FileOutputStream(file);
+            TeeOutputStream myOut = new TeeOutputStream(System.out, fos);
+            PrintStream ps = new PrintStream(myOut);
+            System.setOut(ps);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void stopLog(){
+        try {
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sleep(int mills){
+        try {
+            Thread.sleep(mills);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
