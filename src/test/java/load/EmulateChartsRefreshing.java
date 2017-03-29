@@ -22,18 +22,18 @@ public class EmulateChartsRefreshing {
         requestManager.setUpBaseApiGateway();
     }
 
-//    @Test
+//    @Test(threadPoolSize = 100, invocationCount = 100)
     public void checkNewCreds(){
         RequestManager requestManager = new RequestManager();
-        requestManager.checkExpiredCredentials(10000, 20000);
+        requestManager.checkExpiredCredentials(10000, 1);
     }
 
-    @Test
-    public void refreshDashboard1(){
+    @Test(threadPoolSize = 100, invocationCount = 100)
+    public void refreshDashboard(){
         RequestManager requestManager = new RequestManager();
-        requestManager.startLog("RAlog.txt");
-        requestManager.canvasDashboardRefreshCycle(2);
-        requestManager.stopLog();
+//        requestManager.startLog("RAlog_"+".txt");
+        requestManager.canvasDashboardRefreshCycle(1);
+//        requestManager.stopLog();
     }
 
 //    @Test
