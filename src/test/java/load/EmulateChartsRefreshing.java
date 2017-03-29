@@ -28,7 +28,7 @@ public class EmulateChartsRefreshing {
         requestManager.checkExpiredCredentials(10000, 1);
     }
 
-    @Test(threadPoolSize = 100, invocationCount = 100)
+    @Test(threadPoolSize = 20, invocationCount = 20)
     public void refreshDashboard(){
         RequestManager requestManager = new RequestManager();
 //        requestManager.startLog("RAlog_"+".txt");
@@ -36,10 +36,10 @@ public class EmulateChartsRefreshing {
 //        requestManager.stopLog();
     }
 
-//    @Test
+    @Test(threadPoolSize = 80, invocationCount = 80)
     public void refreshDashboard2(){
         RequestManager requestManager = new RequestManager();
-        requestManager.canvasDashboardRefreshCycle(2);
+        requestManager.canvasDashboardRefreshCycleProperTimestamp(1);
     }
 
 //    @Test
