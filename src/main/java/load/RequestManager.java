@@ -212,7 +212,7 @@ public class RequestManager extends SignAWSv4{
 
     }
 
-    public void canvasDashboardRefreshCycle(int operatingTimeMins) { //creates 1/min 2/min 12/min cycles
+    public void canvasDashboardRefreshCycle(int operatingTimeMins) {
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream("RAlog_"+".txt");
@@ -223,12 +223,26 @@ public class RequestManager extends SignAWSv4{
             e.printStackTrace();
         }
 
+
+        //в зависимости от времени меняется startDate
+        //в зависимости от юзера и дашборда меняется chartUpdate и dashboardInfo
         long startDate = 1490627550017L;
         String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
         String chartUpdate = uri + "/dev/chart/Thing-000013-i4?channelIdx=1&startDate=" + startDate + "&type=2";
         String dashboardInfo = uri + "/dev/dashboard/a36d7666-2e0c-4f01-9663-6d726264dc04";
         String notificationUnread = uri + "/dev/notification?status=unread";
 
+        canvasChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
+
+        try {
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void canvasChartRefreshTemplate(int operatingTimeMins, String chartUpdateUrl, String dashboardInfoUrl, String notificationUnreadUrl){
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> notificationUnreadHeaders = null;
         Map<String, String> dashboardInfoHeaders = null;
@@ -237,47 +251,43 @@ public class RequestManager extends SignAWSv4{
         System.out.println("TIME : HTTP STATUS CODE : RESPONSE TIME : URL");
         System.out.println(LocalDateTime.now() + ": Started");
         //2 1min requests on start here
-        notificationUnreadHeaders = authHeaders("GET", notificationUnread);
-        createEmptyRequestWithHeaders(standardHeaders).options(notificationUnread);
-        createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnread);
+        notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
+        createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
+        createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
         //2 30 sec requests on start here
-        dashboardInfoHeaders = authHeaders("GET", dashboardInfo);
-        createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfo);
-        createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfo);
+        dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
+        createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
+        createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
 
+        //циклы заключены внутри этого метода, чтоб не создавать новые обьекты каждый раз, когда нужно запустить минутный цикл
         for (int i2 = 0; i2 < operatingTimeMins; i2++) {
             for (int i1 = 0; i1 < 2; i1++) {
                 for (int i = 0; i < 6; i++) {
 //                    System.out.println(LocalDateTime.now() + ": 5 sec cycle");
                     //6 requests every 5 sec here (1 sec cut for response)
-                    chartUpdateHeaders = authHeaders("GET", chartUpdate);
-                    createEmptyRequestWithHeaders(standardHeaders).options(chartUpdate);
-                    createEmptyRequestWithHeaders(standardHeaders).options(chartUpdate);
-                    createEmptyRequestWithHeaders(standardHeaders).options(chartUpdate);
-                    createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdate);
-                    createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdate);
-                    createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdate);
+                    chartUpdateHeaders = authHeaders("GET", chartUpdateUrl);
+                    createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
+                    createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
+                    createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
+                    createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
+                    createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
+                    createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
                     sleep(4000);
                 }
 //                System.out.println(LocalDateTime.now() + ": 30 sec cycle");
                 //2requests every 30 sec here
-                dashboardInfoHeaders = authHeaders("GET", dashboardInfo);
-                createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfo);
-                createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfo);
+                dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
+                createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
+                createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
             }
 //            System.out.println(LocalDateTime.now() + ": 1 min cycle");
             //2 requests every 1 min here
-            notificationUnreadHeaders = authHeaders("GET", notificationUnread);
-            createEmptyRequestWithHeaders(standardHeaders).options(notificationUnread);
-            createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnread);
+            notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
+            createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
+            createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
         }
 
 
-        try {
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 
