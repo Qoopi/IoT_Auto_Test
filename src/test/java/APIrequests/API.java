@@ -4,7 +4,7 @@ public class API {
    /* @Test
     public void getEquips(){
         AWS aws = new AWS();
-        RequestSender requestSender = new RequestSender();
+        RequestSenderApi requestSender = new RequestSenderApi();
         requestSender.createRequest(aws.getEquipment());
 
     }*/

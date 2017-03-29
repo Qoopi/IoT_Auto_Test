@@ -1,10 +1,8 @@
-package api.utils;
+package load;
 
 
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.config.SSLConfig;
-import load.GatewaySslSocketFactory;
-import load.SignAWSv4;
 import org.apache.commons.io.output.TeeOutputStream;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.json.simple.JSONObject;

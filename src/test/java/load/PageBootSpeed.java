@@ -1,6 +1,5 @@
 package load;
 
-import api.utils.RequestManager;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;

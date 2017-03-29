@@ -8,7 +8,8 @@ import ui.utils.SessionStorage;
 import ui.utils.WaitsAsserts;
 import ui.utils.WebDriverManager;
 
-import static api.utils.RequestSender.awsCredentials;
+import static load.RequestSender.awsCredentials;
+
 
 public class LogInPage {
     private WaitsAsserts waits_asserts = new WaitsAsserts();

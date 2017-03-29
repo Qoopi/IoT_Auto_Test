@@ -1,6 +1,5 @@
 package load;
 
-import api.utils.RequestSender;
 import load.objects.AWSURI;
 
 import javax.crypto.Mac;
@@ -18,8 +17,6 @@ import java.util.TimeZone;
 
 
 public class SignAWSv4 extends RequestSender {
-
-
 
 
     public Map allHeaders(String method, String url){
