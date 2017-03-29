@@ -8,6 +8,7 @@ import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.junit.Test;
 
 import javax.net.ssl.SSLContext;
 import java.io.*;
@@ -123,23 +124,6 @@ public class RequestManager extends SignAWSv4{
     }
 
 
-    public void setUpBaseApiGateway(){
-        //это вынести по ходу в listener для api/load тестов
-        // Use our custom socket factory
-        SSLSocketFactory customSslFactory = null;
-        try {
-            customSslFactory = new GatewaySslSocketFactory(
-                    SSLContext.getDefault(), SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        RestAssured.config = RestAssured.config().sslConfig(
-                SSLConfig.sslConfig().sslSocketFactory(customSslFactory));
-        RestAssured.config.getHttpClientConfig().reuseHttpClientInstance();
-    }
-
-
-
     public void checkExpiredCredentials(int repeats, int timeBetweenRequests){
         String method = "GET";
         String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread";
@@ -232,9 +216,62 @@ public class RequestManager extends SignAWSv4{
             createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
         }
+    }
 
+    @Test
+    public void kibanaDashboardRefreshCycle(){ //NOT FINISHED YET!
+        String dashboardId = "c020c7c1-2d8c-46f6-933a-abb933788732";
+        String preferenceTimeStamp = "1490780679128";
+        String chartUpdatePostPayloadJSON = "{\"search_type\":\"count\",\"ignore_unavailable\":true}\n" +
+                "{\"query\":{\"filtered\":{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"equipmentId:\\\"Thing-000013-i3\\\" AND channel:1 AND type:2\"}},\"filter\":{\"bool\":{\"must\":[{\"range\":{\"timestamp\":{\"gte\":1488278924314,\"lte\":1490780924314,\"format\":\"epoch_millis\"}}}],\"must_not\":[]}}}},\"size\":0,\"aggs\":{\"2\":{\"date_histogram\":{\"field\":\"timestamp\",\"interval\":\"3h\",\"time_zone\":\"+03:00\",\"min_doc_count\":1,\"extended_bounds\":{\"min\":1488278924313,\"max\":1490780924313}},\"aggs\":{\"1\":{\"avg\":{\"field\":\"value\"}}}}}}";
+
+        String notificationUnreadUrl = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread";
+        String dashboardInfoUrl = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/dashboard/c020c7c1-2d8c-46f6-933a-abb933788732";
+        String chartUpdateUrl = "https://elasticsearch.dev.iotsyst.io/vpv-log/_msearch?timeout=0&preference=1490780679128";
+
+        int operatingTimeMins = 2;
+
+
+
+
+        Map<String, String> standardHeaders = standardHeaders();
+        Map<String, String> notificationUnreadHeaders = null;
+        Map<String, String> dashboardInfoHeaders = null;
+        Map<String, String> chartUpdateHeaders = null;
+
+
+        System.out.println(LocalDateTime.now() + " START");
+        dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
+        notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
+
+        createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
+        createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
+        createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
+        createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
+
+        System.out.println(LocalDateTime.now()+" _msearch?timeout=0&preference=1490780679128");
+        System.out.println(LocalDateTime.now()+" _msearch?timeout=0&preference=1490780679128");
+        System.out.println(LocalDateTime.now()+" _msearch?timeout=0&preference=1490780679128");
+        for (int i1 = 0; i1 < operatingTimeMins; i1++) {
+            for (int i = 0; i < 2; i++) {
+                sleep(29200);
+                //2 req dash inf here (0.8 sec cut for response)
+                dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
+                createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
+                createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
+            }
+            notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
+
+            System.out.println(LocalDateTime.now()+" _msearch?timeout=0&preference=1490780679128");
+            System.out.println(LocalDateTime.now()+" _msearch?timeout=0&preference=1490780679128");
+            System.out.println(LocalDateTime.now()+" _msearch?timeout=0&preference=1490780679128");
+
+            createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
+            createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
+        }
 
     }
+
 
     private void parseNewCreds(String jsonString){
         //parse new credentials from jsonstring and write to awsCredentials
@@ -268,6 +305,22 @@ public class RequestManager extends SignAWSv4{
         out.write("SecretAccessKey,"+awsCredentials.getSecretAccessKey()+"\r\n");
         out.write("SessionToken,"+awsCredentials.getSessionToken()+"\r\n");
         out.close();
+    }
+
+
+    public void setUpBaseApiGateway(){
+        //это вынести по ходу в listener для api/load тестов
+        // Use our custom socket factory
+        SSLSocketFactory customSslFactory = null;
+        try {
+            customSslFactory = new GatewaySslSocketFactory(
+                    SSLContext.getDefault(), SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        RestAssured.config = RestAssured.config().sslConfig(
+                SSLConfig.sslConfig().sslSocketFactory(customSslFactory));
+        RestAssured.config.getHttpClientConfig().reuseHttpClientInstance();
     }
 
     public void startLog(String file){
