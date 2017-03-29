@@ -45,6 +45,8 @@ public class SignAWSv4 extends RequestSender {
     public Map<String, String> standardHeaders(){
         Map<String, String> map = new HashMap();
         map.put("Connection", "keep-alive");
+        map.put("Cache-Control", "no-cache");
+        map.put("Pragma", "no-cache");
         map.put("Referer", "https://dashboard.dev.iotsyst.com/");
         map.put("Accept", "*/*");
         map.put("Content-Type", "application/json");

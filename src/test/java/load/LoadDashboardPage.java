@@ -24,15 +24,17 @@ public class LoadDashboardPage {
 
     }
 
-    @Test
+//    @Test
     public void checkNewCreds(){
         RequestManager requestManager = new RequestManager();
         requestManager.checkExpiredCredentials(10000, 20000);
     }
 
-    @Test
-    public void loadLoginPage (){
-    RequestManager requestManager = new RequestManager();
-    requestManager.loadDashboardPage(20,2000);
+    @Test(threadPoolSize = 80, invocationCount = 80)
+    public void loadDashboardPage (){
+        RequestManager requestManager = new RequestManager();
+        requestManager.startLog("RAlog_"+".txt");
+        requestManager.loadDashboardPage(20,2000);
+        requestManager.stopLog();
     }
 }

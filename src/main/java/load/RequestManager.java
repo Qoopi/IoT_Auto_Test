@@ -106,11 +106,11 @@ public class RequestManager extends SignAWSv4{
             createEmptyRequestWithHeaders(standardHeaders).options(url17);
             createEmptyRequestWithHeaders(standardHeaders).get(url17);
             createEmptyRequestWithHeaders(standardHeaders).get(url18);
-            //createEmptyRequestWithHeaders(standardHeaders).get(url19);
+            createEmptyRequestWithHeaders(standardHeaders).get(url19);
             createEmptyRequestWithHeaders(standardHeaders).get(url20);
             createEmptyRequestWithHeaders(authHeaders("GET", url18)).addHeaders(standardHeaders).get(url18);
             createEmptyRequestWithHeaders(authHeaders("GET", url20)).addHeaders(standardHeaders).get(url20);
-            //createEmptyRequestWithHeaders(authHeaders("GET", url19)).addHeaders(standardHeaders).get(url19);
+            createEmptyRequestWithHeaders(authHeaders("GET", url19)).addHeaders(standardHeaders).get(url19);
 //            System.out.println("==================================");
 //            if (response.statusCode() != 200) {
 //                System.out.println(response.headers().toString());

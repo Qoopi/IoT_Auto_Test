@@ -6,7 +6,7 @@
         <parameter name="browserName" value="chrome"/>
         <parameter name="useGrid" value="false"></parameter>
         <classes>
-            <class name="load.EmulateChartsRefreshing"/>
+            <class name="load.LoadDashboardPage"/>
         </classes>
     </test>
 </suite>
