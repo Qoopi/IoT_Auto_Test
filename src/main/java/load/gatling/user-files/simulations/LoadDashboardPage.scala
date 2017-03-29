@@ -225,9 +225,9 @@ class LoadDashboardPage extends Simulation {
 					http("request_19")
 						.options(uri5 + "/identify")
 						.headers(headers_18),
-//					http("request_20")
-//						.get(uri1 + "/dashboard/acadcc02-8979-4a9a-ad06-308c37291792") //AWS
-//						.headers(headers_20_aws),
+					http("request_20")
+						.get(uri1 + "/dashboard/acadcc02-8979-4a9a-ad06-308c37291792") //AWS
+						.headers(headers_20_aws),
 					http("request_21")
 						.post(uri5 + "/blips")
 						.headers(headers_21)

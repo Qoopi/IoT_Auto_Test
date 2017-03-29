@@ -73,7 +73,9 @@ class SignAWSv4 extends AWSCredentials {
     }
     val host: String = uri.getHost
     val path: String = uri.getPath
-    val queryString: String = uri.getQuery
+    var queryString: String = ""
+      if(uri.getQuery!=null){
+        queryString=uri.getQuery}
     if (!url.contains("60sglz9l5h.execute-api.us-east-1.amazonaws.com")) {
       System.out.println("Looks like you using unknown URL, check it!")
     }
