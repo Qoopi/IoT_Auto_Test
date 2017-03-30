@@ -11,6 +11,10 @@ import ui.pageObjets.LogInPage;
 
 @Listeners(LoadListener.class)
 public class EmulateChartsRefreshing {
+    final int testThreads = 20;
+
+
+
     @BeforeTest
     public void getCreds(){
         LogInPage log = new LogInPage();
@@ -22,21 +26,21 @@ public class EmulateChartsRefreshing {
         requestManager.setUpBaseApiGateway();
     }
 
-//    @Test(threadPoolSize = 100, invocationCount = 100)
+    @Test
     public void checkNewCreds(){
         RequestManager requestManager = new RequestManager();
         requestManager.checkExpiredCredentials(10000, 1);
     }
 
-    @Test(threadPoolSize = 20, invocationCount = 20)
+    @Test(threadPoolSize = testThreads, invocationCount = testThreads)
     public void refreshDashboard(){
         RequestManager requestManager = new RequestManager();
-//        requestManager.startLog("RAlog_"+".txt");
+        requestManager.startLog("refreshDashboard"+".txt");
         requestManager.canvasDashboardRefreshCycle(1);
-//        requestManager.stopLog();
+        requestManager.stopLog();
     }
 
-    @Test(threadPoolSize = 80, invocationCount = 80)
+//    @Test(threadPoolSize = 80, invocationCount = 80)
     public void refreshDashboard2(){
         RequestManager requestManager = new RequestManager();
         requestManager.canvasDashboardRefreshCycleProperTimestamp(1);
