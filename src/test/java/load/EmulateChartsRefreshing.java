@@ -33,11 +33,13 @@ public class EmulateChartsRefreshing {
         requestManager.canvasDashboardRefreshCycleProperTimestamp(testOperationTimeMins);
     }
 
+//    @Test(threadPoolSize = threadsDistantRequest, invocationCount = threadsDistantRequest)
     public void refreshGPVDashboard(){
         RequestManager requestManager = new RequestManager();
         requestManager.canvasGPVDashboardRefreshCycleOldTimestamp(testOperationTimeMins);
     }
 
+//    @Test(threadPoolSize = threadsActualRequest, invocationCount = threadsActualRequest)
     public void refreshGPVDashboard2(){
         RequestManager requestManager = new RequestManager();
         requestManager.canvasGPVDashboardRefreshCycleProperTimestamp(testOperationTimeMins);
