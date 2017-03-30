@@ -3,7 +3,6 @@ package load;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-
 @Listeners(LoadListener.class)
 public class LoadDashboardPage {
     final int threadsDashboardPage = 20;
