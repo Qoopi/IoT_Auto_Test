@@ -46,4 +46,14 @@ public class EmulateChartsRefreshing {
         requestManager.canvasDashboardRefreshCycleProperTimestamp(testOperationTimeMins);
     }
 
+    public void refreshGPVDashboard(){
+        RequestManager requestManager = new RequestManager();
+        requestManager.canvasGPVDashboardRefreshCycleOldTimestamp(testOperationTimeMins);
+    }
+
+    public void refreshGPVDashboard2(){
+        RequestManager requestManager = new RequestManager();
+        requestManager.canvasGPVDashboardRefreshCycleProperTimestamp(testOperationTimeMins);
+    }
+
 }

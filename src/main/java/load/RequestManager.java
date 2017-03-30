@@ -8,7 +8,6 @@ import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.junit.Test;
 
 import javax.net.ssl.SSLContext;
 import java.io.*;
@@ -157,9 +156,36 @@ public class RequestManager extends SignAWSv4{
     }
 
 
+    public void canvasGPVDashboardRefreshCycleOldTimestamp(int operatingTimeMins) {
+        //в зависимости от времени меняется startDate
+        //в зависимости от юзера и дашборда меняется chartUpdate и dashboardInfo
+        long startDate = 1490627550017L;
+        String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
+        String chartUpdate = uri + "/dev/chart/Thing-090035-0?startDate=" + startDate;
+        String dashboardInfo = uri + "/dev/dashboard/bff593fe-298e-4726-90de-ad400f868b8c";
+        String notificationUnread = uri + "/dev/notification?status=unread";
 
-    public void canvasChartRefreshTemplate(int operatingTimeMins, String chartUpdateUrl, String dashboardInfoUrl, String notificationUnreadUrl){
-        //циклы заключены внутри этого метода, чтоб не создавать новые обьекты каждый раз, когда нужно запустить минутный цикл
+        canvasGPVChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
+    }
+
+    public void canvasGPVDashboardRefreshCycleProperTimestamp(int operatingTimeMins) {
+        //в зависимости от времени меняется startDate
+        //в зависимости от юзера и дашборда меняется chartUpdate и dashboardInfo
+        long oneSecEarlier = System.currentTimeMillis()-1000;
+        String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
+        String chartUpdate = uri + "/dev/chart/Thing-090035-0?startDate=" + oneSecEarlier;
+        String dashboardInfo = uri + "/dev/dashboard/bff593fe-298e-4726-90de-ad400f868b8c";
+        String notificationUnread = uri + "/dev/notification?status=unread";
+
+        canvasGPVChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
+    }
+
+
+    private void canvasChartRefreshTemplate(int operatingTimeMins, String chartUpdateUrl, String dashboardInfoUrl, String notificationUnreadUrl){
+        //all requests on start
+        //6 chart update requests every 5 seconds
+        //2 dash info requests every 30 seconds
+        //2 notification requests every 1 min
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> notificationUnreadHeaders = null;
         Map<String, String> dashboardInfoHeaders = null;
@@ -204,7 +230,54 @@ public class RequestManager extends SignAWSv4{
         }
     }
 
-    @Test
+    private void canvasGPVChartRefreshTemplate(int operatingTimeMins, String chartUpdateUrl, String dashboardInfoUrl, String notificationUnreadUrl){
+        //all requests on start
+        //2 dash info requests every 30 sec
+        //2 notification requests every 1 min
+        //2 chart update requests every 1 min
+        Map<String, String> standardHeaders = standardHeaders();
+        Map<String, String> notificationUnreadHeaders = null;
+        Map<String, String> dashboardInfoHeaders = null;
+        Map<String, String> chartUpdateHeaders = null;
+
+        System.out.println("TIME : HTTP STATUS CODE : RESPONSE TIME : METHOD : URL");
+        System.out.println(LocalDateTime.now() + ": Started");
+        //
+        notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
+        createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
+        createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
+        //
+        dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
+        createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
+        createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
+        //
+        chartUpdateHeaders = authHeaders("GET", chartUpdateUrl);
+        createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
+        createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
+
+        for (int i2 = 0; i2 < operatingTimeMins; i2++) {
+            for (int i1 = 0; i1 < 2; i1++) {
+                //
+                dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
+                createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
+                createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
+                sleep(29000);
+            }
+            //
+            notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
+            createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
+            createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
+            //
+            chartUpdateHeaders = authHeaders("GET", chartUpdateUrl);
+            createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
+            createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
+        }
+
+    }
+
+
+
+
     public void kibanaDashboardRefreshCycle(){ //NOT FINISHED YET!
         String dashboardId = "c020c7c1-2d8c-46f6-933a-abb933788732";
         String preferenceTimeStamp = "1490780679128";
