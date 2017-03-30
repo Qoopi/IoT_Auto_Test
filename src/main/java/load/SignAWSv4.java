@@ -29,9 +29,32 @@ public class SignAWSv4 extends RequestSender {
     return map3;
     }
 
+    public Map allHeaders(String method, String url, String body){
+        Map<String, String> authHeaders = authHeaders(method, url, body);
+        Map<String, String> headers = standardHeaders();
+
+        Map<String, String> map3 = new HashMap<>();
+        map3.putAll(authHeaders);
+        map3.putAll(headers);
+        return map3;
+    }
+
     public Map<String, String> authHeaders(String method, String url){
         Date date = new Date();
         AWSURI awsuri = parseForCanonicalRequest(method, url);
+        String sign = generateSign(date, awsuri);
+        Map<String, String> map = new HashMap();
+        String amzDate = getAmzDate(date);
+        map.put("x-amz-date", amzDate);
+        map.put("Authorization", sign);
+        map.put("x-amz-security-token", awsCredentials.getSessionToken());
+        return map;
+    }
+
+    public Map<String, String> authHeaders(String method, String url, String body){
+        Date date = new Date();
+        AWSURI awsuri = parseForCanonicalRequest(method, url);
+        awsuri.setPayload(body);
         String sign = generateSign(date, awsuri);
         Map<String, String> map = new HashMap();
         String amzDate = getAmzDate(date);
@@ -112,7 +135,10 @@ public class SignAWSv4 extends RequestSender {
 
         String credentialScope = dateStamp+"/"+regionName+"/"+serviceName+"/"+"aws4_request";
         String canonicalHeaders = "host:"+host+"\n"+"x-amz-date:"+amzDate+"\n";
-        String payloadHash = SHA256("");
+        String payloadHash = SHA256("");//ВОТ ТУТ
+        if (awsuri.getPayload()!=null){
+            payloadHash = SHA256(awsuri.getPayload());
+        }
         String canonicalRequest = method+"\n"+canonicalUri+"\n"+canonicalQueryString+"\n"+canonicalHeaders+"\n"+signedHeaders+"\n"+payloadHash;
 
         byte[] signingKey = new byte[0];

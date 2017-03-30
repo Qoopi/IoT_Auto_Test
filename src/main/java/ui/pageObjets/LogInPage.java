@@ -20,8 +20,8 @@ public class LogInPage {
         this.driver = WebDriverManager.getDriver();
     }
 
-    private String mail = "kov.ossystem@gmail.com";
-    private String mail2 = "geloksmmm@gmail.com";
+    private String mail2 = "kov.ossystem@gmail.com";
+    private String mail = "geloksmmm@gmail.com";
     private String pass = "QW125478963qw";
     private String pass2 = "QW125478963qw";
 

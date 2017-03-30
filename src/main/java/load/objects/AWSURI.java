@@ -8,6 +8,7 @@ public class AWSURI {
     private String canonicalUri;
     private String canonicalQueryString;
     private String fullURL;
+    private String payload;
 
     @Override
     public String toString() {
@@ -19,7 +20,16 @@ public class AWSURI {
                 ", canonicalUri='" + canonicalUri + '\'' +
                 ", canonicalQueryString='" + canonicalQueryString + '\'' +
                 ", fullURL='" + fullURL + '\'' +
+                ", payload='" + payload + '\'' +
                 '}';
+    }
+
+    public String getPayload() {
+        return payload;
+    }
+
+    public void setPayload(String payload) {
+        this.payload = payload;
     }
 
     public String getMethod() {

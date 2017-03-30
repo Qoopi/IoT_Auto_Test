@@ -8,7 +8,6 @@ import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.junit.Test;
 
 import javax.net.ssl.SSLContext;
 import java.io.*;
@@ -16,7 +15,7 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-public class RequestManager extends SignAWSv4{
+public class RequestManager extends RequestTemplates{
     private FileOutputStream fos = null;
 
     public void getChart(int repeats, int timeBetweenRequests){
@@ -29,13 +28,59 @@ public class RequestManager extends SignAWSv4{
 
             createEmptyRequestWithHeaders(authHeaders).addHeaders(standardHeaders).get(url);
             sleep(timeBetweenRequests);
-
         }
+    }
+
+    public void notificationRuleCreate(){
+        String method = "POST";
+        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/rule";
+        String jsonBody = "{\"active\":true,\"name\":\"twitter-hitler\",\"description\":\"\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380632517418\",\"name\":\"me\"}],\"emails\":[{\"value\":\"hom.ossystem@gmail.com\",\"name\":\"My email\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":5,\"acknowledged\":30},\"equipmentIds\":[\"Thing-000013-i3\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":0,\"period\":0,\"sensor\":1}";
+        Map<String, String> standardHeaders = standardHeaders();
+        Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
+
+        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).post(url);
+    }
+
+    public void notificationRulesRead(){
+        String method = "GET";
+        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/rule";
+
+
+        Map<String, String> standardHeaders = standardHeaders();
+        Map<String, String> authHeaders = authHeaders(method, url);
+
+        createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders).get(url);
+    }
+
+    public void notificationRuleUpdate(){
+        String method = "PUT";
+        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/rule";
+        String jsonBody = "{\"items\":[{\"id\":\"f1d40e8b-df08-4432-8914-63fccfc9a345\",\"active\":1,\"name\":\"dsfsd\",\"description\":\"\",\"notificationType\":0,\"type\":8,\"phones\":[{\"value\":\"+380632517418\",\"name\":\"me\"}],\"emails\":[{\"value\":\"hom.ossystem@gmail.com\",\"name\":\"My email\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":5,\"acknowledged\":30,\"globalSettings\":0,\"sms\":0,\"emails\":0},\"equipmentIds\":[\"Thing-090018-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":30,\"period\":0,\"sensor\":\"\"}]}";
+
+        Map<String, String> standardHeaders = standardHeaders();
+        Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
+
+        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).put(url);
+    }
+
+    public void notificationRuleDelete(){
+        String method = "DELETE";
+        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/rule";
+        String jsonBody = "{\"items\":[{\"id\":\"fc778741-42e3-410f-bbae-e3c677020628\"}]}";
+
+        Map<String, String> standardHeaders = standardHeaders();
+        Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
+
+        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).delete(url);
+    }
+
+
+    public void notificationRuleCRUD(){
+
     }
 
 
     public void loadDashboardPage(int repeats, int timeBetweenRequests) {
-
         String urlBootStrap = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css";
         String urlCloudFlare = "https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css";
         String urlFontawesome = "https://cdn.fontawesome.com/js/stats.js";
@@ -117,6 +162,8 @@ public class RequestManager extends SignAWSv4{
     }
 
 
+
+
     public void checkExpiredCredentials(int repeats, int timeBetweenRequests){
         String method = "GET";
         String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread";
@@ -146,7 +193,7 @@ public class RequestManager extends SignAWSv4{
         String dashboardInfo = uri + "/dev/dashboard/a36d7666-2e0c-4f01-9663-6d726264dc04";
         String notificationUnread = uri + "/dev/notification?status=unread";
 
-        canvasChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
+        canvasVPVChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
     }
 
     public void canvasDashboardRefreshCycleProperTimestamp(int operatingTimeMins) {
@@ -158,58 +205,34 @@ public class RequestManager extends SignAWSv4{
         String dashboardInfo = uri + "/dev/dashboard/a36d7666-2e0c-4f01-9663-6d726264dc04";
         String notificationUnread = uri + "/dev/notification?status=unread";
 
-        canvasChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
+        canvasVPVChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
     }
 
 
+    public void canvasGPVDashboardRefreshCycleOldTimestamp(int operatingTimeMins) {
+        //в зависимости от времени меняется startDate
+        //в зависимости от юзера и дашборда меняется chartUpdate и dashboardInfo
+        long startDate = 1490627550017L;
+        String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
+        String chartUpdate = uri + "/dev/chart/Thing-090035-0?startDate=" + startDate;
+        String dashboardInfo = uri + "/dev/dashboard/bff593fe-298e-4726-90de-ad400f868b8c";
+        String notificationUnread = uri + "/dev/notification?status=unread";
 
-    public void canvasChartRefreshTemplate(int operatingTimeMins, String chartUpdateUrl, String dashboardInfoUrl, String notificationUnreadUrl){
-        //циклы заключены внутри этого метода, чтоб не создавать новые обьекты каждый раз, когда нужно запустить минутный цикл
-        Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> notificationUnreadHeaders = null;
-        Map<String, String> dashboardInfoHeaders = null;
-        Map<String, String> chartUpdateHeaders = null;
-
-        System.out.println("TIME : HTTP STATUS CODE : RESPONSE TIME : METHOD : URL");
-        System.out.println(LocalDateTime.now() + ": Started");
-        //2 1min requests on start here
-        notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
-        createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
-        createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
-        //2 30 sec requests on start here
-        dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
-        createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
-        createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
-
-        for (int i2 = 0; i2 < operatingTimeMins; i2++) {
-            for (int i1 = 0; i1 < 2; i1++) {
-                for (int i = 0; i < 6; i++) {
-                    //5 sec cycle
-                    //6 requests every 5 sec here (1 sec cut for response)
-                    chartUpdateHeaders = authHeaders("GET", chartUpdateUrl);
-                    createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
-                    createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
-                    createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
-                    createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
-                    createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
-                    createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
-                    sleep(4000);
-                }
-                //30 sec cycle
-                //2 requests every 30 sec here
-                dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
-                createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
-                createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
-            }
-            //1 min cycle
-            //2 requests every 1 min here
-            notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
-            createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
-            createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
-        }
+        canvasGPVChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
     }
 
-    @Test
+    public void canvasGPVDashboardRefreshCycleProperTimestamp(int operatingTimeMins) {
+        //в зависимости от времени меняется startDate
+        //в зависимости от юзера и дашборда меняется chartUpdate и dashboardInfo
+        long oneSecEarlier = System.currentTimeMillis()-1000;
+        String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
+        String chartUpdate = uri + "/dev/chart/Thing-090035-0?startDate=" + oneSecEarlier;
+        String dashboardInfo = uri + "/dev/dashboard/bff593fe-298e-4726-90de-ad400f868b8c";
+        String notificationUnread = uri + "/dev/notification?status=unread";
+
+        canvasGPVChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
+    }
+
     public void kibanaDashboardRefreshCycle(){ //NOT FINISHED YET!
         String dashboardId = "c020c7c1-2d8c-46f6-933a-abb933788732";
         String preferenceTimeStamp = "1490780679128";
@@ -221,8 +244,6 @@ public class RequestManager extends SignAWSv4{
         String chartUpdateUrl = "https://elasticsearch.dev.iotsyst.io/vpv-log/_msearch?timeout=0&preference=1490780679128";
 
         int operatingTimeMins = 2;
-
-
 
 
         Map<String, String> standardHeaders = standardHeaders();
@@ -332,6 +353,7 @@ public class RequestManager extends SignAWSv4{
             e.printStackTrace();
         }
     }
+
 
     private void sleep(int mills){
         try {

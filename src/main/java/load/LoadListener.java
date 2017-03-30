@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import ui.pageObjets.LogInPage;
 import ui.utils.WaitsAsserts;
 import ui.utils.WebDriverFactory;
 import ui.utils.WebDriverManager;
@@ -46,7 +47,7 @@ public class LoadListener implements ITestListener {
         WebDriver driver = WebDriverFactory.createInstance(browserName, boo);
         WebDriverManager.setWebDriver(driver);
 
-
+        getCreds();
     }
 
     @Override
@@ -59,7 +60,15 @@ public class LoadListener implements ITestListener {
         if (driver != null) {
             driver.quit();
         }
+    }
 
-
+    public void getCreds(){
+        LogInPage log = new LogInPage();
+        log.getToIoTPage();
+        log.enterGoogleCred();
+        log.getRequestSigns();
+        RequestManager requestManager = new RequestManager();
+        requestManager.writeCredsTofile();
+        requestManager.setUpBaseApiGateway();
     }
 }
