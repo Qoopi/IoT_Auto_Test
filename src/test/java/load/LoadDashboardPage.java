@@ -9,7 +9,7 @@ import ui.utils.TestListener;
 /**
  * Created by Oleg Kutafin on 28.03.2017.
  */
-@Listeners(TestListener.class)
+@Listeners(LoadListener.class)
 public class LoadDashboardPage {
     final int threadsDashboardPage = 1;
 

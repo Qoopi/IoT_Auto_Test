@@ -35,78 +35,83 @@ public class RequestManager extends SignAWSv4{
 
 
     public void loadDashboardPage(int repeats, int timeBetweenRequests) {
+
+        String urlBootStrap = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css";
+        String urlCloudFlare = "https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css";
+        String urlFontawesome = "https://cdn.fontawesome.com/js/stats.js";
+        String urlZenDeskMain = "https://assets.zendesk.com/embeddable_framework/main.js";
+        String urCloudFrontLogo = "https://d30q8hmeeybh67.cloudfront.net/iotLogo_white.png";
+        String urlCloudFrontc0f68 = "https://d30q8hmeeybh67.cloudfront.net/c0f68f659e74333fd659f0ed158e7bed.svg?457b5ac";
+
         String url = "https://dashboard.dev.iotsyst.com";
+        String urlBundleJS = url + "/bundle.js";
+        String urlZenDeskScript = url + "/ZenDeskWidgetScript.js";
+        String urlPathsJSON = url + "/paths.json";
+        String urlWTF = url + "/99fc0816a09395454061301fefa42bf1.ttf?457b5ac";
+        String urlWTF2 = url + "/54a91b0619ccf9373d525109268219dc.ttf?457b5ac";
+
         String urlUseFont = "https://use.fontawesome.com";
+        String urlJS = urlUseFont + "/05f7c8a54f.js";
+        String urlCSS = urlUseFont + "/05f7c8a54f.css";
+        String urlFontsCSS = urlUseFont + "/releases/v4.6.3/css/font-awesome-css.min.css";
+        String urlFonts = urlUseFont + "/releases/v4.6.3/fonts/fontawesome-webfont.woff2";
+
         String urlAPIGateWay = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev";
+        String urlMenu = urlAPIGateWay + "/menu";
+        String urlGlobal_settings = urlAPIGateWay + "/global_settings";
+        String urlProfile = urlAPIGateWay + "/profile";
+        String urlNotificationsUnread = urlAPIGateWay + "/notification?status=unread";
+        String urlDashboard = urlAPIGateWay + "/dashboard/48bd96f7-de8a-478b-993e-b6f5af3178a1";
+        String urlEquipmentMode = urlAPIGateWay + "/equipment_models?availables=true";
+
         String urlCloudFront = "https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0";
-
-        String url1 = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css";
-        String url2 = "https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css";
-        String url3 = "https://cdn.fontawesome.com/js/stats.js";
-        String url4 = "https://assets.zendesk.com/embeddable_framework/main.js";
-        String url5 = "https://d30q8hmeeybh67.cloudfront.net/iotLogo_white.png";
-        String url12 = "https://d30q8hmeeybh67.cloudfront.net/c0f68f659e74333fd659f0ed158e7bed.svg?457b5ac";
-
-        String url6 = url + "/bundle.js";
-        String url7 = url + "/ZenDeskWidgetScript.js";
-        String url8 = url + "/paths.json";
-        String url22 = url + "/99fc0816a09395454061301fefa42bf1.ttf?457b5ac";
-        String url23 = url + "/54a91b0619ccf9373d525109268219dc.ttf?457b5ac";
-
-        String url9 = urlUseFont + "/05f7c8a54f.js";
-        String url10 = urlUseFont + "/05f7c8a54f.css";
-        String url11 = urlUseFont + "/webfontloader/1.6.24/webfontloader.js";
-        String url13 = urlUseFont + "/releases/v4.6.3/css/font-awesome-css.min.css";
-        String url14 = urlUseFont + "/releases/v4.6.3/fonts/fontawesome-webfont.woff2";
-
-        String url15 = urlAPIGateWay + "/menu";
-        String url16 = urlAPIGateWay + "/global_settings";
-        String url17 = urlAPIGateWay + "/profile";
-        String url18 = urlAPIGateWay + "/notification?status=unread";
-        String url19 = urlAPIGateWay + "/dashboard/48bd96f7-de8a-478b-993e-b6f5af3178a1";
-        String url20 = urlAPIGateWay + "/equipment_models?availables=true";
-
-        String url21 = urlCloudFront + "/fonts/Material-Design-Iconic-Font.woff2?v=2.2.0";
+        String urlIconsMaterial = urlCloudFront + "/fonts/Material-Design-Iconic-Font.woff2?v=2.2.0";
 
         Map<String, ?> standardHeaders = standardHeaders();
         Map<String, ?> authHeaders1 = null;
         Map<String, ?> authHeaders2 = null;
         Map<String, ?> authHeaders3 = null;
+        Map<String, ?> authHeaders4 = null;
+        Map<String, ?> authHeaders5 = null;
+        Map<String, ?> authHeaders6 = null;
 
 
         for (int i = 0; i < repeats; i++) {
-            authHeaders1 = authHeaders("GET", url18);
-            authHeaders2 = authHeaders("GET", url20);
-            authHeaders3 = authHeaders("GET", url19);
+            authHeaders1 = authHeaders("GET", urlNotificationsUnread);
+            authHeaders2 = authHeaders("GET", urlEquipmentMode);
+            authHeaders3 = authHeaders("GET", urlDashboard);
+            authHeaders4 = authHeaders("GET", urlGlobal_settings);
+            authHeaders5 = authHeaders("GET", urlMenu);
+            authHeaders6 = authHeaders("GET", urlProfile);
             createEmptyRequestWithHeaders(standardHeaders).get(url);
-            createEmptyRequestWithHeaders(standardHeaders).get(url1);
-            createEmptyRequestWithHeaders(standardHeaders).get(url2);
-            createEmptyRequestWithHeaders(standardHeaders).get(url6);
-            createEmptyRequestWithHeaders(standardHeaders).get(url9);
-            createEmptyRequestWithHeaders(standardHeaders).get(url7);
-            createEmptyRequestWithHeaders(standardHeaders).get(url8);
-            createEmptyRequestWithHeaders(standardHeaders).get(url3);
-            createEmptyRequestWithHeaders(standardHeaders).get(url4);
-            createEmptyRequestWithHeaders(standardHeaders).get(url10);
-            createEmptyRequestWithHeaders(standardHeaders).get(url13);
-            createEmptyRequestWithHeaders(standardHeaders).get(url14);
-            createEmptyRequestWithHeaders(standardHeaders).options(url15);
-            createEmptyRequestWithHeaders(standardHeaders).options(url16);
-            createEmptyRequestWithHeaders(standardHeaders).get(url12);
-            createEmptyRequestWithHeaders(standardHeaders).get(url5);
-            createEmptyRequestWithHeaders(standardHeaders).get(url21);
-            createEmptyRequestWithHeaders(standardHeaders).get(url22);
-            createEmptyRequestWithHeaders(standardHeaders).get(url23);
-            createEmptyRequestWithHeaders(standardHeaders).get(url16);
-            createEmptyRequestWithHeaders(standardHeaders).get(url15);
-            createEmptyRequestWithHeaders(standardHeaders).options(url17);
-            createEmptyRequestWithHeaders(standardHeaders).get(url17);
-            createEmptyRequestWithHeaders(standardHeaders).get(url18);
-            createEmptyRequestWithHeaders(standardHeaders).get(url19);
-            createEmptyRequestWithHeaders(standardHeaders).get(url20);
-            createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders1).get(url18);
-            createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders2).get(url20);
-            createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders3).get(url19);
+            createEmptyRequestWithHeaders(standardHeaders).get(urlBootStrap);
+            createEmptyRequestWithHeaders(standardHeaders).get(urlCloudFlare);
+            createEmptyRequestWithHeaders(standardHeaders).get(urlBundleJS);
+            createEmptyRequestWithHeaders(standardHeaders).get(urlJS);
+            createEmptyRequestWithHeaders(standardHeaders).get(urlZenDeskScript);
+            createEmptyRequestWithHeaders(standardHeaders).get(urlPathsJSON);
+            createEmptyRequestWithHeaders(standardHeaders).get(urlFontawesome);
+            createEmptyRequestWithHeaders(standardHeaders).get(urlZenDeskMain);
+            createEmptyRequestWithHeaders(standardHeaders).get(urlCSS);
+            createEmptyRequestWithHeaders(standardHeaders).get(urlFontsCSS);
+            createEmptyRequestWithHeaders(standardHeaders).get(urlFonts);
+            createEmptyRequestWithHeaders(standardHeaders).options(urlMenu);
+            createEmptyRequestWithHeaders(standardHeaders).options(urlGlobal_settings);
+            createEmptyRequestWithHeaders(standardHeaders).get(urlCloudFrontc0f68);
+            createEmptyRequestWithHeaders(standardHeaders).get(urCloudFrontLogo);
+            createEmptyRequestWithHeaders(standardHeaders).get(urlIconsMaterial);
+            createEmptyRequestWithHeaders(standardHeaders).get(urlWTF);
+            createEmptyRequestWithHeaders(standardHeaders).get(urlWTF2);
+            createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders4).get(urlGlobal_settings);
+            createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders5).get(urlMenu);
+            createEmptyRequestWithHeaders(standardHeaders).options(urlProfile);
+            createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders6).get(urlProfile);
+            createEmptyRequestWithHeaders(standardHeaders).options(urlNotificationsUnread);
+            createEmptyRequestWithHeaders(standardHeaders).options(urlDashboard);
+            createEmptyRequestWithHeaders(standardHeaders).options(urlEquipmentMode);
+            createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders1).get(urlNotificationsUnread);
+            createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders2).get(urlEquipmentMode);
+            createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders3).get(urlDashboard);
             sleep(timeBetweenRequests);
         }
     }
