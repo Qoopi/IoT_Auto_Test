@@ -1,30 +1,14 @@
 package load;
 
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import ui.pageObjets.LogInPage;
-import ui.utils.TestListener;
 
 /**
  * Created by Oleg Kutafin on 28.03.2017.
  */
-@Listeners(TestListener.class)
+@Listeners(LoadListener.class)
 public class LoadDashboardPage {
     final int threadsDashboardPage = 1;
-
-
-
-    @BeforeTest
-    public void getCred(){
-        LogInPage log = new LogInPage();
-        log.getToIoTPage();
-        log.enterGoogleCred();
-        log.getRequestSigns();
-        RequestManager requestManager = new RequestManager();
-        requestManager.writeCredsTofile();
-        requestManager.setUpBaseApiGateway();
-    }
 
     @Test
     public void checkNewCreds(){

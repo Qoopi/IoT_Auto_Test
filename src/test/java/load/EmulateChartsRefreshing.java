@@ -1,9 +1,7 @@
 package load;
 
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import ui.pageObjets.LogInPage;
 
 /**
  * Created by alex00x6 on 28.03.2017.
@@ -11,20 +9,9 @@ import ui.pageObjets.LogInPage;
 
 @Listeners(LoadListener.class)
 public class EmulateChartsRefreshing {
-    final int threadsDistantRequest = 20;
-    final int threadsActualRequest = 80;
-    final int testOperationTimeMins = 1;
-
-    @BeforeTest
-    public void getCreds(){
-        LogInPage log = new LogInPage();
-        log.getToIoTPage();
-        log.enterGoogleCred();
-        log.getRequestSigns();
-        RequestManager requestManager = new RequestManager();
-        requestManager.writeCredsTofile();
-        requestManager.setUpBaseApiGateway();
-    }
+    private final int threadsDistantRequest = 20;
+    private final int threadsActualRequest = 80;
+    private final int testOperationTimeMins = 1;
 
     @Test
     public void checkNewCreds(){
