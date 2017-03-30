@@ -21,16 +21,15 @@ public class LoadDashboardPage {
         RequestManager requestManager = new RequestManager();
         requestManager.writeCredsTofile();
         requestManager.setUpBaseApiGateway();
-
     }
 
-//    @Test
+    @Test
     public void checkNewCreds(){
         RequestManager requestManager = new RequestManager();
         requestManager.checkExpiredCredentials(10000, 20000);
     }
 
-    @Test(threadPoolSize = 80, invocationCount = 80)
+    @Test(threadPoolSize = 1, invocationCount = 1)
     public void loadDashboardPage (){
         RequestManager requestManager = new RequestManager();
         requestManager.startLog("RAlog_"+".txt");

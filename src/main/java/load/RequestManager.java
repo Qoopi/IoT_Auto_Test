@@ -80,8 +80,15 @@ public class RequestManager extends SignAWSv4{
         String url21 = urlCloudFront + "/fonts/Material-Design-Iconic-Font.woff2?v=2.2.0";
 
         Map<String, ?> standardHeaders = standardHeaders();
+        Map<String, ?> authHeaders1 = null;
+        Map<String, ?> authHeaders2 = null;
+        Map<String, ?> authHeaders3 = null;
+
 
         for (int i = 0; i < repeats; i++) {
+            authHeaders1 = authHeaders("GET", url18);
+            authHeaders2 = authHeaders("GET", url20);
+            authHeaders3 = authHeaders("GET", url19);
             createEmptyRequestWithHeaders(standardHeaders).get(url);
             createEmptyRequestWithHeaders(standardHeaders).get(url1);
             createEmptyRequestWithHeaders(standardHeaders).get(url2);
@@ -108,17 +115,9 @@ public class RequestManager extends SignAWSv4{
             createEmptyRequestWithHeaders(standardHeaders).get(url18);
             createEmptyRequestWithHeaders(standardHeaders).get(url19);
             createEmptyRequestWithHeaders(standardHeaders).get(url20);
-            createEmptyRequestWithHeaders(authHeaders("GET", url18)).addHeaders(standardHeaders).get(url18);
-            createEmptyRequestWithHeaders(authHeaders("GET", url20)).addHeaders(standardHeaders).get(url20);
-            createEmptyRequestWithHeaders(authHeaders("GET", url19)).addHeaders(standardHeaders).get(url19);
-//            System.out.println("==================================");
-//            if (response.statusCode() != 200) {
-//                System.out.println(response.headers().toString());
-//            }
-//            System.out.println(response.statusCode());
-//            System.out.println(response.asString());
-//            System.out.println("Time: " + response.timeIn(TimeUnit.MILLISECONDS) + " ms.");
-//            System.out.println("==================================");
+            createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders1).get(url18);
+            createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders2).get(url20);
+            createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders3).get(url19);
             sleep(timeBetweenRequests);
         }
     }

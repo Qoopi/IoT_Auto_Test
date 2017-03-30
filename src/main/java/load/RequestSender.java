@@ -71,6 +71,15 @@ public class RequestSender {
 
         public RequestSender get(String uri){
             response = requestSpecification.get(uri);
+            if (response.statusCode() != 200) {
+                System.out.println("==================================");
+                System.out.println(response.statusCode());
+                System.out.println("-------------------------------");
+                System.out.println(response.headers().toString());
+                System.out.println("-------------------------------");
+                System.out.println(response.asString());
+                System.out.println("==================================");
+            }
             System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+"GET     : "+uri);
             return this;
         }
