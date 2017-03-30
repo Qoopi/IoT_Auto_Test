@@ -131,22 +131,7 @@ public class RequestManager extends SignAWSv4{
         for (int i = 0; i<repeats; i++) {
             Map<String,?> authHeaders = authHeaders(method, url);
 
-            long startTime = System.currentTimeMillis();
             createEmptyRequestWithHeaders(authHeaders).addHeaders(standardHeaders).get(url);
-            long endTime = System.currentTimeMillis();
-
-//
-//            System.out.println("==================================");
-//            if (response.statusCode()!=200){
-//                System.out.println(response.headers().toString());
-//            }
-//            System.out.println(response.statusCode());
-//            System.out.println(response.asString());
-//            System.out.println("Time: "+response.timeIn(TimeUnit.MILLISECONDS)+" ms.");
-//            System.out.println("==================================");
-//
-
-
             String jsonString = response.asString();
 
             if (jsonString.contains("\"expired\":true")) {
@@ -158,11 +143,10 @@ public class RequestManager extends SignAWSv4{
 
     }
 
-    public void canvasDashboardRefreshCycle(int operatingTimeMins) {
+    public void canvasDashboardRefreshCycleOldTimestamp(int operatingTimeMins) {
         //в зависимости от времени меняется startDate
         //в зависимости от юзера и дашборда меняется chartUpdate и dashboardInfo
         long startDate = 1490627550017L;
-        long oneSecEarlier = System.currentTimeMillis()-1000;
         String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
         String chartUpdate = uri + "/dev/chart/Thing-000013-i4?channelIdx=1&startDate=" + startDate + "&type=2";
         String dashboardInfo = uri + "/dev/dashboard/a36d7666-2e0c-4f01-9663-6d726264dc04";
@@ -174,7 +158,6 @@ public class RequestManager extends SignAWSv4{
     public void canvasDashboardRefreshCycleProperTimestamp(int operatingTimeMins) {
         //в зависимости от времени меняется startDate
         //в зависимости от юзера и дашборда меняется chartUpdate и dashboardInfo
-        long startDate = 1490627550017L;
         long oneSecEarlier = System.currentTimeMillis()-1000;
         String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
         String chartUpdate = uri + "/dev/chart/Thing-000013-i4?channelIdx=1&startDate=" + oneSecEarlier + "&type=2";

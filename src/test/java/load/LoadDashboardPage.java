@@ -11,6 +11,9 @@ import ui.utils.TestListener;
  */
 @Listeners(TestListener.class)
 public class LoadDashboardPage {
+    final int threadsDashboardPage = 10;
+
+
 
     @BeforeTest
     public void getCred(){
@@ -29,10 +32,10 @@ public class LoadDashboardPage {
         requestManager.checkExpiredCredentials(10000, 20000);
     }
 
-    @Test(threadPoolSize = 1, invocationCount = 1)
+    @Test(threadPoolSize = threadsDashboardPage, invocationCount = threadsDashboardPage)
     public void loadDashboardPage (){
         RequestManager requestManager = new RequestManager();
-        requestManager.startLog("RAlog_"+".txt");
+        requestManager.startLog("loadDashboardPage.txt");
         requestManager.loadDashboardPage(20,2000);
         requestManager.stopLog();
     }
