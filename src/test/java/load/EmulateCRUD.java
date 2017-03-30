@@ -15,4 +15,10 @@ public class EmulateCRUD {
         RequestManager requestManager = new RequestManager();
         requestManager.notificationRuleCreate();
     }
+
+    @Test
+    public void deleteNotificationRule(){
+        RequestManager requestManager = new RequestManager();
+        requestManager.notificationRuleDelete();
+    }
 }

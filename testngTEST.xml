@@ -3,27 +3,27 @@
 <suite name="Regression testing" parallel="methods" thread-count="3">
 
     <!--<test name="Load Dashboard Page">-->
-        <!--<parameter name="browserName" value="chrome"/>-->
-        <!--<parameter name="useGrid" value="false"></parameter>-->
-        <!--<classes>-->
-            <!--<class name="load.LoadDashboardPage"/>-->
-        <!--</classes>-->
+    <!--<parameter name="browserName" value="chrome"/>-->
+    <!--<parameter name="useGrid" value="false"></parameter>-->
+    <!--<classes>-->
+    <!--<class name="load.LoadDashboardPage"/>-->
+    <!--</classes>-->
     <!--</test>-->
 
     <!--<test name="Emulate Charts Refreshing">-->
-        <!--<parameter name="browserName" value="chrome"/>-->
-        <!--<parameter name="useGrid" value="false"></parameter>-->
-        <!--<classes>-->
-            <!--<class name="load.EmulateChartsRefreshing"/>-->
-        <!--</classes>-->
+    <!--<parameter name="browserName" value="chrome"/>-->
+    <!--<parameter name="useGrid" value="false"></parameter>-->
+    <!--<classes>-->
+    <!--<class name="load.EmulateChartsRefreshing"/>-->
+    <!--</classes>-->
     <!--</test>-->
 
     <test name="Emulate CRUD">
-    <parameter name="browserName" value="chrome"/>
-    <parameter name="useGrid" value="false"></parameter>
-    <classes>
-    <class name="load.EmulateCRUD"/>
-    </classes>
+        <parameter name="browserName" value="chrome"/>
+        <parameter name="useGrid" value="false"></parameter>
+        <classes>
+            <class name="load.EmulateCRUD"/>
+        </classes>
     </test>
 </suite>
 

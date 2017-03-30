@@ -35,12 +35,22 @@ public class RequestManager extends SignAWSv4{
     public void notificationRuleCreate(){
         String method = "POST";
         String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/rule";
-        String jsonBody = "{\"active\":true,\"name\":\"twtwt\",\"description\":\"\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380632517418\",\"name\":\"me\"}],\"emails\":[{\"value\":\"hom.ossystem@gmail.com\",\"name\":\"My email\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":5,\"acknowledged\":30},\"equipmentIds\":[\"Thing-000013-i3\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":0,\"period\":0,\"sensor\":1}";
+        String jsonBody = "{\"active\":true,\"name\":\"twitter-hitler\",\"description\":\"\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380632517418\",\"name\":\"me\"}],\"emails\":[{\"value\":\"hom.ossystem@gmail.com\",\"name\":\"My email\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":5,\"acknowledged\":30},\"equipmentIds\":[\"Thing-000013-i3\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":0,\"period\":0,\"sensor\":1}";
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
 
         createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).post(url);
+    }
 
+    public void notificationRuleDelete(){
+        String method = "DELETE";
+        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/rule";
+        String jsonBody = "{\"items\":[{\"id\":\"fc778741-42e3-410f-bbae-e3c677020628\"}]}";
+
+        Map<String, String> standardHeaders = standardHeaders();
+        Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
+
+        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).delete(url);
     }
 
 
