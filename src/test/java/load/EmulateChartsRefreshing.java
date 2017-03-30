@@ -20,7 +20,7 @@ public class EmulateChartsRefreshing {
     }
 
     @Test(threadPoolSize = threadsDistantRequest, invocationCount = threadsDistantRequest)
-    public void refreshDashboard(){
+    public void refreshVPVDashboardLong(){
         RequestManager requestManager = new RequestManager();
         requestManager.startLog("refreshDashboard"+".txt");
         requestManager.canvasDashboardRefreshCycleOldTimestamp(testOperationTimeMins);
@@ -28,19 +28,19 @@ public class EmulateChartsRefreshing {
     }
 
     @Test(threadPoolSize = threadsActualRequest, invocationCount = threadsActualRequest)
-    public void refreshDashboard2(){
+    public void refreshVPVDashboardShort(){
         RequestManager requestManager = new RequestManager();
         requestManager.canvasDashboardRefreshCycleProperTimestamp(testOperationTimeMins);
     }
 
-//    @Test(threadPoolSize = threadsDistantRequest, invocationCount = threadsDistantRequest)
-    public void refreshGPVDashboard(){
+    @Test(threadPoolSize = threadsDistantRequest, invocationCount = threadsDistantRequest)
+    public void refreshGPVDashboardLong(){
         RequestManager requestManager = new RequestManager();
         requestManager.canvasGPVDashboardRefreshCycleOldTimestamp(testOperationTimeMins);
     }
 
-//    @Test(threadPoolSize = threadsActualRequest, invocationCount = threadsActualRequest)
-    public void refreshGPVDashboard2(){
+    @Test(threadPoolSize = threadsActualRequest, invocationCount = threadsActualRequest)
+    public void refreshGPVDashboardShort(){
         RequestManager requestManager = new RequestManager();
         requestManager.canvasGPVDashboardRefreshCycleProperTimestamp(testOperationTimeMins);
     }

@@ -187,7 +187,7 @@ public class RequestManager extends RequestTemplates{
         String dashboardInfo = uri + "/dev/dashboard/a36d7666-2e0c-4f01-9663-6d726264dc04";
         String notificationUnread = uri + "/dev/notification?status=unread";
 
-        canvasChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
+        canvasVPVChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
     }
 
     public void canvasDashboardRefreshCycleProperTimestamp(int operatingTimeMins) {
@@ -199,7 +199,7 @@ public class RequestManager extends RequestTemplates{
         String dashboardInfo = uri + "/dev/dashboard/a36d7666-2e0c-4f01-9663-6d726264dc04";
         String notificationUnread = uri + "/dev/notification?status=unread";
 
-        canvasChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
+        canvasVPVChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
     }
 
 
@@ -238,8 +238,6 @@ public class RequestManager extends RequestTemplates{
         String chartUpdateUrl = "https://elasticsearch.dev.iotsyst.io/vpv-log/_msearch?timeout=0&preference=1490780679128";
 
         int operatingTimeMins = 2;
-
-
 
 
         Map<String, String> standardHeaders = standardHeaders();

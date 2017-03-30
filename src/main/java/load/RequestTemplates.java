@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class RequestTemplates extends SignAWSv4 {
 
-     void canvasChartRefreshTemplate(int operatingTimeMins, String chartUpdateUrl, String dashboardInfoUrl, String notificationUnreadUrl){
+     void canvasVPVChartRefreshTemplate(int operatingTimeMins, String chartUpdateUrl, String dashboardInfoUrl, String notificationUnreadUrl){
         //all requests on start
         //6 chart update requests every 5 seconds
         //2 dash info requests every 30 seconds
