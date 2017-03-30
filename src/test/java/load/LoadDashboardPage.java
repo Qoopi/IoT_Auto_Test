@@ -11,7 +11,7 @@ import ui.utils.TestListener;
  */
 @Listeners(TestListener.class)
 public class LoadDashboardPage {
-    final int threadsDashboardPage = 10;
+    final int threadsDashboardPage = 1;
 
 
 

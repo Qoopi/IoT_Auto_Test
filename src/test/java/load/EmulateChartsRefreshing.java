@@ -13,8 +13,7 @@ import ui.pageObjets.LogInPage;
 public class EmulateChartsRefreshing {
     final int threadsDistantRequest = 20;
     final int threadsActualRequest = 80;
-
-
+    final int testOperationTimeMins = 1;
 
     @BeforeTest
     public void getCreds(){
@@ -37,14 +36,14 @@ public class EmulateChartsRefreshing {
     public void refreshDashboard(){
         RequestManager requestManager = new RequestManager();
         requestManager.startLog("refreshDashboard"+".txt");
-        requestManager.canvasDashboardRefreshCycleOldTimestamp(1);
+        requestManager.canvasDashboardRefreshCycleOldTimestamp(testOperationTimeMins);
         requestManager.stopLog();
     }
 
     @Test(threadPoolSize = threadsActualRequest, invocationCount = threadsActualRequest)
     public void refreshDashboard2(){
         RequestManager requestManager = new RequestManager();
-        requestManager.canvasDashboardRefreshCycleProperTimestamp(1);
+        requestManager.canvasDashboardRefreshCycleProperTimestamp(testOperationTimeMins);
     }
 
 }

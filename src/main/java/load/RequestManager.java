@@ -15,7 +15,6 @@ import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class RequestManager extends SignAWSv4{
     private FileOutputStream fos = null;
@@ -29,16 +28,6 @@ public class RequestManager extends SignAWSv4{
             Map<String, ?> authHeaders = authHeaders(method, url);
 
             createEmptyRequestWithHeaders(authHeaders).addHeaders(standardHeaders).get(url);
-
-            System.out.println("==================================");
-            if (response.statusCode() != 200) {
-                System.out.println(response.headers().toString());
-            }
-            System.out.println(response.statusCode());
-            System.out.println(response.asString());
-            System.out.println("Time: " + response.timeIn(TimeUnit.MILLISECONDS) + " ms.");
-            System.out.println("==================================");
-
             sleep(timeBetweenRequests);
 
         }
