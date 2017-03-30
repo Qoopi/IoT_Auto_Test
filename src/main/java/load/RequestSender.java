@@ -53,39 +53,35 @@ public class RequestSender {
 
         RequestSender post(String uri) {
             response = requestSpecification.post(uri);
+            debugInfoPrint();
             System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+"POST    : "+uri);
             return this;
         }
 
         RequestSender options(String uri) {
             response = requestSpecification.options(uri);
+            debugInfoPrint();
             System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+"OPTIONS : "+uri);
             return this;
         }
 
         RequestSender delete(String uri){
             response = requestSpecification.delete(uri);
+            debugInfoPrint();
             System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+"DELETE  : "+uri);
             return this;
         }
 
         public RequestSender get(String uri){
             response = requestSpecification.get(uri);
-            if (response.statusCode() != 200) {
-                System.out.println("==================================");
-                System.out.println(response.statusCode());
-                System.out.println("-------------------------------");
-                System.out.println(response.headers().toString());
-                System.out.println("-------------------------------");
-                System.out.println(response.asString());
-                System.out.println("==================================");
-            }
+            debugInfoPrint();
             System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+"GET     : "+uri);
             return this;
         }
 
         RequestSender put(String uri) {
             response = requestSpecification.put(uri);
+            debugInfoPrint();
             System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+"PUT     : "+uri);
             return this;
         }
@@ -96,6 +92,18 @@ public class RequestSender {
 
         public String extractAllResponseAsString(){
             return response.then().extract().asString();
+        }
+
+        public void debugInfoPrint(){
+            if (response.statusCode() != 200) {
+                System.out.println("==================================");
+                System.out.println(response.statusCode());
+                System.out.println("-------------------------------");
+                System.out.println(response.headers().toString());
+                System.out.println("-------------------------------");
+                System.out.println(response.asString());
+                System.out.println("==================================");
+            }
         }
 
     }

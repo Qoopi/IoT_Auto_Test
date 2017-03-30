@@ -10,12 +10,20 @@
         <!--</classes>-->
     <!--</test>-->
 
-    <test name="Emulate Charts Refreshing">
-        <parameter name="browserName" value="chrome"/>
-        <parameter name="useGrid" value="false"></parameter>
-        <classes>
-            <class name="load.EmulateChartsRefreshing"/>
-        </classes>
+    <!--<test name="Emulate Charts Refreshing">-->
+        <!--<parameter name="browserName" value="chrome"/>-->
+        <!--<parameter name="useGrid" value="false"></parameter>-->
+        <!--<classes>-->
+            <!--<class name="load.EmulateChartsRefreshing"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+
+    <test name="Emulate CRUD">
+    <parameter name="browserName" value="chrome"/>
+    <parameter name="useGrid" value="false"></parameter>
+    <classes>
+    <class name="load.EmulateCRUD"/>
+    </classes>
     </test>
 </suite>
 
