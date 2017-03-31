@@ -1,5 +1,6 @@
 package load;
 
+import org.apache.commons.io.output.TeeOutputStream;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -9,7 +10,13 @@ import ui.utils.WaitsAsserts;
 import ui.utils.WebDriverFactory;
 import ui.utils.WebDriverManager;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+
 public class LoadListener implements ITestListener {
+    FileOutputStream fos = null;
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
@@ -53,6 +60,19 @@ public class LoadListener implements ITestListener {
         WebDriverManager.setWebDriver(driver);
 
         getCreds();
+
+        try {
+            fos = new FileOutputStream("loadReports/simulation.log");
+            TeeOutputStream myOut = new TeeOutputStream(System.out, fos);
+            PrintStream ps = new PrintStream(myOut);
+            System.setOut(ps);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String name = "RecordedSimulation1";
+        String nameof = "recordedsimulation1";
+        System.out.println("RUN\t"+name+"\ts\t"+nameof+"\t"+System.currentTimeMillis()+"\ts\t2.0");
     }
 
     @Override
@@ -64,6 +84,13 @@ public class LoadListener implements ITestListener {
         waits.sleep(5000);
         if (driver != null) {
             driver.quit();
+        }
+
+
+        try {
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

@@ -178,12 +178,12 @@ public class RequestManager extends RequestTemplates{
 
 
 
-    public void checkExpiredCredentials(int repeats, int timeBetweenRequestsMills){
+    public void checkExpiredCredentials(int operatingTimeMins){
         String method = "GET";
         String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread";
         Map<String,?> standardHeaders = standardHeaders();
 
-        for (int i = 0; i<repeats; i++) {
+        for (int i = 0; i<operatingTimeMins; i++) {
             Map<String,?> authHeaders = authHeaders(method, url);
 
 //            createEmptyRequestWithHeaders(authHeaders).addHeaders(standardHeaders).get(url, "off");
@@ -194,7 +194,7 @@ public class RequestManager extends RequestTemplates{
                 parseNewCreds(jsonString);
             }
 
-            sleep(timeBetweenRequestsMills);
+            sleep(59000);
         }
 
     }
