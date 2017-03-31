@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 @Listeners(LoadListener.class)
 public class EmulateCRUD {
-    private final int threads = 1;
+    private final int threads = 10;
 
     @Test(threadPoolSize = threads, invocationCount = threads)
     public void notificationRulesCRUD(){
