@@ -7,23 +7,32 @@ import ru.yandex.qatools.allure.annotations.Step;
 import ui.utils.SessionStorage;
 import ui.utils.WaitsAsserts;
 import ui.utils.WebDriverManager;
+import universal.CredentialCenter;
+
+import java.util.HashMap;
 
 import static load.RequestSender.awsCredentials;
 
 
 public class LogInPage {
     private WaitsAsserts waits_asserts = new WaitsAsserts();
-
     private WebDriver driver;
+
+    private String mail = null;
+    private String mail2 = null;
+    private String pass = null;
+    private String pass2 = null;
 
     public LogInPage() {
         this.driver = WebDriverManager.getDriver();
-    }
+        CredentialCenter credentialCenter = new CredentialCenter();
+        HashMap<String, String> map = credentialCenter.readProperties();
 
-    private String mail2 = "kov.ossystem@gmail.com";
-    private String mail = "geloksmmm@gmail.com";
-    private String pass = "QW125478963qw";
-    private String pass2 = "QW125478963qw";
+        mail = map.get("email");
+        pass = map.get("password");
+        mail2 = map.get("email2");
+        pass2 = map.get("password2");
+    }
 
 
     @Step("Get on Start Page")

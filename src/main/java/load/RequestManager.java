@@ -17,6 +17,8 @@ import java.util.Map;
 
 public class RequestManager extends RequestTemplates{
     private FileOutputStream fos = null;
+    private String idOfCreatedRule = null;
+
 
     public void getChart(int repeats, int timeBetweenRequests){
         String method = "GET";
@@ -31,6 +33,8 @@ public class RequestManager extends RequestTemplates{
         }
     }
 
+    //CRUD here
+
     public void notificationRuleCreate(){
         String method = "POST";
         String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/rule";
@@ -38,13 +42,13 @@ public class RequestManager extends RequestTemplates{
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
 
-        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).post(url);
+        String response = createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).post(url).extractAllResponseAsString();
+        idOfCreatedRule = getIdOfCreatedNotificationRule(response);
     }
 
     public void notificationRulesRead(){
         String method = "GET";
         String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/rule";
-
 
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(method, url);
@@ -55,7 +59,7 @@ public class RequestManager extends RequestTemplates{
     public void notificationRuleUpdate(){
         String method = "PUT";
         String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/rule";
-        String jsonBody = "{\"items\":[{\"id\":\"f1d40e8b-df08-4432-8914-63fccfc9a345\",\"active\":1,\"name\":\"dsfsd\",\"description\":\"\",\"notificationType\":0,\"type\":8,\"phones\":[{\"value\":\"+380632517418\",\"name\":\"me\"}],\"emails\":[{\"value\":\"hom.ossystem@gmail.com\",\"name\":\"My email\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":5,\"acknowledged\":30,\"globalSettings\":0,\"sms\":0,\"emails\":0},\"equipmentIds\":[\"Thing-090018-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":30,\"period\":0,\"sensor\":\"\"}]}";
+        String jsonBody = "{\"items\":[{\"id\":\""+idOfCreatedRule+"\",\"active\":1,\"name\":\"New auto-test name\",\"description\":\"\",\"notificationType\":0,\"type\":8,\"phones\":[{\"value\":\"+380632517418\",\"name\":\"me\"}],\"emails\":[{\"value\":\"hom.ossystem@gmail.com\",\"name\":\"My email\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":5,\"acknowledged\":30,\"globalSettings\":0,\"sms\":0,\"emails\":0},\"equipmentIds\":[\"Thing-090018-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":30,\"period\":0,\"sensor\":\"\"}]}";
 
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
@@ -66,7 +70,7 @@ public class RequestManager extends RequestTemplates{
     public void notificationRuleDelete(){
         String method = "DELETE";
         String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/rule";
-        String jsonBody = "{\"items\":[{\"id\":\"fc778741-42e3-410f-bbae-e3c677020628\"}]}";
+        String jsonBody = "{\"items\":[{\"id\":\""+idOfCreatedRule+"\"}]}";
 
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
@@ -75,8 +79,18 @@ public class RequestManager extends RequestTemplates{
     }
 
 
-    public void notificationRuleCRUD(){
-
+    public void notificationRuleCRUD(int repeats, int timeBetweenRequests, int timeBetweenCycles){
+        for (int i = 0; i < repeats; i++){
+            sleep(timeBetweenRequests);
+            notificationRuleCreate();
+            sleep(timeBetweenRequests);
+            notificationRulesRead();
+            sleep(timeBetweenRequests);
+            notificationRuleUpdate();
+            sleep(timeBetweenRequests);
+            notificationRuleDelete();
+            sleep(timeBetweenCycles);
+        }
     }
 
 
@@ -164,7 +178,7 @@ public class RequestManager extends RequestTemplates{
 
 
 
-    public void checkExpiredCredentials(int repeats, int timeBetweenRequests){
+    public void checkExpiredCredentials(int repeats, int timeBetweenRequestsMills){
         String method = "GET";
         String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread";
         Map<String,?> standardHeaders = standardHeaders();
@@ -172,6 +186,7 @@ public class RequestManager extends RequestTemplates{
         for (int i = 0; i<repeats; i++) {
             Map<String,?> authHeaders = authHeaders(method, url);
 
+//            createEmptyRequestWithHeaders(authHeaders).addHeaders(standardHeaders).get(url, "off");
             createEmptyRequestWithHeaders(authHeaders).addHeaders(standardHeaders).get(url);
             String jsonString = response.asString();
 
@@ -179,7 +194,7 @@ public class RequestManager extends RequestTemplates{
                 parseNewCreds(jsonString);
             }
 
-            sleep(timeBetweenRequests);
+            sleep(timeBetweenRequestsMills);
         }
 
     }
@@ -337,7 +352,7 @@ public class RequestManager extends RequestTemplates{
 
     public void startLog(String file){
         try {
-            fos = new FileOutputStream(file);
+            fos = new FileOutputStream("loadReports/"+file);
             TeeOutputStream myOut = new TeeOutputStream(System.out, fos);
             PrintStream ps = new PrintStream(myOut);
             System.setOut(ps);

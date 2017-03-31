@@ -5,7 +5,6 @@ import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 import load.objects.AWSCredentials;
 
-import java.time.LocalDateTime;
 import java.util.Map;
 
 import static com.jayway.restassured.RestAssured.given;
@@ -54,35 +53,41 @@ public class RequestSender {
         RequestSender post(String uri) {
             response = requestSpecification.post(uri);
             debugInfoPrint();
-            System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+"POST    : "+uri);
+            gatlingInfoPrintRequest("POST_"+uri);
             return this;
         }
 
         RequestSender options(String uri) {
             response = requestSpecification.options(uri);
             debugInfoPrint();
-            System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+"OPTIONS : "+uri);
+            gatlingInfoPrintRequest("OPTIONS_"+uri);
             return this;
         }
 
         RequestSender delete(String uri){
             response = requestSpecification.delete(uri);
             debugInfoPrint();
-            System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+"DELETE  : "+uri);
+            gatlingInfoPrintRequest("DELETE_"+uri);
             return this;
         }
 
         public RequestSender get(String uri){
             response = requestSpecification.get(uri);
             debugInfoPrint();
-            System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+"GET     : "+uri);
+            gatlingInfoPrintRequest("GET_"+uri);
             return this;
+        }
+
+        public RequestSender get(String uri, String string){
+            response = requestSpecification.get(uri);
+            debugInfoPrint();
+        return this;
         }
 
         RequestSender put(String uri) {
             response = requestSpecification.put(uri);
             debugInfoPrint();
-            System.out.println(LocalDateTime.now()+" : "+response.statusCode()+" : "+response.time()+" : "+"PUT     : "+uri);
+            gatlingInfoPrintRequest("PUT_"+uri);
             return this;
         }
 
@@ -92,6 +97,23 @@ public class RequestSender {
 
         public String extractAllResponseAsString(){
             return response.then().extract().asString();
+        }
+
+
+
+        public void gatlingInfoPrintRequest(String methodAndUri){
+            String name = "somename";
+            long thread = Thread.currentThread().getId();
+            String requestName = methodAndUri;
+
+            if(response.statusCode()==200 || response.statusCode()==304 || response.statusCode()==201 || response.statusCode()==202
+                    || response.statusCode()==203 || response.statusCode()==204 || response.statusCode()==205 || response.statusCode()==206
+                    || response.statusCode()==207 || response.statusCode()==208 || response.statusCode()==209){
+                System.out.println("REQUEST\t"+name+"\t"+thread+"\t\t"+requestName+"\t"+(System.currentTimeMillis()-response.time())+"\t"+System.currentTimeMillis()+"\t"+"OK\t ");
+            }
+            else{
+                System.out.println("REQUEST\t"+name+"\t"+thread+"\t\t"+requestName+"\t"+(System.currentTimeMillis()-response.time())+"\t"+System.currentTimeMillis()+"\t"+"KO\tstatus.find.in(200,304,201,202,203,204,205,206,207,208,209), but actually found "+response.statusCode());
+            }
         }
 
         public void debugInfoPrint(){

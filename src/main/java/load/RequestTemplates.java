@@ -1,12 +1,11 @@
 package load;
 
-import java.time.LocalDateTime;
 import java.util.Map;
 
 /**
  * Created by alex00x6 on 30.03.2017.
  */
-public class RequestTemplates extends SignAWSv4 {
+public class RequestTemplates extends JSONHandler {
 
      void canvasVPVChartRefreshTemplate(int operatingTimeMins, String chartUpdateUrl, String dashboardInfoUrl, String notificationUnreadUrl){
         //all requests on start
@@ -18,8 +17,9 @@ public class RequestTemplates extends SignAWSv4 {
         Map<String, String> dashboardInfoHeaders = null;
         Map<String, String> chartUpdateHeaders = null;
 
-        System.out.println("TIME : HTTP STATUS CODE : RESPONSE TIME : METHOD : URL");
-        System.out.println(LocalDateTime.now() + ": Started");
+//        System.out.println("TIME : HTTP STATUS CODE : RESPONSE TIME : METHOD : URL");
+//        System.out.println(LocalDateTime.now() + ": Started");
+
         //2 1min requests on start here
         notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
         createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
@@ -67,8 +67,8 @@ public class RequestTemplates extends SignAWSv4 {
         Map<String, String> dashboardInfoHeaders = null;
         Map<String, String> chartUpdateHeaders = null;
 
-        System.out.println("TIME : HTTP STATUS CODE : RESPONSE TIME : METHOD : URL");
-        System.out.println(LocalDateTime.now() + ": Started");
+//        System.out.println("TIME : HTTP STATUS CODE : RESPONSE TIME : METHOD : URL");
+//        System.out.println(LocalDateTime.now() + ": Started");
         //
         notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
         createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
