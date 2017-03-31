@@ -9,7 +9,7 @@ public class PageBootSpeed {
     @Test
     public void checkNewCreds0(){
         RequestManager requestManager = new RequestManager();
-        requestManager.checkExpiredCredentials(10000, 20000);
+        requestManager.checkExpiredCredentials(2);
     }
 
     @Test

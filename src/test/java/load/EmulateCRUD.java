@@ -9,12 +9,12 @@ import org.testng.annotations.Test;
 
 @Listeners(LoadListener.class)
 public class EmulateCRUD {
-    private final int threads = 10;
+    private final int threads = 1;
 
     @Test(threadPoolSize = threads, invocationCount = threads)
     public void notificationRulesCRUD(){
         RequestManager requestManager = new RequestManager();
-        requestManager.notificationRuleCRUD(5, 1500, 5000);
+        requestManager.notificationRuleCRUD(1, 2500, 5000);
     }
 
 

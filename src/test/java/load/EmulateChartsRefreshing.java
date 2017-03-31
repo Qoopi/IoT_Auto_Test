@@ -9,8 +9,8 @@ import org.testng.annotations.Test;
 
 @Listeners(LoadListener.class)
 public class EmulateChartsRefreshing {
-    private final int threadsDistantRequest = 2;
-    private final int threadsActualRequest = 8;
+    private final int threadsDistantRequest = 20;
+    private final int threadsActualRequest = 80;
     private final int testOperationTimeMins = 1;
 
     @Test
