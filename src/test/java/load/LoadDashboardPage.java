@@ -6,18 +6,17 @@ import org.testng.annotations.Test;
 @Listeners(LoadListener.class)
 public class LoadDashboardPage {
     final int threadsDashboardPage = 20;
+    final int testOperationTimeMins = 1;
 
     @Test
     public void checkNewCreds(){
         RequestManager requestManager = new RequestManager();
-        requestManager.checkExpiredCredentials(1);
+        requestManager.checkExpiredCredentials(testOperationTimeMins);
     }
 
     @Test(threadPoolSize = threadsDashboardPage, invocationCount = threadsDashboardPage)
     public void loadDashboardPage (){
         RequestManager requestManager = new RequestManager();
-        requestManager.startLog("loadDashboardPage.txt");
         requestManager.loadDashboardPage(200,2000);
-        requestManager.stopLog();
     }
 }
