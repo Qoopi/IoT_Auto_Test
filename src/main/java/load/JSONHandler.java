@@ -17,6 +17,13 @@ public class JSONHandler extends SignAWSv4{
         return id;
     }
 
+    public String getIfOfCreatedDashboard(String response){
+        JSONObject jsonObject = parseToJSONObject(response);
+        JSONObject item = (JSONObject) jsonObject.get("item");
+        String id = item.get("id").toString();
+        return id;
+    }
+
 
     private JSONObject parseToJSONObject(String jsonString){
         JSONParser parser = new JSONParser();

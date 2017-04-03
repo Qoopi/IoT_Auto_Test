@@ -1,5 +1,7 @@
 package load;
 
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -9,9 +11,23 @@ import org.testng.annotations.Test;
 
 @Listeners(LoadListener.class)
 public class EmulateChartsRefreshing {
-    private final int threadsDistantRequest = 20;
-    private final int threadsActualRequest = 80;
+    private final int threadsDistantRequest = 1;
+    private final int threadsActualRequest = 1;
     private final int testOperationTimeMins = 1;
+
+    @BeforeClass
+    public void createDashboards(){
+        RequestManager requestManager = new RequestManager();
+        requestManager.dashboardCreateCanvasGPV();
+        requestManager.dashboardCreateCanvasVPV();
+    }
+
+    @AfterClass
+    public void deleteDashboards(){
+        RequestManager requestManager = new RequestManager();
+        requestManager.dashboardDeleteCanvasGPV();
+        requestManager.dashboardDeleteCanvasVPV();
+    }
 
     @Test
     public void checkNewCreds(){
@@ -22,13 +38,13 @@ public class EmulateChartsRefreshing {
     @Test(threadPoolSize = threadsDistantRequest, invocationCount = threadsDistantRequest)
     public void refreshVPVDashboardLong(){
         RequestManager requestManager = new RequestManager();
-        requestManager.canvasDashboardRefreshCycleOldTimestamp(testOperationTimeMins);
+        requestManager.canvasVPVDashboardRefreshCycleOldTimestamp(testOperationTimeMins);
     }
 
     @Test(threadPoolSize = threadsActualRequest, invocationCount = threadsActualRequest)
     public void refreshVPVDashboardShort(){
         RequestManager requestManager = new RequestManager();
-        requestManager.canvasDashboardRefreshCycleProperTimestamp(testOperationTimeMins);
+        requestManager.canvasVPVDashboardRefreshCycleProperTimestamp(testOperationTimeMins);
     }
 
     @Test(threadPoolSize = threadsDistantRequest, invocationCount = threadsDistantRequest)

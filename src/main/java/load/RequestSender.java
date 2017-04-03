@@ -14,6 +14,11 @@ public class RequestSender {
         public Response response = null;
         public static AWSCredentials awsCredentials = new AWSCredentials();
 
+        //this three booleans controls console output messages
+        private boolean enableGatlingReportMessages = true; //should be used with debug messages off (if you want gatling reports to work)
+        private boolean enableErrorDebugResponseMessages = true;
+        private boolean enableAllDebugResponseMessages = false;
+
         public RequestSender(){
         }
 
@@ -78,12 +83,6 @@ public class RequestSender {
             return this;
         }
 
-        public RequestSender get(String uri, String string){
-            response = requestSpecification.get(uri);
-            debugInfoPrint();
-        return this;
-        }
-
         RequestSender put(String uri) {
             response = requestSpecification.put(uri);
             debugInfoPrint();
@@ -102,22 +101,34 @@ public class RequestSender {
 
 
         public void gatlingInfoPrintRequest(String methodAndUri){
-            String name = "somename";
-            long thread = Thread.currentThread().getId();
-            String requestName = methodAndUri;
+            if (enableGatlingReportMessages) {
+                String name = "somename";
+                long thread = Thread.currentThread().getId();
+                String requestName = methodAndUri;
 
-            if(response.statusCode()==200 || response.statusCode()==304 || response.statusCode()==201 || response.statusCode()==202
-                    || response.statusCode()==203 || response.statusCode()==204 || response.statusCode()==205 || response.statusCode()==206
-                    || response.statusCode()==207 || response.statusCode()==208 || response.statusCode()==209){
-                System.out.println("REQUEST\t"+name+"\t"+thread+"\t\t"+requestName+"\t"+(System.currentTimeMillis()-response.time())+"\t"+System.currentTimeMillis()+"\t"+"OK\t ");
-            }
-            else{
-                System.out.println("REQUEST\t"+name+"\t"+thread+"\t\t"+requestName+"\t"+(System.currentTimeMillis()-response.time())+"\t"+System.currentTimeMillis()+"\t"+"KO\tstatus.find.in(200,304,201,202,203,204,205,206,207,208,209), but actually found "+response.statusCode());
+                if (response.statusCode() == 200 || response.statusCode() == 304 || response.statusCode() == 201 || response.statusCode() == 202
+                        || response.statusCode() == 203 || response.statusCode() == 204 || response.statusCode() == 205 || response.statusCode() == 206
+                        || response.statusCode() == 207 || response.statusCode() == 208 || response.statusCode() == 209) {
+                    System.out.println("REQUEST\t" + name + "\t" + thread + "\t\t" + requestName + "\t" + (System.currentTimeMillis() - response.time()) + "\t" + System.currentTimeMillis() + "\t" + "OK\t ");
+                } else {
+                    System.out.println("REQUEST\t" + name + "\t" + thread + "\t\t" + requestName + "\t" + (System.currentTimeMillis() - response.time()) + "\t" + System.currentTimeMillis() + "\t" + "KO\tstatus.find.in(200,304,201,202,203,204,205,206,207,208,209), but actually found " + response.statusCode());
+                }
             }
         }
 
         public void debugInfoPrint(){
-            if (response.statusCode() != 200) {
+            if(enableErrorDebugResponseMessages) {
+                if (response.statusCode() != 200) {
+                    System.out.println("==================================");
+                    System.out.println(response.statusCode());
+                    System.out.println("-------------------------------");
+                    System.out.println(response.headers().toString());
+                    System.out.println("-------------------------------");
+                    System.out.println(response.asString());
+                    System.out.println("==================================");
+                }
+            }
+            if (enableAllDebugResponseMessages){
                 System.out.println("==================================");
                 System.out.println(response.statusCode());
                 System.out.println("-------------------------------");

@@ -17,6 +17,6 @@ public class LoadDashboardPage {
     @Test(threadPoolSize = threadsDashboardPage, invocationCount = threadsDashboardPage)
     public void loadDashboardPage (){
         RequestManager requestManager = new RequestManager();
-        requestManager.loadDashboardPage(200,2000);
+        requestManager.loadDashboardPage(10,2000);
     }
 }
