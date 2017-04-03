@@ -2,8 +2,6 @@ package ui.utils;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import ui.pageObjets.dashboard.Dasboards.Dashboard;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -14,7 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertEquals;
 import static ui.utils.WaitsAsserts.sleep;
 
 public class UiUtils {

@@ -135,7 +135,7 @@ public class SignAWSv4 extends RequestSender {
 
         String credentialScope = dateStamp+"/"+regionName+"/"+serviceName+"/"+"aws4_request";
         String canonicalHeaders = "host:"+host+"\n"+"x-amz-date:"+amzDate+"\n";
-        String payloadHash = SHA256("");//ВОТ ТУТ
+        String payloadHash = SHA256("");
         if (awsuri.getPayload()!=null){
             payloadHash = SHA256(awsuri.getPayload());
         }

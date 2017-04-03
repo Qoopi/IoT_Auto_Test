@@ -1,7 +1,6 @@
 package ui.pageObjets.dashboard.Dasboards;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -149,7 +148,7 @@ public class Dashboard{
     }
 
     @Step("Open dashboard table")
-    public void openDashboadr() {
+    public void openDashboard() {
         String openDashboardButton = "//*[@id=\"root\"]/div/div[4]/div/div/div[2]/div/div[1]/div[1]/button";
         waits_asserts.waitForVisibilityByXpath(driver, openDashboardButton);
         driver.findElement(By.xpath(openDashboardButton)).click();

@@ -94,7 +94,7 @@ public class LoadListener implements ITestListener {
         }
     }
 
-    public void getCreds(){
+    private void getCreds(){
         LogInPage log = new LogInPage();
         log.getToIoTPage();
         log.enterGoogleCred();
@@ -112,7 +112,7 @@ public class LoadListener implements ITestListener {
         System.out.println("RUN\t"+name+"\ts\t"+nameof+"\t"+System.currentTimeMillis()+"\ts\t2.0");
     }
 
-    public void gatlingInfoPrintUserStart(){
+    private void gatlingInfoPrintUserStart(){
         // USER    | NAME | THREAD | START/END | TIMESTART | TIMESTART(onstart)/TIMESTOP(onstop)
         String name = "RecordedSimulation1";
         long thread = Thread.currentThread().getId();
@@ -122,7 +122,7 @@ public class LoadListener implements ITestListener {
         System.out.println("USER\t"+name+"\t"+thread+"\tSTART\t"+timeStart+"\t"+timeStart);
     }
 
-    public void gatlingInfoPrintUserEnd(){
+    private void gatlingInfoPrintUserEnd(){
         // USER    | NAME | THREAD | START/END | TIMESTART | TIMESTART(onstart)/TIMESTOP(onstop)
         String name = "RecordedSimulation1";
         long thread = Thread.currentThread().getId();

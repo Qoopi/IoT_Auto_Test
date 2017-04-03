@@ -17,9 +17,6 @@ public class RequestTemplates extends JSONHandler {
         Map<String, String> dashboardInfoHeaders = null;
         Map<String, String> chartUpdateHeaders = null;
 
-//        System.out.println("TIME : HTTP STATUS CODE : RESPONSE TIME : METHOD : URL");
-//        System.out.println(LocalDateTime.now() + ": Started");
-
         //2 1min requests on start here
         notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
         createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
@@ -67,8 +64,6 @@ public class RequestTemplates extends JSONHandler {
         Map<String, String> dashboardInfoHeaders = null;
         Map<String, String> chartUpdateHeaders = null;
 
-//        System.out.println("TIME : HTTP STATUS CODE : RESPONSE TIME : METHOD : URL");
-//        System.out.println(LocalDateTime.now() + ": Started");
         //
         notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
         createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);

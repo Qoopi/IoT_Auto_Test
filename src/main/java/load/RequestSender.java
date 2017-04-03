@@ -100,7 +100,7 @@ public class RequestSender {
 
 
 
-        public void gatlingInfoPrintRequest(String methodAndUri){
+        private void gatlingInfoPrintRequest(String methodAndUri){
             if (enableGatlingReportMessages) {
                 String name = "somename";
                 long thread = Thread.currentThread().getId();
@@ -116,7 +116,7 @@ public class RequestSender {
             }
         }
 
-        public void debugInfoPrint(){
+        private void debugInfoPrint(){
             if(enableErrorDebugResponseMessages) {
                 if (response.statusCode() != 200) {
                     System.out.println("==================================");
