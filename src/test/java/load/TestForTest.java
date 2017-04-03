@@ -4,7 +4,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners(LoadListener.class)
-public class PageBootSpeed {
+public class TestForTest {
 
     @Test
     public void checkNewCreds0(){

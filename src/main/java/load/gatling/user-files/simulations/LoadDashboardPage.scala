@@ -213,21 +213,21 @@ class LoadDashboardPage extends Simulation {
 					http("request_15")
 						.get(uri9 + "/releases/v4.6.3/fonts/fontawesome-webfont.woff2")
 						.headers(headers_15),
-					http("request_16")
-						.get(uri1 + "/notification?status=unread") //AWS notifications + check expired creds
-						.headers(headers_16_aws),
-					http("request_17")
-						.get(uri1 + "/equipment_models?availables=true") //AWS
-						.headers(headers_17_aws),
+//					http("request_16")
+//						.get(uri1 + "/notification?status=unread") //AWS notifications + check expired creds
+//						.headers(headers_16_aws),
+//					http("request_17")
+//						.get(uri1 + "/equipment_models?availables=true") //AWS
+//						.headers(headers_17_aws),
 					http("request_18")
 						.options(uri5 + "/blips")
 						.headers(headers_18),
 					http("request_19")
 						.options(uri5 + "/identify")
 						.headers(headers_18),
-					http("request_20")
-						.get(uri1 + "/dashboard/acadcc02-8979-4a9a-ad06-308c37291792") //AWS
-						.headers(headers_20_aws),
+//					http("request_20")
+//						.get(uri1 + "/dashboard/acadcc02-8979-4a9a-ad06-308c37291792") //AWS
+//						.headers(headers_20_aws),
 					http("request_21")
 						.post(uri5 + "/blips")
 						.headers(headers_21)

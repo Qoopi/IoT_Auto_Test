@@ -39,6 +39,12 @@ class SignAWSv4 extends AWSCredentials {
     map3
   }
 
+  def allHeaders(method: String, url: String, body: String): Map[String, String] = {
+    readCredsFromFile()
+    val map3 = standardHeaders++authHeaders(method, url, body)
+    map3
+  }
+
   def authHeaders(method: String, url: String): Map[String, String] = {
     val date: Date = new Date
     val awsuri: AWSURI = parseForCanonicalRequest(method, url)
@@ -47,6 +53,17 @@ class SignAWSv4 extends AWSCredentials {
     val map = Map("x-amz-date" -> amzDate, "Authorization" -> sign, "x-amz-security-token"-> getSessionToken)
     map
   }
+
+  def authHeaders(method: String, url: String, body: String): Map[String, String] = {
+    val date: Date = new Date
+    val awsuri: AWSURI = parseForCanonicalRequest(method, url)
+    awsuri.setPayload(body)
+    val sign: String = generateSign(date, awsuri)
+    val amzDate = getAmzDate(date)
+    val map = Map("x-amz-date" -> amzDate, "Authorization" -> sign, "x-amz-security-token"-> getSessionToken)
+    map
+  }
+
 
   def standardHeaders: Map[String, String] = {
     val map = Map("Connection" -> "keep-alive",
@@ -106,7 +123,9 @@ class SignAWSv4 extends AWSCredentials {
     val dateStamp: String = getDateStamp(date)
     val credentialScope: String = dateStamp + "/" + regionName + "/" + serviceName + "/" + "aws4_request"
     val canonicalHeaders: String = "host:" + host + "\n" + "x-amz-date:" + amzDate + "\n"
-    val payloadHash: String = SHA256("")
+    var payloadHash: String = SHA256("")
+    if(awsuri.getPayload!=null){
+      payloadHash=awsuri.getPayload}
     val canonicalRequest: String = method + "\n" + canonicalUri + "\n" + canonicalQueryString + "\n" + canonicalHeaders + "\n" + signedHeaders + "\n" + payloadHash
     var signingKey: Array[Byte] = new Array[Byte](0)
     try {

@@ -96,6 +96,24 @@ public class RequestManager extends RequestTemplates{
         }
     }
 
+    public void skedlerReportCreate(){
+        String method = "PUT";
+        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/report";
+        String jsonBody = "{\"templateId\":\"Vacuum-Pump-Vibration-Report---Optimized-for-Printing---Daily\",\"emaillist\":\"kov.ossystem@gmasill.com\",\"filter\":\"equipmentId:Thing-090035-0\",\"filter_name\":\"Vacuum-Pump-Vibration-Report-List---Optimized-for-Printing---Daily\",\"excelEnabled\":false}";
+
+        Map<String, String> standardHeaders = standardHeaders();
+        Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
+
+        String kaka = createRequestWithHeaders(authHeaders, jsonBody).addHeaders(standardHeaders).put(url).extractAllResponseAsString();
+    }
+
+    public void skedlerReportSendNow(){
+        String method = "POST";
+        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/report";
+        String jsonBody = "{\"filterId\":\"20d24722-cb84-4bf9-8705-d34617b813e2\",\"templateId\":\"GPV-Smart-Sensor-Report-15-minutes-activity-1\",\"emaillist\":\"geloksmmm@gmail.com,kov.ossystem@gmail.com\",\"filter\":\"equipmentId:Thing-090035-0\",\"filter_name\":\"GPV-Smart-Sensor-Report-List-15-minutes\",\"excelEnabled\":false}";
+
+    }
+
 
     public void loadDashboardPage(int repeats, int timeBetweenCycles) {
         String urlBootStrap = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css";

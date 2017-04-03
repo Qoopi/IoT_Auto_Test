@@ -6,9 +6,18 @@ class AWSURI {
   private var canonicalUri: String = null
   private var canonicalQueryString: String = null
   private var fullURL: String = null
+  private var payload: String = null
 
   override def toString: String = {
     return "AWSURI{" + "method='" + method + '\'' + ", serviceName='" + serviceName + '\'' + ", regionName='" + regionName + '\'' + ", host='" + host + '\'' + ", canonicalUri='" + canonicalUri + '\'' + ", canonicalQueryString='" + canonicalQueryString + '\'' + ", fullURL='" + fullURL + '\'' + '}'
+  }
+
+  def getPayload: String = {
+    return payload
+  }
+
+  def setPayload(payload: String){
+    this.payload = payload
   }
 
   def getMethod: String = {

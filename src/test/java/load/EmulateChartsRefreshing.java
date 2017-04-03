@@ -11,8 +11,10 @@ import org.testng.annotations.Test;
 
 @Listeners(LoadListener.class)
 public class EmulateChartsRefreshing {
-    private final int threadsDistantRequest = 1;
-    private final int threadsActualRequest = 1;
+    //The quantity of both requests is summed and multiplied by 2 (for this test configuration)
+    //For instance 100 threads of Distant and 400 Actual will give 1000 threads total
+    private final int threadsDistantRequest = 100;
+    private final int threadsActualRequest = 400;
     private final int testOperationTimeMins = 1;
 
     @BeforeClass

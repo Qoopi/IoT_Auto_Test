@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Regression testing" parallel="methods" thread-count="100">
+<suite name="Regression testing" parallel="methods" thread-count="2000">
 
     <!--<test name="Load Dashboard Page">-->
         <!--<parameter name="browserName" value="chrome"/>-->
@@ -10,13 +10,13 @@
         <!--</classes>-->
     <!--</test>-->
 
-    <test name="Emulate Charts Refreshing">
-        <parameter name="browserName" value="chrome"/>
-        <parameter name="useGrid" value="false"></parameter>
-        <classes>
-            <class name="load.EmulateChartsRefreshing"/>
-        </classes>
-    </test>
+    <!--<test name="Emulate Charts Refreshing">-->
+        <!--<parameter name="browserName" value="chrome"/>-->
+        <!--<parameter name="useGrid" value="false"></parameter>-->
+        <!--<classes>-->
+            <!--<class name="load.EmulateChartsRefreshing"/>-->
+        <!--</classes>-->
+    <!--</test>-->
 
     <!--<test name="Emulate CRUD">-->
         <!--<parameter name="browserName" value="chrome"/>-->
@@ -25,5 +25,13 @@
             <!--<class name="load.EmulateCRUD"/>-->
         <!--</classes>-->
     <!--</test>-->
+
+    <test name="Emulate sending reports via Skedler">
+        <parameter name="browserName" value="chrome"/>
+        <parameter name="useGrid" value="false"></parameter>
+        <classes>
+            <class name="load.EmulateReportsThroughSkedler"/>
+        </classes>
+    </test>
 </suite>
 

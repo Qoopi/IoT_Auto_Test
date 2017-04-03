@@ -14,10 +14,10 @@ public class RequestSender {
         public Response response = null;
         public static AWSCredentials awsCredentials = new AWSCredentials();
 
-        //this three booleans controls console output messages
-        private boolean enableGatlingReportMessages = true; //should be used with debug messages off (if you want gatling reports to work)
-        private boolean enableErrorDebugResponseMessages = true;
-        private boolean enableAllDebugResponseMessages = false;
+        //these three booleans controls console output messages
+        private boolean enableGatlingReportMessages = false; //should be used with debug messages off (if you want gatling reports to work)
+        private boolean enableErrorDebugResponseMessages = false;
+        private boolean enableAllDebugResponseMessages = true;
 
         public RequestSender(){
         }
