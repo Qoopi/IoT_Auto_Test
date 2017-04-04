@@ -5,8 +5,9 @@ import org.testng.annotations.Test;
 
 @Listeners(LoadListener.class)
 public class LoadDashboardPage {
-    final int threadsDashboardPage = 20;
-    final int testOperationTimeMins = 1;
+    private final int threadsDashboardPage = 20;
+    private final int testOperationTimeMins = 1;
+    private final int newThreadLaunchDelayMs = 500;
 
     @Test
     public void checkNewCreds(){
@@ -16,6 +17,7 @@ public class LoadDashboardPage {
 
     @Test(threadPoolSize = threadsDashboardPage, invocationCount = threadsDashboardPage)
     public void loadDashboardPage (){
+        ThreadLaunchDelayer.delay(newThreadLaunchDelayMs);
         RequestManager requestManager = new RequestManager();
         requestManager.loadDashboardPage(10,2000);
     }

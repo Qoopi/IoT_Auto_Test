@@ -16,6 +16,7 @@ public class EmulateChartsRefreshing {
     private final int threadsDistantRequest = 100;
     private final int threadsActualRequest = 400;
     private final int testOperationTimeMins = 1;
+    private final int newThreadLaunchDelayMs = 500;
 
     @BeforeClass
     public void createDashboards(){
@@ -39,24 +40,28 @@ public class EmulateChartsRefreshing {
 
     @Test(threadPoolSize = threadsDistantRequest, invocationCount = threadsDistantRequest)
     public void refreshVPVDashboardLong(){
+        ThreadLaunchDelayer.delay(newThreadLaunchDelayMs);
         RequestManager requestManager = new RequestManager();
         requestManager.canvasVPVDashboardRefreshCycleOldTimestamp(testOperationTimeMins);
     }
 
     @Test(threadPoolSize = threadsActualRequest, invocationCount = threadsActualRequest)
     public void refreshVPVDashboardShort(){
+        ThreadLaunchDelayer.delay(newThreadLaunchDelayMs);
         RequestManager requestManager = new RequestManager();
         requestManager.canvasVPVDashboardRefreshCycleProperTimestamp(testOperationTimeMins);
     }
 
     @Test(threadPoolSize = threadsDistantRequest, invocationCount = threadsDistantRequest)
     public void refreshGPVDashboardLong(){
+        ThreadLaunchDelayer.delay(newThreadLaunchDelayMs);
         RequestManager requestManager = new RequestManager();
         requestManager.canvasGPVDashboardRefreshCycleOldTimestamp(testOperationTimeMins);
     }
 
     @Test(threadPoolSize = threadsActualRequest, invocationCount = threadsActualRequest)
     public void refreshGPVDashboardShort(){
+        ThreadLaunchDelayer.delay(newThreadLaunchDelayMs);
         RequestManager requestManager = new RequestManager();
         requestManager.canvasGPVDashboardRefreshCycleProperTimestamp(testOperationTimeMins);
     }

@@ -3,6 +3,7 @@ package load;
 
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.config.SSLConfig;
+import load.constants.AmazonAPIGateway;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -12,7 +13,6 @@ import javax.net.ssl.SSLContext;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDateTime;
 import java.util.Map;
 
 public class RequestManager extends RequestTemplates{
@@ -20,7 +20,6 @@ public class RequestManager extends RequestTemplates{
     private static String idOfCreatedVPVDashboard = null;
     private static String idOfCreatedGPVDashboard = null;
     private static String idOfCreatedReport = null;
-
 
 
     public void getChart(int repeats, int timeBetweenRequests){
@@ -40,7 +39,7 @@ public class RequestManager extends RequestTemplates{
 
     public void notificationRuleCreate(){
         String method = "POST";
-        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/rule";
+        String url = AmazonAPIGateway.Rule.getUri();
         String jsonBody = "{\"active\":true,\"name\":\"twitter-hitler\",\"description\":\"\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380632517418\",\"name\":\"me\"}],\"emails\":[{\"value\":\"hom.ossystem@gmail.com\",\"name\":\"My email\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":5,\"acknowledged\":30},\"equipmentIds\":[\"Thing-000013-i3\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":0,\"period\":0,\"sensor\":1}";
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
@@ -51,7 +50,7 @@ public class RequestManager extends RequestTemplates{
 
     public void notificationRulesRead(){
         String method = "GET";
-        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/rule";
+        String url = AmazonAPIGateway.Rule.getUri();
 
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(method, url);
@@ -61,7 +60,7 @@ public class RequestManager extends RequestTemplates{
 
     public void notificationRuleUpdate(){
         String method = "PUT";
-        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/rule";
+        String url = AmazonAPIGateway.Rule.getUri();
         String jsonBody = "{\"items\":[{\"id\":\""+ idOfCreatedNotificationRule +"\",\"active\":1,\"name\":\"New auto-test name\",\"description\":\"\",\"notificationType\":0,\"type\":8,\"phones\":[{\"value\":\"+380632517418\",\"name\":\"me\"}],\"emails\":[{\"value\":\"hom.ossystem@gmail.com\",\"name\":\"My email\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":5,\"acknowledged\":30,\"globalSettings\":0,\"sms\":0,\"emails\":0},\"equipmentIds\":[\"Thing-090018-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":30,\"period\":0,\"sensor\":\"\"}]}";
 
         Map<String, String> standardHeaders = standardHeaders();
@@ -72,7 +71,7 @@ public class RequestManager extends RequestTemplates{
 
     public void notificationRuleDelete(){
         String method = "DELETE";
-        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/rule";
+        String url = AmazonAPIGateway.Rule.getUri();
         String jsonBody = "{\"items\":[{\"id\":\""+ idOfCreatedNotificationRule +"\"}]}";
 
         Map<String, String> standardHeaders = standardHeaders();
@@ -100,7 +99,7 @@ public class RequestManager extends RequestTemplates{
 
     public void skedlerReportCreate(){
         String method = "PUT";
-        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/report";
+        String url = AmazonAPIGateway.Report.getUri();
         String jsonBody = "{\"templateId\":\"Vacuum-Pump-Vibration-Report---Optimized-for-Printing---Daily\",\"emaillist\":\"kov.ossystem@gmasill.com\",\"filter\":\"equipmentId:Thing-090035-0\",\"filter_name\":\"Vacuum-Pump-Vibration-Report-List---Optimized-for-Printing---Daily\",\"excelEnabled\":false}";
 
         Map<String, String> standardHeaders = standardHeaders();
@@ -114,7 +113,7 @@ public class RequestManager extends RequestTemplates{
 
     public void skedlerReportSendNow(){
         String method = "POST";
-        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/report";
+        String url = AmazonAPIGateway.Report.getUri();
         String jsonBody = "{\"filterId\":\""+idOfCreatedReport+"\",\"templateId\":\"GPV-Smart-Sensor-Report-15-minutes-activity-1\",\"emaillist\":\"geloksmmm@gmail.com,kov.ossystem@gmail.com\",\"filter\":\"equipmentId:Thing-090035-0\",\"filter_name\":\"GPV-Smart-Sensor-Report-List-15-minutes\",\"excelEnabled\":false}";
 
         Map<String, String> standardHeaders = standardHeaders();
@@ -125,7 +124,7 @@ public class RequestManager extends RequestTemplates{
 
     public void skedlerReportDelete(){
         String method = "DELETE";
-        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/report";
+        String url = AmazonAPIGateway.Report.getUri();
         String jsonBody = "";
         //get body from test account
         //{"filter_name":"GPV-Smart-Sensor-Report-List-15-minutes","filterTitle":"GPV-Smart-Sensor-Report-List-15-minutes hom.ossystem@gmail.com","equipments":"Thing-090035-0","id":null,"filterId":"7e15db45-45f3-4f41-8979-bd35787be667","emails":"hom.ossystem@gmail.com","userId":"0315f51c-67ab-4390-bdd1-46bd9d3fd038","createdAt":null,"excelIncluded":null}
@@ -221,8 +220,6 @@ public class RequestManager extends RequestTemplates{
     }
 
 
-
-
     public void checkExpiredCredentials(int operatingTimeMins){
         String method = "GET";
         String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread";
@@ -246,7 +243,7 @@ public class RequestManager extends RequestTemplates{
 
     public void dashboardCreateCanvasVPV(){
         String method = "POST";
-        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/dashboard";
+        String url = AmazonAPIGateway.Dashboard.getUri();
         String body = "{\"type\":7,\"equipmentIds\":[\"Thing-000013-i3\",\"Thing-000011-i1\",\"Thing-000012-i2\"],\"name\":\"someAutoTestNameVPV\",\"description\":\"someAutoTestDescriptionVPV\"}";
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(method, url, body);
@@ -257,7 +254,7 @@ public class RequestManager extends RequestTemplates{
 
     public void dashboardCreateCanvasGPV(){
         String method = "POST";
-        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/dashboard";
+        String url = AmazonAPIGateway.Dashboard.getUri();
         String body = "{\"type\":9,\"equipmentIds\":[\"Thing-090035-0\"],\"name\":\"someAutoTestNameGPV\",\"description\":\"someAutoTestDescriptionGPV\"}";
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(method, url, body);
@@ -276,7 +273,7 @@ public class RequestManager extends RequestTemplates{
 
     private void deleteCanvasDashboardById(String id){
         String method = "DELETE";
-        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/dashboard";
+        String url = AmazonAPIGateway.Dashboard.getUri();
         String jsonBody = "{\"items\":[{\"id\":\""+id+"\"}]}";
 
         Map<String, String> standardHeaders = standardHeaders();
@@ -352,7 +349,6 @@ public class RequestManager extends RequestTemplates{
         Map<String, String> dashboardInfoHeaders = null;
         Map<String, String> chartUpdateHeaders = null;
 
-        System.out.println(LocalDateTime.now() + " START");
         dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
         notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
 
@@ -361,9 +357,6 @@ public class RequestManager extends RequestTemplates{
         createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
         createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
 
-        System.out.println(LocalDateTime.now()+" _msearch?timeout=0&preference=1490780679128");
-        System.out.println(LocalDateTime.now()+" _msearch?timeout=0&preference=1490780679128");
-        System.out.println(LocalDateTime.now()+" _msearch?timeout=0&preference=1490780679128");
         for (int i1 = 0; i1 < operatingTimeMins; i1++) {
             for (int i = 0; i < 2; i++) {
                 sleep(29200);
@@ -373,11 +366,6 @@ public class RequestManager extends RequestTemplates{
                 createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
             }
             notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
-
-            System.out.println(LocalDateTime.now()+" _msearch?timeout=0&preference=1490780679128");
-            System.out.println(LocalDateTime.now()+" _msearch?timeout=0&preference=1490780679128");
-            System.out.println(LocalDateTime.now()+" _msearch?timeout=0&preference=1490780679128");
-
             createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
         }

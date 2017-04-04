@@ -9,9 +9,12 @@ import org.testng.annotations.Test;
 
 @Listeners(LoadListener.class)
 public class EmulateReportsThroughSkedler {
+    private final int threadsDashboardPage = 20;
+    private final int newThreadLaunchDelayMs = 500;
 
-    @Test
+    @Test(threadPoolSize = threadsDashboardPage, invocationCount = threadsDashboardPage)
     public void createReport(){
+        ThreadLaunchDelayer.delay(newThreadLaunchDelayMs);
         RequestManager requestManager = new RequestManager();
         requestManager.skedlerReportCreate();
     }
