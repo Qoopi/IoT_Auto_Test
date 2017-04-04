@@ -4,6 +4,7 @@ target
 *.iml
 *.ipr
 *.txt
-
+target/
+results/
 loadReports/
 *.properties
