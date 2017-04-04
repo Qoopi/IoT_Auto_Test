@@ -3,23 +3,23 @@ package load;
 
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.config.SSLConfig;
-import org.apache.commons.io.output.TeeOutputStream;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.net.ssl.SSLContext;
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.Map;
 
 public class RequestManager extends RequestTemplates{
-    private FileOutputStream fos = null;
-    private static String idOfCreatedRule = null;
+    private static String idOfCreatedNotificationRule = null;
     private static String idOfCreatedVPVDashboard = null;
     private static String idOfCreatedGPVDashboard = null;
+    private static String idOfCreatedReport = null;
 
 
 
@@ -46,7 +46,7 @@ public class RequestManager extends RequestTemplates{
         Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
 
         String response = createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).post(url).extractAllResponseAsString();
-        idOfCreatedRule = getIdOfCreatedNotificationRule(response);
+        idOfCreatedNotificationRule = getIdOfCreatedNotificationRule(response);
     }
 
     public void notificationRulesRead(){
@@ -62,7 +62,7 @@ public class RequestManager extends RequestTemplates{
     public void notificationRuleUpdate(){
         String method = "PUT";
         String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/rule";
-        String jsonBody = "{\"items\":[{\"id\":\""+idOfCreatedRule+"\",\"active\":1,\"name\":\"New auto-test name\",\"description\":\"\",\"notificationType\":0,\"type\":8,\"phones\":[{\"value\":\"+380632517418\",\"name\":\"me\"}],\"emails\":[{\"value\":\"hom.ossystem@gmail.com\",\"name\":\"My email\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":5,\"acknowledged\":30,\"globalSettings\":0,\"sms\":0,\"emails\":0},\"equipmentIds\":[\"Thing-090018-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":30,\"period\":0,\"sensor\":\"\"}]}";
+        String jsonBody = "{\"items\":[{\"id\":\""+ idOfCreatedNotificationRule +"\",\"active\":1,\"name\":\"New auto-test name\",\"description\":\"\",\"notificationType\":0,\"type\":8,\"phones\":[{\"value\":\"+380632517418\",\"name\":\"me\"}],\"emails\":[{\"value\":\"hom.ossystem@gmail.com\",\"name\":\"My email\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":5,\"acknowledged\":30,\"globalSettings\":0,\"sms\":0,\"emails\":0},\"equipmentIds\":[\"Thing-090018-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":30,\"period\":0,\"sensor\":\"\"}]}";
 
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
@@ -73,7 +73,7 @@ public class RequestManager extends RequestTemplates{
     public void notificationRuleDelete(){
         String method = "DELETE";
         String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/rule";
-        String jsonBody = "{\"items\":[{\"id\":\""+idOfCreatedRule+"\"}]}";
+        String jsonBody = "{\"items\":[{\"id\":\""+ idOfCreatedNotificationRule +"\"}]}";
 
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
@@ -82,19 +82,21 @@ public class RequestManager extends RequestTemplates{
     }
 
 
-    public void notificationRuleCRUD(int repeats, int timeBetweenRequests, int timeBetweenCycles){
+    public void notificationRuleCRUD(int repeats, int timeBetweenRequestsMills, int timeBetweenCyclesMills){
         for (int i = 0; i < repeats; i++){
-            sleep(timeBetweenRequests);
+            sleep(timeBetweenRequestsMills);
             notificationRuleCreate();
-            sleep(timeBetweenRequests);
+            sleep(timeBetweenRequestsMills);
             notificationRulesRead();
-            sleep(timeBetweenRequests);
+            sleep(timeBetweenRequestsMills);
             notificationRuleUpdate();
-            sleep(timeBetweenRequests);
+            sleep(timeBetweenRequestsMills);
             notificationRuleDelete();
-            sleep(timeBetweenCycles);
+            sleep(timeBetweenCyclesMills);
         }
     }
+
+    //SKEDLER IN PROGRESS AND NOT FINISHED YET
 
     public void skedlerReportCreate(){
         String method = "PUT";
@@ -104,15 +106,37 @@ public class RequestManager extends RequestTemplates{
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
 
-        String kaka = createRequestWithHeaders(authHeaders, jsonBody).addHeaders(standardHeaders).put(url).extractAllResponseAsString();
+        String jsonResponse = createRequestWithHeaders(authHeaders, jsonBody).addHeaders(standardHeaders).put(url).extractAllResponseAsString();
+        System.out.println(jsonResponse);
+        //тут сделать парс json и запись id в variable
+        idOfCreatedReport = getIdOfCreatedReport(jsonResponse);
     }
 
     public void skedlerReportSendNow(){
         String method = "POST";
         String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/report";
-        String jsonBody = "{\"filterId\":\"20d24722-cb84-4bf9-8705-d34617b813e2\",\"templateId\":\"GPV-Smart-Sensor-Report-15-minutes-activity-1\",\"emaillist\":\"geloksmmm@gmail.com,kov.ossystem@gmail.com\",\"filter\":\"equipmentId:Thing-090035-0\",\"filter_name\":\"GPV-Smart-Sensor-Report-List-15-minutes\",\"excelEnabled\":false}";
+        String jsonBody = "{\"filterId\":\""+idOfCreatedReport+"\",\"templateId\":\"GPV-Smart-Sensor-Report-15-minutes-activity-1\",\"emaillist\":\"geloksmmm@gmail.com,kov.ossystem@gmail.com\",\"filter\":\"equipmentId:Thing-090035-0\",\"filter_name\":\"GPV-Smart-Sensor-Report-List-15-minutes\",\"excelEnabled\":false}";
 
+        Map<String, String> standardHeaders = standardHeaders();
+        Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
+
+        createRequestWithHeaders(authHeaders, jsonBody).addHeaders(standardHeaders).post(url);
     }
+
+    public void skedlerReportDelete(){
+        String method = "DELETE";
+        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/report";
+        String jsonBody = "";
+        //get body from test account
+        //{"filter_name":"GPV-Smart-Sensor-Report-List-15-minutes","filterTitle":"GPV-Smart-Sensor-Report-List-15-minutes hom.ossystem@gmail.com","equipments":"Thing-090035-0","id":null,"filterId":"7e15db45-45f3-4f41-8979-bd35787be667","emails":"hom.ossystem@gmail.com","userId":"0315f51c-67ab-4390-bdd1-46bd9d3fd038","createdAt":null,"excelIncluded":null}
+
+        Map<String, String> standardHeaders = standardHeaders();
+        Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
+
+        createRequestWithHeaders(authHeaders, jsonBody).addHeaders(standardHeaders).delete(url);
+    }
+
+    //
 
 
     public void loadDashboardPage(int repeats, int timeBetweenCycles) {
@@ -228,7 +252,7 @@ public class RequestManager extends RequestTemplates{
         Map<String, String> authHeaders = authHeaders(method, url, body);
 
         String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(url).extractAllResponseAsString();
-        idOfCreatedVPVDashboard = getIfOfCreatedDashboard(response);
+        idOfCreatedVPVDashboard = getIdOfCreatedDashboard(response);
     }
 
     public void dashboardCreateCanvasGPV(){
@@ -239,7 +263,7 @@ public class RequestManager extends RequestTemplates{
         Map<String, String> authHeaders = authHeaders(method, url, body);
 
         String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(url).extractAllResponseAsString();
-        idOfCreatedGPVDashboard = getIfOfCreatedDashboard(response);
+        idOfCreatedGPVDashboard = getIdOfCreatedDashboard(response);
     }
 
     public void dashboardDeleteCanvasVPV(){
@@ -411,33 +435,13 @@ public class RequestManager extends RequestTemplates{
         RestAssured.config.getHttpClientConfig().reuseHttpClientInstance();
     }
 
-    public void startLog(String file){
-        try {
-            fos = new FileOutputStream("loadReports/"+file);
-            TeeOutputStream myOut = new TeeOutputStream(System.out, fos);
-            PrintStream ps = new PrintStream(myOut);
-            System.setOut(ps);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
 
-    public void stopLog(){
-        try {
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    private void sleep(int mills){
+    public void sleep(int mills){
         try {
             Thread.sleep(mills);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
-
 
 }

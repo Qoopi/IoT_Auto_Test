@@ -14,7 +14,8 @@ public class EmulateCRUD {
     @Test(threadPoolSize = threads, invocationCount = threads)
     public void notificationRulesCRUD(){
         RequestManager requestManager = new RequestManager();
-        requestManager.notificationRuleCRUD(1, 2500, 5000);
+        ThreadLaunchDelayer.delay(5000);
+        requestManager.notificationRuleCRUD(1, 10000, 10000);
     }
 
 
