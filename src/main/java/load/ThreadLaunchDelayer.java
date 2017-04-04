@@ -8,11 +8,13 @@ public class ThreadLaunchDelayer {
 
     public static void delay(int delayForEachThreadMs){
         countOfInvocations++;
+        if (delayForEachThreadMs!=0){
         int resultSleepTime = countOfInvocations*delayForEachThreadMs;
-        try {
-            Thread.sleep(resultSleepTime);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            try {
+                Thread.sleep(resultSleepTime);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
