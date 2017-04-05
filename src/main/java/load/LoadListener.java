@@ -20,7 +20,7 @@ public class LoadListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        gatlingInfoPrintUserStart();
+        //gatlingInfoPrintUserStart();
     }
 
     @Override

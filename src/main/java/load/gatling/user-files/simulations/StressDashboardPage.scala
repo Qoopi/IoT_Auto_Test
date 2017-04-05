@@ -210,4 +210,5 @@ class StressDashboardPage extends Simulation {
 	})
 
 	setUp(scn.inject(splitUsers(1000) into(atOnceUsers(100)) separatedBy(3 minutes))).protocols(httpProtocol)
+//	setUp(scn.inject(atOnceUsers(1000))).protocols(httpProtocol)
 }

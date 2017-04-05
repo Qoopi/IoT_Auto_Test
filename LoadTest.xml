@@ -2,13 +2,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Load testing" parallel="methods" thread-count="2000">
 
-    <test name="Load Dashboard Page">
-        <parameter name="browserName" value="chrome"/>
-        <parameter name="useGrid" value="false"></parameter>
-        <classes>
-            <class name="load.LoadDashboardPage"/>
-        </classes>
-    </test>
+    <!--<test name="Load Dashboard Page">-->
+        <!--<parameter name="browserName" value="chrome"/>-->
+        <!--<parameter name="useGrid" value="false"></parameter>-->
+        <!--<classes>-->
+            <!--<class name="load.LoadDashboardPage"/>-->
+        <!--</classes>-->
+    <!--</test>-->
 
     <!--<test name="Emulate Charts Refreshing">-->
         <!--<parameter name="browserName" value="chrome"/>-->
@@ -22,9 +22,17 @@
         <!--<parameter name="browserName" value="chrome"/>-->
         <!--<parameter name="useGrid" value="false"></parameter>-->
         <!--<classes>-->
-            <!--<class name="load.EmulateCRUD"/>-->
+            <!--<class name="load.LoadNotificationRulesCRUD"/>-->
         <!--</classes>-->
     <!--</test>-->
+
+    <test name="Emulate CRUD Stress">
+        <parameter name="browserName" value="chrome"/>
+        <parameter name="useGrid" value="false"></parameter>
+        <classes>
+            <class name="load.StressNotificationRulesCRUD"/>
+        </classes>
+    </test>
 
     <!--<test name="Emulate sending reports via Skedler">-->
         <!--<parameter name="browserName" value="chrome"/>-->

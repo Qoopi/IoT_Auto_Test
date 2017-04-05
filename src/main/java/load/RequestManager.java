@@ -40,7 +40,7 @@ public class RequestManager extends RequestTemplates{
     public void notificationRuleCreate(){
         String method = "POST";
         String url = AmazonAPIGateway.Rule.getUri();
-        String jsonBody = "{\"active\":true,\"name\":\"twitter-hitler\",\"description\":\"\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380632517418\",\"name\":\"me\"}],\"emails\":[{\"value\":\"hom.ossystem@gmail.com\",\"name\":\"My email\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":5,\"acknowledged\":30},\"equipmentIds\":[\"Thing-000013-i3\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":0,\"period\":0,\"sensor\":1}";
+        String jsonBody = "{\"active\":true,\"name\":\"autotestname\",\"description\":\"\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380632517418\",\"name\":\"me\"}],\"emails\":[{\"value\":\"hom.ossystem@gmail.com\",\"name\":\"My email\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":5,\"acknowledged\":30},\"equipmentIds\":[\"Thing-000013-i3\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":0,\"period\":0,\"sensor\":1}";
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
 
@@ -81,9 +81,10 @@ public class RequestManager extends RequestTemplates{
     }
 
 
-    public void notificationRuleCRUD(int repeats, int timeBetweenRequestsMills, int timeBetweenCyclesMills){
-        for (int i = 0; i < repeats; i++){
-            sleep(timeBetweenRequestsMills);
+    public void notificationRuleCRUD(int timeToRunMins, int timeBetweenRequestsMills, int timeBetweenCyclesMills){
+        long start = System.currentTimeMillis();
+
+        while(System.currentTimeMillis()<(start+(timeToRunMins*60000))){
             notificationRuleCreate();
             sleep(timeBetweenRequestsMills);
             notificationRulesRead();
@@ -92,6 +93,17 @@ public class RequestManager extends RequestTemplates{
             sleep(timeBetweenRequestsMills);
             notificationRuleDelete();
             sleep(timeBetweenCyclesMills);
+        }
+    }
+
+    public void notificationRuleCRUDStress(int timeToRunMins){
+        long start = System.currentTimeMillis();
+
+        while(System.currentTimeMillis()<(start+(timeToRunMins*60000))){
+            notificationRuleCreate();
+            notificationRulesRead();
+            notificationRuleUpdate();
+            notificationRuleDelete();
         }
     }
 

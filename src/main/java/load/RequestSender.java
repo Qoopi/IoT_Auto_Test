@@ -120,7 +120,8 @@ public class RequestSender {
             if(enableErrorDebugResponseMessages) {
                 if (response.statusCode() != 200) {
                     System.out.println("==================================");
-                    System.out.println(response.statusCode());
+                    System.out.println("Response time: "+response.time());
+                    System.out.println("Status code: "+response.statusCode());
                     System.out.println("-------------------------------");
                     System.out.println(response.headers().toString());
                     System.out.println("-------------------------------");
@@ -130,7 +131,8 @@ public class RequestSender {
             }
             if (enableAllDebugResponseMessages){
                 System.out.println("==================================");
-                System.out.println(response.statusCode());
+                System.out.println("Response time: "+response.time());
+                System.out.println("Status code: "+response.statusCode());
                 System.out.println("-------------------------------");
                 System.out.println(response.headers().toString());
                 System.out.println("-------------------------------");
