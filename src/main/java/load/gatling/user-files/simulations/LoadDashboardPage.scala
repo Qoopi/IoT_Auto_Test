@@ -143,7 +143,7 @@ class LoadDashboardPage extends Simulation {
 		"Pragma" -> "no-cache",
 		"User-Agent" -> "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36")
 
-	val scn = scenario("LoadDashboardPage").exec( during(1 hour){
+	val scn = scenario("LoadDashboardPage").exec( during(30 minutes){
 		exec(http("request_0")
 			.get("/")
 			.headers(headers_0))
@@ -206,7 +206,6 @@ class LoadDashboardPage extends Simulation {
 						.post(uri5 + "/identify")
 						.headers(headers_21)
 						.body(RawFileBody("RecordedSimulation_0022_request.txt"))))
-			.pause(5 seconds)
 	})
 
 	setUp(scn.inject(splitUsers(100) into(atOnceUsers(1)) separatedBy(5 seconds))).protocols(httpProtocol)
