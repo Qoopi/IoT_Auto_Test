@@ -100,7 +100,7 @@ public class RequestManager extends RequestTemplates{
     public void skedlerReportCreate(){
         String method = "PUT";
         String url = AmazonAPIGateway.Report.getUri();
-        String jsonBody = "{\"templateId\":\"Vacuum-Pump-Vibration-Report---Optimized-for-Printing---Daily\",\"emaillist\":\"kov.ossystem@gmasill.com\",\"filter\":\"equipmentId:Thing-090035-0\",\"filter_name\":\"Vacuum-Pump-Vibration-Report-List---Optimized-for-Printing---Daily\",\"excelEnabled\":false}";
+        String jsonBody = "{\"templateId\":\"Vacuum-Pump-Vibration-Report---Optimized-for-Printing---Daily\",\"emaillist\":\"vasya.ossystem@gmasill.com\",\"filter\":\"equipmentId:Thing-090035-0\",\"filter_name\":\"Vacuum-Pump-Vibration-Report-List---Optimized-for-Printing---Daily\",\"excelEnabled\":false}";
 
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(method, url, jsonBody);

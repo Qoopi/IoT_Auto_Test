@@ -5,7 +5,7 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.jdbc.Predef._
 
-class LoadDashboardPage extends Simulation {
+class StressDashboardPage extends Simulation {
 
 	val httpProtocol = http
 		.baseURL("https://dashboard.dev.iotsyst.com")
@@ -120,6 +120,15 @@ class LoadDashboardPage extends Simulation {
 		"referer" -> "https://use.fontawesome.com/05f7c8a54f.css",
 		"user-agent" -> "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36")
 
+
+	val aws: SignAWSv4 = new SignAWSv4
+	val headers_16_aws = aws.allHeaders("GET", uri1 + "/notification?status=unread")
+
+
+
+	val headers_17_aws = aws.allHeaders("GET", uri1 + "/equipment_models?availables=true")
+
+
 	val headers_18 = Map(
 		"Accept" -> "*/*",
 		"Accept-Encoding" -> "gzip, deflate, sdch, br",
@@ -132,6 +141,11 @@ class LoadDashboardPage extends Simulation {
 		"Pragma" -> "no-cache",
 		"User-Agent" -> "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36")
 
+
+	val headers_20_aws = aws.allHeaders("GET", uri1 + "/dashboard/acadcc02-8979-4a9a-ad06-308c37291792")
+
+
+
 	val headers_21 = Map(
 		"Accept" -> "*/*",
 		"Accept-Encoding" -> "gzip, deflate, br",
@@ -143,10 +157,17 @@ class LoadDashboardPage extends Simulation {
 		"Pragma" -> "no-cache",
 		"User-Agent" -> "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36")
 
-	val scn = scenario("LoadDashboardPage").exec( during(1 hour){
+
+	val repeats = 10 //should not be zero
+	val users = 10
+	val rampUsersDelay = 1
+
+
+	val scn = scenario("LoadDashboardPage").exec( repeat(repeats){
 		exec(http("request_0")
 			.get("/")
 			.headers(headers_0))
+			.pause(3)
 			.exec(http("request_1")
 				.get("/paths.json")
 				.headers(headers_1)
@@ -192,12 +213,21 @@ class LoadDashboardPage extends Simulation {
 					http("request_15")
 						.get(uri9 + "/releases/v4.6.3/fonts/fontawesome-webfont.woff2")
 						.headers(headers_15),
+//					http("request_16")
+//						.get(uri1 + "/notification?status=unread") //AWS notifications + check expired creds
+//						.headers(headers_16_aws),
+//					http("request_17")
+//						.get(uri1 + "/equipment_models?availables=true") //AWS
+//						.headers(headers_17_aws),
 					http("request_18")
 						.options(uri5 + "/blips")
 						.headers(headers_18),
 					http("request_19")
 						.options(uri5 + "/identify")
 						.headers(headers_18),
+//					http("request_20")
+//						.get(uri1 + "/dashboard/acadcc02-8979-4a9a-ad06-308c37291792") //AWS
+//						.headers(headers_20_aws),
 					http("request_21")
 						.post(uri5 + "/blips")
 						.headers(headers_21)
@@ -206,8 +236,8 @@ class LoadDashboardPage extends Simulation {
 						.post(uri5 + "/identify")
 						.headers(headers_21)
 						.body(RawFileBody("RecordedSimulation_0022_request.txt"))))
-			.pause(5 seconds)
 	})
 
-	setUp(scn.inject(splitUsers(100) into(atOnceUsers(1)) separatedBy(5 seconds))).protocols(httpProtocol)
+//	setUp(scn.inject(atOnceUsers(users))).protocols(httpProtocol)
+	setUp(scn.inject(rampUsers(users) over (rampUsersDelay seconds))).protocols(httpProtocol)
 }

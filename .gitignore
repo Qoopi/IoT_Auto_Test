@@ -6,5 +6,5 @@ target
 *.txt
 target/
 results/
-loadReports/
+loadReports/*.log
 *.properties
