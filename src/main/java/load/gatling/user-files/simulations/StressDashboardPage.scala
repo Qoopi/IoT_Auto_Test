@@ -144,12 +144,7 @@ class StressDashboardPage extends Simulation {
 		"User-Agent" -> "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36")
 
 
-//	val repeats = 10 //should not be zero
-//	val users = 10
-//	val rampUsersDelay = 1
-
-
-	val scn = scenario("LoadDashboardPage").exec( during(30 minutes){
+	val scn = scenario("StressDashboardPage").exec( during(30 minutes){
 		exec(http("request_0")
 			.get("/")
 			.headers(headers_0))
