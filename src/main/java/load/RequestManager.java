@@ -16,10 +16,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 public class RequestManager extends RequestTemplates{
-    private static String idOfCreatedNotificationRule = null;
+    private String idOfCreatedNotificationRule = null;
     private static String idOfCreatedVPVDashboard = null;
     private static String idOfCreatedGPVDashboard = null;
-    private static String idOfCreatedReport = null;
+    private String idOfCreatedReport = null;
 
 
     public void getChart(int repeats, int timeBetweenRequests){
@@ -40,7 +40,7 @@ public class RequestManager extends RequestTemplates{
     public void notificationRuleCreate(){
         String method = "POST";
         String url = AmazonAPIGateway.Rule.getUri();
-        String jsonBody = "{\"active\":true,\"name\":\"autotestname\",\"description\":\"\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380632517418\",\"name\":\"me\"}],\"emails\":[{\"value\":\"hom.ossystem@gmail.com\",\"name\":\"My email\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":5,\"acknowledged\":30},\"equipmentIds\":[\"Thing-000013-i3\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":0,\"period\":0,\"sensor\":1}";
+        String jsonBody = "{\"active\":true,\"name\":\"Abnormal auto-test rule\",\"description\":\"some description\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380634953177\",\"name\":\"My Lifecell\"}],\"emails\":[{\"value\":\"TestUser.Israil@mail.ru\",\"name\":\"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":10,\"acknowledged\":15,\"sms\":false,\"emails\":false},\"equipmentIds\":[\"Thing-090011-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":0,\"period\":0,\"sensor\":1}";
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
 
@@ -61,7 +61,7 @@ public class RequestManager extends RequestTemplates{
     public void notificationRuleUpdate(){
         String method = "PUT";
         String url = AmazonAPIGateway.Rule.getUri();
-        String jsonBody = "{\"items\":[{\"id\":\""+ idOfCreatedNotificationRule +"\",\"active\":1,\"name\":\"New auto-test name\",\"description\":\"\",\"notificationType\":0,\"type\":8,\"phones\":[{\"value\":\"+380632517418\",\"name\":\"me\"}],\"emails\":[{\"value\":\"hom.ossystem@gmail.com\",\"name\":\"My email\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":5,\"acknowledged\":30,\"globalSettings\":0,\"sms\":0,\"emails\":0},\"equipmentIds\":[\"Thing-090018-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":30,\"period\":0,\"sensor\":\"\"}]}";
+        String jsonBody = "{\"items\":[{\"id\":\""+idOfCreatedNotificationRule+"\",\"active\":1,\"name\":\"Abnormal edited auto-test rule\",\"description\":\"edited description\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380634953177\",\"name\":\"My Lifecell\"}],\"emails\":[{\"value\":\"TestUser.Israil@mail.ru\",\"name\":\"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":10,\"acknowledged\":15,\"globalSettings\":0,\"sms\":false,\"emails\":false},\"equipmentIds\":[\"Thing-090011-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":30,\"period\":0,\"sensor\":1}]}";
 
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
@@ -96,7 +96,7 @@ public class RequestManager extends RequestTemplates{
         }
     }
 
-    public void notificationRuleCRUDStress(int timeToRunMins){
+    public void notificationRuleCRUD(int timeToRunMins){
         long start = System.currentTimeMillis();
 
         while(System.currentTimeMillis()<(start+(timeToRunMins*60000))){
@@ -293,6 +293,54 @@ public class RequestManager extends RequestTemplates{
 
         createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).delete(url);
 
+    }
+
+    public void canvasVPVDashboardLoadRefreshCycle(int tenMinuteCyclesCount){
+        int repeatsHighLoad = 11;
+        int operatingTimeMinsLowLoad = 9;
+
+        Map<String, String> standardHeaders = standardHeaders();
+        long oldDate = 1490627550017L;
+        String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
+        String chartUpdate = uri + "/dev/chart/Thing-000013-i4?channelIdx=1&startDate=" + oldDate + "&type=2";
+        String chartUpdate1 = uri+ "/dev/chart/Thing-000013-i4?channelIdx=1&startDate=";
+        String chartUpdate2 = "&type=2";
+        String dashboardInfo = uri + "/dev/dashboard/"+idOfCreatedVPVDashboard;
+        String notificationUnread = uri + "/dev/notification?status=unread";
+        Map<String, String> chartUpdateHeaders = null;
+
+        for(int i1 = 0; i1<tenMinuteCyclesCount; i1++) {
+            for (int i = 0; i < repeatsHighLoad; i++) {
+                chartUpdateHeaders = authHeaders("GET", chartUpdate);
+                createEmptyRequestWithHeaders(standardHeaders).options(chartUpdate);
+                createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdate);
+            }
+            canvasVPVChartRefreshTemplateActualTime(operatingTimeMinsLowLoad, chartUpdate1, chartUpdate2, dashboardInfo, notificationUnread);
+        }
+    }
+
+    public void canvasGPVDashboardLoadRefreshCycle(int tenMinuteCyclesCount){
+        int repeatsHighLoad = 1;
+        int operatingTimeMinsLowLoad = 9;
+
+        Map<String, String> standardHeaders = standardHeaders();
+//        long oldDate = 1490627550017L;
+        long oldDate = System.currentTimeMillis()-898581;//almost 15 min nazad
+        String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
+        String chartUpdate = uri + "/dev/chart/Thing-090035-0?startDate="+oldDate;
+        String chartUpdate1 = uri+ "/dev/chart/Thing-090035-0?startDate=";
+        String dashboardInfo = uri + "/dev/dashboard/"+idOfCreatedGPVDashboard;
+        String notificationUnread = uri + "/dev/notification?status=unread";
+        Map<String, String> chartUpdateHeaders = null;
+
+        for(int i1 = 0; i1<tenMinuteCyclesCount; i1++) {
+            for (int i = 0; i < repeatsHighLoad; i++) {
+                chartUpdateHeaders = authHeaders("GET", chartUpdate);
+                createEmptyRequestWithHeaders(standardHeaders).options(chartUpdate);
+                createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdate);
+            }
+            canvasGPVChartRefreshTemplateActualTime(operatingTimeMinsLowLoad, chartUpdate1, dashboardInfo, notificationUnread);
+        }
     }
 
     public void canvasVPVDashboardRefreshCycleOldTimestamp(int operatingTimeMins) {

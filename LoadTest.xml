@@ -10,15 +10,23 @@
         <!--</classes>-->
     <!--</test>-->
 
-    <!--<test name="Emulate Charts Refreshing">-->
+    <!--<test name="Emulate Charts Refreshing Load VPV">-->
         <!--<parameter name="browserName" value="chrome"/>-->
         <!--<parameter name="useGrid" value="false"></parameter>-->
         <!--<classes>-->
-            <!--<class name="load.EmulateChartsRefreshing"/>-->
+            <!--<class name="load.LoadChartsRefreshingVPV"/>-->
         <!--</classes>-->
     <!--</test>-->
 
-    <!--<test name="Emulate CRUD">-->
+    <test name="Emulate Charts Refreshing Load GPV">
+        <parameter name="browserName" value="chrome"/>
+        <parameter name="useGrid" value="false"></parameter>
+        <classes>
+            <class name="load.LoadChartsRefreshingGPV"/>
+        </classes>
+    </test>
+
+    <!--<test name="Emulate CRUD Load">-->
         <!--<parameter name="browserName" value="chrome"/>-->
         <!--<parameter name="useGrid" value="false"></parameter>-->
         <!--<classes>-->
@@ -26,13 +34,13 @@
         <!--</classes>-->
     <!--</test>-->
 
-    <test name="Emulate CRUD Stress">
-        <parameter name="browserName" value="chrome"/>
-        <parameter name="useGrid" value="false"></parameter>
-        <classes>
-            <class name="load.StressNotificationRulesCRUD"/>
-        </classes>
-    </test>
+    <!--<test name="Emulate CRUD Stress">-->
+        <!--<parameter name="browserName" value="chrome"/>-->
+        <!--<parameter name="useGrid" value="false"></parameter>-->
+        <!--<classes>-->
+            <!--<class name="load.StressNotificationRulesCRUD"/>-->
+        <!--</classes>-->
+    <!--</test>-->
 
     <!--<test name="Emulate sending reports via Skedler">-->
         <!--<parameter name="browserName" value="chrome"/>-->

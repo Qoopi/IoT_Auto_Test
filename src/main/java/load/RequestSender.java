@@ -4,6 +4,9 @@ package load;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 import load.objects.AWSCredentials;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.util.Map;
 
@@ -15,9 +18,9 @@ public class RequestSender {
         public static AWSCredentials awsCredentials = new AWSCredentials();
 
         //these three booleans controls console output messages
-        private boolean enableGatlingReportMessages = false; //should be used with debug messages off (if you want gatling reports to work)
+        private boolean enableGatlingReportMessages = true; //should be used with debug messages off (if you want gatling reports to work)
         private boolean enableErrorDebugResponseMessages = false;
-        private boolean enableAllDebugResponseMessages = true;
+        private boolean enableAllDebugResponseMessages = false;
 
         public RequestSender(){
         }
@@ -57,35 +60,36 @@ public class RequestSender {
 
         RequestSender post(String uri) {
             response = requestSpecification.post(uri);
-            debugInfoPrint();
+            debugInfoPrint("POST_"+uri);
             gatlingInfoPrintRequest("POST_"+uri);
             return this;
         }
 
         RequestSender options(String uri) {
             response = requestSpecification.options(uri);
-            debugInfoPrint();
+            debugInfoPrint("OPTIONS_"+uri);
             gatlingInfoPrintRequest("OPTIONS_"+uri);
             return this;
         }
 
         RequestSender delete(String uri){
             response = requestSpecification.delete(uri);
-            debugInfoPrint();
+            debugInfoPrint("DELETE_"+uri);
             gatlingInfoPrintRequest("DELETE_"+uri);
             return this;
         }
 
         public RequestSender get(String uri){
             response = requestSpecification.get(uri);
-            debugInfoPrint();
+            debugInfoPrint("GET_"+uri);
             gatlingInfoPrintRequest("GET_"+uri);
+            checkExpiredCredentials(response,uri);
             return this;
         }
 
         RequestSender put(String uri) {
             response = requestSpecification.put(uri);
-            debugInfoPrint();
+            debugInfoPrint("PUT_"+uri);
             gatlingInfoPrintRequest("PUT_"+uri);
             return this;
         }
@@ -99,6 +103,25 @@ public class RequestSender {
         }
 
 
+        private void checkExpiredCredentials(Response response, String url){
+            if (url.contains("notification?status=unread")){
+                if (response.asString().contains("\"expired\":true")){
+                    JSONParser parser = new JSONParser();
+                    JSONObject json = null;
+                    try {
+                        json = (JSONObject) parser.parse(response.asString());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    JSONObject creds = (JSONObject) json.get("creds");
+                    //write new creds to credential storage
+                    awsCredentials.setAccessKeyId(creds.get("accessKeyId").toString());
+                    awsCredentials.setSecretAccessKey(creds.get("secretAccessKey").toString());
+                    awsCredentials.setSessionToken(creds.get("sessionToken").toString());
+                }
+            }
+        }
+
 
         private void gatlingInfoPrintRequest(String methodAndUri){
             if (enableGatlingReportMessages) {
@@ -109,17 +132,25 @@ public class RequestSender {
                 if (response.statusCode() == 200 || response.statusCode() == 304 || response.statusCode() == 201 || response.statusCode() == 202
                         || response.statusCode() == 203 || response.statusCode() == 204 || response.statusCode() == 205 || response.statusCode() == 206
                         || response.statusCode() == 207 || response.statusCode() == 208 || response.statusCode() == 209) {
-                    System.out.println("REQUEST\t" + name + "\t" + thread + "\t\t" + requestName + "\t" + (System.currentTimeMillis() - response.time()) + "\t" + System.currentTimeMillis() + "\t" + "OK\t ");
+                    if(!response.asString().contains("error")) {
+                        System.out.println("REQUEST\t" + name + "\t" + thread + "\t\t" + requestName + "\t" + (System.currentTimeMillis() - response.time()) + "\t" + System.currentTimeMillis() + "\t" + "OK\t ");
+                    }
+                    else{
+                        System.out.println("REQUEST\t" + name + "\t" + thread + "\t\t" + requestName + "\t" + (System.currentTimeMillis() - response.time()) + "\t" + System.currentTimeMillis() + "\t" + "KO\tstatus.find.in(200,304,201,202,203,204,205,206,207,208,209), but actually found " + response.statusCode() + " with response body contains 'error' : "+response.asString());
+                    }
                 } else {
                     System.out.println("REQUEST\t" + name + "\t" + thread + "\t\t" + requestName + "\t" + (System.currentTimeMillis() - response.time()) + "\t" + System.currentTimeMillis() + "\t" + "KO\tstatus.find.in(200,304,201,202,203,204,205,206,207,208,209), but actually found " + response.statusCode());
                 }
             }
         }
 
-        private void debugInfoPrint(){
-            if(enableErrorDebugResponseMessages) {
-                if (response.statusCode() != 200) {
+        private void debugInfoPrint(String url){
+            if(enableErrorDebugResponseMessages || enableAllDebugResponseMessages) {
+                if (response.statusCode() != 200 || response.asString().contains("error") || enableAllDebugResponseMessages) {
                     System.out.println("==================================");
+                    System.out.println("Request: ");
+                    System.out.println(url);
+                    System.out.println("-------------------------------");
                     System.out.println("Response time: "+response.time());
                     System.out.println("Status code: "+response.statusCode());
                     System.out.println("-------------------------------");
@@ -129,16 +160,5 @@ public class RequestSender {
                     System.out.println("==================================");
                 }
             }
-            if (enableAllDebugResponseMessages){
-                System.out.println("==================================");
-                System.out.println("Response time: "+response.time());
-                System.out.println("Status code: "+response.statusCode());
-                System.out.println("-------------------------------");
-                System.out.println(response.headers().toString());
-                System.out.println("-------------------------------");
-                System.out.println(response.asString());
-                System.out.println("==================================");
-            }
         }
-
     }

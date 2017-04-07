@@ -74,7 +74,7 @@ public class LoadListener implements ITestListener {
         //for browser
         WebDriver driver = WebDriverManager.getDriver();
         WaitsAsserts waits = new WaitsAsserts();
-        waits.sleep(5000);
+        WaitsAsserts.sleep(5000);
         if (driver != null) {
             driver.quit();
         }
