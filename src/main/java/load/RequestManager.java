@@ -22,16 +22,29 @@ public class RequestManager extends RequestTemplates{
     private String idOfCreatedReport = null;
 
 
-    private final String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
+    private static final String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
+    private static final String notificationUnread = uri+"/dev/notification?status=unread";
+    private static final String notificationRule = uri+"/dev/rule";
+    private static final String dashboard = uri+"/dev/dashboard";
+    private static final String report = uri+"/report";
+    private static final String chart = uri+"/dev/chart";
+
+    private static final String thingGPV = "Thing-090035-0";
+    private static final String thingVPV = "Thing-000013-i4";
+    private static final String channelVPV = "channelIdx=1";
+
+    private static final String httpGET = "GET";
+    private static final String httpPOST = "POST";
+    private static final String httpPUT = "PUT";
+    private static final String httpDELETE = "DELETE";
 
 
     public void getChart(int repeats, int timeBetweenRequests){
-        String method = "GET";
-        String url = uri+"/dev/chart/Thing-000013-i4?channelIdx=1&startDate=1490189802247&type=2";
+        String url = chart+"/"+thingVPV+"?"+channelVPV+"&startDate=1490189802247&type=2";
         Map<String,?> standardHeaders = standardHeaders();
 
         for (int i = 0; i<repeats; i++) {
-            Map<String, ?> authHeaders = authHeaders(method, url);
+            Map<String, ?> authHeaders = authHeaders(httpGET, url);
 
             createEmptyRequestWithHeaders(authHeaders).addHeaders(standardHeaders).get(url);
             sleep(timeBetweenRequests);
@@ -41,46 +54,39 @@ public class RequestManager extends RequestTemplates{
     //CRUD here
 
     public void notificationRuleCreate(){
-        String method = "POST";
-        String url = AmazonAPIGateway.Rule.getUri();
         String jsonBody = "{\"active\":true,\"name\":\"Abnormal auto-test rule\",\"description\":\"some description\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380634953177\",\"name\":\"My Lifecell\"}],\"emails\":[{\"value\":\"TestUser.Israil@mail.ru\",\"name\":\"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":10,\"acknowledged\":15,\"sms\":false,\"emails\":false},\"equipmentIds\":[\"Thing-090011-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":0,\"period\":0,\"sensor\":1}";
         Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
+        Map<String, String> authHeaders = authHeaders(httpPOST, notificationRule, jsonBody);
 
-        String response = createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).post(url).extractAllResponseAsString();
+        String response = createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).post(notificationRule).extractAllResponseAsString();
         idOfCreatedNotificationRule = getIdOfCreatedNotificationRule(response);
     }
 
     public void notificationRulesRead(){
-        String method = "GET";
-        String url = AmazonAPIGateway.Rule.getUri();
-
         Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(method, url);
+        Map<String, String> authHeaders = authHeaders(httpGET, notificationRule);
 
-        createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders).get(url);
+        createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders).get(notificationRule);
     }
 
     public void notificationRuleUpdate(){
-        String method = "PUT";
         String url = AmazonAPIGateway.Rule.getUri();
         String jsonBody = "{\"items\":[{\"id\":\""+idOfCreatedNotificationRule+"\",\"active\":1,\"name\":\"Abnormal edited auto-test rule\",\"description\":\"edited description\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380634953177\",\"name\":\"My Lifecell\"}],\"emails\":[{\"value\":\"TestUser.Israil@mail.ru\",\"name\":\"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":10,\"acknowledged\":15,\"globalSettings\":0,\"sms\":false,\"emails\":false},\"equipmentIds\":[\"Thing-090011-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":30,\"period\":0,\"sensor\":1}]}";
 
         Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
+        Map<String, String> authHeaders = authHeaders(httpPUT, notificationRule, jsonBody);
 
-        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).put(url);
+        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).put(notificationRule);
     }
 
     public void notificationRuleDelete(){
-        String method = "DELETE";
         String url = AmazonAPIGateway.Rule.getUri();
         String jsonBody = "{\"items\":[{\"id\":\""+ idOfCreatedNotificationRule +"\"}]}";
 
         Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
+        Map<String, String> authHeaders = authHeaders(httpDELETE, notificationRule, jsonBody);
 
-        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).delete(url);
+        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).delete(notificationRule);
     }
 
 
@@ -113,41 +119,35 @@ public class RequestManager extends RequestTemplates{
     //SKEDLER IN PROGRESS AND NOT FINISHED YET
 
     public void skedlerReportCreate(){
-        String method = "PUT";
-        String url = AmazonAPIGateway.Report.getUri();
-        String jsonBody = "{\"templateId\":\"Vacuum-Pump-Vibration-Report---Optimized-for-Printing---Daily\",\"emaillist\":\"vasya.ossystem@gmasill.com\",\"filter\":\"equipmentId:Thing-090035-0\",\"filter_name\":\"Vacuum-Pump-Vibration-Report-List---Optimized-for-Printing---Daily\",\"excelEnabled\":false}";
+        String jsonBody = "{\"templateId\":\"Vacuum-Pump-Vibration-Report---Optimized-for-Printing---Daily\",\"emaillist\":\"vasya.ossystem@gmasill.com\",\"filter\":\"equipmentId:"+thingGPV+"\",\"filter_name\":\"Vacuum-Pump-Vibration-Report-List---Optimized-for-Printing---Daily\",\"excelEnabled\":false}";
 
         Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
+        Map<String, String> authHeaders = authHeaders(httpPUT, report, jsonBody);
 
-        String jsonResponse = createRequestWithHeaders(authHeaders, jsonBody).addHeaders(standardHeaders).put(url).extractAllResponseAsString();
+        String jsonResponse = createRequestWithHeaders(authHeaders, jsonBody).addHeaders(standardHeaders).put(report).extractAllResponseAsString();
         System.out.println(jsonResponse);
         //тут сделать парс json и запись id в variable
         idOfCreatedReport = getIdOfCreatedReport(jsonResponse);
     }
 
     public void skedlerReportSendNow(){
-        String method = "POST";
-        String url = AmazonAPIGateway.Report.getUri();
-        String jsonBody = "{\"filterId\":\""+idOfCreatedReport+"\",\"templateId\":\"GPV-Smart-Sensor-Report-15-minutes-activity-1\",\"emaillist\":\"geloksmmm@gmail.com,kov.ossystem@gmail.com\",\"filter\":\"equipmentId:Thing-090035-0\",\"filter_name\":\"GPV-Smart-Sensor-Report-List-15-minutes\",\"excelEnabled\":false}";
+        String jsonBody = "{\"filterId\":\""+idOfCreatedReport+"\",\"templateId\":\"GPV-Smart-Sensor-Report-15-minutes-activity-1\",\"emaillist\":\"geloksmmm@gmail.com,kov.ossystem@gmail.com\",\"filter\":\"equipmentId:"+thingGPV+"\",\"filter_name\":\"GPV-Smart-Sensor-Report-List-15-minutes\",\"excelEnabled\":false}";
 
         Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
+        Map<String, String> authHeaders = authHeaders(httpPOST, report, jsonBody);
 
-        createRequestWithHeaders(authHeaders, jsonBody).addHeaders(standardHeaders).post(url);
+        createRequestWithHeaders(authHeaders, jsonBody).addHeaders(standardHeaders).post(report);
     }
 
     public void skedlerReportDelete(){
-        String method = "DELETE";
-        String url = AmazonAPIGateway.Report.getUri();
         String jsonBody = "";
         //get body from test account
         //{"filter_name":"GPV-Smart-Sensor-Report-List-15-minutes","filterTitle":"GPV-Smart-Sensor-Report-List-15-minutes hom.ossystem@gmail.com","equipments":"Thing-090035-0","id":null,"filterId":"7e15db45-45f3-4f41-8979-bd35787be667","emails":"hom.ossystem@gmail.com","userId":"0315f51c-67ab-4390-bdd1-46bd9d3fd038","createdAt":null,"excelIncluded":null}
 
         Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
+        Map<String, String> authHeaders = authHeaders(httpDELETE, report, jsonBody);
 
-        createRequestWithHeaders(authHeaders, jsonBody).addHeaders(standardHeaders).delete(url);
+        createRequestWithHeaders(authHeaders, jsonBody).addHeaders(standardHeaders).delete(report);
     }
 
     //
@@ -195,12 +195,12 @@ public class RequestManager extends RequestTemplates{
 
 
         for (int i = 0; i < repeats; i++) {
-            authHeaders1 = authHeaders("GET", urlNotificationsUnread);
-            authHeaders2 = authHeaders("GET", urlEquipmentMode);
-            authHeaders3 = authHeaders("GET", urlDashboard);
-            authHeaders4 = authHeaders("GET", urlGlobal_settings);
-            authHeaders5 = authHeaders("GET", urlMenu);
-            authHeaders6 = authHeaders("GET", urlProfile);
+            authHeaders1 = authHeaders(httpGET, urlNotificationsUnread);
+            authHeaders2 = authHeaders(httpGET, urlEquipmentMode);
+            authHeaders3 = authHeaders(httpGET, urlDashboard);
+            authHeaders4 = authHeaders(httpGET, urlGlobal_settings);
+            authHeaders5 = authHeaders(httpGET, urlMenu);
+            authHeaders6 = authHeaders(httpGET, urlProfile);
             createEmptyRequestWithHeaders(standardHeaders).get(url);
             createEmptyRequestWithHeaders(standardHeaders).get(urlBootStrap);
             createEmptyRequestWithHeaders(standardHeaders).get(urlCloudFlare);
@@ -236,15 +236,12 @@ public class RequestManager extends RequestTemplates{
 
 
     public void checkExpiredCredentials(int operatingTimeMins){
-        String method = "GET";
-        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread";
         Map<String,?> standardHeaders = standardHeaders();
 
         for (int i = 0; i<operatingTimeMins; i++) {
-            Map<String,?> authHeaders = authHeaders(method, url);
+            Map<String,?> authHeaders = authHeaders(httpGET, notificationUnread);
 
-//            createEmptyRequestWithHeaders(authHeaders).addHeaders(standardHeaders).get(url, "off");
-            createEmptyRequestWithHeaders(authHeaders).addHeaders(standardHeaders).get(url);
+            createEmptyRequestWithHeaders(authHeaders).addHeaders(standardHeaders).get(notificationUnread);
             String jsonString = response.asString();
 
             if (jsonString.contains("\"expired\":true")) {
@@ -257,24 +254,20 @@ public class RequestManager extends RequestTemplates{
     }
 
     public void dashboardCreateCanvasVPV(){
-        String method = "POST";
-        String url = AmazonAPIGateway.Dashboard.getUri();
         String body = "{\"type\":7,\"equipmentIds\":[\"Thing-000013-i3\",\"Thing-000011-i1\",\"Thing-000012-i2\"],\"name\":\"someAutoTestNameVPV\",\"description\":\"someAutoTestDescriptionVPV\"}";
         Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(method, url, body);
+        Map<String, String> authHeaders = authHeaders(httpPOST, dashboard, body);
 
-        String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(url).extractAllResponseAsString();
+        String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(dashboard).extractAllResponseAsString();
         idOfCreatedVPVDashboard = getIdOfCreatedDashboard(response);
     }
 
     public void dashboardCreateCanvasGPV(){
-        String method = "POST";
-        String url = AmazonAPIGateway.Dashboard.getUri();
-        String body = "{\"type\":9,\"equipmentIds\":[\"Thing-090035-0\"],\"name\":\"someAutoTestNameGPV\",\"description\":\"someAutoTestDescriptionGPV\"}";
+        String body = "{\"type\":9,\"equipmentIds\":[\""+thingGPV+"\"],\"name\":\"someAutoTestNameGPV\",\"description\":\"someAutoTestDescriptionGPV\"}";
         Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(method, url, body);
+        Map<String, String> authHeaders = authHeaders(httpPOST, dashboard, body);
 
-        String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(url).extractAllResponseAsString();
+        String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(dashboard).extractAllResponseAsString();
         idOfCreatedGPVDashboard = getIdOfCreatedDashboard(response);
     }
 
@@ -287,14 +280,12 @@ public class RequestManager extends RequestTemplates{
     }
 
     private void deleteCanvasDashboardById(String id){
-        String method = "DELETE";
-        String url = AmazonAPIGateway.Dashboard.getUri();
         String jsonBody = "{\"items\":[{\"id\":\""+id+"\"}]}";
 
         Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(method, url, jsonBody);
+        Map<String, String> authHeaders = authHeaders(httpDELETE, dashboard, jsonBody);
 
-        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).delete(url);
+        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).delete(dashboard);
 
     }
 
@@ -304,16 +295,15 @@ public class RequestManager extends RequestTemplates{
 
         Map<String, String> standardHeaders = standardHeaders();
         long oldDate = 1490627550017L;
-        String chartUpdate = uri + "/dev/chart/Thing-000013-i4?channelIdx=1&startDate=" + oldDate + "&type=2";
-        String chartUpdate1 = uri+ "/dev/chart/Thing-000013-i4?channelIdx=1&startDate=";
+        String chartUpdate = chart+"/"+thingVPV+"?"+channelVPV+"&startDate=" + oldDate + "&type=2";
+        String chartUpdate1 = chart+"/"+thingVPV+"?"+channelVPV+"&startDate=";
         String chartUpdate2 = "&type=2";
-        String dashboardInfo = uri + "/dev/dashboard/"+idOfCreatedVPVDashboard;
-        String notificationUnread = uri + "/dev/notification?status=unread";
+        String dashboardInfo = dashboard+"/"+idOfCreatedVPVDashboard;
         Map<String, String> chartUpdateHeaders = null;
 
         for(int i1 = 0; i1<tenMinuteCyclesCount; i1++) {
             for (int i = 0; i < repeatsHighLoad; i++) {
-                chartUpdateHeaders = authHeaders("GET", chartUpdate);
+                chartUpdateHeaders = authHeaders(httpGET, chartUpdate);
                 createEmptyRequestWithHeaders(standardHeaders).options(chartUpdate);
                 createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdate);
             }
@@ -328,15 +318,14 @@ public class RequestManager extends RequestTemplates{
         Map<String, String> standardHeaders = standardHeaders();
 //        long oldDate = 1490627550017L;
         long oldDate = System.currentTimeMillis()-898581;//almost 15 min nazad
-        String chartUpdate = uri + "/dev/chart/Thing-090035-0?startDate="+oldDate;
-        String chartUpdate1 = uri+ "/dev/chart/Thing-090035-0?startDate=";
-        String dashboardInfo = uri + "/dev/dashboard/"+idOfCreatedGPVDashboard;
-        String notificationUnread = uri + "/dev/notification?status=unread";
+        String chartUpdate = chart+"/"+thingGPV+"?startDate="+oldDate;
+        String chartUpdate1 = chart+"/"+thingGPV+"?startDate=";
+        String dashboardInfo = dashboard+"/"+idOfCreatedGPVDashboard;
         Map<String, String> chartUpdateHeaders = null;
 
         for(int i1 = 0; i1<tenMinuteCyclesCount; i1++) {
             for (int i = 0; i < repeatsHighLoad; i++) {
-                chartUpdateHeaders = authHeaders("GET", chartUpdate);
+                chartUpdateHeaders = authHeaders(httpGET, chartUpdate);
                 createEmptyRequestWithHeaders(standardHeaders).options(chartUpdate);
                 createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdate);
             }
@@ -350,15 +339,14 @@ public class RequestManager extends RequestTemplates{
 
         Map<String, String> standardHeaders = standardHeaders();
         long oldDate = System.currentTimeMillis()-898581;//almost 15 min nazad
-        String chartUpdate = uri + "/dev/chart/Thing-090035-0?startDate="+oldDate;
-        String chartUpdate1 = uri+ "/dev/chart/Thing-090035-0?startDate=";
-        String dashboardInfo = uri + "/dev/dashboard/"+idOfCreatedGPVDashboard;
-        String notificationUnread = uri + "/dev/notification?status=unread";
+        String chartUpdate = chart+"/"+thingGPV+"?startDate="+oldDate;
+        String chartUpdate1 = chart+"/"+thingGPV+"?startDate=";
+        String dashboardInfo = dashboard+"/"+idOfCreatedGPVDashboard;
         Map<String, String> chartUpdateHeaders = null;
 
         for(int i1 = 0; i1<tenMinuteCyclesCount; i1++) {
             for (int i = 0; i < repeatsHighLoad; i++) {
-                chartUpdateHeaders = authHeaders("GET", chartUpdate);
+                chartUpdateHeaders = authHeaders(httpGET, chartUpdate);
                 createEmptyRequestWithHeaders(standardHeaders).options(chartUpdate);
                 createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdate);
             }
@@ -370,9 +358,8 @@ public class RequestManager extends RequestTemplates{
         //в зависимости от времени меняется startDate
         //в зависимости от юзера и дашборда меняется chartUpdate и dashboardInfo
         long startDate = 1490627550017L;
-        String chartUpdate = uri + "/dev/chart/Thing-000013-i4?channelIdx=1&startDate=" + startDate + "&type=2";
-        String dashboardInfo = uri + "/dev/dashboard/"+idOfCreatedVPVDashboard;
-        String notificationUnread = uri + "/dev/notification?status=unread";
+        String chartUpdate = chart+"/"+thingVPV+"?"+channelVPV+"&startDate=" + startDate + "&type=2";
+        String dashboardInfo = dashboard+"/"+idOfCreatedVPVDashboard;
 
         canvasVPVChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
     }
@@ -381,9 +368,8 @@ public class RequestManager extends RequestTemplates{
         //в зависимости от времени меняется startDate
         //в зависимости от юзера и дашборда меняется chartUpdate и dashboardInfo
         long oneSecEarlier = System.currentTimeMillis()-1000;
-        String chartUpdate = uri + "/dev/chart/Thing-000013-i4?channelIdx=1&startDate=" + oneSecEarlier + "&type=2";
-        String dashboardInfo = uri + "/dev/dashboard/"+idOfCreatedVPVDashboard;
-        String notificationUnread = uri + "/dev/notification?status=unread";
+        String chartUpdate = chart+"/"+thingVPV+"?"+channelVPV+"&startDate=" + oneSecEarlier + "&type=2";
+        String dashboardInfo = dashboard+"/"+idOfCreatedVPVDashboard;
 
         canvasVPVChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
     }
@@ -393,9 +379,8 @@ public class RequestManager extends RequestTemplates{
         //в зависимости от времени меняется startDate
         //в зависимости от юзера и дашборда меняется chartUpdate и dashboardInfo
         long startDate = 1490627550017L;
-        String chartUpdate = uri + "/dev/chart/Thing-090035-0?startDate=" + startDate;
-        String dashboardInfo = uri + "/dev/dashboard/"+idOfCreatedGPVDashboard;
-        String notificationUnread = uri + "/dev/notification?status=unread";
+        String chartUpdate = chart+"/"+thingGPV+"?startDate=" + startDate;
+        String dashboardInfo = dashboard+"/"+idOfCreatedGPVDashboard;
 
         canvasGPVChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
     }
@@ -404,9 +389,8 @@ public class RequestManager extends RequestTemplates{
         //в зависимости от времени меняется startDate
         //в зависимости от юзера и дашборда меняется chartUpdate и dashboardInfo
         long oneSecEarlier = System.currentTimeMillis()-1000;
-        String chartUpdate = uri + "/dev/chart/Thing-090035-0?startDate=" + oneSecEarlier;
-        String dashboardInfo = uri + "/dev/dashboard/"+idOfCreatedGPVDashboard;
-        String notificationUnread = uri + "/dev/notification?status=unread";
+        String chartUpdate = chart+"/"+thingGPV+"?startDate=" + oneSecEarlier;
+        String dashboardInfo = dashboard+"/"+idOfCreatedGPVDashboard;
 
         canvasGPVChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
     }
@@ -417,8 +401,7 @@ public class RequestManager extends RequestTemplates{
         String chartUpdatePostPayloadJSON = "{\"search_type\":\"count\",\"ignore_unavailable\":true}\n" +
                 "{\"query\":{\"filtered\":{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"equipmentId:\\\"Thing-000013-i3\\\" AND channel:1 AND type:2\"}},\"filter\":{\"bool\":{\"must\":[{\"range\":{\"timestamp\":{\"gte\":1488278924314,\"lte\":1490780924314,\"format\":\"epoch_millis\"}}}],\"must_not\":[]}}}},\"size\":0,\"aggs\":{\"2\":{\"date_histogram\":{\"field\":\"timestamp\",\"interval\":\"3h\",\"time_zone\":\"+03:00\",\"min_doc_count\":1,\"extended_bounds\":{\"min\":1488278924313,\"max\":1490780924313}},\"aggs\":{\"1\":{\"avg\":{\"field\":\"value\"}}}}}}";
 
-        String notificationUnreadUrl = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread";
-        String dashboardInfoUrl = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/dashboard/c020c7c1-2d8c-46f6-933a-abb933788732";
+                String dashboardInfoUrl = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/dashboard/c020c7c1-2d8c-46f6-933a-abb933788732";
         String chartUpdateUrl = "https://elasticsearch.dev.iotsyst.io/vpv-log/_msearch?timeout=0&preference=1490780679128";
 
         int operatingTimeMins = 2;
@@ -428,11 +411,11 @@ public class RequestManager extends RequestTemplates{
         Map<String, String> dashboardInfoHeaders = null;
         Map<String, String> chartUpdateHeaders = null;
 
-        dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
-        notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
+        dashboardInfoHeaders = authHeaders(httpGET, dashboardInfoUrl);
+        notificationUnreadHeaders = authHeaders(httpGET, notificationUnread);
 
-        createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
-        createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
+        createEmptyRequestWithHeaders(standardHeaders).options(notificationUnread);
+        createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnread);
         createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
         createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
 
@@ -440,13 +423,13 @@ public class RequestManager extends RequestTemplates{
             for (int i = 0; i < 2; i++) {
                 sleep(29200);
                 //2 req dash inf here (0.8 sec cut for response)
-                dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
+                dashboardInfoHeaders = authHeaders(httpGET, dashboardInfoUrl);
                 createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
                 createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
             }
-            notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
-            createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
-            createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
+            notificationUnreadHeaders = authHeaders(httpGET, notificationUnread);
+            createEmptyRequestWithHeaders(standardHeaders).options(notificationUnread);
+            createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnread);
         }
 
     }

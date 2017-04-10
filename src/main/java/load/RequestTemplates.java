@@ -6,6 +6,8 @@ import java.util.Map;
  * Created by alex00x6 on 30.03.2017.
  */
 public class RequestTemplates extends JSONHandler {
+    private static final String httpGET = "GET";
+
 
      void canvasVPVChartRefreshTemplate(int operatingTimeMins, String chartUpdateUrl, String dashboardInfoUrl, String notificationUnreadUrl){
         //all requests on start
@@ -18,11 +20,11 @@ public class RequestTemplates extends JSONHandler {
         Map<String, String> chartUpdateHeaders = null;
 
         //2 1min requests on start here
-        notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
+        notificationUnreadHeaders = authHeaders(httpGET, notificationUnreadUrl);
         createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
         createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
         //2 30 sec requests on start here
-        dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
+        dashboardInfoHeaders = authHeaders(httpGET, dashboardInfoUrl);
         createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
         createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
 
@@ -31,7 +33,7 @@ public class RequestTemplates extends JSONHandler {
                 for (int i = 0; i < 6; i++) {
                     //5 sec cycle
                     //6 requests every 5 sec here (1 sec cut for response)
-                    chartUpdateHeaders = authHeaders("GET", chartUpdateUrl);
+                    chartUpdateHeaders = authHeaders(httpGET, chartUpdateUrl);
                     createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
                     createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
                     createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
@@ -42,13 +44,13 @@ public class RequestTemplates extends JSONHandler {
                 }
                 //30 sec cycle
                 //2 requests every 30 sec here
-                dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
+                dashboardInfoHeaders = authHeaders(httpGET, dashboardInfoUrl);
                 createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
                 createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
             }
             //1 min cycle
             //2 requests every 1 min here
-            notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
+            notificationUnreadHeaders = authHeaders(httpGET, notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
         }
@@ -65,11 +67,11 @@ public class RequestTemplates extends JSONHandler {
         Map<String, String> chartUpdateHeaders = null;
 
         //2 1min requests on start here
-        notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
+        notificationUnreadHeaders = authHeaders(httpGET, notificationUnreadUrl);
         createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
         createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
         //2 30 sec requests on start here
-        dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
+        dashboardInfoHeaders = authHeaders(httpGET, dashboardInfoUrl);
         createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
         createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
 
@@ -79,7 +81,7 @@ public class RequestTemplates extends JSONHandler {
                     String chartUpdateUrl = chartUpdateUrl1+(System.currentTimeMillis()-10000)+chartUpdateUrl2;
                     //5 sec cycle
                     //6 requests every 5 sec here (1 sec cut for response)
-                    chartUpdateHeaders = authHeaders("GET", chartUpdateUrl);
+                    chartUpdateHeaders = authHeaders(httpGET, chartUpdateUrl);
                     createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
                     createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
                     createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
@@ -90,13 +92,13 @@ public class RequestTemplates extends JSONHandler {
                 }
                 //30 sec cycle
                 //2 requests every 30 sec here
-                dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
+                dashboardInfoHeaders = authHeaders(httpGET, dashboardInfoUrl);
                 createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
                 createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
             }
             //1 min cycle
             //2 requests every 1 min here
-            notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
+            notificationUnreadHeaders = authHeaders(httpGET, notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
         }
@@ -116,34 +118,34 @@ public class RequestTemplates extends JSONHandler {
         String chartUpdateUrl = chartUpdateUrlNoTimestamp + (System.currentTimeMillis() - 62000);
 
         //
-        notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
+        notificationUnreadHeaders = authHeaders(httpGET, notificationUnreadUrl);
         createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
         createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
         //
-        dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
+        dashboardInfoHeaders = authHeaders(httpGET, dashboardInfoUrl);
         createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
         createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
         //
-        chartUpdateHeaders = authHeaders("GET", chartUpdateUrl);
+        chartUpdateHeaders = authHeaders(httpGET, chartUpdateUrl);
         createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
         createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
 
         for (int i2 = 0; i2 < operatingTimeMins; i2++) {
             for (int i1 = 0; i1 < 2; i1++) {
                 //
-                dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
+                dashboardInfoHeaders = authHeaders(httpGET, dashboardInfoUrl);
                 createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
                 createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
                 sleep(29000);
             }
             //
-            notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
+            notificationUnreadHeaders = authHeaders(httpGET, notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
             //
             chartUpdateUrl = chartUpdateUrlNoTimestamp + (System.currentTimeMillis() - 62000);
 
-            chartUpdateHeaders = authHeaders("GET", chartUpdateUrl);
+            chartUpdateHeaders = authHeaders(httpGET, chartUpdateUrl);
             createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
         }
@@ -162,17 +164,17 @@ public class RequestTemplates extends JSONHandler {
             chartUpdateUrl = chartUpdateUrlNoTimestamp+(System.currentTimeMillis()-62000);
 
 
-            notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
+            notificationUnreadHeaders = authHeaders(httpGET, notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
 
             for (int i1 = 0; i1 < 60; i1++) {
                 start = System.currentTimeMillis()/1000;
-                dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
+                dashboardInfoHeaders = authHeaders(httpGET, dashboardInfoUrl);
                 createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
                 createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
 
-                chartUpdateHeaders = authHeaders("GET", chartUpdateUrl);
+                chartUpdateHeaders = authHeaders(httpGET, chartUpdateUrl);
                 createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
                 createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
 
@@ -180,7 +182,7 @@ public class RequestTemplates extends JSONHandler {
                     sleep(100);
                 }
             }
-            notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
+            notificationUnreadHeaders = authHeaders(httpGET, notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
         }
@@ -199,32 +201,32 @@ public class RequestTemplates extends JSONHandler {
         Map<String, String> chartUpdateHeaders = null;
 
         //
-        notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
+        notificationUnreadHeaders = authHeaders(httpGET, notificationUnreadUrl);
         createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
         createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
         //
-        dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
+        dashboardInfoHeaders = authHeaders(httpGET, dashboardInfoUrl);
         createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
         createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
         //
-        chartUpdateHeaders = authHeaders("GET", chartUpdateUrl);
+        chartUpdateHeaders = authHeaders(httpGET, chartUpdateUrl);
         createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
         createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
 
         for (int i2 = 0; i2 < operatingTimeMins; i2++) {
             for (int i1 = 0; i1 < 2; i1++) {
                 //
-                dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
+                dashboardInfoHeaders = authHeaders(httpGET, dashboardInfoUrl);
                 createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
                 createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
                 sleep(29000);
             }
             //
-            notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
+            notificationUnreadHeaders = authHeaders(httpGET, notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
             //
-            chartUpdateHeaders = authHeaders("GET", chartUpdateUrl);
+            chartUpdateHeaders = authHeaders(httpGET, chartUpdateUrl);
             createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
         }
