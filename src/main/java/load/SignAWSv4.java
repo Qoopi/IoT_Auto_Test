@@ -82,7 +82,7 @@ public class SignAWSv4 extends RequestSender {
     }
 
 
-    public AWSURI parseForCanonicalRequest(String method, String url){
+    private AWSURI parseForCanonicalRequest(String method, String url){
         AWSURI awsuri = new AWSURI();
 
         URL uri = null;
@@ -117,7 +117,7 @@ public class SignAWSv4 extends RequestSender {
     }
 
 
-    public String generateSign(Date date, AWSURI awsuri) {
+    private String generateSign(Date date, AWSURI awsuri) {
         String method = awsuri.getMethod();
         String serviceName = awsuri.getServiceName();
         String regionName = awsuri.getRegionName();
@@ -165,7 +165,7 @@ public class SignAWSv4 extends RequestSender {
         return authorizationHeader;
     }
 
-    public String getAmzDate(Date date) {
+    private String getAmzDate(Date date) {
         SimpleDateFormat f = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'");
         f.setTimeZone(TimeZone.getTimeZone("GMT"));
         String xAmzDate = f.format(date);

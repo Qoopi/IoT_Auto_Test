@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 public class LoadListener implements ITestListener {
-    FileOutputStream fos = null;
+    private FileOutputStream fos = null;
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
@@ -96,17 +96,6 @@ public class LoadListener implements ITestListener {
         requestManager.writeCredsTofile();
         requestManager.setUpBaseApiGateway();
     }
-
-    private void gatlingInfoPrintUserStart(){
-        // USER    | NAME | THREAD | START/END | TIMESTART | TIMESTART(onstart)/TIMESTOP(onstop)
-        String name = "RecordedSimulation1";
-        long thread = Thread.currentThread().getId();
-        long timeStart = System.currentTimeMillis();
-        String timeEnd = "1490170480541";
-
-        System.out.println("USER\t"+name+"\t"+thread+"\tSTART\t"+timeStart+"\t"+timeStart);
-    }
-
     private void gatlingInfoPrintUserEnd(){
         // USER    | NAME | THREAD | START/END | TIMESTART | TIMESTART(onstart)/TIMESTOP(onstop)
         String name = "RecordedSimulation1";

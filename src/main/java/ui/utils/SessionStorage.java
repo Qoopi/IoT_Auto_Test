@@ -16,11 +16,8 @@ public class SessionStorage {
     }
 
     public boolean isItemPresentInSessionStorage(String item) {
-        if (js.executeScript(String.format(
-                "return window.sessionStorage.getItem('%s');", item)) == null)
-            return false;
-        else
-            return true;
+        return js.executeScript(String.format(
+                "return window.sessionStorage.getItem('%s');", item)) != null;
     }
 
     public String getItemFromSessionStorage(String key) {

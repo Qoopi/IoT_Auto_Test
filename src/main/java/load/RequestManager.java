@@ -39,6 +39,8 @@ public class RequestManager extends RequestTemplates{
     private static final String httpDELETE = "DELETE";
 
 
+
+
     public void getChart(int repeats, int timeBetweenRequests){
         String url = chart+"/"+thingVPV+"?"+channelVPV+"&startDate=1490189802247&type=2";
         Map<String,?> standardHeaders = standardHeaders();
@@ -53,7 +55,7 @@ public class RequestManager extends RequestTemplates{
 
     //CRUD here
 
-    public void notificationRuleCreate(){
+    private void notificationRuleCreate(){
         String jsonBody = "{\"active\":true,\"name\":\"Abnormal auto-test rule\",\"description\":\"some description\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380634953177\",\"name\":\"My Lifecell\"}],\"emails\":[{\"value\":\"TestUser.Israil@mail.ru\",\"name\":\"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":10,\"acknowledged\":15,\"sms\":false,\"emails\":false},\"equipmentIds\":[\"Thing-090011-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":0,\"period\":0,\"sensor\":1}";
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(httpPOST, notificationRule, jsonBody);
@@ -62,14 +64,14 @@ public class RequestManager extends RequestTemplates{
         idOfCreatedNotificationRule = getIdOfCreatedNotificationRule(response);
     }
 
-    public void notificationRulesRead(){
+    private void notificationRulesRead(){
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(httpGET, notificationRule);
 
         createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders).get(notificationRule);
     }
 
-    public void notificationRuleUpdate(){
+    private void notificationRuleUpdate(){
         String url = AmazonAPIGateway.Rule.getUri();
         String jsonBody = "{\"items\":[{\"id\":\""+idOfCreatedNotificationRule+"\",\"active\":1,\"name\":\"Abnormal edited auto-test rule\",\"description\":\"edited description\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380634953177\",\"name\":\"My Lifecell\"}],\"emails\":[{\"value\":\"TestUser.Israil@mail.ru\",\"name\":\"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":10,\"acknowledged\":15,\"globalSettings\":0,\"sms\":false,\"emails\":false},\"equipmentIds\":[\"Thing-090011-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":30,\"period\":0,\"sensor\":1}]}";
 
@@ -79,7 +81,7 @@ public class RequestManager extends RequestTemplates{
         createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).put(notificationRule);
     }
 
-    public void notificationRuleDelete(){
+    private void notificationRuleDelete(){
         String url = AmazonAPIGateway.Rule.getUri();
         String jsonBody = "{\"items\":[{\"id\":\""+ idOfCreatedNotificationRule +"\"}]}";
 
@@ -486,7 +488,7 @@ public class RequestManager extends RequestTemplates{
     }
 
 
-    public void sleep(int mills){
+    private void sleep(int mills){
         try {
             Thread.sleep(mills);
         } catch (InterruptedException e) {

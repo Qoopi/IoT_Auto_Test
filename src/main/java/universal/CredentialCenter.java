@@ -12,9 +12,9 @@ import java.util.Properties;
 
 public class CredentialCenter {
 
-    Properties prop = new Properties();
-    InputStream input = null;
-    public static HashMap<String, String> credentials = null;
+    private Properties prop = new Properties();
+    private InputStream input = null;
+    private static HashMap<String, String> credentials = null;
 
     public HashMap<String, String> readProperties() {
         credentials = new HashMap<>();

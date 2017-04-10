@@ -105,12 +105,7 @@ public class UiUtils {
     }
 
     public boolean isDDMenuOpen(WebDriver driver){
-        if (isElementClickableLong(driver, ddMenuButtonXpath)){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return !isElementClickableLong(driver, ddMenuButtonXpath);
     }
 
     public boolean isDDMenuOpenFF(WebDriver driver){

@@ -4,9 +4,9 @@ package load.objects;
  * Created by user on 17.03.2017.
  */
 public class AWSCredentials {
-    String accessKeyId; //required for request and for sign
-    String secretAccessKey; //required for sign
-    String sessionToken; //required for request
+    private String accessKeyId; //required for request and for sign
+    private String secretAccessKey; //required for sign
+    private String sessionToken; //required for request
 
     @Override
     public String toString() {

@@ -9,8 +9,8 @@ import java.util.Map;
 import static com.jayway.restassured.RestAssured.given;
 
 public class RequestSenderApi {
-        public RequestSpecification requestSpecification = null;
-        public Response response = null;
+        private RequestSpecification requestSpecification = null;
+        private Response response = null;
 
         public RequestSenderApi(){
         }

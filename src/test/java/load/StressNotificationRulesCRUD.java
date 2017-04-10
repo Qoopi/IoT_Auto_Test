@@ -3,9 +3,6 @@ package load;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-/**
- * Created by user on 05.04.2017.
- */
 @Listeners(LoadListener.class)
 public class StressNotificationRulesCRUD {
     private final int threads = 500;//required 100-200-300-400-500-600-700-800-900-1000

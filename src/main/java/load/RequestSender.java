@@ -13,7 +13,7 @@ import java.util.Map;
 import static com.jayway.restassured.RestAssured.given;
 
 public class RequestSender {
-        public RequestSpecification requestSpecification = null;
+        private RequestSpecification requestSpecification = null;
         public Response response = null;
         public static AWSCredentials awsCredentials = new AWSCredentials();
 
