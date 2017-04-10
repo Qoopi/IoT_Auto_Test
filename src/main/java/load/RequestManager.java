@@ -22,9 +22,12 @@ public class RequestManager extends RequestTemplates{
     private String idOfCreatedReport = null;
 
 
+    private final String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
+
+
     public void getChart(int repeats, int timeBetweenRequests){
         String method = "GET";
-        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/chart/Thing-000013-i4?channelIdx=1&startDate=1490189802247&type=2";
+        String url = uri+"/dev/chart/Thing-000013-i4?channelIdx=1&startDate=1490189802247&type=2";
         Map<String,?> standardHeaders = standardHeaders();
 
         for (int i = 0; i<repeats; i++) {
@@ -301,7 +304,6 @@ public class RequestManager extends RequestTemplates{
 
         Map<String, String> standardHeaders = standardHeaders();
         long oldDate = 1490627550017L;
-        String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
         String chartUpdate = uri + "/dev/chart/Thing-000013-i4?channelIdx=1&startDate=" + oldDate + "&type=2";
         String chartUpdate1 = uri+ "/dev/chart/Thing-000013-i4?channelIdx=1&startDate=";
         String chartUpdate2 = "&type=2";
@@ -326,7 +328,6 @@ public class RequestManager extends RequestTemplates{
         Map<String, String> standardHeaders = standardHeaders();
 //        long oldDate = 1490627550017L;
         long oldDate = System.currentTimeMillis()-898581;//almost 15 min nazad
-        String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
         String chartUpdate = uri + "/dev/chart/Thing-090035-0?startDate="+oldDate;
         String chartUpdate1 = uri+ "/dev/chart/Thing-090035-0?startDate=";
         String dashboardInfo = uri + "/dev/dashboard/"+idOfCreatedGPVDashboard;
@@ -343,11 +344,32 @@ public class RequestManager extends RequestTemplates{
         }
     }
 
+    public void canvasGPVDashboardRefreshCycleBurst(int tenMinuteCyclesCount){
+        int repeatsHighLoad = 1;
+        int operatingTimeMinsLowLoad = 9;
+
+        Map<String, String> standardHeaders = standardHeaders();
+        long oldDate = System.currentTimeMillis()-898581;//almost 15 min nazad
+        String chartUpdate = uri + "/dev/chart/Thing-090035-0?startDate="+oldDate;
+        String chartUpdate1 = uri+ "/dev/chart/Thing-090035-0?startDate=";
+        String dashboardInfo = uri + "/dev/dashboard/"+idOfCreatedGPVDashboard;
+        String notificationUnread = uri + "/dev/notification?status=unread";
+        Map<String, String> chartUpdateHeaders = null;
+
+        for(int i1 = 0; i1<tenMinuteCyclesCount; i1++) {
+            for (int i = 0; i < repeatsHighLoad; i++) {
+                chartUpdateHeaders = authHeaders("GET", chartUpdate);
+                createEmptyRequestWithHeaders(standardHeaders).options(chartUpdate);
+                createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdate);
+            }
+            canvasGPVChartRefreshTemplateBurst(operatingTimeMinsLowLoad, chartUpdate1, dashboardInfo, notificationUnread);
+        }
+    }
+
     public void canvasVPVDashboardRefreshCycleOldTimestamp(int operatingTimeMins) {
         //в зависимости от времени меняется startDate
         //в зависимости от юзера и дашборда меняется chartUpdate и dashboardInfo
         long startDate = 1490627550017L;
-        String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
         String chartUpdate = uri + "/dev/chart/Thing-000013-i4?channelIdx=1&startDate=" + startDate + "&type=2";
         String dashboardInfo = uri + "/dev/dashboard/"+idOfCreatedVPVDashboard;
         String notificationUnread = uri + "/dev/notification?status=unread";
@@ -359,7 +381,6 @@ public class RequestManager extends RequestTemplates{
         //в зависимости от времени меняется startDate
         //в зависимости от юзера и дашборда меняется chartUpdate и dashboardInfo
         long oneSecEarlier = System.currentTimeMillis()-1000;
-        String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
         String chartUpdate = uri + "/dev/chart/Thing-000013-i4?channelIdx=1&startDate=" + oneSecEarlier + "&type=2";
         String dashboardInfo = uri + "/dev/dashboard/"+idOfCreatedVPVDashboard;
         String notificationUnread = uri + "/dev/notification?status=unread";
@@ -372,7 +393,6 @@ public class RequestManager extends RequestTemplates{
         //в зависимости от времени меняется startDate
         //в зависимости от юзера и дашборда меняется chartUpdate и dashboardInfo
         long startDate = 1490627550017L;
-        String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
         String chartUpdate = uri + "/dev/chart/Thing-090035-0?startDate=" + startDate;
         String dashboardInfo = uri + "/dev/dashboard/"+idOfCreatedGPVDashboard;
         String notificationUnread = uri + "/dev/notification?status=unread";
@@ -384,7 +404,6 @@ public class RequestManager extends RequestTemplates{
         //в зависимости от времени меняется startDate
         //в зависимости от юзера и дашборда меняется chartUpdate и dashboardInfo
         long oneSecEarlier = System.currentTimeMillis()-1000;
-        String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
         String chartUpdate = uri + "/dev/chart/Thing-090035-0?startDate=" + oneSecEarlier;
         String dashboardInfo = uri + "/dev/dashboard/"+idOfCreatedGPVDashboard;
         String notificationUnread = uri + "/dev/notification?status=unread";

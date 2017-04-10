@@ -102,7 +102,7 @@ public class RequestTemplates extends JSONHandler {
         }
     }
 
-    void canvasGPVChartRefreshTemplateActualTime(int operatingTimeMins, String chartUpdateUrlNoTimestamp, String dashboardInfoUrl, String notificationUnreadUrl){
+    void canvasGPVChartRefreshTemplateActualTime(int operatingTimeMins, String chartUpdateUrlNoTimestamp, String dashboardInfoUrl, String notificationUnreadUrl) {
         //all requests on start
         //2 dash info requests every 30 sec
         //2 notification requests every 1 min
@@ -113,7 +113,7 @@ public class RequestTemplates extends JSONHandler {
         Map<String, String> chartUpdateHeaders = null;
 
 
-        String chartUpdateUrl = chartUpdateUrlNoTimestamp+(System.currentTimeMillis()-62000);
+        String chartUpdateUrl = chartUpdateUrlNoTimestamp + (System.currentTimeMillis() - 62000);
 
         //
         notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
@@ -141,11 +141,48 @@ public class RequestTemplates extends JSONHandler {
             createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
             //
-            chartUpdateUrl = chartUpdateUrlNoTimestamp+(System.currentTimeMillis()-62000);
+            chartUpdateUrl = chartUpdateUrlNoTimestamp + (System.currentTimeMillis() - 62000);
 
             chartUpdateHeaders = authHeaders("GET", chartUpdateUrl);
             createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
+        }
+    }
+
+    void canvasGPVChartRefreshTemplateBurst(int operatingTimeMins, String chartUpdateUrlNoTimestamp, String dashboardInfoUrl, String notificationUnreadUrl){
+        Map<String, String> standardHeaders = standardHeaders();
+        Map<String, String> notificationUnreadHeaders = null;
+        Map<String, String> dashboardInfoHeaders = null;
+        Map<String, String> chartUpdateHeaders = null;
+
+        String chartUpdateUrl;
+        long start;
+
+        for (int i2 = 0; i2 < operatingTimeMins; i2++) {
+            chartUpdateUrl = chartUpdateUrlNoTimestamp+(System.currentTimeMillis()-62000);
+
+
+            notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
+            createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
+            createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
+
+            for (int i1 = 0; i1 < 60; i1++) {
+                start = System.currentTimeMillis()/1000;
+                dashboardInfoHeaders = authHeaders("GET", dashboardInfoUrl);
+                createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
+                createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
+
+                chartUpdateHeaders = authHeaders("GET", chartUpdateUrl);
+                createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
+                createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
+
+                while (start>=(System.currentTimeMillis()/1000)){
+                    sleep(100);
+                }
+            }
+            notificationUnreadHeaders = authHeaders("GET", notificationUnreadUrl);
+            createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
+            createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
         }
 
     }

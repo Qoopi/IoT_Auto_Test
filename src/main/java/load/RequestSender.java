@@ -124,22 +124,38 @@ public class RequestSender {
 
 
         private void gatlingInfoPrintRequest(String methodAndUri){
+            //if response with error status code = print error
+            //if response with ok status code - check response body
+            //if response body contains error messages - check again
+            //if body contains "expired":false = print ok (not error in our service)
+            //if body contains error/exception/expired/timed our = print error
+
             if (enableGatlingReportMessages) {
                 String name = "somename";
                 long thread = Thread.currentThread().getId();
                 String requestName = methodAndUri;
 
+                String responseOK = "REQUEST\t" + name + "\t" + thread + "\t\t" + requestName + "\t" + (System.currentTimeMillis() - response.time()) + "\t" + System.currentTimeMillis() + "\t" + "OK\t ";
+                String responseErrorInBody = "REQUEST\t" + name + "\t" + thread + "\t\t" + requestName + "\t" + (System.currentTimeMillis() - response.time()) + "\t" + System.currentTimeMillis() + "\t" + "KO\tstatus.find.in(200,304,201,202,203,204,205,206,207,208,209), but actually found " + response.statusCode() + " with response body contains error : "+response.asString();
+                String responseErrorStatusCode = "REQUEST\t" + name + "\t" + thread + "\t\t" + requestName + "\t" + (System.currentTimeMillis() - response.time()) + "\t" + System.currentTimeMillis() + "\t" + "KO\tstatus.find.in(200,304,201,202,203,204,205,206,207,208,209), but actually found " + response.statusCode() + " with response body: "+response.asString();
+
+
                 if (response.statusCode() == 200 || response.statusCode() == 304 || response.statusCode() == 201 || response.statusCode() == 202
                         || response.statusCode() == 203 || response.statusCode() == 204 || response.statusCode() == 205 || response.statusCode() == 206
                         || response.statusCode() == 207 || response.statusCode() == 208 || response.statusCode() == 209) {
-                    if(!response.asString().contains("error") && !response.asString().contains("exception") && !response.asString().contains("expired")) {
-                        System.out.println("REQUEST\t" + name + "\t" + thread + "\t\t" + requestName + "\t" + (System.currentTimeMillis() - response.time()) + "\t" + System.currentTimeMillis() + "\t" + "OK\t ");
+                    if(!response.asString().contains("error") && !response.asString().contains("exception") && !response.asString().contains("expired") && !response.asString().contains("timed out")) {
+                        System.out.println(responseOK);
                     }
                     else{
-                        System.out.println("REQUEST\t" + name + "\t" + thread + "\t\t" + requestName + "\t" + (System.currentTimeMillis() - response.time()) + "\t" + System.currentTimeMillis() + "\t" + "KO\tstatus.find.in(200,304,201,202,203,204,205,206,207,208,209), but actually found " + response.statusCode() + " with response body contains 'error' : "+response.asString());
-                    }
+                        if (response.asString().contains("\"expired\":false")){
+                            System.out.println(responseOK);
+                        }
+                        else{
+                            System.out.println(responseErrorInBody);
+                        }
+                        }
                 } else {
-                    System.out.println("REQUEST\t" + name + "\t" + thread + "\t\t" + requestName + "\t" + (System.currentTimeMillis() - response.time()) + "\t" + System.currentTimeMillis() + "\t" + "KO\tstatus.find.in(200,304,201,202,203,204,205,206,207,208,209), but actually found " + response.statusCode() + " with response body: "+response.asString());
+                    System.out.println(responseErrorStatusCode);
                 }
             }
         }

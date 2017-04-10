@@ -10,10 +10,10 @@ import org.testng.annotations.Test;
  */
 
 @Listeners(LoadListener.class)
-public class LoadChartsRefreshingGPV {
-    private final int threads = 70;
+public class LoadChartsRefreshingGPVBurst {
+    private final int threads = 4;
     private final int newThreadLaunchDelayMs = 5000;
-    private final int tenMinutesCyclesCount = 2;
+    private final int tenMinutesCyclesCount = 1;
 
     @BeforeClass
     public void createDashboards(){
@@ -28,11 +28,11 @@ public class LoadChartsRefreshingGPV {
     }
 
     @Test(threadPoolSize = threads, invocationCount = threads)
-    public void refreshGPVDashboard(){
+    public void refreshGPVDashboardBurst(){
         ThreadLaunchDelayer.delay(newThreadLaunchDelayMs);
         gatlingInfoPrintUserStart();
         RequestManager requestManager = new RequestManager();
-        requestManager.canvasGPVDashboardLoadRefreshCycle(tenMinutesCyclesCount);
+        requestManager.canvasGPVDashboardRefreshCycleBurst(tenMinutesCyclesCount);
     }
 
     private void gatlingInfoPrintUserStart(){
