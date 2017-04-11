@@ -5,24 +5,21 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-/**
- * Created by alex00x6 on 28.03.2017.
- */
 
 @Listeners(LoadListener.class)
 public class LoadChartsRefreshingGPVBurst {
-    private final int threads = 4;
+    private final int threads = 10;
     private final int newThreadLaunchDelayMs = 5000;
     private final int tenMinutesCyclesCount = 1;
 
     @BeforeClass
-    public void createDashboards(){
+    public void createDashboard(){
         RequestManager requestManager = new RequestManager();
         requestManager.dashboardCreateCanvasGPV();
     }
 
     @AfterClass
-    public void deleteDashboards(){
+    public void deleteDashboard(){
         RequestManager requestManager = new RequestManager();
         requestManager.dashboardDeleteCanvasGPV();
     }

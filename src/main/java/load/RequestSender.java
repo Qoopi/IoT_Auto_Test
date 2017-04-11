@@ -21,6 +21,7 @@ public class RequestSender {
         private final boolean enableGatlingReportMessages = true; //should be used with debug messages off (if you want gatling reports to work)
         private final boolean enableErrorDebugResponseMessages = false;
         private final boolean enableAllDebugResponseMessages = false;
+        private final boolean replaceTimeStampsInUrls = true;
 
         public RequestSender(){
         }
@@ -129,11 +130,18 @@ public class RequestSender {
             //if response body contains error messages - check again
             //if body contains "expired":false = print ok (not error in our service)
             //if body contains error/exception/expired/timed our = print error
-
             if (enableGatlingReportMessages) {
+                //we parsing methodAndUri for unix timestamp and replacing it with *
+                //this step required in order to greatly reduce weight of report during time-generated urls
+                String requestName;
+                if(replaceTimeStampsInUrls) {
+                    requestName = methodAndUri.replaceAll("[0-9]{13}", "*************");
+                }
+                else{
+                    requestName = methodAndUri;
+                }
                 String name = "somename";
                 long thread = Thread.currentThread().getId();
-                String requestName = methodAndUri;
 
                 String responseOK = "REQUEST\t" + name + "\t" + thread + "\t\t" + requestName + "\t" + (System.currentTimeMillis() - response.time()) + "\t" + System.currentTimeMillis() + "\t" + "OK\t ";
                 String responseErrorInBody = "REQUEST\t" + name + "\t" + thread + "\t\t" + requestName + "\t" + (System.currentTimeMillis() - response.time()) + "\t" + System.currentTimeMillis() + "\t" + "KO\tstatus.find.in(200,304,201,202,203,204,205,206,207,208,209), but actually found " + response.statusCode() + " with response body contains error : "+response.asString();

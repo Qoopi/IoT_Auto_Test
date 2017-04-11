@@ -5,15 +5,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-/**
- * Created by alex00x6 on 28.03.2017.
- */
 
 @Listeners(LoadListener.class)
 public class LoadChartsRefreshingVPV {
-    private final int threads = 100;
+    private final int threads = 70;
     private final int newThreadLaunchDelayMs = 5000;
-    private final int tenMinutesCyclesCount = 1;
+    private final int tenMinutesCyclesCount = 2;
 
     @BeforeClass
     public void createDashboards(){
@@ -25,12 +22,6 @@ public class LoadChartsRefreshingVPV {
     public void deleteDashboards(){
         RequestManager requestManager = new RequestManager();
         requestManager.dashboardDeleteCanvasVPV();
-    }
-
-
-    public void checkNewCreds(){
-        RequestManager requestManager = new RequestManager();
-        requestManager.checkExpiredCredentials((tenMinutesCyclesCount*10));
     }
 
     @Test(threadPoolSize = threads, invocationCount = threads)
