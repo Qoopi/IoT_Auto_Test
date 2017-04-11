@@ -21,7 +21,7 @@ public class RequestSender {
         private final boolean enableGatlingReportMessages = true; //should be used with debug messages off (if you want gatling reports to work)
         private final boolean enableErrorDebugResponseMessages = false;
         private final boolean enableAllDebugResponseMessages = false;
-        private final boolean replaceTimeStampsInUrls = true;
+        private final boolean replaceTimeStampsInUrls = true; //should be on, if you want to generate small and nimble gatling reports
 
         public RequestSender(){
         }
@@ -132,7 +132,7 @@ public class RequestSender {
             //if body contains error/exception/expired/timed our = print error
             if (enableGatlingReportMessages) {
                 //we parsing methodAndUri for unix timestamp and replacing it with *
-                //this step required in order to greatly reduce weight of report during time-generated urls
+                //this step required in order to greatly reduce weight of report in case of time-generated urls
                 String requestName;
                 if(replaceTimeStampsInUrls) {
                     requestName = methodAndUri.replaceAll("[0-9]{13}", "*************");
