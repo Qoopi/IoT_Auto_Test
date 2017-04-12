@@ -9,7 +9,7 @@ class LoadDashboardPage2 extends Simulation {
 
 	val httpProtocol = http
 		.baseURL("https://dashboard.dev.iotsyst.com")
-		.inferHtmlResources()
+		.inferHtmlResources().disableCaching
 
 	val headers_0 = Map(
 		"Accept" -> "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -118,8 +118,8 @@ class LoadDashboardPage2 extends Simulation {
     val uri8 = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
     val uri9 = "https://use.fontawesome.com"
 
-	val scn = scenario("LoadDashboardPage2")
-		.exec(http("request_0")
+	val scn = scenario("LoadDashboardPage2")exec( during(30 minutes){
+		exec(http("request_0")
 			.get("/")
 			.headers(headers_0))
 		.exec(http("request_1")
@@ -176,6 +176,7 @@ class LoadDashboardPage2 extends Simulation {
             http("request_21")
 			.options(uri1 + "/chart/Thing-090035-0?startDate=1491980957542")
 			.headers(headers_10)))
+	})
 
-	setUp(scn.inject(splitUsers(20) into(atOnceUsers(1)) separatedBy(5 seconds))).protocols(httpProtocol)
+	setUp(scn.inject(splitUsers(100) into(atOnceUsers(1)) separatedBy(5 seconds))).protocols(httpProtocol)
 }
