@@ -44,7 +44,7 @@ public class WebDriverFactory {
             if (SystemUtils.IS_OS_WINDOWS) {
                 System.out.println("OS is Windows");
                 if (browserName.toLowerCase().contains("firefox")) {
-                    System.setProperty("webdriver.gecko.driver", "src/main/resources/base/windows/geckodriver32.exe");
+                    System.setProperty("webdriver.gecko.driver", "src/main/resources/selenium/windows/geckodriver32.exe");
                     driver = new FirefoxDriver();
                 }
                 if (browserName.toLowerCase().contains("ie32")) {
@@ -57,11 +57,11 @@ public class WebDriverFactory {
                 }
 
                 if (browserName.toLowerCase().contains("chrome")) {
-                    System.setProperty("webdriver.chrome.driver", "src/main/resources/base/windows/chromedriver.exe");
+                    System.setProperty("webdriver.chrome.driver", "src/main/resources/selenium/windows/chromedriver.exe");
                     driver = new ChromeDriver();
                 }
                 if (browserName.toLowerCase().contains("edge")) {
-                    System.setProperty("webdriver.edge.driver", "src/main/resources/base/windows/MicrosoftWebDriver.exe");
+                    System.setProperty("webdriver.edge.driver", "src/main/resources/selenium/windows/MicrosoftWebDriver.exe");
                     driver = new EdgeDriver();
                 }
             }
@@ -70,11 +70,11 @@ public class WebDriverFactory {
             System.out.println("OS is Linux");
             System.out.println("The local driver configuration for linux is not fully implemented yet ");
             if (browserName.toLowerCase().contains("chrome")) {
-                System.setProperty("webdriver.chrome.driver", "src/main/resources/base/linux/chromedriver");
+                System.setProperty("webdriver.chrome.driver", "src/main/resources/selenium/linux/chromedriver");
                 driver = new ChromeDriver();
             }
             if (browserName.toLowerCase().contains("firefox")) {
-                System.setProperty("webdriver.gecko.driver", "src/main/resources/base/linux/geckodriver");
+                System.setProperty("webdriver.gecko.driver", "src/main/resources/selenium/linux/geckodriver");
                 driver = new FirefoxDriver();
             }
         }

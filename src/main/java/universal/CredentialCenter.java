@@ -20,7 +20,7 @@ public class CredentialCenter {
         credentials = new HashMap<>();
 
         try {
-            input = new FileInputStream("credentials.properties");
+            input = new FileInputStream("src/main/resources/credentials/credentials.properties");
 
             // load a properties file
             prop.load(input);

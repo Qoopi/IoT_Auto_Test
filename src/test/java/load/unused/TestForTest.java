@@ -87,7 +87,8 @@ public class TestForTest {
 //        awsIotClient.connect();
 
 
-        String testTopic = "Data/U000001/ODS/Lab/ATMRobot/002/VPV/STA";
+//        String testTopic = "Data/U000001/ODS/Lab/ATMRobot/002/VPV/STA";
+        String testTopic = "Heartbeat/U0000012454/BUC/Lab/FGW/Thing-090154";
 //        String testTopic = "Heartbeat/l/lk/lk/FGW/Thing-090035";
 
         AWSIotTopic topic = new TestTopicListener(testTopic, AWSIotQos.QOS0);
@@ -155,7 +156,9 @@ public class TestForTest {
 
     @Test
     public void mqttConnectorTest() {
-        String topic = "Data/U000001/ODS/Lab/ATMRobot/002/VPV/STA";
+//        String topic = "Data/U000001/ODS/Lab/ATMRobot/002/VPV/STA";
+//        String topic = "Heartbeat/U0000012454/BUC/Lab/FGW/Thing-090154";
+        String topic = "Heartbeat/U000001/MRL/Lab/ATMRobot/002";
         MQTTConnector mqttConnector = new MQTTConnector();
         mqttConnector.mqttOpen(600000, topic);
 //        mqttConnector.mqttOpen(600000);
