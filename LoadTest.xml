@@ -6,7 +6,7 @@
         <!--<parameter name="browserName" value="chrome"/>-->
         <!--<parameter name="useGrid" value="false"></parameter>-->
         <!--<classes>-->
-            <!--<class name="load.LoadDashboardPage"/>-->
+            <!--<class naload.unused.LoadDashboardPagePage"/>-->
         <!--</classes>-->
     <!--</test>-->
 
@@ -54,7 +54,7 @@
         <!--<parameter name="browserName" value="chrome"/>-->
         <!--<parameter name="useGrid" value="false"></parameter>-->
         <!--<classes>-->
-            <!--<class name="load.EmulateReportsThroughSkedler"/>-->
+            <!--<class naload.unused.EmulateReportsThroughSkedlerdler"/>-->
         <!--</classes>-->
     <!--</test>-->
 </suite>

@@ -1,6 +1,8 @@
-package load;
+package load.unused;
 
 import com.amazonaws.services.iot.client.*;
+import load.LoadListener;
+import load.ThreadLaunchDelayer;
 import load.constants.AmazonAPIGateway;
 import mqtt.MQTTConnector;
 import mqtt.pubSub.TestTopicListener;
@@ -11,25 +13,25 @@ import org.testng.annotations.Test;
 public class TestForTest {
     private final int threads = 10;
 
-//    @Test(threadPoolSize = threads, invocationCount = threads)
+    //    @Test(threadPoolSize = threads, invocationCount = threads)
     public void test() {
         ThreadLaunchDelayer.delay(1000);
-        System.out.println(System.currentTimeMillis()+": hello, i'm your new thread!");
+        System.out.println(System.currentTimeMillis() + ": hello, i'm your new thread!");
     }
 
-//    @Test(threadPoolSize = threads, invocationCount = threads)
+    //    @Test(threadPoolSize = threads, invocationCount = threads)
     public void test1() {
         ThreadLaunchDelayer.delay(1000);
-        System.out.println(System.currentTimeMillis()+": hello, i'm your new thread!");
+        System.out.println(System.currentTimeMillis() + ": hello, i'm your new thread!");
     }
 
-//    @Test
-    public void sometest(){
+    //    @Test
+    public void sometest() {
         System.out.println(AmazonAPIGateway.Dashboard.getUri());
     }
 
-//    @Test
-    public void testagain(){
+    //    @Test
+    public void testagain() {
         String text = "GET_https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/chart/Thing-090035-0?startDate=1491567426185";
 
         String removedTimestamp = text.replaceAll("[0-9]{13}", "*************");
@@ -43,7 +45,7 @@ public class TestForTest {
     String sessionToken = "FQoDYXdzEMD//////////wEaDKXOC2c6D6Yi11wo+SLmA7j50OzH6Vp9lJb0BNKKS07HvBbq7XFL7zyE0x/mlwMizLBKECfyF0SRDHzzSpp/hthJJl9Uz9XwG8fmjri5j0U1GAiftIw+xwmDoLeJax+2cbDDIuZDwTaDrU/DdKQs0/YTVbdIyIGSrHyPWOpdaJLOGStXcYVE0E6MFmgZ+OxaJcoff9/1LxLhkAwGep8rJ1YevYP4AH4enJULGm/UciKxlbf4dCGnX5CqdXODSpNr8YSp18VufI1Ac1nVz3j2ezMtw8jCQm2697nX0Jh5YJaRGbAU7tFQWUYKuU5mSD2ScPYHies2aJJ1BjjrEcgz0jFhahGZm1nwtTLBF2PyjIpcHYqM5C/arRzr6RAp6mfCkLv9RdGsIUUWSgJxk3CzCZGT6E9sRzwwu4xhm8CUt1O9sqlgNLF/0VGnXM5S+6k4fRfTJI2sSQNlKkZ84oNvS4PrcPmlSXw3prm87ke33+M4M9BS0ptPnUlH8zX4L/sq6ARPB3j/6dUbi1KYedF2n0yMVFeMV8OdRx5P+/GnwcVXSNbIzecuefzk32car9c9u/Pnf8jl0zmwuROebWxEun1eqCtJxtDS/yHbC54KhWR4TC5DkEqzqfzp+rmH6L5FiQuDOEqN6f0xTbaifF8jZBsWeJEwsijilL7HBQ==";
 
 
-//    @Test
+    //    @Test
     public void testMQTT() throws AWSIotException, InterruptedException {
 
         String clientId = "7f2650";
@@ -64,16 +66,16 @@ public class TestForTest {
         System.out.println(awsIotClient.getConnectionStatus().toString());
         System.out.println(awsIotClient.getKeepAliveInterval());
 
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             Thread.sleep(80000);
-            awsIotClient.updateCredentials(awsAccessKeyId, awsSecretAccessKey,sessionToken);
+            awsIotClient.updateCredentials(awsAccessKeyId, awsSecretAccessKey, sessionToken);
             System.out.println("tipa creds updated");
             Thread.sleep(80000);
         }
         awsIotClient.disconnect();
     }
 
-//    @Test//doesn't work blin
+    //    @Test//doesn't work blin
     public void testMQTTSend() throws AWSIotException, InterruptedException {
 
         String clientId = "lstn";
@@ -126,7 +128,7 @@ public class TestForTest {
     }
 
 
-//    @Test
+    //    @Test
     public void createShadow() throws AWSIotException {
         String clientId = "7f2650";
         AWSIotMqttClient awsIotClient = new AWSIotMqttClient(clientEndpoint, clientId, awsAccessKeyId, awsSecretAccessKey, sessionToken);
@@ -152,10 +154,11 @@ public class TestForTest {
 
 
     @Test
-    public void mqttConnectorTest(){
+    public void mqttConnectorTest() {
         String topic = "Data/U000001/ODS/Lab/ATMRobot/002/VPV/STA";
         MQTTConnector mqttConnector = new MQTTConnector();
         mqttConnector.mqttOpen(600000, topic);
+//        mqttConnector.mqttOpen(600000);
     }
 
 

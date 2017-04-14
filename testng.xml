@@ -32,7 +32,7 @@
         <!--<parameter name="browserName" value="firefox"></parameter>-->
         <!--<parameter name="useGrid" value="false"></parameter>-->
         <!--<classes>-->
-            <!--<class name="UI.Admin_Role_Firefox"/>-->
+            <!--<class naUI.unused.Admin_Role_Firefoxefox"/>-->
         <!--</classes>-->
     <!--</test>-->
 
@@ -41,7 +41,7 @@
         <parameter name="browserName" value="firefox"></parameter>
         <parameter name="useGrid" value="false"></parameter>
         <classes>
-            <class name="UI.CreateNewUser_Firefox"/>
+            <class naUI.unused.CreateNewUser_Firefoxefox"/>
         </classes>
     </test>-->
 

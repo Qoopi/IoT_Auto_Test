@@ -20,6 +20,7 @@ public class MQTTConnector {
         String sessionToken = RequestSender.awsCredentials.getSessionToken();
 
         AWSIotMqttClient awsIotClient = new AWSIotMqttClient(clientEndpoint, clientId, awsAccessKeyId, awsSecretAccessKey, sessionToken);
+        awsIotClient.setConnectionTimeout(openConnectionTimeMs);
 
         try {
             awsIotClient.connect();
@@ -35,6 +36,42 @@ public class MQTTConnector {
             e.printStackTrace();
         }
 
+
+        System.out.println(awsIotClient.getConnectionStatus().toString());
+        System.out.println(awsIotClient.getKeepAliveInterval());
+
+        if(openConnectionTimeMs > 60000){
+            int runTimeInMinutes = openConnectionTimeMs/60000;
+
+            for (int i = 0; i < runTimeInMinutes; i++){
+                sleep(60000);
+                awsIotClient.updateCredentials(awsAccessKeyId, awsSecretAccessKey,sessionToken);
+                System.out.println("credentials checked");
+            }
+        }
+
+        try {
+            awsIotClient.disconnect();
+        } catch (AWSIotException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void mqttOpen(int openConnectionTimeMs){
+        String clientId = ThreadLocalRandom.current().nextInt(9000, 900000 + 1)+"xe";
+        String awsAccessKeyId = RequestSender.awsCredentials.getAccessKeyId();
+        String awsSecretAccessKey = RequestSender.awsCredentials.getSecretAccessKey();
+        String sessionToken = RequestSender.awsCredentials.getSessionToken();
+
+        AWSIotMqttClient awsIotClient = new AWSIotMqttClient(clientEndpoint, clientId, awsAccessKeyId, awsSecretAccessKey, sessionToken);
+        awsIotClient.setConnectionTimeout(openConnectionTimeMs);
+
+        try {
+            awsIotClient.connect();
+        } catch (AWSIotException e) {
+            e.printStackTrace();
+        }
 
         System.out.println(awsIotClient.getConnectionStatus().toString());
         System.out.println(awsIotClient.getKeepAliveInterval());

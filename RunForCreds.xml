@@ -3,11 +3,20 @@
 <suite name="Regression testing" parallel="methods" thread-count="2">
 
 
+    <!--<test name="Get creds for gatling">-->
+        <!--<parameter name="browserName" value="chrome"></parameter>-->
+        <!--<parameter name="useGrid" value="false"></parameter>-->
+        <!--<classes>-->
+            <!--<class naload.unused.CredsForGatlingling"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+
+
     <test name="Get creds for gatling">
         <parameter name="browserName" value="chrome"></parameter>
         <parameter name="useGrid" value="false"></parameter>
         <classes>
-            <class name="load.CredsForGatling"/>
+            <class name="load.unused.TestForTest"/>
         </classes>
     </test>
 </suite>
