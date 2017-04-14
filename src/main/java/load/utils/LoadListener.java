@@ -1,4 +1,4 @@
-package load;
+package load.utils;
 
 import org.apache.commons.io.output.TeeOutputStream;
 import org.openqa.selenium.WebDriver;

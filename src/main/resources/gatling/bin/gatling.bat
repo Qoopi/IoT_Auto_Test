@@ -1,6 +1,6 @@
 @ECHO OFF
 @REM
-@REM Copyright 2011-2016 GatlingCorp (http://gatling.io)
+@REM Copyright 2011-2016 GatlingCorp (http://load.gatling.io)
 @REM
 @REM Licensed under the Apache License, Version 2.0 (the "License");
 @REM you may not use this file except in compliance with the License.
@@ -25,14 +25,14 @@ cd ..
 set "DEFAULT_GATLING_HOME=%cd%"
 cd %OLD_DIR%
 
-rem if gatling home is correctly set
-if exist "%GATLING_HOME%\bin\gatling.bat" goto gotHome
-rem if gatling home is not correctly set
+rem if load.gatling home is correctly set
+if exist "%GATLING_HOME%\bin\load.gatling.bat" goto gotHome
+rem if load.gatling home is not correctly set
 if not "%GATLING_HOME%" == "" goto badHome
 rem if not try current folder
-if exist "%OLD_DIR%\bin\gatling.bat" set "GATLING_HOME=%OLD_DIR%" && goto gotHome
+if exist "%OLD_DIR%\bin\load.gatling.bat" set "GATLING_HOME=%OLD_DIR%" && goto gotHome
 rem if not try parent folder
-if exist "%DEFAULT_GATLING_HOME%\bin\gatling.bat" set "GATLING_HOME=%DEFAULT_GATLING_HOME%" && goto gotHome
+if exist "%DEFAULT_GATLING_HOME%\bin\load.gatling.bat" set "GATLING_HOME=%DEFAULT_GATLING_HOME%" && goto gotHome
 rem else tell user to set GATLING_HOME
 goto :noHome
 
@@ -61,9 +61,9 @@ echo JAVA = "%JAVA%"
 rem Run the compiler
 set COMPILATION_CLASSPATH=""
 for %%i in ("%GATLING_HOME%\lib\*.jar") do call :addToPath "%%i"
-%JAVA% %COMPILER_OPTS% -cp %COMPILER_CLASSPATH% io.gatling.compiler.ZincCompiler -ccp %COMPILATION_CLASSPATH% %USER_ARGS%  2>NUL
+%JAVA% %COMPILER_OPTS% -cp %COMPILER_CLASSPATH% io.load.gatling.compiler.ZincCompiler -ccp %COMPILATION_CLASSPATH% %USER_ARGS%  2>NUL
 rem Run Gatling
-%JAVA% %JAVA_OPTS% -cp %GATLING_CLASSPATH% io.gatling.app.Gatling %USER_ARGS%
+%JAVA% %JAVA_OPTS% -cp %GATLING_CLASSPATH% io.load.gatling.app.Gatling %USER_ARGS%
 if %errorlevel% neq 0 exit /b %errorlevel%
 rem The above line will forward any potential exit codes from Java if Gatling failed
 

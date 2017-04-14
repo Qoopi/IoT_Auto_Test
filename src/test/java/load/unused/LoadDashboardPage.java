@@ -1,8 +1,8 @@
 package load.unused;
 
-import load.LoadListener;
-import load.RequestManager;
-import load.ThreadLaunchDelayer;
+import load.utils.LoadListener;
+import load.utils.RequestManager;
+import load.utils.ThreadLaunchDelayer;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 

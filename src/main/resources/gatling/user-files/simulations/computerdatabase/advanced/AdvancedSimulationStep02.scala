@@ -1,5 +1,5 @@
 /**
- * Copyright 2011-2016 GatlingCorp (http://gatling.io)
+ * Copyright 2011-2016 GatlingCorp (http://load.gatling.io)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,34 +19,38 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import scala.concurrent.duration._
 
-class AdvancedSimulationStep04 extends Simulation {
+class AdvancedSimulationStep02 extends Simulation {
 
   object Search {
-
-    val feeder = csv("search.csv").random
 
     val search = exec(http("Home")
       .get("/"))
       .pause(1)
-      .feed(feeder)
       .exec(http("Search")
-        .get("/computers?f=${searchCriterion}")
-        .check(css("a:contains('${searchComputerName}')", "href").saveAs("computerURL")))
+        .get("/computers?f=macbook"))
       .pause(1)
       .exec(http("Select")
-        .get("${computerURL}")
-        .check(status.is(200)))
+        .get("/computers/6"))
       .pause(1)
   }
 
   object Browse {
 
-    // repeat is a loop resolved at RUNTIME
-    val browse = repeat(4, "i") { // Note how we force the counter name so we can reuse it
-      exec(http("Page ${i}")
-        .get("/computers?p=${i}"))
-        .pause(1)
-    }
+    val browse = exec(http("Home")
+      .get("/"))
+      .pause(2)
+      .exec(http("Page 1")
+        .get("/computers?p=1"))
+      .pause(670 milliseconds)
+      .exec(http("Page 2")
+        .get("/computers?p=2"))
+      .pause(629 milliseconds)
+      .exec(http("Page 3")
+        .get("/computers?p=3"))
+      .pause(734 milliseconds)
+      .exec(http("Page 4")
+        .get("/computers?p=4"))
+      .pause(5)
   }
 
   object Edit {
@@ -66,16 +70,18 @@ class AdvancedSimulationStep04 extends Simulation {
   }
 
   val httpConf = http
-    .baseURL("http://computer-database.gatling.io")
+    .baseURL("http://computer-database.load.gatling.io")
     .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
     .doNotTrackHeader("1")
     .acceptLanguageHeader("en-US,en;q=0.5")
     .acceptEncodingHeader("gzip, deflate")
     .userAgentHeader("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:16.0) Gecko/20100101 Firefox/16.0")
 
-  val users = scenario("Users").exec(Search.search, Browse.browse)
+  // Let's have multiple populations
+  val users = scenario("Users").exec(Search.search, Browse.browse) // regular users can't edit
   val admins = scenario("Admins").exec(Search.search, Browse.browse, Edit.edit)
 
+  // Let's have 10 regular users and 2 admins, and ramp them on 10 sec so we don't hammer the server
   setUp(
     users.inject(rampUsers(10) over (10 seconds)),
     admins.inject(rampUsers(2) over (10 seconds))

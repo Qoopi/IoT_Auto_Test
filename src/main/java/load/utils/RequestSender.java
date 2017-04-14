@@ -1,4 +1,4 @@
-package load;
+package load.utils;
 
 
 import com.jayway.restassured.response.Response;
@@ -18,10 +18,10 @@ public class RequestSender {
         public static AWSCredentials awsCredentials = new AWSCredentials();
 
         //these three booleans controls console output messages
-        private final boolean enableGatlingReportMessages = true; //should be used with debug messages off (if you want gatling reports to work)
+        private final boolean enableGatlingReportMessages = true; //should be used with debug messages off (if you want load.gatling reports to work)
         private final boolean enableErrorDebugResponseMessages = false;
         private final boolean enableAllDebugResponseMessages = false;
-        private final boolean replaceTimeStampsInUrls = true; //should be on, if you want to generate small and nimble gatling reports
+        private final boolean replaceTimeStampsInUrls = true; //should be on, if you want to generate small and nimble load.gatling reports
 
         public RequestSender(){
         }

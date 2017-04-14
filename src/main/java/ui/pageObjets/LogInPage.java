@@ -11,7 +11,7 @@ import universal.CredentialCenter;
 
 import java.util.HashMap;
 
-import static load.RequestSender.awsCredentials;
+import static load.utils.RequestSender.awsCredentials;
 
 
 public class LogInPage {

@@ -18,7 +18,7 @@ class SignAWSv4 extends AWSCredentials {
 
   //проверить этот метод и реализовать что-то на его основе, если он работает
   def readCredsFromFile(){ //берет файл из корня проекта, разбирает его в map (файл генерится jav'ой), сетит ключи и юзает их
-    val filename = "../../../../../../creds.txt"
+    val filename = "credentials/creds.txt"
     val keyValuePairs = Source.fromFile(filename, "UTF8")
       .getLines.map(_.stripLineEnd.split(",", -1))
       .map(fields => fields(0) -> fields(1)).toList

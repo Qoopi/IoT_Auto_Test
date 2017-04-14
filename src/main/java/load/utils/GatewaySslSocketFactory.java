@@ -1,4 +1,4 @@
-package load;
+package load.utils;
 
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.conn.ssl.X509HostnameVerifier;

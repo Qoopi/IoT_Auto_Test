@@ -1,5 +1,5 @@
 /**
- * Copyright 2011-2016 GatlingCorp (http://gatling.io)
+ * Copyright 2011-2016 GatlingCorp (http://load.gatling.io)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,46 +19,34 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import scala.concurrent.duration._
 
-class AdvancedSimulationStep03 extends Simulation {
+class AdvancedSimulationStep04 extends Simulation {
 
   object Search {
 
-    // We need dynamic data so that all users don't play the same and we end up with a behavior completely different from the live system (caching, JIT...)
-    // ==> Feeders!
-
-    val feeder = csv("search.csv").random // default is queue, so for this test, we use random to avoid feeder starvation
+    val feeder = csv("search.csv").random
 
     val search = exec(http("Home")
       .get("/"))
       .pause(1)
-      .feed(feeder) // every time a user passes here, a record is popped from the feeder and injected into the user's session
+      .feed(feeder)
       .exec(http("Search")
-        .get("/computers?f=${searchCriterion}") // use session data thanks to Gatling's EL
-        .check(css("a:contains('${searchComputerName}')", "href").saveAs("computerURL"))) // use a CSS selector with an EL, save the result of the capture group
+        .get("/computers?f=${searchCriterion}")
+        .check(css("a:contains('${searchComputerName}')", "href").saveAs("computerURL")))
       .pause(1)
       .exec(http("Select")
-        .get("${computerURL}") // use the link previously saved
+        .get("${computerURL}")
         .check(status.is(200)))
       .pause(1)
   }
 
   object Browse {
 
-    val browse = exec(http("Home")
-      .get("/"))
-      .pause(2)
-      .exec(http("Page 1")
-        .get("/computers?p=1"))
-      .pause(670 milliseconds)
-      .exec(http("Page 2")
-        .get("/computers?p=2"))
-      .pause(629 milliseconds)
-      .exec(http("Page 3")
-        .get("/computers?p=3"))
-      .pause(734 milliseconds)
-      .exec(http("Page 4")
-        .get("/computers?p=4"))
-      .pause(5)
+    // repeat is a loop resolved at RUNTIME
+    val browse = repeat(4, "i") { // Note how we force the counter name so we can reuse it
+      exec(http("Page ${i}")
+        .get("/computers?p=${i}"))
+        .pause(1)
+    }
   }
 
   object Edit {
@@ -78,7 +66,7 @@ class AdvancedSimulationStep03 extends Simulation {
   }
 
   val httpConf = http
-    .baseURL("http://computer-database.gatling.io")
+    .baseURL("http://computer-database.load.gatling.io")
     .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
     .doNotTrackHeader("1")
     .acceptLanguageHeader("en-US,en;q=0.5")

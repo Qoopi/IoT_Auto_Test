@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright 2011-2016 GatlingCorp (http://gatling.io)
+# Copyright 2011-2016 GatlingCorp (http://load.gatling.io)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,4 +35,4 @@ JAVA_OPTS="${JAVA_OPTS} -Xms512M -Xmx512M -Xmn100M"
 
 CLASSPATH="$GATLING_HOME/lib/*:$GATLING_CONF:${JAVA_CLASSPATH}"
 
-"$JAVA" $JAVA_OPTS -cp "$CLASSPATH" io.gatling.recorder.GatlingRecorder "$@"
+"$JAVA" $JAVA_OPTS -cp "$CLASSPATH" io.load.gatling.recorder.GatlingRecorder "$@"

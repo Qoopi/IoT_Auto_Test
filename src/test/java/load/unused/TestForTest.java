@@ -1,8 +1,8 @@
 package load.unused;
 
 import com.amazonaws.services.iot.client.*;
-import load.LoadListener;
-import load.ThreadLaunchDelayer;
+import load.utils.LoadListener;
+import load.utils.ThreadLaunchDelayer;
 import load.constants.AmazonAPIGateway;
 import mqtt.MQTTConnector;
 import mqtt.pubSub.TestTopicListener;

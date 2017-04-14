@@ -5,7 +5,7 @@ import com.amazonaws.services.iot.client.AWSIotException;
 import com.amazonaws.services.iot.client.AWSIotMqttClient;
 import com.amazonaws.services.iot.client.AWSIotQos;
 import com.amazonaws.services.iot.client.AWSIotTopic;
-import load.RequestSender;
+import load.utils.RequestSender;
 import mqtt.pubSub.TestTopicListener;
 
 import java.util.concurrent.ThreadLocalRandom;

@@ -1,6 +1,6 @@
 @ECHO OFF
 @REM
-@REM Copyright 2011-2016 GatlingCorp (http://gatling.io)
+@REM Copyright 2011-2016 GatlingCorp (http://load.gatling.io)
 @REM
 @REM Licensed under the Apache License, Version 2.0 (the "License");
 @REM you may not use this file except in compliance with the License.
@@ -23,14 +23,14 @@ cd ..
 set "DEFAULT_GATLING_HOME=%cd%"
 cd %OLD_DIR%
 
-rem if gatling home is correctly set
-if exist "%GATLING_HOME%\bin\gatling.bat" goto gotHome
-rem if gatling home is not correctly set
+rem if load.gatling home is correctly set
+if exist "%GATLING_HOME%\bin\load.gatling.bat" goto gotHome
+rem if load.gatling home is not correctly set
 if not "%GATLING_HOME%" == "" goto badHome
 rem if not try current folder
-if exist "%OLD_DIR%\bin\gatling.bat" set "GATLING_HOME=%OLD_DIR%" && goto gotHome
+if exist "%OLD_DIR%\bin\load.gatling.bat" set "GATLING_HOME=%OLD_DIR%" && goto gotHome
 rem if not try parent folder
-if exist "%DEFAULT_GATLING_HOME%\bin\gatling.bat" set "GATLING_HOME=%DEFAULT_GATLING_HOME%" && goto gotHome
+if exist "%DEFAULT_GATLING_HOME%\bin\load.gatling.bat" set "GATLING_HOME=%DEFAULT_GATLING_HOME%" && goto gotHome
 rem else tell user to set GATLING_HOME
 goto :noHome
 
@@ -41,7 +41,7 @@ echo GATLING_HOME is set to "%GATLING_HOME%"
 set JAVA_OPTS=-Xms512M -Xmx512M -Xmn100M %JAVA_OPTS%
 
 set CLASSPATH="%GATLING_HOME%"\lib\*;"%GATLING_HOME%"\conf;%JAVA_CLASSPATH%
-set COMMAND=-cp %CLASSPATH% io.gatling.recorder.GatlingRecorder
+set COMMAND=-cp %CLASSPATH% io.load.gatling.recorder.GatlingRecorder
 
 set JAVA=java
 if exist "%JAVA_HOME%\bin\java.exe" goto setJavaHome

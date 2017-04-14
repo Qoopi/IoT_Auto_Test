@@ -1,4 +1,4 @@
-package load;
+package load.utils;
 
 
 import com.jayway.restassured.RestAssured;
