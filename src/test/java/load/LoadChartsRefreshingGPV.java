@@ -12,8 +12,8 @@ import org.testng.annotations.Test;
 
 @Listeners(LoadListener.class)
 public class LoadChartsRefreshingGPV {
-    private final int threads = 10;
-    private final int newThreadLaunchDelayMs = 100;
+    private final int threads = 5;
+    private final int newThreadLaunchDelayMs = 5000;
     private final int tenMinutesCyclesCount = 1;
 
     @BeforeClass
@@ -31,7 +31,8 @@ public class LoadChartsRefreshingGPV {
     @Test(threadPoolSize = threads, invocationCount = threads)
     public void refreshDashboardGPV(){
         ThreadLaunchDelayer.delay(newThreadLaunchDelayMs);
-        GatlingReportAdapter.gatlingInfoPrintUserStart();
+        GatlingReportAdapter gatling = new GatlingReportAdapter();
+        gatling.gatlingInfoPrintUserStart();
         RequestManager requestManager = new RequestManager();
         requestManager.canvasGPVDashboardLoadRefreshCycle(tenMinutesCyclesCount);
     }

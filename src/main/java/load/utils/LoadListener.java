@@ -25,23 +25,27 @@ public class LoadListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult tr) {
-        gatlingInfoPrintUserEnd();
+        GatlingReportAdapter gatling = new GatlingReportAdapter();
+        gatling.gatlingInfoPrintUserEnd();
     }
 
 
     @Override
     public void onTestFailure(ITestResult tr) {
-        gatlingInfoPrintUserEnd();
+        GatlingReportAdapter gatling = new GatlingReportAdapter();
+        gatling.gatlingInfoPrintUserEnd();
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-        gatlingInfoPrintUserEnd();
+        GatlingReportAdapter gatling = new GatlingReportAdapter();
+        gatling.gatlingInfoPrintUserEnd();
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
-        gatlingInfoPrintUserEnd();
+        GatlingReportAdapter gatling = new GatlingReportAdapter();
+        gatling.gatlingInfoPrintUserEnd();
     }
 
     @Override
@@ -64,16 +68,14 @@ public class LoadListener implements ITestListener {
             e.printStackTrace();
         }
 
-        String name = "RecordedSimulation1";
-        String nameof = "recordedsimulation1";
-        System.out.println("RUN\t"+name+"\ts\t"+nameof+"\t"+System.currentTimeMillis()+"\ts\t2.0");
+        GatlingReportAdapter gatling = new GatlingReportAdapter();
+        gatling.gatlingInfoPrintTestStart();
     }
 
     @Override
     public void onFinish(ITestContext iTestContext) {
         //for browser
         WebDriver driver = WebDriverManager.getDriver();
-        WaitsAsserts waits = new WaitsAsserts();
         WaitsAsserts.sleep(5000);
         if (driver != null) {
             driver.quit();
@@ -93,16 +95,8 @@ public class LoadListener implements ITestListener {
         log.enterGoogleCred();
         log.getRequestSigns();
         RequestManager requestManager = new RequestManager();
-        requestManager.writeCredsTofile();
+//        requestManager.writeCredsTofile();
         requestManager.setUpBaseApiGateway();
     }
-    private void gatlingInfoPrintUserEnd(){
-        // USER    | NAME | THREAD | START/END | TIMESTART | TIMESTART(onstart)/TIMESTOP(onstop)
-        String name = "RecordedSimulation1";
-        long thread = Thread.currentThread().getId();
-        long timeStart = System.currentTimeMillis();
-        long timeEnd = System.currentTimeMillis();
 
-        System.out.println("USER\t"+name+"\t"+thread+"\tEND\t"+timeStart+"\t"+timeEnd);
-    }
 }

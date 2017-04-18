@@ -31,7 +31,8 @@ public class LoadChartsRefreshingGPVBurst {
     @Test(threadPoolSize = threads, invocationCount = threads)
     public void refreshDashboardGPVBurst(){
         ThreadLaunchDelayer.delay(newThreadLaunchDelayMs);
-        GatlingReportAdapter.gatlingInfoPrintUserStart();
+        GatlingReportAdapter gatling = new GatlingReportAdapter();
+        gatling.gatlingInfoPrintUserStart();
         RequestManager requestManager = new RequestManager();
         requestManager.canvasGPVDashboardRefreshCycleBurst(tenMinutesCyclesCount);
     }

@@ -31,7 +31,8 @@ public class LoadChartsRefreshingVPV {
     @Test(threadPoolSize = threads, invocationCount = threads)
     public void refreshDashboardVPV(){
         ThreadLaunchDelayer.delay(newThreadLaunchDelayMs);
-        GatlingReportAdapter.gatlingInfoPrintUserStart();
+        GatlingReportAdapter gatling = new GatlingReportAdapter();
+        gatling.gatlingInfoPrintUserStart();
         RequestManager requestManager = new RequestManager();
         requestManager.canvasVPVDashboardLoadRefreshCycle(tenMinutesCyclesCount);
     }

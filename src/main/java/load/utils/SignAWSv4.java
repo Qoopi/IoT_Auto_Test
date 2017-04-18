@@ -159,9 +159,6 @@ public class SignAWSv4 extends RequestSender {
         String signature = String.format("%064x", new java.math.BigInteger(1, si));
         String authorizationHeader = algoritm+" "+"Credential="+access_key_id+"/"+credentialScope+", "+"SignedHeaders="+signedHeaders+", "+"Signature="+signature;
 
-//        System.out.println(amzDate);
-//        System.out.println(authorizationHeader);
-
         return authorizationHeader;
     }
 

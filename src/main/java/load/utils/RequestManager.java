@@ -3,7 +3,6 @@ package load.utils;
 
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.config.SSLConfig;
-import load.constants.AmazonAPIGateway;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -72,7 +71,6 @@ public class RequestManager extends RequestTemplates{
     }
 
     private void notificationRuleUpdate(){
-        String url = AmazonAPIGateway.Rule.getUri();
         String jsonBody = "{\"items\":[{\"id\":\""+idOfCreatedNotificationRule+"\",\"active\":1,\"name\":\"Abnormal edited auto-test rule\",\"description\":\"edited description\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380634953177\",\"name\":\"My Lifecell\"}],\"emails\":[{\"value\":\"TestUser.Israil@mail.ru\",\"name\":\"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":10,\"acknowledged\":15,\"globalSettings\":0,\"sms\":false,\"emails\":false},\"equipmentIds\":[\"Thing-090011-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":30,\"period\":0,\"sensor\":1}]}";
 
         Map<String, String> standardHeaders = standardHeaders();
@@ -82,7 +80,6 @@ public class RequestManager extends RequestTemplates{
     }
 
     private void notificationRuleDelete(){
-        String url = AmazonAPIGateway.Rule.getUri();
         String jsonBody = "{\"items\":[{\"id\":\""+ idOfCreatedNotificationRule +"\"}]}";
 
         Map<String, String> standardHeaders = standardHeaders();
@@ -260,7 +257,7 @@ public class RequestManager extends RequestTemplates{
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(httpPOST, dashboard, body);
 
-        String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(dashboard).extractAllResponseAsString();
+        String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(dashboard, false).extractAllResponseAsString();
         idOfCreatedVPVDashboard = getIdOfCreatedDashboard(response);
     }
 
@@ -269,7 +266,7 @@ public class RequestManager extends RequestTemplates{
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(httpPOST, dashboard, body);
 
-        String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(dashboard).extractAllResponseAsString();
+        String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(dashboard, false).extractAllResponseAsString();
         idOfCreatedGPVDashboard = getIdOfCreatedDashboard(response);
     }
 
@@ -287,7 +284,7 @@ public class RequestManager extends RequestTemplates{
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(httpDELETE, dashboard, jsonBody);
 
-        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).delete(dashboard);
+        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).delete(dashboard, false);
 
     }
 
@@ -315,10 +312,9 @@ public class RequestManager extends RequestTemplates{
 
     public void canvasGPVDashboardLoadRefreshCycle(int tenMinuteCyclesCount){
         int repeatsHighLoad = 1;
-        int operatingTimeMinsLowLoad = 9;
+        int operatingTimeMinsLowLoad = 9;//should be 9
 
         Map<String, String> standardHeaders = standardHeaders();
-//        long oldDate = 1490627550017L;
         long oldDate = System.currentTimeMillis()-898581;//almost 15 min nazad
         String chartUpdate = chart+"/"+thingGPV+"?startDate="+oldDate;
         String chartUpdate1 = chart+"/"+thingGPV+"?startDate=";
@@ -403,7 +399,7 @@ public class RequestManager extends RequestTemplates{
         String chartUpdatePostPayloadJSON = "{\"search_type\":\"count\",\"ignore_unavailable\":true}\n" +
                 "{\"query\":{\"filtered\":{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"equipmentId:\\\"Thing-000013-i3\\\" AND channel:1 AND type:2\"}},\"filter\":{\"bool\":{\"must\":[{\"range\":{\"timestamp\":{\"gte\":1488278924314,\"lte\":1490780924314,\"format\":\"epoch_millis\"}}}],\"must_not\":[]}}}},\"size\":0,\"aggs\":{\"2\":{\"date_histogram\":{\"field\":\"timestamp\",\"interval\":\"3h\",\"time_zone\":\"+03:00\",\"min_doc_count\":1,\"extended_bounds\":{\"min\":1488278924313,\"max\":1490780924313}},\"aggs\":{\"1\":{\"avg\":{\"field\":\"value\"}}}}}}";
 
-                String dashboardInfoUrl = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/dashboard/c020c7c1-2d8c-46f6-933a-abb933788732";
+        String dashboardInfoUrl = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/dashboard/c020c7c1-2d8c-46f6-933a-abb933788732";
         String chartUpdateUrl = "https://elasticsearch.dev.iotsyst.io/vpv-log/_msearch?timeout=0&preference=1490780679128";
 
         int operatingTimeMins = 2;
@@ -452,8 +448,6 @@ public class RequestManager extends RequestTemplates{
             awsCredentials.setAccessKeyId(creds.get("accessKeyId").toString());
             awsCredentials.setSecretAccessKey(creds.get("secretAccessKey").toString());
             awsCredentials.setSessionToken(creds.get("sessionToken").toString());
-
-            writeCredsTofile();
         }
 
     }

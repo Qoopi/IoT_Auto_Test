@@ -13,7 +13,8 @@ public class StressNotificationRulesCRUD {
 
     @Test(threadPoolSize = threads, invocationCount = threads)
     public void notificationRulesCRUD(){
-        GatlingReportAdapter.gatlingInfoPrintUserStart();
+        GatlingReportAdapter gatling = new GatlingReportAdapter();
+        gatling.gatlingInfoPrintUserStart();
         RequestManager requestManager = new RequestManager();
         requestManager.notificationRuleCRUD(timeOfTestRunMins);
     }

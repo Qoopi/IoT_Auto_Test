@@ -13,6 +13,8 @@ import java.net.Socket;
 import java.util.Collections;
 
 public class GatewaySslSocketFactory extends SSLSocketFactory {
+    private static final String host = "60sglz9l5h.execute-api.us-east-1.amazonaws.com";
+    private static final String protocol = "TLSv1.2";
 
     public GatewaySslSocketFactory(SSLContext sslContext, X509HostnameVerifier hostnameVerifier) {
         super(sslContext, hostnameVerifier);
@@ -23,10 +25,10 @@ public class GatewaySslSocketFactory extends SSLSocketFactory {
         SSLSocket sslSocket = (SSLSocket) super.createSocket(params);
 
         // Set the encryption protocol
-        sslSocket.setEnabledProtocols(new String[]{"TLSv1.2"});
+        sslSocket.setEnabledProtocols(new String[]{protocol});
 
         // Configure SNI
-        SNIHostName serverName = new SNIHostName("60sglz9l5h.execute-api.us-east-1.amazonaws.com");
+        SNIHostName serverName = new SNIHostName(host);
         SSLParameters sslParams = sslSocket.getSSLParameters();
         sslParams.setServerNames(Collections.singletonList(serverName));
         sslSocket.setSSLParameters(sslParams);

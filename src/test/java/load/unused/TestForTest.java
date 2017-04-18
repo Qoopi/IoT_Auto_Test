@@ -1,7 +1,6 @@
 package load.unused;
 
 import com.amazonaws.services.iot.client.*;
-import load.constants.AmazonAPIGateway;
 import load.utils.LoadListener;
 import load.utils.ThreadLaunchDelayer;
 import mqtt.MQTTConnector;
@@ -25,10 +24,6 @@ public class TestForTest {
         System.out.println(System.currentTimeMillis() + ": hello, i'm your new thread!");
     }
 
-    //    @Test
-    public void sometest() {
-        System.out.println(AmazonAPIGateway.Dashboard.getUri());
-    }
 
     //    @Test
     public void testagain() {
