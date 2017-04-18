@@ -5,31 +5,29 @@ import org.jglue.fluentjson.JsonBuilderFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.testng.annotations.Test;
 
-public class JSONHandler extends SignAWSv4{
-
+public class JSONHandler extends SignAWSv4 {
 
 
-    public String getIdOfCreatedNotificationRule(String response){
+    public String getIdOfCreatedNotificationRule(String response) {
         JSONObject jsonObject = parseToJSONObject(response);
         String id = jsonObject.get("id").toString();
         return id;
     }
 
-    public String getIdOfCreatedDashboard(String response){
+    public String getIdOfCreatedDashboard(String response) {
         JSONObject jsonObject = parseToJSONObject(response);
         JSONObject item = (JSONObject) jsonObject.get("item");
         String id = item.get("id").toString();
         return id;
     }
 
-    public String getIdOfCreatedReport(String response){
+    public String getIdOfCreatedReport(String response) {
         String id = null;
         return id;
     }
 
-    private JSONObject parseToJSONObject(String jsonString){
+    private JSONObject parseToJSONObject(String jsonString) {
         JSONParser parser = new JSONParser();
         JSONObject jsonObject = null;
         try {
@@ -44,10 +42,10 @@ public class JSONHandler extends SignAWSv4{
     //"{\"active\":true,\"name\":\"Abnormal auto-test rule\",\"description\":\"some description\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380634953177\",\"name\":\"My Lifecell\"}],
     // \"emails\":[{\"value\":\"TestUser.Israil@mail.ru\",\"name\":\"hhhhhhhhhhhhh\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":10,\"acknowledged\":15,\"sms\":false,\"emails\":false},
     // \"equipmentIds\":[\"Thing-090011-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":0,\"period\":0,\"sensor\":1}";
-    @Test
-    public void notificationRuleCreateJSON(){
+//    @Test
+    public String notificationRuleCreateJSON() {
         JsonObject jsonObject = JsonBuilderFactory.buildObject()
-                .add("active", "true")
+                .add("active", true)
                 .add("name", "Abnormal auto-test rule")
                 .add("description", "some description")
                 .add("notificationType", 0)
@@ -59,19 +57,19 @@ public class JSONHandler extends SignAWSv4{
                 .add("channel", 0)
                 .add("frq", 0)
                 .add("threshold", 0)
-                .add("trigger","")
+                .add("trigger", "")
                 .add("operation", ">=")
                 .add("value", 0)
-                .add("period", 0).add("sensor",1).getJson();
-        System.out.println(jsonObject.toString());
+                .add("period", 0).add("sensor", 1).getJson();
+//        System.out.println(jsonObject.toString());
+        return jsonObject.toString();
     }
 
     //"{\"items\":[{\"id\":\""+ idOfCreatedNotificationRule.get() +"\"}]}"
-    public String notificationRuleDeleteJSON(){
-        String idOfRule = "254254532";
+    public String notificationRuleDeleteJSON(String id) {
 
         JsonObject jsonObject = JsonBuilderFactory.buildObject()
-                .addArray("items").addObject().add("id", idOfRule)
+                .addArray("items").addObject().add("id", id)
                 .getJson();
         return jsonObject.toString();
     }

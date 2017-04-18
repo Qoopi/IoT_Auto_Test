@@ -57,7 +57,10 @@ public class RequestManager extends RequestTemplates{
 
     //CRUD here
     private void notificationRuleCreate(){
-        String jsonBody = "{\"active\":true,\"name\":\"Abnormal auto-test rule\",\"description\":\"some description\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380634953177\",\"name\":\"My Lifecell\"}],\"emails\":[{\"value\":\"TestUser.Israil@mail.ru\",\"name\":\"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":10,\"acknowledged\":15,\"sms\":false,\"emails\":false},\"equipmentIds\":[\"Thing-090011-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":0,\"period\":0,\"sensor\":1}";
+        JSONHandler jsonHandler = new JSONHandler();
+//        String jsonBody = "{\"active\":true,\"name\":\"Abnormal auto-test rule\",\"description\":\"some description\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380634953177\",\"name\":\"My Lifecell\"}],\"emails\":[{\"value\":\"TestUser.Israil@mail.ru\",\"name\":\"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":10,\"acknowledged\":15,\"sms\":false,\"emails\":false},\"equipmentIds\":[\"Thing-090011-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":0,\"period\":0,\"sensor\":1}";
+        String jsonBody = jsonHandler.notificationRuleCreateJSON();
+//        String jsonBody = "cock";
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(httpPOST, notificationRule, jsonBody);
 
@@ -82,7 +85,8 @@ public class RequestManager extends RequestTemplates{
     }
 
     private void notificationRuleDelete(){
-        String jsonBody = "{\"items\":[{\"id\":\""+ idOfCreatedNotificationRule.get() +"\"}]}";
+        JSONHandler jsonHandler = new JSONHandler();
+        String jsonBody = jsonHandler.notificationRuleDeleteJSON(idOfCreatedNotificationRule.get());
 
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(httpDELETE, notificationRule, jsonBody);
