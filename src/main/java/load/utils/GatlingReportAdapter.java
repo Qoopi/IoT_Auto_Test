@@ -8,6 +8,7 @@ import com.jayway.restassured.response.Response;
 public class GatlingReportAdapter {
     private final String reportName = "RecordedSimulation";
     private final String reportName1 = "Simulation";
+    private final String reportName2 = "Gatling launch";
 
     private static ThreadLocal<Long> threadStartTime = new ThreadLocal<>();
 
@@ -29,7 +30,7 @@ public class GatlingReportAdapter {
     }
 
     public void gatlingInfoPrintTestStart(){
-        System.out.println("RUN\t"+reportName+"\ts\t"+reportName1+"\t"+System.currentTimeMillis()+"\ts\t2.0");
+        System.out.println("RUN\t"+reportName+"\t"+reportName2+"\t"+reportName1+"\t"+System.currentTimeMillis()+"\ts\t2.0");
     }
 
     public void gatlingInfoPrintRequest(String methodAndUri, Response response, boolean enableGatlingReportMessages, boolean replaceTimeStampsInUrls){
