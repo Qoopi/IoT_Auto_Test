@@ -1,5 +1,6 @@
 package load;
 
+import load.utils.GatlingReportAdapter;
 import load.utils.LoadListener;
 import load.utils.RequestManager;
 import load.utils.ThreadLaunchDelayer;
@@ -11,34 +12,27 @@ import org.testng.annotations.Test;
 
 @Listeners(LoadListener.class)
 public class LoadChartsRefreshingGPV {
-    private final int threads = 100;
-    private final int newThreadLaunchDelayMs = 5000;
+    private final int threads = 10;
+    private final int newThreadLaunchDelayMs = 100;
     private final int tenMinutesCyclesCount = 1;
 
     @BeforeClass
-    public void createDashboards(){
+    public void createDashboardGPV(){
         RequestManager requestManager = new RequestManager();
         requestManager.dashboardCreateCanvasGPV();
     }
 
     @AfterClass
-    public void deleteDashboards(){
+    public void deleteDashboardGPV(){
         RequestManager requestManager = new RequestManager();
         requestManager.dashboardDeleteCanvasGPV();
     }
 
     @Test(threadPoolSize = threads, invocationCount = threads)
-    public void refreshGPVDashboard(){
+    public void refreshDashboardGPV(){
         ThreadLaunchDelayer.delay(newThreadLaunchDelayMs);
-        gatlingInfoPrintUserStart();
+        GatlingReportAdapter.gatlingInfoPrintUserStart();
         RequestManager requestManager = new RequestManager();
         requestManager.canvasGPVDashboardLoadRefreshCycle(tenMinutesCyclesCount);
-    }
-
-    private void gatlingInfoPrintUserStart(){
-        String name = "RecordedSimulation1";
-        long thread = Thread.currentThread().getId();
-        long timeStart = System.currentTimeMillis();
-        System.out.println("USER\t"+name+"\t"+thread+"\tSTART\t"+timeStart+"\t"+timeStart);
     }
 }

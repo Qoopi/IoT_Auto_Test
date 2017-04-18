@@ -1,5 +1,6 @@
 package load;
 
+import load.utils.GatlingReportAdapter;
 import load.utils.LoadListener;
 import load.utils.RequestManager;
 import org.testng.annotations.Listeners;
@@ -12,15 +13,8 @@ public class StressNotificationRulesCRUD {
 
     @Test(threadPoolSize = threads, invocationCount = threads)
     public void notificationRulesCRUD(){
-        gatlingInfoPrintUserStart();
+        GatlingReportAdapter.gatlingInfoPrintUserStart();
         RequestManager requestManager = new RequestManager();
         requestManager.notificationRuleCRUD(timeOfTestRunMins);
-    }
-
-    private void gatlingInfoPrintUserStart(){
-        String name = "RecordedSimulation1";
-        long thread = Thread.currentThread().getId();
-        long timeStart = System.currentTimeMillis();
-        System.out.println("USER\t"+name+"\t"+thread+"\tSTART\t"+timeStart+"\t"+timeStart);
     }
 }

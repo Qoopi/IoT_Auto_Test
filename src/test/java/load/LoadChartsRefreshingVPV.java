@@ -1,5 +1,6 @@
 package load;
 
+import load.utils.GatlingReportAdapter;
 import load.utils.LoadListener;
 import load.utils.RequestManager;
 import load.utils.ThreadLaunchDelayer;
@@ -16,29 +17,22 @@ public class LoadChartsRefreshingVPV {
     private final int tenMinutesCyclesCount = 2;
 
     @BeforeClass
-    public void createDashboards(){
+    public void createDashboardVPV(){
         RequestManager requestManager = new RequestManager();
         requestManager.dashboardCreateCanvasVPV();
     }
 
     @AfterClass
-    public void deleteDashboards(){
+    public void deleteDashboardVPV(){
         RequestManager requestManager = new RequestManager();
         requestManager.dashboardDeleteCanvasVPV();
     }
 
     @Test(threadPoolSize = threads, invocationCount = threads)
-    public void refreshVPVDashboard(){
+    public void refreshDashboardVPV(){
         ThreadLaunchDelayer.delay(newThreadLaunchDelayMs);
-        gatlingInfoPrintUserStart();
+        GatlingReportAdapter.gatlingInfoPrintUserStart();
         RequestManager requestManager = new RequestManager();
         requestManager.canvasVPVDashboardLoadRefreshCycle(tenMinutesCyclesCount);
-    }
-
-    private void gatlingInfoPrintUserStart(){
-        String name = "RecordedSimulation1";
-        long thread = Thread.currentThread().getId();
-        long timeStart = System.currentTimeMillis();
-        System.out.println("USER\t"+name+"\t"+thread+"\tSTART\t"+timeStart+"\t"+timeStart);
     }
 }

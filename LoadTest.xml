@@ -10,21 +10,21 @@
         <!--</classes>-->
     <!--</test>-->
 
-    <test name="Emulate Charts Refreshing Load VPV">
-        <parameter name="browserName" value="chrome"/>
-        <parameter name="useGrid" value="false"></parameter>
-        <classes>
-            <class name="load.LoadChartsRefreshingVPV"/>
-        </classes>
-    </test>
-
-    <!--<test name="Emulate Charts Refreshing Load GPV">-->
+    <!--<test name="Emulate Charts Refreshing Load VPV">-->
         <!--<parameter name="browserName" value="chrome"/>-->
         <!--<parameter name="useGrid" value="false"></parameter>-->
         <!--<classes>-->
-            <!--<class name="load.LoadChartsRefreshingGPV"/>-->
+            <!--<class name="load.LoadChartsRefreshingVPV"/>-->
         <!--</classes>-->
     <!--</test>-->
+
+    <test name="Emulate Charts Refreshing Load GPV">
+        <parameter name="browserName" value="chrome"/>
+        <parameter name="useGrid" value="false"></parameter>
+        <classes>
+            <class name="load.LoadChartsRefreshingGPV"/>
+        </classes>
+    </test>
 
     <!--<test name="Emulate Charts Refreshing Load GPV Burst">-->
         <!--<parameter name="browserName" value="chrome"/>-->

@@ -1,5 +1,6 @@
 package load;
 
+import load.utils.GatlingReportAdapter;
 import load.utils.LoadListener;
 import load.utils.RequestManager;
 import load.utils.ThreadLaunchDelayer;
@@ -20,16 +21,8 @@ public class LoadNotificationRulesCRUD {
     @Test(threadPoolSize = threads, invocationCount = threads)
     public void notificationRulesCRUD(){
         ThreadLaunchDelayer.delay(newThreadLaunchDelayMs);
-        gatlingInfoPrintUserStart();
+        GatlingReportAdapter.gatlingInfoPrintUserStart();
         RequestManager requestManager = new RequestManager();
         requestManager.notificationRuleCRUD(timeOfTestRunMins, pauseBetweenRequestsMs, pauseBetweenCyclesMs);
-    }
-
-
-    private void gatlingInfoPrintUserStart(){
-        String name = "RecordedSimulation1";
-        long thread = Thread.currentThread().getId();
-        long timeStart = System.currentTimeMillis();
-        System.out.println("USER\t"+name+"\t"+thread+"\tSTART\t"+timeStart+"\t"+timeStart);
     }
 }

@@ -1,10 +1,7 @@
 package mqtt;
 
 
-import com.amazonaws.services.iot.client.AWSIotException;
-import com.amazonaws.services.iot.client.AWSIotMqttClient;
-import com.amazonaws.services.iot.client.AWSIotQos;
-import com.amazonaws.services.iot.client.AWSIotTopic;
+import com.amazonaws.services.iot.client.*;
 import load.utils.RequestSender;
 import mqtt.pubSub.TestTopicListener;
 
@@ -48,7 +45,6 @@ public class MQTTConnector {
             for (int i = 0; i < runTimeInMinutes; i++){
                 sleep(60000);
                 awsIotClient.updateCredentials(awsAccessKeyId, awsSecretAccessKey,sessionToken);
-                System.out.println("credentials checked");
             }
         }
 
@@ -96,7 +92,6 @@ public class MQTTConnector {
             for (int i = 0; i < runTimeInMinutes; i++){
                 sleep(60000);
                 awsIotClient.updateCredentials(awsAccessKeyId, awsSecretAccessKey,sessionToken);
-                System.out.println("credentials checked");
             }
         }
 
@@ -134,7 +129,6 @@ public class MQTTConnector {
             for (int i = 0; i < runTimeInMinutes; i++){
                 sleep(60000);
                 awsIotClient.updateCredentials(awsAccessKeyId, awsSecretAccessKey,sessionToken);
-                System.out.println("credentials checked");
             }
         }
 

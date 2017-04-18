@@ -1,9 +1,9 @@
 package load.unused;
 
 import com.amazonaws.services.iot.client.*;
+import load.constants.AmazonAPIGateway;
 import load.utils.LoadListener;
 import load.utils.ThreadLaunchDelayer;
-import load.constants.AmazonAPIGateway;
 import mqtt.MQTTConnector;
 import mqtt.pubSub.TestTopicListener;
 import org.testng.annotations.Listeners;
@@ -159,12 +159,11 @@ public class TestForTest {
 //        String topic = "Data/U000001/ODS/Lab/ATMRobot/002/VPV/STA";
 //        String topic = "Heartbeat/U0000012454/BUC/Lab/FGW/Thing-090154";
         String topic = "Heartbeat/U000001/MRL/Lab/ATMRobot/002";
+        int connectionTime = 600000;
+
         MQTTConnector mqttConnector = new MQTTConnector();
-        mqttConnector.mqttOpen(600000, topic);
-//        mqttConnector.mqttOpen(600000);
+        mqttConnector.mqttOpen(connectionTime, topic);
     }
-
-
     public class MyMessage extends AWSIotMessage {
         public MyMessage(String topic, AWSIotQos qos, String payload) {
             super(topic, qos, payload);
