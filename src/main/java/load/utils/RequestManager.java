@@ -17,10 +17,10 @@ import java.util.Map;
 import static ui.utils.WaitsAsserts.sleep;
 
 public class RequestManager extends RequestTemplates{
-    private String idOfCreatedNotificationRule = null;
+    private static ThreadLocal<String> idOfCreatedNotificationRule = new ThreadLocal<>();
+    private static ThreadLocal<String> idOfCreatedReport = new ThreadLocal<>();
     private static String idOfCreatedVPVDashboard = null;
     private static String idOfCreatedGPVDashboard = null;
-    private String idOfCreatedReport = null;
 
 
     private static final String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
@@ -62,7 +62,7 @@ public class RequestManager extends RequestTemplates{
         Map<String, String> authHeaders = authHeaders(httpPOST, notificationRule, jsonBody);
 
         String response = createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).post(notificationRule).extractAllResponseAsString();
-        idOfCreatedNotificationRule = getIdOfCreatedNotificationRule(response);
+        idOfCreatedNotificationRule.set(getIdOfCreatedNotificationRule(response));
     }
 
     private void notificationRulesRead(){
@@ -73,7 +73,7 @@ public class RequestManager extends RequestTemplates{
     }
 
     private void notificationRuleUpdate(){
-        String jsonBody = "{\"items\":[{\"id\":\""+idOfCreatedNotificationRule+"\",\"active\":1,\"name\":\"Abnormal edited auto-test rule\",\"description\":\"edited description\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380634953177\",\"name\":\"My Lifecell\"}],\"emails\":[{\"value\":\"TestUser.Israil@mail.ru\",\"name\":\"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":10,\"acknowledged\":15,\"globalSettings\":0,\"sms\":false,\"emails\":false},\"equipmentIds\":[\"Thing-090011-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":30,\"period\":0,\"sensor\":1}]}";
+        String jsonBody = "{\"items\":[{\"id\":\""+idOfCreatedNotificationRule.get()+"\",\"active\":1,\"name\":\"Abnormal edited auto-test rule\",\"description\":\"edited description\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380634953177\",\"name\":\"My Lifecell\"}],\"emails\":[{\"value\":\"TestUser.Israil@mail.ru\",\"name\":\"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":10,\"acknowledged\":15,\"globalSettings\":0,\"sms\":false,\"emails\":false},\"equipmentIds\":[\"Thing-090011-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":30,\"period\":0,\"sensor\":1}]}";
 
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(httpPUT, notificationRule, jsonBody);
@@ -82,7 +82,7 @@ public class RequestManager extends RequestTemplates{
     }
 
     private void notificationRuleDelete(){
-        String jsonBody = "{\"items\":[{\"id\":\""+ idOfCreatedNotificationRule +"\"}]}";
+        String jsonBody = "{\"items\":[{\"id\":\""+ idOfCreatedNotificationRule.get() +"\"}]}";
 
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(httpDELETE, notificationRule, jsonBody);
@@ -127,11 +127,11 @@ public class RequestManager extends RequestTemplates{
         String jsonResponse = createRequestWithHeaders(authHeaders, jsonBody).addHeaders(standardHeaders).put(report).extractAllResponseAsString();
         System.out.println(jsonResponse);
         //тут сделать парс json и запись id в variable
-        idOfCreatedReport = getIdOfCreatedReport(jsonResponse);
+        idOfCreatedReport.set(getIdOfCreatedReport(jsonResponse));
     }
 
     public void skedlerReportSendNow(){
-        String jsonBody = "{\"filterId\":\""+idOfCreatedReport+"\",\"templateId\":\"GPV-Smart-Sensor-Report-15-minutes-activity-1\",\"emaillist\":\"geloksmmm@gmail.com,kov.ossystem@gmail.com\",\"filter\":\"equipmentId:"+thingGPV+"\",\"filter_name\":\"GPV-Smart-Sensor-Report-List-15-minutes\",\"excelEnabled\":false}";
+        String jsonBody = "{\"filterId\":\""+idOfCreatedReport.get()+"\",\"templateId\":\"GPV-Smart-Sensor-Report-15-minutes-activity-1\",\"emaillist\":\"geloksmmm@gmail.com,kov.ossystem@gmail.com\",\"filter\":\"equipmentId:"+thingGPV+"\",\"filter_name\":\"GPV-Smart-Sensor-Report-List-15-minutes\",\"excelEnabled\":false}";
 
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(httpPOST, report, jsonBody);

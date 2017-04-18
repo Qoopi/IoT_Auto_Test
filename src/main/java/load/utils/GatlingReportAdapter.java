@@ -6,8 +6,8 @@ import com.jayway.restassured.response.Response;
  * Created by user on 18.04.2017.
  */
 public class GatlingReportAdapter {
-    private final String reportName = "RecordedSimulation1";
-    private final String reportName1 = "recordedSimulation1";
+    private final String reportName = "RecordedSimulation";
+    private final String reportName1 = "Simulation";
 
     private static ThreadLocal<Long> threadStartTime = new ThreadLocal<>();
 
@@ -26,7 +26,6 @@ public class GatlingReportAdapter {
         long timeEnd = System.currentTimeMillis();
 
         System.out.println("USER\t"+reportName+"\t"+thread+"\tEND\t"+timeStart+"\t"+timeEnd);
-//        System.out.println("USER\t"+reportName+"\t"+thread+"\tEND\t"+timeEnd+"\t"+timeStart);
     }
 
     public void gatlingInfoPrintTestStart(){
