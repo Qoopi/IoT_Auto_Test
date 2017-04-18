@@ -4,7 +4,6 @@ target
 *.iml
 *.ipr
 *.txt
-target/
 results/
 loadReports/*.log
 *.properties

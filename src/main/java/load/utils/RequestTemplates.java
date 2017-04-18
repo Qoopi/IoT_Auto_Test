@@ -2,6 +2,8 @@ package load.utils;
 
 import java.util.Map;
 
+import static ui.utils.WaitsAsserts.sleep;
+
 /**
  * Created by alex00x6 on 30.03.2017.
  */
@@ -231,14 +233,5 @@ public class RequestTemplates extends JSONHandler {
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
         }
 
-    }
-
-
-    private void sleep(int mills){
-        try {
-            Thread.sleep(mills);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

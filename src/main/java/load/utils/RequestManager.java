@@ -14,6 +14,8 @@ import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
+import static ui.utils.WaitsAsserts.sleep;
+
 public class RequestManager extends RequestTemplates{
     private String idOfCreatedNotificationRule = null;
     private static String idOfCreatedVPVDashboard = null;
@@ -480,14 +482,4 @@ public class RequestManager extends RequestTemplates{
                 SSLConfig.sslConfig().sslSocketFactory(customSslFactory));
         RestAssured.config.getHttpClientConfig().reuseHttpClientInstance();
     }
-
-
-    private void sleep(int mills){
-        try {
-            Thread.sleep(mills);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
 }
