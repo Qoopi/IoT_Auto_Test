@@ -43,7 +43,8 @@ public class RequestManager extends RequestTemplates{
 
 
     public void getChart(int repeats, int timeBetweenRequests){
-        String url = chart+"/"+thingVPV+"?"+channelVPV+"&startDate=1490189802247&type=2";
+        long startDate = 1490189802247L;
+        String url = chart+"/"+thingVPV+"?"+channelVPV+"&startDate="+startDate+"&type=2";
         Map<String,?> standardHeaders = standardHeaders();
 
         for (int i = 0; i<repeats; i++) {
@@ -55,7 +56,6 @@ public class RequestManager extends RequestTemplates{
     }
 
     //CRUD here
-
     private void notificationRuleCreate(){
         String jsonBody = "{\"active\":true,\"name\":\"Abnormal auto-test rule\",\"description\":\"some description\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380634953177\",\"name\":\"My Lifecell\"}],\"emails\":[{\"value\":\"TestUser.Israil@mail.ru\",\"name\":\"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":10,\"acknowledged\":15,\"sms\":false,\"emails\":false},\"equipmentIds\":[\"Thing-090011-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":0,\"period\":0,\"sensor\":1}";
         Map<String, String> standardHeaders = standardHeaders();
@@ -117,8 +117,7 @@ public class RequestManager extends RequestTemplates{
         }
     }
 
-    //SKEDLER IN PROGRESS AND NOT FINISHED YET
-
+    //SKEDLER SCENARIOS ARE NOT FINISHED
     public void skedlerReportCreate(){
         String jsonBody = "{\"templateId\":\"Vacuum-Pump-Vibration-Report---Optimized-for-Printing---Daily\",\"emaillist\":\"vasya.ossystem@gmasill.com\",\"filter\":\"equipmentId:"+thingGPV+"\",\"filter_name\":\"Vacuum-Pump-Vibration-Report-List---Optimized-for-Printing---Daily\",\"excelEnabled\":false}";
 
@@ -150,10 +149,9 @@ public class RequestManager extends RequestTemplates{
 
         createRequestWithHeaders(authHeaders, jsonBody).addHeaders(standardHeaders).delete(report);
     }
-
     //
 
-
+    //not used, this scenario is launched by Gatling
     public void loadDashboardPage(int repeats, int timeBetweenCycles) {
         String urlBootStrap = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css";
         String urlCloudFlare = "https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css";
@@ -454,10 +452,11 @@ public class RequestManager extends RequestTemplates{
 
     }
 
+    //i've turn this method off, because we don't use signed requests in gatling anymore
     public void writeCredsTofile(){
         PrintWriter out = null;
         try {
-            out = new PrintWriter("creds.txt");
+            out = new PrintWriter("src/main/resources/credentials/creds.txt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

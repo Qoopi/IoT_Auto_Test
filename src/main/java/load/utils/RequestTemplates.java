@@ -4,9 +4,7 @@ import java.util.Map;
 
 import static ui.utils.WaitsAsserts.sleep;
 
-/**
- * Created by alex00x6 on 30.03.2017.
- */
+
 public class RequestTemplates extends JSONHandler {
     private static final String httpGET = "GET";
 

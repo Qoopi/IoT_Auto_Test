@@ -8,6 +8,7 @@ import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
 
 public class WaitsAsserts {
+
     public static void sleep(int time){
         try {
             Thread.sleep(time);
@@ -15,6 +16,7 @@ public class WaitsAsserts {
             e.printStackTrace();
         }
     }
+
     public static void  assertByTitle(WebDriver driver, String title) {
         String currentTitle = driver.getTitle();
         assertEquals(currentTitle, title);
