@@ -58,9 +58,7 @@ public class RequestManager extends RequestTemplates{
     //CRUD here
     private void notificationRuleCreate(){
         JSONHandler jsonHandler = new JSONHandler();
-//        String jsonBody = "{\"active\":true,\"name\":\"Abnormal auto-test rule\",\"description\":\"some description\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380634953177\",\"name\":\"My Lifecell\"}],\"emails\":[{\"value\":\"TestUser.Israil@mail.ru\",\"name\":\"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":10,\"acknowledged\":15,\"sms\":false,\"emails\":false},\"equipmentIds\":[\"Thing-090011-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":0,\"period\":0,\"sensor\":1}";
         String jsonBody = jsonHandler.notificationRuleCreateJSON();
-//        String jsonBody = "cock";
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(httpPOST, notificationRule, jsonBody);
 
@@ -76,8 +74,8 @@ public class RequestManager extends RequestTemplates{
     }
 
     private void notificationRuleUpdate(){
-        String jsonBody = "{\"items\":[{\"id\":\""+idOfCreatedNotificationRule.get()+"\",\"active\":1,\"name\":\"Abnormal edited auto-test rule\",\"description\":\"edited description\",\"notificationType\":0,\"type\":0,\"phones\":[{\"value\":\"+380634953177\",\"name\":\"My Lifecell\"}],\"emails\":[{\"value\":\"TestUser.Israil@mail.ru\",\"name\":\"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh\"}],\"notifications\":{\"alwaysSend\":false,\"triggered\":10,\"acknowledged\":15,\"globalSettings\":0,\"sms\":false,\"emails\":false},\"equipmentIds\":[\"Thing-090011-0\"],\"channel\":0,\"frq\":0,\"threshold\":0,\"trigger\":\"\",\"operation\":\">=\",\"value\":30,\"period\":0,\"sensor\":1}]}";
-
+        JSONHandler jsonHandler = new JSONHandler();
+        String jsonBody = jsonHandler.notificationRuleUpdateJSON(idOfCreatedNotificationRule.get());
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(httpPUT, notificationRule, jsonBody);
 
@@ -257,7 +255,8 @@ public class RequestManager extends RequestTemplates{
     }
 
     public void dashboardCreateCanvasVPV(){
-        String body = "{\"type\":7,\"equipmentIds\":[\"Thing-000013-i3\",\"Thing-000011-i1\",\"Thing-000012-i2\"],\"name\":\"someAutoTestNameVPV\",\"description\":\"someAutoTestDescriptionVPV\"}";
+        JSONHandler jsonHandler = new JSONHandler();
+        String body = jsonHandler.dashboardCreateCanvasVPVJSON();
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(httpPOST, dashboard, body);
 
@@ -266,7 +265,8 @@ public class RequestManager extends RequestTemplates{
     }
 
     public void dashboardCreateCanvasGPV(){
-        String body = "{\"type\":9,\"equipmentIds\":[\""+thingGPV+"\"],\"name\":\"someAutoTestNameGPV\",\"description\":\"someAutoTestDescriptionGPV\"}";
+        JSONHandler jsonHandler = new JSONHandler();
+        String body = jsonHandler.dashboardCreateCanvasGPVJSON();
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(httpPOST, dashboard, body);
 
@@ -283,7 +283,8 @@ public class RequestManager extends RequestTemplates{
     }
 
     private void deleteCanvasDashboardById(String id){
-        String jsonBody = "{\"items\":[{\"id\":\""+id+"\"}]}";
+        JSONHandler jsonHandler = new JSONHandler();
+        String jsonBody = jsonHandler.dashboardDeleteJSON(id);
 
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(httpDELETE, dashboard, jsonBody);
