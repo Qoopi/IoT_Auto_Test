@@ -3,6 +3,7 @@ package load.utils;
 
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.config.SSLConfig;
+import load.Things;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -30,9 +31,9 @@ public class RequestManager extends RequestTemplates{
     private static final String report = uri+"/report";
     private static final String chart = uri+"/dev/chart";
 
-    private static final String thingGPV = "Thing-090035-0";
-    private static final String thingVPV = "Thing-000013-i4";
-    private static final String channelVPV = "channelIdx=1";
+    private static final String thingGPV = Things.ThingGPV.getValue();
+    private static final String thingVPV = Things.ThingVPV13.getValue();
+    private static final String channelVPV = Things.ChannelVPV.getValue();
 
     private static final String httpGET = "GET";
     private static final String httpPOST = "POST";
