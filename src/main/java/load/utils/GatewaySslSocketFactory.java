@@ -1,5 +1,6 @@
 package load.utils;
 
+import load.URLs;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.conn.ssl.X509HostnameVerifier;
 import org.apache.http.params.HttpParams;
@@ -13,7 +14,7 @@ import java.net.Socket;
 import java.util.Collections;
 
 public class GatewaySslSocketFactory extends SSLSocketFactory {
-    private static final String host = "60sglz9l5h.execute-api.us-east-1.amazonaws.com";
+    private static final String host = URLs.ApiGateway.getValue();
     private static final String protocol = "TLSv1.2";
 
     public GatewaySslSocketFactory(SSLContext sslContext, X509HostnameVerifier hostnameVerifier) {

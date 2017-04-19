@@ -4,6 +4,7 @@ package load.utils;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.config.SSLConfig;
 import load.Things;
+import load.URLs;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -24,7 +25,7 @@ public class RequestManager extends RequestTemplates{
     private static String idOfCreatedGPVDashboard = null;
 
 
-    private static final String uri = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com";
+    private static final String uri = URLs.HTTPS.getValue()+ URLs.ApiGateway.getValue();
     private static final String notificationUnread = uri+"/dev/notification?status=unread";
     private static final String notificationRule = uri+"/dev/rule";
     private static final String dashboard = uri+"/dev/dashboard";

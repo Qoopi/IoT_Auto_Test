@@ -1,5 +1,6 @@
 package load.utils;
 
+import load.URLs;
 import load.objects.AWSURI;
 
 import javax.crypto.Mac;
@@ -70,13 +71,13 @@ public class SignAWSv4 extends RequestSender {
         map.put("Connection", "keep-alive");
         map.put("Cache-Control", "no-cache");
         map.put("Pragma", "no-cache");
-        map.put("Referer", "https://dashboard.dev.iotsyst.com/");
+        map.put("Referer", "https://"+URLs.Dashboard.getValue()+"/");
         map.put("Accept", "*/*");
         map.put("Content-Type", "application/json");
         map.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36");
         map.put("Accept-Language", "en-US,en;q=0.8");
         map.put("Accept-Encoding", "gzip, deflate, sdch, br");
-        map.put("Origin", "https://dashboard.dev.iotsyst.com");
+        map.put("Origin", "https://"+URLs.Dashboard.getValue());
 
         return map;
     }
@@ -98,7 +99,7 @@ public class SignAWSv4 extends RequestSender {
             queryString=uri.getQuery();
         }
 
-        if (!url.contains("60sglz9l5h.execute-api.us-east-1.amazonaws.com")){
+        if (!url.contains(URLs.ApiGateway.getValue())){
             System.out.println("Looks like you using unknown URL, check it!");
         }
 
