@@ -1,6 +1,7 @@
 package load.unused;
 
 import com.amazonaws.services.iot.client.*;
+import load.MQTTTopics;
 import load.utils.LoadListener;
 import load.utils.ThreadLaunchDelayer;
 import mqtt.MQTTConnector;
@@ -153,7 +154,8 @@ public class TestForTest {
     public void mqttConnectorTest() {
 //        String topic = "Data/U000001/ODS/Lab/ATMRobot/002/VPV/STA";
 //        String topic = "Heartbeat/U0000012454/BUC/Lab/FGW/Thing-090154";
-        String topic = "Heartbeat/U000001/MRL/Lab/ATMRobot/002";
+//        String topic = "Heartbeat/U000001/MRL/Lab/ATMRobot/002";
+        String topic = MQTTTopics.someTopic.getValue();
         int connectionTime = 600000;
 
         MQTTConnector mqttConnector = new MQTTConnector();

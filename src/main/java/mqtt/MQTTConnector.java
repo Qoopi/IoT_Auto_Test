@@ -2,13 +2,14 @@ package mqtt;
 
 
 import com.amazonaws.services.iot.client.*;
+import load.URLs;
 import load.utils.RequestSender;
 import mqtt.pubSub.TestTopicListener;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MQTTConnector {
-    private String clientEndpoint = "a2awmps9ermju9.iot.us-east-1.amazonaws.com";
+    private String clientEndpoint = URLs.MQTTGateway.getValue();
 
     public void mqttOpen(int openConnectionTimeMs, String topic){
         String clientId = ThreadLocalRandom.current().nextInt(9000, 900000 + 1)+"xe";

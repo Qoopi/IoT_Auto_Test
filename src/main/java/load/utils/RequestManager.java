@@ -42,8 +42,6 @@ public class RequestManager extends RequestTemplates{
     private static final String httpDELETE = "DELETE";
 
 
-
-
     public void getChart(int repeats, int timeBetweenRequests){
         long startDate = 1490189802247L;
         String url = chart+"/"+thingVPV+"?"+channelVPV+"&startDate="+startDate+"&type=2";

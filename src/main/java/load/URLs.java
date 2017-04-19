@@ -6,6 +6,7 @@ package load;
 public enum URLs {
     HTTPS("https://"),
     ApiGateway("60sglz9l5h.execute-api.us-east-1.amazonaws.com"),
+    MQTTGateway("a2awmps9ermju9.iot.us-east-1.amazonaws.com"),
     Dashboard("dashboard.dev.iotsyst.com");
 
     private final String value;
