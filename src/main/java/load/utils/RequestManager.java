@@ -1,21 +1,15 @@
 package load.utils;
 
 
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.config.SSLConfig;
-import system.constant.Things;
-import system.constant.URLs;
-import system.http.GatewaySslSocketFactory;
-import system.http.JSONHandler;
-import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import system.constant.Things;
+import system.constant.URLs;
+import system.http.JSONHandler;
 
-import javax.net.ssl.SSLContext;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 import static ui.utils.WaitsAsserts.sleep;
@@ -473,19 +467,4 @@ public class RequestManager extends RequestTemplates{
         out.close();
     }
 
-
-    public void setUpBaseApiGateway(){
-        //это вынести по ходу в listener для api/load тестов
-        // Use our custom socket factory
-        SSLSocketFactory customSslFactory = null;
-        try {
-            customSslFactory = new GatewaySslSocketFactory(
-                    SSLContext.getDefault(), SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        RestAssured.config = RestAssured.config().sslConfig(
-                SSLConfig.sslConfig().sslSocketFactory(customSslFactory));
-        RestAssured.config.getHttpClientConfig().reuseHttpClientInstance();
-    }
 }
