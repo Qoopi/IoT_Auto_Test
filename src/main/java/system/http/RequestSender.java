@@ -24,10 +24,10 @@ public class RequestSender {
     public static AWSCredentials awsCredentials = new AWSCredentials();
 
     //these three booleans controls console output messages
-    private final boolean enableGatlingReportMessages = true; //should be used with debug messages off (if you want load.gatling reports to work)
-    private final boolean enableErrorDebugResponseMessages = false;
-    private final boolean enableAllDebugResponseMessages = false;
-    private final boolean replaceTimeStampsInUrls = true; //should be on, if you want to generate small and nimble load.gatling reports
+    protected boolean messagesEnableGatlingReport = true; //should be used with debug messages off (if you want load.gatling reports to work)
+    protected boolean messagesEnableErrorDebugResponse = false;
+    protected boolean messagesEnableAllDebugResponse = false;
+    private boolean messagesReplaceTimeStampsInUrls = true; //should be on, if you want to generate small and nimble load.gatling reports
 
     public RequestSender() {
     }
@@ -69,7 +69,7 @@ public class RequestSender {
         response = requestSpecification.post(uri);
         debugInfoPrint("POST_" + uri);
         GatlingReportAdapter gatling = new GatlingReportAdapter();
-        gatling.gatlingInfoPrintRequest("POST_" + uri, response, enableGatlingReportMessages, replaceTimeStampsInUrls);
+        gatling.gatlingInfoPrintRequest("POST_" + uri, response, messagesEnableGatlingReport, messagesReplaceTimeStampsInUrls);
         return this;
     }
 
@@ -78,7 +78,7 @@ public class RequestSender {
         if (print) {
             debugInfoPrint("POST_" + uri);
             GatlingReportAdapter gatling = new GatlingReportAdapter();
-            gatling.gatlingInfoPrintRequest("POST_" + uri, response, enableGatlingReportMessages, replaceTimeStampsInUrls);
+            gatling.gatlingInfoPrintRequest("POST_" + uri, response, messagesEnableGatlingReport, messagesReplaceTimeStampsInUrls);
         }
         return this;
     }
@@ -87,7 +87,7 @@ public class RequestSender {
         response = requestSpecification.options(uri);
         debugInfoPrint("OPTIONS_" + uri);
         GatlingReportAdapter gatling = new GatlingReportAdapter();
-        gatling.gatlingInfoPrintRequest("OPTIONS_" + uri, response, enableGatlingReportMessages, replaceTimeStampsInUrls);
+        gatling.gatlingInfoPrintRequest("OPTIONS_" + uri, response, messagesEnableGatlingReport, messagesReplaceTimeStampsInUrls);
         return this;
     }
 
@@ -96,7 +96,7 @@ public class RequestSender {
         if (print) {
             debugInfoPrint("OPTIONS_" + uri);
             GatlingReportAdapter gatling = new GatlingReportAdapter();
-            gatling.gatlingInfoPrintRequest("OPTIONS_" + uri, response, enableGatlingReportMessages, replaceTimeStampsInUrls);
+            gatling.gatlingInfoPrintRequest("OPTIONS_" + uri, response, messagesEnableGatlingReport, messagesReplaceTimeStampsInUrls);
         }
         return this;
     }
@@ -105,7 +105,7 @@ public class RequestSender {
         response = requestSpecification.delete(uri);
         debugInfoPrint("DELETE_" + uri);
         GatlingReportAdapter gatling = new GatlingReportAdapter();
-        gatling.gatlingInfoPrintRequest("DELETE_" + uri, response, enableGatlingReportMessages, replaceTimeStampsInUrls);
+        gatling.gatlingInfoPrintRequest("DELETE_" + uri, response, messagesEnableGatlingReport, messagesReplaceTimeStampsInUrls);
         return this;
     }
 
@@ -114,7 +114,7 @@ public class RequestSender {
         if (print) {
             debugInfoPrint("DELETE_" + uri);
             GatlingReportAdapter gatling = new GatlingReportAdapter();
-            gatling.gatlingInfoPrintRequest("DELETE_" + uri, response, enableGatlingReportMessages, replaceTimeStampsInUrls);
+            gatling.gatlingInfoPrintRequest("DELETE_" + uri, response, messagesEnableGatlingReport, messagesReplaceTimeStampsInUrls);
         }
         return this;
     }
@@ -123,7 +123,7 @@ public class RequestSender {
         response = requestSpecification.get(uri);
         debugInfoPrint("GET_" + uri);
         GatlingReportAdapter gatling = new GatlingReportAdapter();
-        gatling.gatlingInfoPrintRequest("GET_" + uri, response, enableGatlingReportMessages, replaceTimeStampsInUrls);
+        gatling.gatlingInfoPrintRequest("GET_" + uri, response, messagesEnableGatlingReport, messagesReplaceTimeStampsInUrls);
         checkExpiredCredentials(response, uri);
         return this;
     }
@@ -133,7 +133,7 @@ public class RequestSender {
         if (print) {
             debugInfoPrint("GET_" + uri);
             GatlingReportAdapter gatling = new GatlingReportAdapter();
-            gatling.gatlingInfoPrintRequest("GET_" + uri, response, enableGatlingReportMessages, replaceTimeStampsInUrls);
+            gatling.gatlingInfoPrintRequest("GET_" + uri, response, messagesEnableGatlingReport, messagesReplaceTimeStampsInUrls);
             checkExpiredCredentials(response, uri);
         }
         return this;
@@ -143,7 +143,7 @@ public class RequestSender {
         response = requestSpecification.put(uri);
         debugInfoPrint("PUT_" + uri);
         GatlingReportAdapter gatling = new GatlingReportAdapter();
-        gatling.gatlingInfoPrintRequest("PUT_" + uri, response, enableGatlingReportMessages, replaceTimeStampsInUrls);
+        gatling.gatlingInfoPrintRequest("PUT_" + uri, response, messagesEnableGatlingReport, messagesReplaceTimeStampsInUrls);
         return this;
     }
 
@@ -152,7 +152,7 @@ public class RequestSender {
         if (print) {
             debugInfoPrint("PUT_" + uri);
             GatlingReportAdapter gatling = new GatlingReportAdapter();
-            gatling.gatlingInfoPrintRequest("PUT_" + uri, response, enableGatlingReportMessages, replaceTimeStampsInUrls);
+            gatling.gatlingInfoPrintRequest("PUT_" + uri, response, messagesEnableGatlingReport, messagesReplaceTimeStampsInUrls);
         }
         return this;
     }
@@ -187,8 +187,8 @@ public class RequestSender {
 
 
     private void debugInfoPrint(String url) {
-        if (enableErrorDebugResponseMessages || enableAllDebugResponseMessages) {
-            if (response.statusCode() != 200 || response.asString().contains("error") || enableAllDebugResponseMessages) {
+        if (messagesEnableErrorDebugResponse || messagesEnableAllDebugResponse) {
+            if (response.statusCode() != 200 || response.asString().contains("error") || messagesEnableAllDebugResponse) {
                 System.out.println("==================================");
                 System.out.println("Request: ");
                 System.out.println(url);

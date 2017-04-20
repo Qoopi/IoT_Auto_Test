@@ -7,7 +7,7 @@
         <parameter name="browserName" value="chrome"></parameter>
         <parameter name="useGrid" value="false"></parameter>
         <classes>
-            <class name="UI.Admin_Role_Chrome"/>
+            <class name="ui.Admin_Role_Chrome"/>
         </classes>
     </test>
 
