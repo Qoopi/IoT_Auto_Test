@@ -258,7 +258,7 @@ public class RequestManager extends RequestTemplates{
 
     public void dashboardCreateCanvasVPV(){
         JSONHandler jsonHandler = new JSONHandler();
-        String body = jsonHandler.dashboardCreateCanvasVPVJSON();
+        String body = jsonHandler.dashboardCreateCanvasVPVJSONDefault();
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(httpPOST, dashboard, body);
 
@@ -268,7 +268,7 @@ public class RequestManager extends RequestTemplates{
 
     public void dashboardCreateCanvasGPV(){
         JSONHandler jsonHandler = new JSONHandler();
-        String body = jsonHandler.dashboardCreateCanvasGPVJSON();
+        String body = jsonHandler.dashboardCreateCanvasGPVJSONDefault();
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(httpPOST, dashboard, body);
 
