@@ -19,9 +19,9 @@ public class NotificationRuleTests {
     @Test
     public void test1(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-        JSONManagerAPI jsonManagerAPI = new JSONManagerAPI();
-        String shit = jsonManagerAPI.notificationRuleCreateAbnormalVibrationRuleVPVPumpD11();
+        String shit = requestManagerAPI.notificationRuleCreateAbnormalVibrationRuleVPVPumpD11();
         System.out.println(shit);
         requestManagerAPI.notificationRuleCreate(shit);
+        requestManagerAPI.checkNotificationRuleIsCreated();
     }
 }

@@ -1,5 +1,8 @@
 package api;
 
+import com.jayway.restassured.response.Response;
+import org.apache.http.protocol.HTTP;
+import org.testng.Assert;
 import system.constant.HTTPMethod;
 import system.constant.URLs;
 import system.http.JSONHandler;
@@ -11,8 +14,10 @@ import java.util.Map;
  */
 public class RequestManagerAPI extends JSONManagerAPI{
     private String idOfCreatedNotificationRule = null;
+    private Response responseApi = null;
     private static final String uri = URLs.HTTPS.getValue()+ URLs.ApiGateway.getValue();
     private static final String notificationRule = uri+"/dev/rule";
+    private static final String notificationUnread = uri+"/dev/notification?status=unread";
 
     public RequestManagerAPI() {
         messagesEnableAllDebugResponse = true;
@@ -20,21 +25,46 @@ public class RequestManagerAPI extends JSONManagerAPI{
         messagesEnableGatlingReport = false;
     }
 
-    public void notificationRuleCreate(String jsonBody){
+    public Response notificationRuleCreate(String jsonBody){
 //        JSONHandler jsonHandler = new JSONHandler();
 //        String jsonBody = jsonHandler.notificationRuleCreateJSONDefault();
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(HTTPMethod.POST.getValue(), notificationRule, jsonBody);
 
-        String response = createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).post(notificationRule).extractAllResponseAsString();
-        idOfCreatedNotificationRule = getIdOfCreatedNotificationRule(response);
+        Response response = createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).post(notificationRule).getResponse();
+        idOfCreatedNotificationRule = getIdOfCreatedNotificationRule(response.asString());
+        checkStatusCode(response);
+        return response;
     }
 
-    public void notificationRulesRead(){
+    private void checkStatusCode(Response response){
+        Assert.assertTrue(response.statusCode() == 200 || response.statusCode() == 304 || response.statusCode() == 201 || response.statusCode() == 202
+                || response.statusCode() == 203 || response.statusCode() == 204 || response.statusCode() == 205 || response.statusCode() == 206
+                || response.statusCode() == 207 || response.statusCode() == 208 || response.statusCode() == 209);
+    }
+
+    public void checkNotificationRuleIsCreated(){
+        String responseToCheck = notificationRulesRead().asString();
+        Assert.assertTrue(responseToCheck.contains(idOfCreatedNotificationRule));
+    }
+
+    public void checkNotificationRuleTriggered(){
+
+    }
+
+    public Response notificationGetUnread(){
+        Map<String, String> headers = allHeaders(HTTPMethod.GET.getValue(), notificationUnread);
+
+        Response response = createEmptyRequestWithHeaders(headers).get(notificationUnread).getResponse();
+        return response;
+    }
+
+    public Response notificationRulesRead(){
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(HTTPMethod.GET.getValue(), notificationRule);
 
-        createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders).get(notificationRule);
+        Response response = createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders).get(notificationRule).getResponse();
+        return response;
     }
 
     public void notificationRuleUpdate(String jsonBody){

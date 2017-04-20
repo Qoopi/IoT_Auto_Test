@@ -165,6 +165,9 @@ public class RequestSender {
         return response.then().extract().asString();
     }
 
+    public Response getResponse() {
+        return response;
+    }
 
     private void checkExpiredCredentials(Response response, String url) {
         if (url.contains("notification?status=unread")) {
