@@ -92,10 +92,10 @@ class RecordedSimulation1 extends Simulation {
 
 
   //  val scn = scenario("RecordedSimulation1")
-  //    .exec(http("request_0")
+  //    .exec(system.http("request_0")
   //      .options("/dev/notification?status=unread")
   //      .headers(map)
-  //      .resources(http("request_2")
+  //      .resources(system.http("request_2")
   //          .get("/dev/notification?status=unread")
   //          .headers(map)))
 
@@ -120,7 +120,7 @@ class RecordedSimulation1 extends Simulation {
 //  var head1 = new SignAWSv4()
 //  val getDash4 = scenario("get Dash 2 ").exec(repeat (150){
 //    exec(
-//      http("brainfuckwithheaders")
+//      system.http("brainfuckwithheaders")
 //        .get("/dev/chart/Thing-000013-i3?channelIdx=1&startDate=1490189802247&type=2")
 //        .headers(buildHeaders("GET", "/dev/chart/Thing-000013-i3?channelIdx=1&startDate=1490189802247&type=2")))
 //      .pause(1)
@@ -136,7 +136,7 @@ class RecordedSimulation1 extends Simulation {
 //  val scn = scenario("+1")
 //    .asLongAs(session => counter.getAndIncrement() < endNum)
 //    {
-//      exec(http("Change_Password")
+//      exec(system.http("Change_Password")
 //        .get(session =>"http://demo.mockable.io/" + s"""${head.allHeaders("","")}""")
 //        .check(status.is(404))
 //      )

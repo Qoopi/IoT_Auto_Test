@@ -7,11 +7,11 @@ import ru.yandex.qatools.allure.annotations.Step;
 import ui.utils.SessionStorage;
 import ui.utils.WaitsAsserts;
 import ui.utils.WebDriverManager;
-import universal.CredentialCenter;
+import system.readers.CredentialCenter;
 
 import java.util.HashMap;
 
-import static load.utils.RequestSender.awsCredentials;
+import static system.http.RequestSender.awsCredentials;
 
 
 public class LogInPage {
@@ -102,7 +102,7 @@ public class LogInPage {
     }
 
     public void getRequestSigns(){
-        //get aws credential from browser session storage after login and write to aws credential storage
+        //get system.aws credential from browser session storage after login and write to system.aws credential storage
         SessionStorage sessionStorage = new SessionStorage(driver);
         String accessKey = sessionStorage.getItemFromSessionStorage("access_key_id");
         String secretKey = sessionStorage.getItemFromSessionStorage("secret_access_key");

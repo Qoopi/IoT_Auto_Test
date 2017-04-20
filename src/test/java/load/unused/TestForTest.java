@@ -1,11 +1,11 @@
 package load.unused;
 
 import com.amazonaws.services.iot.client.*;
-import load.MQTTTopics;
+import system.constant.MQTTTopics;
 import load.utils.LoadListener;
 import load.utils.ThreadLaunchDelayer;
-import mqtt.MQTTConnector;
-import mqtt.pubSub.TestTopicListener;
+import system.mqtt.MQTTConnector;
+import system.mqtt.pubSub.TestTopicListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 

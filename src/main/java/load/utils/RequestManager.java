@@ -3,8 +3,10 @@ package load.utils;
 
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.config.SSLConfig;
-import load.Things;
-import load.URLs;
+import system.constant.Things;
+import system.constant.URLs;
+import system.http.GatewaySslSocketFactory;
+import system.http.JSONHandler;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

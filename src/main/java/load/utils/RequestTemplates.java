@@ -1,5 +1,7 @@
 package load.utils;
 
+import system.http.JSONHandler;
+
 import java.util.Map;
 
 import static ui.utils.WaitsAsserts.sleep;

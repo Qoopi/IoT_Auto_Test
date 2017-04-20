@@ -97,7 +97,7 @@
     </build>
     <dependencies>
 
-        <!--don't touch these 2 dependencies, or mqtt will break-->
+        <!--don't touch these 2 dependencies,system.mqttmqtt will break-->
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-iot-device-sdk-java</artifactId>
