@@ -51,16 +51,17 @@ public class JSONHandler extends SignAWSv4 {
         String description = "some description";
         int type = 0;
         String equipment = "Thing-090011-0";
+        int threshold = 0;
         String trigger = "";
         String operation = ">=";
         int value = 0;
         int period = 0;
         int sensor = 1;
 
-        return notificationRuleCreateJSON(name, description, type, equipment, trigger, operation, value, period, sensor).toString();
+        return notificationRuleCreateJSON(name, description, type, equipment, threshold, trigger, operation, value, period, sensor).toString();
     }
 
-    public JsonObject notificationRuleCreateJSON(String name, String description, int type, String equipment, String trigger, String operation, int value, int period, int sensor) {
+    public JsonObject notificationRuleCreateJSON(String name, String description, int type, String equipment, int threshold, String trigger, String operation, int value, int period, int sensor) {
         JsonObject jsonObject = JsonBuilderFactory.buildObject()
                 .add("active", true)
                 .add("name", name)
@@ -73,7 +74,7 @@ public class JSONHandler extends SignAWSv4 {
                 .addArray("equipmentIds").add(equipment).end()
                 .add("channel", 0)
                 .add("frq", 0)
-                .add("threshold", 0)
+                .add("threshold", threshold)
                 .add("trigger", trigger)
                 .add("operation", operation)
                 .add("value", value)
