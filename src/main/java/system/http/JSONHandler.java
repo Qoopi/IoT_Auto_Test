@@ -9,6 +9,10 @@ import system.aws.SignAWSv4;
 import system.constant.Things;
 
 public class JSONHandler extends SignAWSv4 {
+    private String defaultDashboardVPVName = "someAutoTestNameVPV";
+    private String defaultDashboardVPVDescription = "someAutoTestDescriptionVPV";
+    private String defaultDashboardGPVName = "someAutoTestNameGPV";
+    private String defaultDashboardGPVDescription = "someAutoTestDescriptionGPV";
 
 
     public String getIdOfCreatedNotificationRule(String response) {
@@ -97,8 +101,8 @@ public class JSONHandler extends SignAWSv4 {
         String thingVPV1 = Things.ThingVPV13.getValue();
         String thingVPV2 = Things.ThingVPV12.getValue();
         String thingVPV3 = Things.ThingVPV11.getValue();
-        String name = "someAutoTestNameVPV";
-        String description = "someAutoTestDescriptionVPV";
+        String name = defaultDashboardVPVName;
+        String description = defaultDashboardVPVDescription;
 
         return dashboardCreateCanvasVPVJSON(thingVPV1, thingVPV2, thingVPV3, name, description).toString();
     }
@@ -114,9 +118,9 @@ public class JSONHandler extends SignAWSv4 {
 
     public String dashboardCreateCanvasGPVJSONDefault(){
         String thingGPV = Things.ThingGPV.getValue();
-        String name = "someAutoTestNameGPV";
-        String description = "someAutoTestDescriptionGPV";
-        
+        String name = defaultDashboardGPVName;
+        String description = defaultDashboardGPVDescription;
+
         return dashboardCreateCanvasGPVJSON(thingGPV, name, description).toString();
     }
 
