@@ -1,7 +1,6 @@
 package api;
 
 import com.jayway.restassured.response.Response;
-import org.apache.http.protocol.HTTP;
 import org.testng.Assert;
 import system.constant.HTTPMethod;
 import system.constant.URLs;
@@ -26,21 +25,12 @@ public class RequestManagerAPI extends JSONManagerAPI{
     }
 
     public Response notificationRuleCreate(String jsonBody){
-//        JSONHandler jsonHandler = new JSONHandler();
-//        String jsonBody = jsonHandler.notificationRuleCreateJSONDefault();
-        Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(HTTPMethod.POST.getValue(), notificationRule, jsonBody);
-
-        Response response = createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).post(notificationRule).getResponse();
+        Map<String, String> authHeaders = allHeaders(HTTPMethod.POST.getValue(), notificationRule, jsonBody);
+        Response response = createRequestWithHeaders(authHeaders, jsonBody).post(notificationRule).getResponse();
         idOfCreatedNotificationRule = getIdOfCreatedNotificationRule(response.asString());
         checkStatusCode(response);
+        checkErrorInResponseBody(response);
         return response;
-    }
-
-    private void checkStatusCode(Response response){
-        Assert.assertTrue(response.statusCode() == 200 || response.statusCode() == 304 || response.statusCode() == 201 || response.statusCode() == 202
-                || response.statusCode() == 203 || response.statusCode() == 204 || response.statusCode() == 205 || response.statusCode() == 206
-                || response.statusCode() == 207 || response.statusCode() == 208 || response.statusCode() == 209);
     }
 
     public void checkNotificationRuleIsCreated(){
@@ -54,35 +44,47 @@ public class RequestManagerAPI extends JSONManagerAPI{
 
     public Response notificationGetUnread(){
         Map<String, String> headers = allHeaders(HTTPMethod.GET.getValue(), notificationUnread);
-
         Response response = createEmptyRequestWithHeaders(headers).get(notificationUnread).getResponse();
         return response;
     }
 
     public Response notificationRulesRead(){
-        Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(HTTPMethod.GET.getValue(), notificationRule);
-
-        Response response = createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders).get(notificationRule).getResponse();
+        Map<String, String> authHeaders = allHeaders(HTTPMethod.GET.getValue(), notificationRule);
+        Response response = createEmptyRequestWithHeaders(authHeaders).get(notificationRule).getResponse();
         return response;
     }
 
     public void notificationRuleUpdate(String jsonBody){
-//        JSONHandler jsonHandler = new JSONHandler();
-//        String jsonBody = jsonHandler.notificationRuleUpdateJSON(idOfCreatedNotificationRule);
-        Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(HTTPMethod.PUT.getValue(), notificationRule, jsonBody);
+        Map<String, String> authHeaders = allHeaders(HTTPMethod.PUT.getValue(), notificationRule, jsonBody);
 
-        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).put(notificationRule);
+        createRequestWithHeaders(authHeaders, jsonBody).put(notificationRule);
     }
 
     public void notificationRuleDelete(String idOfNotificationRule){
         JSONHandler jsonHandler = new JSONHandler();
         String jsonBody = jsonHandler.notificationRuleDeleteJSON(idOfNotificationRule);
 
-        Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(HTTPMethod.DELETE.getValue(), notificationRule, jsonBody);
+        Map<String, String> authHeaders = allHeaders(HTTPMethod.DELETE.getValue(), notificationRule, jsonBody);
 
-        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).delete(notificationRule);
+        createRequestWithHeaders(authHeaders, jsonBody).delete(notificationRule);
+    }
+
+    private void checkStatusCode(Response response){
+        Assert.assertTrue(response.statusCode() == 200 || response.statusCode() == 304 || response.statusCode() == 201 || response.statusCode() == 202
+                || response.statusCode() == 203 || response.statusCode() == 204 || response.statusCode() == 205 || response.statusCode() == 206
+                || response.statusCode() == 207 || response.statusCode() == 208 || response.statusCode() == 209);
+    }
+
+    private void checkErrorInResponseBody(Response response) {
+        if (!response.asString().contains("error") && !response.asString().contains("exception") && !response.asString().contains("expired") && !response.asString().contains("timed out")) {
+            Assert.assertTrue(true);
+        } else {
+            if (response.asString().contains("\"expired\":false")) {
+                Assert.assertTrue(true);
+            } else {
+                Assert.assertTrue(false);
+                System.out.println("ERR: error message found in response body");
+            }
+        }
     }
 }
