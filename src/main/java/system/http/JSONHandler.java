@@ -57,7 +57,6 @@ public class JSONHandler extends SignAWSv4 {
         int value = 0;
         int period = 0;
         int sensor = 1;
-
         return notificationRuleCreateJSON(name, description, type, equipment, threshold, trigger, operation, value, period, sensor).toString();
     }
 
