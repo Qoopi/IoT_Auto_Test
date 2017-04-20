@@ -46,25 +46,40 @@ public class JSONHandler extends SignAWSv4 {
         return jsonObject;
     }
 
-    public String notificationRuleCreateJSON() {
+    public String notificationRuleCreateJSONDefault(){
+        String name = "Abnormal auto-test rule";
+        String description = "some description";
+        int type = 0;
+        String equipment = "Thing-090011-0";
+        String trigger = "";
+        String operation = ">=";
+        int value = 0;
+        int period = 0;
+        int sensor = 1;
+
+        return notificationRuleCreateJSON(name, description, type, equipment, trigger, operation, value, period, sensor).toString();
+    }
+
+    public JsonObject notificationRuleCreateJSON(String name, String description, int type, String equipment, String trigger, String operation, int value, int period, int sensor) {
         JsonObject jsonObject = JsonBuilderFactory.buildObject()
                 .add("active", true)
-                .add("name", "Abnormal auto-test rule")
-                .add("description", "some description")
+                .add("name", name)
+                .add("description", description)
                 .add("notificationType", 0)
-                .add("type", 0)
+                .add("type", type)
                 .addArray("phones").addObject().add("value", "+380634953177").add("name", "My Lifecell").end().end()
                 .addArray("emails").addObject().add("value", "TestUser.Israil@mail.ru").add("name", "hhhhhhhhhhhhh").end().end()
                 .addObject("notifications").add("alwaysSend", false).add("triggered", 10).add("acknowledged", 15).add("sms", false).add("emails", false).end()
-                .addArray("equipmentIds").add("Thing-090011-0").end()
+                .addArray("equipmentIds").add(equipment).end()
                 .add("channel", 0)
                 .add("frq", 0)
                 .add("threshold", 0)
-                .add("trigger", "")
-                .add("operation", ">=")
-                .add("value", 0)
-                .add("period", 0).add("sensor", 1).getJson();
-        return jsonObject.toString();
+                .add("trigger", trigger)
+                .add("operation", operation)
+                .add("value", value)
+                .add("period", period)
+                .add("sensor", sensor).getJson();
+        return jsonObject;
     }
 
     public String notificationRuleUpdateJSON(String id){

@@ -60,7 +60,7 @@ public class RequestManager extends RequestTemplates{
     //CRUD here
     private void notificationRuleCreate(){
         JSONHandler jsonHandler = new JSONHandler();
-        String jsonBody = jsonHandler.notificationRuleCreateJSON();
+        String jsonBody = jsonHandler.notificationRuleCreateJSONDefault();
         Map<String, String> standardHeaders = standardHeaders();
         Map<String, String> authHeaders = authHeaders(httpPOST, notificationRule, jsonBody);
 
