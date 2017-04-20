@@ -1,14 +1,19 @@
 package system.http;
 
 
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.config.SSLConfig;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
+import org.apache.http.conn.ssl.SSLSocketFactory;
 import system.aws.objects.AWSCredentials;
 import load.utils.GatlingReportAdapter;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.net.ssl.SSLContext;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 import static com.jayway.restassured.RestAssured.given;
@@ -197,5 +202,20 @@ public class RequestSender {
                 System.out.println("==================================");
             }
         }
+    }
+
+    public void setUpBaseApiGateway(){
+        //это вынести по ходу в listener для api/load тестов
+        // Use our custom socket factory
+        SSLSocketFactory customSslFactory = null;
+        try {
+            customSslFactory = new GatewaySslSocketFactory(
+                    SSLContext.getDefault(), SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        RestAssured.config = RestAssured.config().sslConfig(
+                SSLConfig.sslConfig().sslSocketFactory(customSslFactory));
+        RestAssured.config.getHttpClientConfig().reuseHttpClientInstance();
     }
 }
