@@ -17,6 +17,7 @@ public class RequestManagerAPI extends JSONManagerAPI{
     private static final String uri = URLs.HTTPS.getValue()+ URLs.ApiGateway.getValue();
     private static final String notificationRule = uri+"/dev/rule";
     private static final String notificationUnread = uri+"/dev/notification?status=unread";
+    private static final String notification = uri+"/dev/notification";
 
     public RequestManagerAPI() {
         messagesEnableAllDebugResponse = true;
@@ -40,8 +41,12 @@ public class RequestManagerAPI extends JSONManagerAPI{
         Assert.assertTrue(response.asString().contains(idOfCreatedNotificationRule));
     }
 
-    public void checkNotificationRuleTriggered(){
+    public void checkNotificationRuleNotTriggered(){
+        Assert.assertTrue(!notificationListRead().asString().contains(idOfCreatedNotificationRule));
+    }
 
+    public void checkNotificationRuleTriggered(){
+        Assert.assertTrue(notificationListRead().asString().contains(idOfCreatedNotificationRule));
     }
 
     public Response notificationGetUnread(){
@@ -60,6 +65,15 @@ public class RequestManagerAPI extends JSONManagerAPI{
         return response;
     }
 
+    public Response notificationListRead(){
+        Map<String, String> authHeaders = allHeaders(HTTPMethod.GET.getValue(), notification);
+        Response response = createEmptyRequestWithHeaders(authHeaders).get(notification).getResponse();
+        checkStatusCode(response);
+        checkErrorInResponseBody(response);
+        return response;
+    }
+
+
     public Response notificationRuleUpdate(String jsonBody){
         Map<String, String> authHeaders = allHeaders(HTTPMethod.PUT.getValue(), notificationRule, jsonBody);
 
@@ -72,6 +86,15 @@ public class RequestManagerAPI extends JSONManagerAPI{
     public void notificationRuleDelete(String idOfNotificationRule){
         JSONHandler jsonHandler = new JSONHandler();
         String jsonBody = jsonHandler.notificationRuleDeleteJSON(idOfNotificationRule);
+        Map<String, String> authHeaders = allHeaders(HTTPMethod.DELETE.getValue(), notificationRule, jsonBody);
+        Response response = createRequestWithHeaders(authHeaders, jsonBody).delete(notificationRule).getResponse();
+        checkStatusCode(response);
+        checkErrorInResponseBody(response);
+    }
+
+    public void notificationRuleDelete(){
+        JSONHandler jsonHandler = new JSONHandler();
+        String jsonBody = jsonHandler.notificationRuleDeleteJSON(idOfCreatedNotificationRule);
         Map<String, String> authHeaders = allHeaders(HTTPMethod.DELETE.getValue(), notificationRule, jsonBody);
         Response response = createRequestWithHeaders(authHeaders, jsonBody).delete(notificationRule).getResponse();
         checkStatusCode(response);

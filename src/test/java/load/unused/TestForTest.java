@@ -1,13 +1,14 @@
 package load.unused;
 
+import api.MQTTManagerAPI;
 import com.amazonaws.services.iot.client.*;
-import system.constant.MQTTTopics;
 import load.utils.LoadListener;
 import load.utils.ThreadLaunchDelayer;
-import system.mqtt.MQTTConnector;
-import system.mqtt.pubSub.TestTopicListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import system.constant.MQTTTopics;
+import system.mqtt.MQTTConnector;
+import system.mqtt.pubSub.TestTopicListener;
 
 @Listeners(LoadListener.class)
 public class TestForTest {
@@ -149,8 +150,14 @@ public class TestForTest {
         System.out.println(state1);
     }
 
-
     @Test
+    public void mqttPublisher(){
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
+        mqttManagerAPI.triggerVPVD11AbnormalVibration();
+    }
+
+
+//    @Test
     public void mqttConnectorTest() {
 //        String topic = "Data/U000001/ODS/Lab/ATMRobot/002/VPV/STA";
 //        String topic = "Heartbeat/U0000012454/BUC/Lab/FGW/Thing-090154";
@@ -159,7 +166,7 @@ public class TestForTest {
         int connectionTime = 600000;
 
         MQTTConnector mqttConnector = new MQTTConnector();
-        mqttConnector.mqttOpen(connectionTime, topic);
+        mqttConnector.mqttSubscribe(connectionTime, topic);
     }
     public class MyMessage extends AWSIotMessage {
         public MyMessage(String topic, AWSIotQos qos, String payload) {

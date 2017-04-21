@@ -9,19 +9,17 @@ import org.testng.annotations.Test;
 @Listeners(ListenerAPI.class)
 public class NotificationRuleTests {
 
-    @Test
-    public void firstTest(){
-        //создание рула
-        //проверка рула
-        //удаление рула
-    }
 
     @Test
-    public void test1(){
+    public void abnormalVibrationVPV(){
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-        String shit = requestManagerAPI.notificationRuleCreateAbnormalVibrationRuleVPVPumpD11();
-        System.out.println(shit);
-        requestManagerAPI.notificationRuleCreate(shit);
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.notificationRuleCreateAbnormalVibrationVPVPumpD11());
         requestManagerAPI.checkNotificationRuleIsCreated();
+        requestManagerAPI.checkNotificationRuleNotTriggered();
+        mqttManagerAPI.triggerVPVD11AbnormalVibration();
+        requestManagerAPI.checkNotificationRuleTriggered();
+        requestManagerAPI.notificationRuleDelete();
     }
+
 }
