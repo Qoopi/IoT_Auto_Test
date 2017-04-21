@@ -9,8 +9,14 @@ import org.testng.annotations.Test;
 @Listeners(ListenerAPI.class)
 public class NotificationRuleTests {
 
+//    @Test
+    public void test(){
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
+        mqttManagerAPI.readGPV();
+    }
 
-    @Test
+
+//    @Test
     public void abnormalVibrationVPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -61,14 +67,15 @@ public class NotificationRuleTests {
 
     }
 
-    @Test
+//    @Test
     public void disconnectedEquipmentGPV(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.equipmentChangeState(requestManagerAPI.equipmentConnectGPV());
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.notificationRuleCreateDisconnectedGPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
-        requestManagerAPI.equipmentChangeState(requestManagerAPI.equipmentDisconnectGPV());
+
+
         requestManagerAPI.checkNotificationRuleTriggered();
         requestManagerAPI.notificationRuleDelete();
 
@@ -76,38 +83,41 @@ public class NotificationRuleTests {
 
     @Test
     public void disconnectedEquipmentVPV(){
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.equipmentChangeState(requestManagerAPI.equipmentConnectVPV());
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.notificationRuleCreateDisconnectedVPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
-        requestManagerAPI.equipmentChangeState(requestManagerAPI.equipmentDisconnectVPV());
+        mqttManagerAPI.triggerVPVDisconected();
         requestManagerAPI.checkNotificationRuleTriggered();
         requestManagerAPI.notificationRuleDelete();
 
     }
 
-    @Test
+//    @Test
     public void connectedEquipmentGPV() {
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.equipmentChangeState(requestManagerAPI.equipmentDisconnectGPV());
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.notificationRuleCreateConnectedGPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
-        requestManagerAPI.equipmentChangeState(requestManagerAPI.equipmentConnectGPV());
+
+
         requestManagerAPI.checkNotificationRuleTriggered();
         requestManagerAPI.notificationRuleDelete();
     }
 
 
-    @Test
+//    @Test
     public void connectedEquipmentVPV(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.equipmentChangeState(requestManagerAPI.equipmentDisconnectVPV());
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.notificationRuleCreateConnectedVPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
-        requestManagerAPI.equipmentChangeState(requestManagerAPI.equipmentConnectVPV());
+
+
         requestManagerAPI.checkNotificationRuleTriggered();
         requestManagerAPI.notificationRuleDelete();
 

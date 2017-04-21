@@ -8,6 +8,8 @@ import system.http.JSONHandler;
 
 import java.util.Map;
 
+import static jodd.util.ThreadUtil.sleep;
+
 /**
  * Created by user on 20.04.2017.
  */
@@ -56,7 +58,13 @@ public class RequestManagerAPI extends JSONManagerAPI{
     }
 
     public void checkNotificationRuleTriggered(){
-        Assert.assertTrue(notificationListRead().asString().contains(idOfCreatedNotificationRule));
+        if(notificationListRead().asString().contains(idOfCreatedNotificationRule)){
+            Assert.assertTrue(true);
+        }
+        else{
+            sleep(10000);
+            Assert.assertTrue(notificationListRead().asString().contains(idOfCreatedNotificationRule));
+        }
     }
 
     public Response notificationGetUnread(){

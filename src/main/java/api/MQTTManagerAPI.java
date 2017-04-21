@@ -14,9 +14,20 @@ public class MQTTManagerAPI extends MQTTConnector {
         mqttPublish(topic, payload);
     }
 
+    public void triggerVPVDisconected(){
+        String topic = MQTTTopics.VPVD11Heartbeat.getValue();
+        String payload = "{\"expiration\":1482111111}";
+        mqttPublish(topic, payload);
+    }
+
     public void readVPVD11(){
         String topic = "Heartbeat/U000001/ODS/Lab/ATMRobot/001";
         mqttSubscribe(59000, topic);
 
+    }
+
+    public void readGPV(){
+        String topic = MQTTTopics.GPVBUCData.getValue();
+        mqttSubscribe(59000, topic);
     }
 }
