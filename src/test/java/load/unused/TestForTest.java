@@ -6,7 +6,6 @@ import load.utils.LoadListener;
 import load.utils.ThreadLaunchDelayer;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import system.constant.MQTTTopics;
 import system.mqtt.MQTTConnector;
 import system.mqtt.pubSub.TestTopicListener;
 
@@ -161,8 +160,7 @@ public class TestForTest {
     public void mqttConnectorTest() {
 //        String topic = "Data/U000001/ODS/Lab/ATMRobot/002/VPV/STA";
 //        String topic = "Heartbeat/U0000012454/BUC/Lab/FGW/Thing-090154";
-//        String topic = "Heartbeat/U000001/MRL/Lab/ATMRobot/002";
-        String topic = MQTTTopics.someTopic.getValue();
+        String topic = "Heartbeat/U000001/MRL/Lab/ATMRobot/002";
         int connectionTime = 600000;
 
         MQTTConnector mqttConnector = new MQTTConnector();
