@@ -47,4 +47,5 @@ public class JSONManagerAPI extends JSONHandler{
     public  String connectedGPV(){
         return equipmentOnOff("Thing-090154-0",true).toString();
     }
+
 }
