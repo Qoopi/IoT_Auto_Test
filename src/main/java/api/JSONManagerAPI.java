@@ -37,16 +37,16 @@ public class JSONManagerAPI extends JSONHandler{
         return notificationRuleCreateJSON("Disconnected Equipment GPV","BUC ARTRobot",4,equipmentGPV, Integer.parseInt(null),"1","",0,0, Integer.parseInt(null)).toString();
     }
 
-    public String disconnectedVPV(){
+    public String equipmentDisconnectVPV(){
         return equipmentOnOff(equipmentVPV,false);
     }
-    public String connectedVPV(){
+    public String equipmentConnectVPV(){
         return equipmentOnOff(equipmentVPV,true);
     }
-    public String disconnectedGPV(){
+    public String equipmentDisconnectGPV(){
         return equipmentOnOff(equipmentGPV,false);
     }
-    public String connectedGPV(){
+    public String equipmentConnectGPV(){
         return equipmentOnOff(equipmentGPV,true);
     }
 

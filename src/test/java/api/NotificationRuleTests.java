@@ -22,40 +22,40 @@ public class NotificationRuleTests {
         requestManagerAPI.notificationRuleDelete();
     }
 
-    @Test
+//    @Test
     public void alarmCountGPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.notificationRuleCreateAlarmCountGPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
-        mqttManagerAPI.trigger
+//        mqttManagerAPI.trigger
         requestManagerAPI.checkNotificationRuleTriggered();
         requestManagerAPI.notificationRuleDelete();
 
     }
 
-    @Test
+//    @Test
     public void alarmCountVPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.notificationRuleCreateAlarmCountVPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
-        mqttManagerAPI.trigger
+//        mqttManagerAPI.trigger
         requestManagerAPI.checkNotificationRuleTriggered();
         requestManagerAPI.notificationRuleDelete();
 
     }
 
-    @Test
+//    @Test
     public void abortCountVPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.notificationRuleCreateAbortsCountVPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
-        mqttManagerAPI.trigger
+//        mqttManagerAPI.trigger
         requestManagerAPI.checkNotificationRuleTriggered();
         requestManagerAPI.notificationRuleDelete();
 
@@ -63,12 +63,12 @@ public class NotificationRuleTests {
 
     @Test
     public void disconnectedEquipmentGPV(){
-        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        requestManagerAPI.equipmentChangeState(requestManagerAPI.equipmentConnectGPV());
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.notificationRuleCreateDisconnectedGPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
-        mqttManagerAPI.trigger
+        requestManagerAPI.equipmentChangeState(requestManagerAPI.equipmentDisconnectGPV());
         requestManagerAPI.checkNotificationRuleTriggered();
         requestManagerAPI.notificationRuleDelete();
 
@@ -76,12 +76,12 @@ public class NotificationRuleTests {
 
     @Test
     public void disconnectedEquipmentVPV(){
-        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        requestManagerAPI.equipmentChangeState(requestManagerAPI.equipmentConnectVPV());
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.notificationRuleCreateDisconnectedVPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
-        mqttManagerAPI.trigger
+        requestManagerAPI.equipmentChangeState(requestManagerAPI.equipmentDisconnectVPV());
         requestManagerAPI.checkNotificationRuleTriggered();
         requestManagerAPI.notificationRuleDelete();
 
@@ -89,12 +89,12 @@ public class NotificationRuleTests {
 
     @Test
     public void connectedEquipmentGPV() {
-        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        requestManagerAPI.equipmentChangeState(requestManagerAPI.equipmentDisconnectGPV());
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.notificationRuleCreateConnectedGPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
-        mqttManagerAPI.trigger
+        requestManagerAPI.equipmentChangeState(requestManagerAPI.equipmentConnectGPV());
         requestManagerAPI.checkNotificationRuleTriggered();
         requestManagerAPI.notificationRuleDelete();
     }
@@ -102,12 +102,12 @@ public class NotificationRuleTests {
 
     @Test
     public void connectedEquipmentVPV(){
-        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        requestManagerAPI.equipmentChangeState(requestManagerAPI.equipmentDisconnectVPV());
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.notificationRuleCreateConnectedVPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
-        mqttManagerAPI.trigger
+        requestManagerAPI.equipmentChangeState(requestManagerAPI.equipmentConnectVPV());
         requestManagerAPI.checkNotificationRuleTriggered();
         requestManagerAPI.notificationRuleDelete();
 

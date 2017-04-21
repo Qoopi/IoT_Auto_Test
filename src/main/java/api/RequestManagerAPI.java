@@ -18,11 +18,21 @@ public class RequestManagerAPI extends JSONManagerAPI{
     private static final String notificationRule = uri+"/dev/rule";
     private static final String notificationUnread = uri+"/dev/notification?status=unread";
     private static final String notification = uri+"/dev/notification";
+    private static final String equipmentAdmin = uri+"/dev/equipment_admin";
 
     public RequestManagerAPI() {
         messagesEnableAllDebugResponse = true;
         messagesEnableErrorDebugResponse = false;
         messagesEnableGatlingReport = false;
+    }
+
+    public Response equipmentChangeState(String jsonBody){
+        Map<String, String> authHeaders = allHeaders(HTTPMethod.PUT.getValue(), equipmentAdmin, jsonBody);
+        Response response = createRequestWithHeaders(authHeaders, jsonBody).put(equipmentAdmin).getResponse();
+        checkStatusCode(response);
+        checkErrorInResponseBody(response);
+        return response;
+
     }
 
     public Response notificationRuleCreate(String jsonBody){
