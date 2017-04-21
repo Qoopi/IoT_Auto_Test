@@ -26,13 +26,25 @@ public class JSONManagerAPI extends JSONHandler{
         return notificationRuleCreateJSON("Disconnected Equipment","PUMP D11",4,"Thing-000011-i1", Integer.parseInt(null),"0","",0,0, Integer.parseInt(null)).toString();
     }
     public String notificationRuleCreateDisconnectedGPV(){
-        return notificationRuleCreateJSON("Disconnected Equipment","PUMP D11",4,"Thing-090154-0", Integer.parseInt(null),"0","",0,0, Integer.parseInt(null)).toString();
+        return notificationRuleCreateJSON("Disconnected Equipment","BUC ARTRobot",4,"Thing-090154-0", Integer.parseInt(null),"0","",0,0, Integer.parseInt(null)).toString();
     }
     public String notificationRuleCreateConnectedVPV(){
         return notificationRuleCreateJSON("Disconnected Equipment","PUMP D11",4,"Thing-000011-i1", Integer.parseInt(null),"1","",0,0, Integer.parseInt(null)).toString();
     }
     public String notificationRuleCreateConnectedGPV(){
-        return notificationRuleCreateJSON("Disconnected Equipment","PUMP D11",4,"Thing-090154-0", Integer.parseInt(null),"1","",0,0, Integer.parseInt(null)).toString();
+        return notificationRuleCreateJSON("Disconnected Equipment","BUC ARTRobot",4,"Thing-090154-0", Integer.parseInt(null),"1","",0,0, Integer.parseInt(null)).toString();
     }
 
+    public  String disconnectedVPV(){
+        return equipmentOnOff("Thing-000011-i1",false).toString();
+    }
+    public  String connectedVPV(){
+        return equipmentOnOff("Thing-000011-i1",true).toString();
+    }
+    public  String disconnectedGPV(){
+        return equipmentOnOff("Thing-090154-0",false).toString();
+    }
+    public  String connectedGPV(){
+        return equipmentOnOff("Thing-090154-0",true).toString();
+    }
 }

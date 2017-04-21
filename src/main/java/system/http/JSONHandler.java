@@ -5,6 +5,7 @@ import org.jglue.fluentjson.JsonBuilderFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.junit.Test;
 import system.aws.SignAWSv4;
 import system.constant.Things;
 
@@ -154,4 +155,12 @@ public class JSONHandler extends SignAWSv4 {
                 .addArray("items").addObject().add("id", id).getJson();
         return jsonObject.toString();
     }
+
+    public String equipmentOnOff(String id, Boolean active){
+        JsonObject jsonObject = JsonBuilderFactory.buildObject()
+                .addArray("items").addObject().add("id",id).add("isDataTransfer",active).getJson();
+
+        return jsonObject.toString();
+    }
+
 }
