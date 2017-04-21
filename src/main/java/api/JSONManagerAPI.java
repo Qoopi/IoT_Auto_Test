@@ -23,7 +23,9 @@ public class JSONManagerAPI extends JSONHandler{
         return notificationRuleCreateJSON("Aborts Count VPV","PUMP D11",3,"Thing-000011-i1", Integer.parseInt(null),"",">=",1,1, Integer.parseInt(null)).toString();
     }
     public String notificationRuleCreateDisconnected(){
-        return notificationRuleCreateJSON("Disconnected Equipment","PUMP D11",3,"Thing-000011-i1", Integer.parseInt(null),"0","",0,0, Integer.parseInt(null)).toString();
+        return notificationRuleCreateJSON("Disconnected Equipment","PUMP D11",4,"Thing-000011-i1", Integer.parseInt(null),"0","",0,0, Integer.parseInt(null)).toString();
     }
-
+    public String notificationRuleCreateConnected(){
+        return notificationRuleCreateJSON("Disconnected Equipment","PUMP D11",4,"Thing-000011-i1", Integer.parseInt(null),"1","",0,0, Integer.parseInt(null)).toString();
+    }
 }
