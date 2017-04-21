@@ -8,7 +8,7 @@ import system.http.JSONHandler;
 public class JSONManagerAPI extends JSONHandler{
 
 
-    public String notificationRuleCreateAbnormalVibrationRuleVPVPumpD11(){
+    public String notificationRuleCreateAbnormalVibrationVPVPumpD11(){
         return notificationRuleCreateJSON("I HATE YOU BITCH","Pump D11",0,"Thing-000011-i1",0,"",">=",30,0,1).toString();
     }
 
