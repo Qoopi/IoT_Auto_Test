@@ -61,6 +61,7 @@ public class JSONHandler extends SignAWSv4 {
         return notificationRuleCreateJSON(name, description, type, equipment, threshold, trigger, operation, value, period, sensor).toString();
     }
 
+
     public JsonObject notificationRuleCreateJSON(String name, String description, int type, String equipment, int threshold, String trigger, String operation, int value, int period, int sensor) {
         JsonObject jsonObject = JsonBuilderFactory.buildObject()
                 .add("active", true)
@@ -84,6 +85,7 @@ public class JSONHandler extends SignAWSv4 {
                 .add("sensor", sensor).getJson();
         return jsonObject;
     }
+
 
     public String notificationRuleUpdateJSON(String id){
         JsonObject jsonObject = JsonBuilderFactory.buildObject()
