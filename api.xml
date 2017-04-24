@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="API tests" parallel="none" thread-count="1">
-    <!--parallel is none, single vpv equipment is used-->
+    <!--parallel is none, single GPV/VPV equipment is used-->
     <test name="test">
         <parameter name="browserName" value="chrome"></parameter>
         <parameter name="useGrid" value="false"></parameter>

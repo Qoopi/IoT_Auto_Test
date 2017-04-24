@@ -26,21 +26,21 @@
         <!--</classes>-->
     <!--</test>-->
 
-    <!--<test name="Emulate Charts Refreshing Load GPV Burst">-->
-        <!--<parameter name="browserName" value="chrome"/>-->
-        <!--<parameter name="useGrid" value="false"></parameter>-->
-        <!--<classes>-->
-            <!--<class name="load.LoadChartsRefreshingGPVBurst"/>-->
-        <!--</classes>-->
-    <!--</test>-->
-
-    <test name="Emulate Notification rule CRUD Load">
+    <test name="Emulate Charts Refreshing Load GPV Burst">
         <parameter name="browserName" value="chrome"/>
         <parameter name="useGrid" value="false"></parameter>
         <classes>
-            <class name="load.LoadNotificationRulesCRUD"/>
+            <class name="load.LoadChartsRefreshingGPVBurst"/>
         </classes>
     </test>
+
+    <!--<test name="Emulate Notification rule CRUD Load">-->
+        <!--<parameter name="browserName" value="chrome"/>-->
+        <!--<parameter name="useGrid" value="false"></parameter>-->
+        <!--<classes>-->
+            <!--<class name="load.LoadNotificationRulesCRUD"/>-->
+        <!--</classes>-->
+    <!--</test>-->
 
     <!--<test name="Emulate CRUD Stress">-->
         <!--<parameter name="browserName" value="chrome"/>-->
