@@ -21,20 +21,29 @@ public class JSONManagerAPI extends JSONHandler{
     public String notificationRuleCreateAlarmCountVPV(){
         return notificationRuleCreateJSON("Alarm Count VPV","PUMP D11",3,equipmentVPV, 0,"",">=",1,1, 0).toString();
     }
+
     public String notificationRuleCreateAbortsCountVPV(){
         return notificationRuleCreateJSON("Aborts Count VPV","PUMP D11",3,equipmentVPV, 0,"",">=",1,1, 0).toString();
     }
+
     public String notificationRuleCreateDisconnectedVPV(){
         return notificationRuleCreateJSON("Disconnected Equipment VPV","PUMP D11",4,equipmentVPV, 0,"0","",0,0, 0).toString();
     }
+
     public String notificationRuleCreateDisconnectedGPV(){
         return notificationRuleCreateJSON("Disconnected Equipment GPV","BUC ARTRobot",4,equipmentGPV, 0,"0","",0,0, 0).toString();
     }
+
     public String notificationRuleCreateConnectedVPV(){
         return notificationRuleCreateJSON("Disconnected Equipment VPV","PUMP D11",4,equipmentVPV, 0,"1","",0,0, 0).toString();
     }
+
     public String notificationRuleCreateConnectedGPV(){
         return notificationRuleCreateJSON("Disconnected Equipment GPV","BUC ARTRobot",4,equipmentGPV, 0,"1","",0,0, 0).toString();
+    }
+
+    public String notificationRuleCreateEveryWarningVPV(){
+        return notificationRuleCreateJSON("Every Warning VPV", "PUMP D11", 8, equipmentVPV, 0, "", ">=", 0, 0, 0).toString();
     }
 
     public String equipmentDisconnectVPV(){

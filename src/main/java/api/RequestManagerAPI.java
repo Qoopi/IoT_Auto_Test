@@ -6,6 +6,7 @@ import system.constant.HTTPMethod;
 import system.constant.URLs;
 import system.http.JSONHandler;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import static jodd.util.ThreadUtil.sleep;
@@ -26,6 +27,16 @@ public class RequestManagerAPI extends JSONManagerAPI{
         messagesEnableAllDebugResponse = true;
         messagesEnableErrorDebugResponse = false;
         messagesEnableGatlingReport = false;
+    }
+
+
+    public void notificationListDeleteAll(){
+        ArrayList ids = getIdsOfAllNotifications(notificationListRead().asString());
+        String jsonBody = notificationListDeleteAllJSON(ids);
+        Map<String, String> authHeaders = allHeaders(HTTPMethod.DELETE.getValue(), notification, jsonBody);
+        Response response = createRequestWithHeaders(authHeaders, jsonBody).delete(notification).getResponse();
+        checkStatusCode(response);
+        checkErrorInResponseBody(response);
     }
 
     public Response equipmentChangeState(String jsonBody){
@@ -64,6 +75,22 @@ public class RequestManagerAPI extends JSONManagerAPI{
         else{
             sleep(10000);
             Assert.assertTrue(notificationListRead().asString().contains(idOfCreatedNotificationRule));
+        }
+    }
+
+    public void checkNotificationRuleTriggeredLong(){
+        if(notificationListRead().asString().contains(idOfCreatedNotificationRule)){
+            Assert.assertTrue(true);
+        }
+        else{
+            sleep(10000);
+            if (notificationListRead().asString().contains(idOfCreatedNotificationRule)){
+                Assert.assertTrue(true);
+            }
+            else {
+                sleep(30000);
+                Assert.assertTrue(notificationListRead().asString().contains(idOfCreatedNotificationRule));
+            }
         }
     }
 

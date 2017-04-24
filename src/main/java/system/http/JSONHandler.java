@@ -2,12 +2,14 @@ package system.http;
 
 import com.google.gson.JsonObject;
 import org.jglue.fluentjson.JsonBuilderFactory;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.junit.Test;
 import system.aws.SignAWSv4;
 import system.constant.Things;
+
+import java.util.ArrayList;
 
 public class JSONHandler extends SignAWSv4 {
     private String defaultDashboardVPVName = "someAutoTestNameVPV";
@@ -35,6 +37,29 @@ public class JSONHandler extends SignAWSv4 {
         return id;
     }
 
+    public ArrayList<String> getIdsOfAllNotifications(String response){
+        JSONArray jsonArray = parseToJSONArray(response);
+        ArrayList<String> ids = new ArrayList<>();
+        for (int i = 0; i < jsonArray.size(); i ++){
+            JSONObject jsonObject = parseToJSONObject(jsonArray.get(i).toString());
+            String id = jsonObject.get("id").toString();
+            ids.add(id);
+        }
+        return ids;
+    }
+
+    private JSONArray parseToJSONArray(String jsonString) {
+        JSONParser parser = new JSONParser();
+        JSONArray jsonObject = null;
+        try {
+            jsonObject = (JSONArray) parser.parse(jsonString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return jsonObject;
+    }
+
     private JSONObject parseToJSONObject(String jsonString) {
         JSONParser parser = new JSONParser();
         JSONObject jsonObject = null;
@@ -45,6 +70,29 @@ public class JSONHandler extends SignAWSv4 {
         }
 
         return jsonObject;
+    }
+
+    public String notificationListAcknowledgeAllJSON(ArrayList<String> arrayList) {
+        String jsonString = "{\"items\":[";
+        for (int i = 0; i < arrayList.size(); i++) {
+            jsonString = jsonString+"{\"id\":\""+arrayList.get(i)+"\",\"status\":1}";
+            if (arrayList.size()>i+1){
+                jsonString = jsonString+",";
+
+            }
+        }
+        return jsonString+"]}";
+    }
+
+    public String notificationListDeleteAllJSON(ArrayList<String> arrayList){
+        String jsonString = "{\"items\":[";
+        for (int i = 0; i < arrayList.size(); i++) {
+            jsonString = jsonString+"{\"id\":\""+arrayList.get(i)+"\"}";
+            if (arrayList.size()>i+1){
+                jsonString = jsonString+",";
+            }
+        }
+        return jsonString+"]}";
     }
 
     public String notificationRuleCreateJSONDefault(){
