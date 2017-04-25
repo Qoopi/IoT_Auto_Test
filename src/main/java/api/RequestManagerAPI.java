@@ -2,6 +2,7 @@ package api;
 
 import com.jayway.restassured.response.Response;
 import org.testng.Assert;
+import ru.yandex.qatools.allure.annotations.Step;
 import system.constant.HTTPMethod;
 import system.constant.URLs;
 import system.http.JSONHandler;
@@ -56,18 +57,18 @@ public class RequestManagerAPI extends JSONManagerAPI{
         checkErrorInResponseBody(response);
         return response;
     }
-
+    @Step("Check if Rule created")
     public void checkNotificationRuleIsCreated(){
         Response response = notificationRulesRead();
         checkStatusCode(response);
         checkErrorInResponseBody(response);
         Assert.assertTrue(response.asString().contains(idOfCreatedNotificationRule));
     }
-
+    @Step("Check if Rule not triggered")
     public void checkNotificationRuleNotTriggered(){
         Assert.assertTrue(!notificationListRead().asString().contains(idOfCreatedNotificationRule));
     }
-
+    @Step("Check if Rule triggered")
     public void checkNotificationRuleTriggered(){
         if(notificationListRead().asString().contains(idOfCreatedNotificationRule)){
             Assert.assertTrue(true);
@@ -136,7 +137,7 @@ public class RequestManagerAPI extends JSONManagerAPI{
         checkStatusCode(response);
         checkErrorInResponseBody(response);
     }
-
+    @Step("Deleting notifications")
     public void notificationRuleDelete(){
         JSONHandler jsonHandler = new JSONHandler();
         String jsonBody = jsonHandler.notificationRuleDeleteJSON(idOfCreatedNotificationRule);
