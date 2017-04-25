@@ -66,7 +66,21 @@ public class NotificationRuleTests {
 
     }
 
-    @Test//не работает принципиально
+
+    //    @Test //не работает по тому что нет возможности симулировать GPV
+    public void alarmCountGPV(){
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
+        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.notificationRuleCreateAlarmCountGPV());
+        requestManagerAPI.checkNotificationRuleIsCreated();
+        requestManagerAPI.checkNotificationRuleNotTriggered();
+//        mqttManagerAPI.trigger
+        requestManagerAPI.checkNotificationRuleTriggered();
+        requestManagerAPI.notificationRuleDelete();
+
+    }
+
+    //    @Test//не работает принципиально
     public void disconnectedEquipmentVPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -82,7 +96,7 @@ public class NotificationRuleTests {
 
     }
 
-    @Test//не работает принципиально
+    //    @Test//не работает принципиально
     public void connectedEquipmentVPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -98,20 +112,8 @@ public class NotificationRuleTests {
 
     }
 
-    //    @Test
-    public void alarmCountGPV(){
-        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
-        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-        requestManagerAPI.notificationRuleCreate(requestManagerAPI.notificationRuleCreateAlarmCountGPV());
-        requestManagerAPI.checkNotificationRuleIsCreated();
-        requestManagerAPI.checkNotificationRuleNotTriggered();
-//        mqttManagerAPI.trigger
-        requestManagerAPI.checkNotificationRuleTriggered();
-        requestManagerAPI.notificationRuleDelete();
 
-    }
-
-    //    @Test
+    //    @Test //не работает принципиально
     public void disconnectedEquipmentGPV(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.equipmentChangeState(requestManagerAPI.equipmentConnectGPV());
@@ -124,7 +126,7 @@ public class NotificationRuleTests {
         requestManagerAPI.notificationRuleDelete();
     }
 
-    //    @Test
+    //    @Test //не работает принципиально
     public void connectedEquipmentGPV() {
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.equipmentChangeState(requestManagerAPI.equipmentDisconnectGPV());
