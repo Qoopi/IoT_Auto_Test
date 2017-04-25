@@ -12,9 +12,6 @@ import java.util.Properties;
  * Created by Kutafin Oleg on 24.04.2017.
  */
 public class CheckingMails {
-    private static String  mail = null;
-    private static String pass = null;
-
     public static void checkEmail(String host, String storeType, String userName, String password, String subject) {
         try {
 
@@ -91,8 +88,8 @@ public class CheckingMails {
         CredentialCenter credentialCenter = new CredentialCenter();
         HashMap<String, String> map = credentialCenter.readProperties();
 
-        mail = map.get("email");
-        pass = map.get("password");
+        String mail = map.get("email");
+        String pass = map.get("password");
 
         String host = "pop.gmail.com";// change accordingly
         String mailStoreType = "pop3";
