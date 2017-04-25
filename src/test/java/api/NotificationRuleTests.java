@@ -5,8 +5,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import system.email.CheckingMails;
 
-import static system.constant.EmailINBOX.SubjectNotificationRuleAbnormalVibrations;
-import static system.constant.EmailINBOX.SubjectNotificationRuleEveryWarning;
+import static system.constant.EmailINBOX.*;
 
 /**
  * Created by user on 20.04.2017.
@@ -45,10 +44,10 @@ public class NotificationRuleTests {
         requestManagerAPI.checkNotificationRuleTriggered();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.check(SubjectNotificationRuleEveryWarning.getMessage());
-        requestManagerAPI.notificationRuleDelete();
+//        requestManagerAPI.notificationRuleDelete();
     }
 
-//    @Test//само по себе создается с 30 эвент-каунтами, ждем фикса
+    @Test//само по себе создается с 30 эвент-каунтами, ждем фикса
     public void alarmCountVPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -57,11 +56,13 @@ public class NotificationRuleTests {
         requestManagerAPI.checkNotificationRuleNotTriggered();
         mqttManagerAPI.triggerVPVAlarmCount();
         requestManagerAPI.checkNotificationRuleTriggeredLong();
-        requestManagerAPI.notificationRuleDelete();
+        CheckingMails checkingMails = new CheckingMails();
+        checkingMails.check(SubjectNotificationRuleNumberOfAlarms.getMessage());
+//        requestManagerAPI.notificationRuleDelete();
 
     }
 
-//    @Test//само по себе создается с 30 эвент-каунтами, ждем фикса
+    @Test//само по себе создается с 30 эвент-каунтами, ждем фикса
     public void abortCountVPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -70,7 +71,9 @@ public class NotificationRuleTests {
         requestManagerAPI.checkNotificationRuleNotTriggered();
         mqttManagerAPI.triggerVPVAbortCount();
         requestManagerAPI.checkNotificationRuleTriggeredLong();
-        requestManagerAPI.notificationRuleDelete();
+        CheckingMails checkingMails = new CheckingMails();
+        checkingMails.check(SubjectNotificationRuleNumberOfAborts.getMessage());
+//        requestManagerAPI.notificationRuleDelete();
 
     }
 

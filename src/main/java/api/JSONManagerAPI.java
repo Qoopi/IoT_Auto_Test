@@ -16,15 +16,15 @@ public class JSONManagerAPI extends JSONHandler{
     }
     @Step("Creating Number of Alarms above threshold on BUC ARTRobot")
     public String notificationRuleCreateAlarmCountGPV(){
-        return notificationRuleCreateJSON("Alarm Count GPV","BUC ARTRobot",2,equipmentGPV, 0,"",">=",1,1, 0).toString();
+        return notificationRuleCreateJSON("Alarm Count GPV","BUC ARTRobot",3,equipmentGPV, "","",">=",1,1, 0).toString();
     }
     @Step("Creating Number of Alarms above threshold on Pump D11")
     public String notificationRuleCreateAlarmCountVPV(){
-        return notificationRuleCreateJSON("Alarm Count VPV","PUMP D11",3,equipmentVPV, 0,"",">=",1,1, 0).toString();
+        return notificationRuleCreateJSON("Alarm Count VPV","PUMP D11",3,equipmentVPV, "","",">=",1,1, 0).toString();
     }
     @Step("Creating Number of Aborts above threshold on Pump D11")
     public String notificationRuleCreateAbortsCountVPV(){
-        return notificationRuleCreateJSON("Aborts Count VPV","PUMP D11",3,equipmentVPV, 0,"",">=",1,1, 0).toString();
+        return notificationRuleCreateJSON("Aborts Count VPV","PUMP D11",2,equipmentVPV, "","",">=",1,1, 0).toString();
     }
     @Step("Creating Disconnected Rule for PUMP D11")
     public String notificationRuleCreateDisconnectedVPV(){

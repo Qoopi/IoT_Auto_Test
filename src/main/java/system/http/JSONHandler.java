@@ -121,7 +121,31 @@ public class JSONHandler extends SignAWSv4 {
                 .addObject().add("value", "+380634953177").add("name", "My Lifecell").end().end()
                 .addArray("emails")
                 .addObject().add("value", "kov.ossystem@gmail.com").add("name", "hhhhhhhhhhhhh").end().end()
-                .addObject("notifications").add("alwaysSend", false).add("triggered", 10).add("acknowledged", 15).add("sms", false).add("emails", true).end()
+                .addObject("notifications").add("alwaysSend", false).add("triggered", 0).add("acknowledged", 0).add("sms", false).add("emails", true).end()
+                .addArray("equipmentIds").add(equipment).end()
+                .add("channel", 0)
+                .add("frq", 0)
+                .add("threshold", threshold)
+                .add("trigger", trigger)
+                .add("operation", operation)
+                .add("value", value)
+                .add("period", period)
+                .add("sensor", sensor).getJson();
+        return jsonObject;
+    }
+
+    public JsonObject notificationRuleCreateJSON(String name, String description, int type, String equipment, String threshold, String trigger, String operation, int value, int period, int sensor) {
+        JsonObject jsonObject = JsonBuilderFactory.buildObject()
+                .add("active", true)
+                .add("name", name)
+                .add("description", description)
+                .add("notificationType", 0)
+                .add("type", type)
+                .addArray("phones")
+                .addObject().add("value", "+380634953177").add("name", "My Lifecell").end().end()
+                .addArray("emails")
+                .addObject().add("value", "kov.ossystem@gmail.com").add("name", "hhhhhhhhhhhhh").end().end()
+                .addObject("notifications").add("alwaysSend", false).add("triggered", 0).add("acknowledged", 0).add("sms", false).add("emails", true).end()
                 .addArray("equipmentIds").add(equipment).end()
                 .add("channel", 0)
                 .add("frq", 0)

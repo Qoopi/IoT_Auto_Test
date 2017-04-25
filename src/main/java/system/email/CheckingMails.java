@@ -4,7 +4,6 @@ import org.junit.Assert;
 import system.readers.CredentialCenter;
 
 import javax.mail.*;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -45,7 +44,6 @@ public class CheckingMails {
 
             boolean found = false;
 
-            Date date = new Date();
             for (int i = 0, n = messages.length; i < n; i++) {
                 Message message = messages[i];
                 System.out.println("---------------------------------");
@@ -59,6 +57,7 @@ public class CheckingMails {
                if (message.getSubject().contains(subject)){
                    System.out.println("Message with suitable Subject was found");
                    if (message.getSentDate().getTime()>(System.currentTimeMillis()-60000)){
+                       System.out.println(message.getSentDate().getTime()+">"+(System.currentTimeMillis()-60000));
                        System.out.println("Message was sent lesser then 60 sec ago");
                        found = true;
                    }
@@ -95,7 +94,6 @@ public class CheckingMails {
         String mailStoreType = "pop3";
         String userName = mail;// change accordingly
         String password = pass;// change accordingly
-        //String subject = SubjectNotificationRuleAbnormalVibrations.getMessage();
         checkEmail(host, mailStoreType, userName, password, subject);
 
     }
