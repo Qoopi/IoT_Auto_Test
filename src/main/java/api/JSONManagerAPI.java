@@ -3,6 +3,10 @@ package api;
 import ru.yandex.qatools.allure.annotations.Step;
 import system.http.JSONHandler;
 
+import static system.constant.EmailINBOX.SubjectNotificationRuleAbnormalVibrationsVPV;
+import static system.constant.EmailINBOX.SubjectNotificationRuleNumberOfAborts;
+import static system.constant.EmailINBOX.SubjectNotificationRuleNumberOfAlarms;
+
 /**
  * Created by user on 20.04.2017.
  */
@@ -12,19 +16,19 @@ public class JSONManagerAPI extends JSONHandler{
 
     @Step("Creating Abnormal Vibration Rule on Pump D11")
     public String notificationRuleCreateAbnormalVibrationVPVPumpD11(){
-        return notificationRuleCreateJSON("Abnormal Vibration VPV","Pump D11",0,equipmentVPV,0,"",">=",30,0,1).toString();
+        return notificationRuleCreateJSON(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage(),"Pump D11",0,equipmentVPV,0,"",">=",30,0,1).toString();
     }
     @Step("Creating Number of Alarms above threshold on BUC ARTRobot")
     public String notificationRuleCreateAlarmCountGPV(){
-        return notificationRuleCreateJSON("Alarm Count GPV","BUC ARTRobot",3,equipmentGPV, "","",">=",1,1, 0).toString();
+        return notificationRuleCreateJSON(SubjectNotificationRuleNumberOfAlarms.getMessage(),"BUC ARTRobot",3,equipmentGPV, "","",">=",1,1, 0).toString();
     }
     @Step("Creating Number of Alarms above threshold on Pump D11")
     public String notificationRuleCreateAlarmCountVPV(){
-        return notificationRuleCreateJSON("Alarm Count VPV","PUMP D11",3,equipmentVPV, "","",">=",1,1, 0).toString();
+        return notificationRuleCreateJSON(SubjectNotificationRuleNumberOfAlarms.getMessage(),"PUMP D11",3,equipmentVPV, "","",">=",1,1, 0).toString();
     }
     @Step("Creating Number of Aborts above threshold on Pump D11")
     public String notificationRuleCreateAbortsCountVPV(){
-        return notificationRuleCreateJSON("Aborts Count VPV","PUMP D11",2,equipmentVPV, "","",">=",1,1, 0).toString();
+        return notificationRuleCreateJSON(SubjectNotificationRuleNumberOfAborts.getMessage(),"PUMP D11",2,equipmentVPV, "","",">=",1,1, 0).toString();
     }
     @Step("Creating Disconnected Rule for PUMP D11")
     public String notificationRuleCreateDisconnectedVPV(){

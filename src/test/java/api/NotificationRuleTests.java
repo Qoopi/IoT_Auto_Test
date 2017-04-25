@@ -16,7 +16,8 @@ public class NotificationRuleTests {
     @AfterClass
     public void afterTest(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-        requestManagerAPI.notificationListDeleteAll();
+//
+//       requestManagerAPI.notificationListDeleteAll();
     }
 
     @Test//работает ок
@@ -29,8 +30,8 @@ public class NotificationRuleTests {
         mqttManagerAPI.triggerVPVD11AbnormalVibration();
         requestManagerAPI.checkNotificationRuleTriggered();
         CheckingMails checkingMails = new CheckingMails();
-        checkingMails.check(SubjectNotificationRuleAbnormalVibrations.getMessage());
-        requestManagerAPI.notificationRuleDelete();
+        checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
+//        requestManagerAPI.notificationRuleDelete();
     }
 
     @Test//похоже, работает

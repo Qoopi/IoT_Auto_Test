@@ -5,8 +5,7 @@ package system.constant;
  */
 public enum EmailINBOX implements CharSequence {
     TitleNotificationsVPV("IoT Systems - DEV"),
-    SubjectNotificationRuleAbnormalVibrations("Abnormal Vibration"),
-    SubjectNotificationRule("Abnormal Vibrations"),
+    SubjectNotificationRuleAbnormalVibrationsVPV("Abnormal Vibration VPV"),
     SubjectNotificationRuleNumberOfAlarms("Number of Alarms above threshold"),
     SubjectNotificationRuleNumberOfAborts("Number of Aborts above threshold"),
     SubjectNotificationRuleEveryWarning("Every Warning VPV"),
