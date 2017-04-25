@@ -1,22 +1,10 @@
 package system.email;
 
-import org.testng.Assert;
-import system.constant.EmailINBOX;
 import system.readers.CredentialCenter;
 
+import javax.mail.*;
 import java.util.HashMap;
 import java.util.Properties;
-
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Store;
-
-import static system.constant.EmailINBOX.SubjectNotificationRuleAbnormalVibrations;
-import static system.constant.EmailINBOX.TitleNotificationsVPV;
 
 /**
  * Created by Kutafin Oleg on 24.04.2017.
@@ -63,6 +51,7 @@ public class CheckingMails {
                 System.out.println("Subject: " + message.getSubject());
                 System.out.println("From: " + message.getFrom()[0]);
                 System.out.println("Text: " + message.getContent().toString());
+                System.out.println("Send at: "+message.getSentDate());
 
 //                Assert.assertTrue(message.getSubject().contains(subject));
                 if (message.getSubject().contains(subject)){
@@ -83,7 +72,12 @@ public class CheckingMails {
         }
     }
 
-    public static void main(String[] args) {
+    public void check(String subject) {
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         CredentialCenter credentialCenter = new CredentialCenter();
         HashMap<String, String> map = credentialCenter.readProperties();
 
@@ -94,8 +88,8 @@ public class CheckingMails {
         String mailStoreType = "pop3";
         String userName = mail;// change accordingly
         String password = pass;// change accordingly
-        String subject = SubjectNotificationRuleAbnormalVibrations.getMessage();
-        checkEmail(host, mailStoreType, userName, password, subject );
+        //String subject = SubjectNotificationRuleAbnormalVibrations.getMessage();
+        checkEmail(host, mailStoreType, userName, password, subject);
 
     }
 

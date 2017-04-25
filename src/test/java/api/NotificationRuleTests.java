@@ -3,6 +3,9 @@ package api;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import system.email.CheckingMails;
+
+import static system.constant.EmailINBOX.SubjectNotificationRuleAbnormalVibrations;
 
 /**
  * Created by user on 20.04.2017.
@@ -25,10 +28,24 @@ public class NotificationRuleTests {
         requestManagerAPI.checkNotificationRuleNotTriggered();
         mqttManagerAPI.triggerVPVD11AbnormalVibration();
         requestManagerAPI.checkNotificationRuleTriggered();
+        CheckingMails checkingMails = new CheckingMails();
+        checkingMails.check(SubjectNotificationRuleAbnormalVibrations.getMessage());
         requestManagerAPI.notificationRuleDelete();
     }
 
-    @Test//само по себе создается с 30 эвент-каунтами, ждем фикса
+//    @Test//похоже, работает
+    public void everyWarningVPVAbnormalVibration(){
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
+        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.notificationRuleCreateEveryWarningVPV());
+        requestManagerAPI.checkNotificationRuleIsCreated();
+        requestManagerAPI.checkNotificationRuleNotTriggered();
+        mqttManagerAPI.triggerVPVD11AbnormalVibration();
+        requestManagerAPI.checkNotificationRuleTriggered();
+        requestManagerAPI.notificationRuleDelete();
+    }
+
+//    @Test//само по себе создается с 30 эвент-каунтами, ждем фикса
     public void alarmCountVPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -41,19 +58,7 @@ public class NotificationRuleTests {
 
     }
 
-    @Test//похоже, работает
-    public void everyWarningVPVAbnormalVibration(){
-        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
-        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-        requestManagerAPI.notificationRuleCreate(requestManagerAPI.notificationRuleCreateEveryWarningVPV());
-        requestManagerAPI.checkNotificationRuleIsCreated();
-        requestManagerAPI.checkNotificationRuleNotTriggered();
-        mqttManagerAPI.triggerVPVD11AbnormalVibration();
-        requestManagerAPI.checkNotificationRuleTriggered();
-        requestManagerAPI.notificationRuleDelete();
-    }
-
-    @Test//само по себе создается с 30 эвент-каунтами, ждем фикса
+//    @Test//само по себе создается с 30 эвент-каунтами, ждем фикса
     public void abortCountVPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
