@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import system.email.CheckingMails;
 
 import static system.constant.EmailINBOX.SubjectNotificationRuleAbnormalVibrations;
+import static system.constant.EmailINBOX.SubjectNotificationRuleEveryWarning;
 
 /**
  * Created by user on 20.04.2017.
@@ -33,7 +34,7 @@ public class NotificationRuleTests {
         requestManagerAPI.notificationRuleDelete();
     }
 
-//    @Test//похоже, работает
+    @Test//похоже, работает
     public void everyWarningVPVAbnormalVibration(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -42,6 +43,8 @@ public class NotificationRuleTests {
         requestManagerAPI.checkNotificationRuleNotTriggered();
         mqttManagerAPI.triggerVPVD11AbnormalVibration();
         requestManagerAPI.checkNotificationRuleTriggered();
+        CheckingMails checkingMails = new CheckingMails();
+        checkingMails.check(SubjectNotificationRuleEveryWarning.getMessage());
         requestManagerAPI.notificationRuleDelete();
     }
 

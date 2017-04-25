@@ -146,7 +146,7 @@ public class JSONHandler extends SignAWSv4 {
                 .add("notificationType", 0)
                 .add("type", 0)
                 .addArray("phones").addObject().add("value", "+380634953177").add("name", "My Lifecell").end().end()
-                .addArray("emails").addObject().add("value", "TestUser.Israil@mail.ru").add("name", "hhhhhhhhhhhhh").end().end()
+                .addArray("emails").addObject().add("value", "kov.ossystem@gmail.com").add("name", "hhhhhhhhhhhhh").end().end()
                 .addObject("notifications").add("alwaysSend", false).add("triggered", 10).add("acknowledged", 15).add("globalSettings", 0).add("sms", false).add("emails", false).end()
                 .addArray("equipmentIds").add("Thing-090011-0").end()
                 .add("channel", 0)

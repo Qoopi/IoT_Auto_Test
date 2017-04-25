@@ -11,14 +11,14 @@ public class MQTTManagerAPI extends MQTTConnector {
     public void triggerVPVD11AbnormalVibration(){
         String topic = MQTTTopics.VPVD11Data.getValue();
         String payload = "{\"device\":{\"id\":\"Thing-000011-i1\",\"model\":\"r2d4\",\"name\":\"Pump D11\"},\"vibration\":{\"accelerometer\":[{\"filteredMax\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":false,\"distance\":115},\"filteredRms\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":0,\"distance\":40},\"freqAtMaxDistance\":6953,\"max\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":false,\"distance\":11.9},\"pumpFailureState\":true,\"rms\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":false,\"distance\":15},\"userDefined\":[{\"distance\":6666,\"freq\":1000},{\"distance\":6666,\"freq\":2000},{\"distance\":0,\"freq\":3000},{\"distance\":0,\"freq\":4000},{\"distance\":0,\"freq\":5000},{\"distance\":0,\"freq\":6000},{\"distance\":0,\"freq\":7000},{\"distance\":0,\"freq\":8000},{\"distance\":0,\"freq\":9000},{\"distance\":0,\"freq\":10000}]},{\"filteredMax\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":false,\"distance\":0},\"filteredRms\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":false,\"distance\":0},\"freqAtMaxDistance\":6953,\"max\":{\"abortLimit\":90,\"abortState\":false,\"alarmLimit\":30,\"alarmState\":false,\"distance\":0},\"pumpFailureState\":true,\"rms\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":false,\"distance\":0},\"userDefined\":[{\"distance\":6666,\"freq\":1000},{\"distance\":6666,\"freq\":2000},{\"distance\":0,\"freq\":3000},{\"distance\":0,\"freq\":4000},{\"distance\":0,\"freq\":5000},{\"distance\":0,\"freq\":6000},{\"distance\":0,\"freq\":7000},{\"distance\":0,\"freq\":8000},{\"distance\":0,\"freq\":9000},{\"distance\":0,\"freq\":10000}]}],\"alarm\":{\"abort\":false,\"failure\":true,\"state\":false},\"serialNum\":0,\"timestamp\":1492776189}}";
-        mqttPublish(topic, payload);
+//        mqttPublish(topic, payload);
         mqttPublish(topic, payload);
     }
 
     public void triggerVPVDisconected(){
         String topic = MQTTTopics.VPVD11Heartbeat.getValue();
         String payload = "{\"expiration\":"+(System.currentTimeMillis()/1000-600)+"}";
-        mqttPublish(topic, payload);
+//        mqttPublish(topic, payload);
         mqttPublish(topic, payload);
     }
 
@@ -26,21 +26,21 @@ public class MQTTManagerAPI extends MQTTConnector {
         String topic = MQTTTopics.VPVD11Heartbeat.getValue();
         String payload = "{\"expiration\":"+(System.currentTimeMillis()/1000+120)+"}";
         mqttPublish(topic, payload);
-        mqttPublish(topic, payload);
+//        mqttPublish(topic, payload);
     }
 
     public void triggerVPVAlarmCount(){
         String topic = MQTTTopics.VPVD11Data.getValue();
         String payload = "{\"device\":{\"id\":\"Thing-000011-i1\",\"model\":\"r2d4\",\"name\":\"Pump D11\"},\"vibration\":{\"accelerometer\":[{\"filteredMax\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":false,\"distance\":115},\"filteredRms\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":0,\"distance\":40},\"freqAtMaxDistance\":6953,\"max\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":false,\"distance\":11.9},\"pumpFailureState\":true,\"rms\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":false,\"distance\":15},\"userDefined\":[{\"distance\":99,\"freq\":1000},{\"distance\":0,\"freq\":2000},{\"distance\":0,\"freq\":3000},{\"distance\":0,\"freq\":4000},{\"distance\":0,\"freq\":5000},{\"distance\":0,\"freq\":6000},{\"distance\":0,\"freq\":7000},{\"distance\":0,\"freq\":8000},{\"distance\":0,\"freq\":9000},{\"distance\":0,\"freq\":10000}]},{\"filteredMax\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":false,\"distance\":0},\"filteredRms\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":false,\"distance\":0},\"freqAtMaxDistance\":6953,\"max\":{\"abortLimit\":90,\"abortState\":false,\"alarmLimit\":30,\"alarmState\":false,\"distance\":0},\"pumpFailureState\":true,\"rms\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":false,\"distance\":0},\"userDefined\":[{\"distance\":0,\"freq\":1000},{\"distance\":0,\"freq\":2000},{\"distance\":0,\"freq\":3000},{\"distance\":0,\"freq\":4000},{\"distance\":0,\"freq\":5000},{\"distance\":0,\"freq\":6000},{\"distance\":0,\"freq\":7000},{\"distance\":0,\"freq\":8000},{\"distance\":0,\"freq\":9000},{\"distance\":0,\"freq\":10000}]}],\"alarm\":{\"abort\":false,\"failure\":true,\"state\":true},\"serialNum\":0,\"timestamp\":1492776189}}";
         mqttPublish(topic, payload);
-        mqttPublish(topic, payload);
+//        mqttPublish(topic, payload);
     }
 
     public void triggerVPVAbortCount(){
         String topic = MQTTTopics.VPVD11Data.getValue();
         String payload = "{\"device\":{\"id\":\"Thing-000011-i1\",\"model\":\"r2d4\",\"name\":\"Pump D11\"},\"vibration\":{\"accelerometer\":[{\"filteredMax\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":false,\"distance\":115},\"filteredRms\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":0,\"distance\":140},\"freqAtMaxDistance\":6953,\"max\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":false,\"distance\":111.9},\"pumpFailureState\":true,\"rms\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":false,\"distance\":15},\"userDefined\":[{\"distance\":250,\"freq\":1000},{\"distance\":0,\"freq\":2000},{\"distance\":0,\"freq\":3000},{\"distance\":0,\"freq\":4000},{\"distance\":0,\"freq\":5000},{\"distance\":0,\"freq\":6000},{\"distance\":0,\"freq\":7000},{\"distance\":0,\"freq\":8000},{\"distance\":0,\"freq\":9000},{\"distance\":0,\"freq\":10000}]},{\"filteredMax\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":false,\"distance\":0},\"filteredRms\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":false,\"distance\":0},\"freqAtMaxDistance\":6953,\"max\":{\"abortLimit\":90,\"abortState\":false,\"alarmLimit\":30,\"alarmState\":false,\"distance\":0},\"pumpFailureState\":true,\"rms\":{\"abortLimit\":0,\"abortState\":false,\"alarmLimit\":0,\"alarmState\":false,\"distance\":0},\"userDefined\":[{\"distance\":0,\"freq\":1000},{\"distance\":0,\"freq\":2000},{\"distance\":0,\"freq\":3000},{\"distance\":0,\"freq\":4000},{\"distance\":0,\"freq\":5000},{\"distance\":0,\"freq\":6000},{\"distance\":0,\"freq\":7000},{\"distance\":0,\"freq\":8000},{\"distance\":0,\"freq\":9000},{\"distance\":0,\"freq\":10000}]}],\"alarm\":{\"abort\":true,\"failure\":true,\"state\":false},\"serialNum\":0,\"timestamp\":1492776189}}";
         mqttPublish(topic, payload);
-        mqttPublish(topic, payload);
+//        mqttPublish(topic, payload);
     }
 
     public void readVPVD11(){
