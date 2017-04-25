@@ -54,7 +54,7 @@ public class CheckingMails {
                 System.out.println("Send at: "+message.getSentDate());
 
 //                Assert.assertTrue(message.getSubject().contains(subject));
-                if (message.getSubject().contains(subject)){
+               if (message.getSubject().contains(subject)){
                     System.out.println("hello, you suck dicks!");
                 }
             }
