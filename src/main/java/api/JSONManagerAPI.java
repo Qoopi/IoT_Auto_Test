@@ -16,7 +16,7 @@ public class JSONManagerAPI extends JSONHandler{
     }
     @Step("Creating Number of Alarms above threshold on BUC ARTRobot")
     public String notificationRuleCreateAlarmCountGPV(){
-        return notificationRuleCreateJSON("Alarm Count GPV","BUC ARTRobot",3,equipmentGPV, 0,"",">=",1,1, 0).toString();
+        return notificationRuleCreateJSON("Alarm Count GPV","BUC ARTRobot",2,equipmentGPV, 0,"",">=",1,1, 0).toString();
     }
     @Step("Creating Number of Alarms above threshold on Pump D11")
     public String notificationRuleCreateAlarmCountVPV(){
