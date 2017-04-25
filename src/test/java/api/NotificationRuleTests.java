@@ -16,8 +16,7 @@ public class NotificationRuleTests {
     @AfterClass
     public void afterTest(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-//
-//       requestManagerAPI.notificationListDeleteAll();
+       requestManagerAPI.notificationListDeleteAll();
     }
 
     @Test//работает ок
@@ -31,7 +30,7 @@ public class NotificationRuleTests {
         requestManagerAPI.checkNotificationRuleTriggered();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
-//        requestManagerAPI.notificationRuleDelete();
+        requestManagerAPI.notificationRuleDelete();
     }
 
     @Test//похоже, работает
@@ -45,10 +44,10 @@ public class NotificationRuleTests {
         requestManagerAPI.checkNotificationRuleTriggered();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.check(SubjectNotificationRuleEveryWarning.getMessage());
-//        requestManagerAPI.notificationRuleDelete();
+        requestManagerAPI.notificationRuleDelete();
     }
 
-    @Test//само по себе создается с 30 эвент-каунтами, ждем фикса
+    @Test
     public void alarmCountVPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -59,11 +58,11 @@ public class NotificationRuleTests {
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.check(SubjectNotificationRuleNumberOfAlarms.getMessage());
-//        requestManagerAPI.notificationRuleDelete();
+        requestManagerAPI.notificationRuleDelete();
 
     }
 
-    @Test//само по себе создается с 30 эвент-каунтами, ждем фикса
+    @Test
     public void abortCountVPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -74,7 +73,7 @@ public class NotificationRuleTests {
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.check(SubjectNotificationRuleNumberOfAborts.getMessage());
-//        requestManagerAPI.notificationRuleDelete();
+        requestManagerAPI.notificationRuleDelete();
 
     }
 
