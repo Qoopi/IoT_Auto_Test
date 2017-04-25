@@ -15,8 +15,7 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Store;
 
-import static system.constant.EmailINBOX.SubjectNotificationRuleAbnormalVibrations;
-import static system.constant.EmailINBOX.TitleNotificationsVPV;
+import static system.constant.EmailINBOX.*;
 
 /**
  * Created by Kutafin Oleg on 24.04.2017.
@@ -65,7 +64,7 @@ public class CheckingMails {
                 System.out.println("Text: " + message.getContent().toString());
 
 //                Assert.assertTrue(message.getSubject().contains(subject));
-                if (message.getSubject().contains(subject)){
+               if (message.getSubject().contains(subject)){
                     System.out.println("hello, you suck dicks!");
                 }
             }
@@ -83,7 +82,7 @@ public class CheckingMails {
         }
     }
 
-    public static void main(String[] args) {
+    public void checkEmailNotificationAbnormalVibration() {
         CredentialCenter credentialCenter = new CredentialCenter();
         HashMap<String, String> map = credentialCenter.readProperties();
 
@@ -98,5 +97,34 @@ public class CheckingMails {
         checkEmail(host, mailStoreType, userName, password, subject );
 
     }
+    public void checkEmailNotificatioAlarmCountVPV() {
+        CredentialCenter credentialCenter = new CredentialCenter();
+        HashMap<String, String> map = credentialCenter.readProperties();
 
+        mail = map.get("email");
+        pass = map.get("password");
+
+        String host = "pop.gmail.com";// change accordingly
+        String mailStoreType = "pop3";
+        String userName = mail;// change accordingly
+        String password = pass;// change accordingly
+        String subject = SubjectNotificationRuleNumberOfAlarms.getMessage();
+        checkEmail(host, mailStoreType, userName, password, subject );
+
+    }
+    public void checkEmailNotificatioAbortsCountCountVPV() {
+        CredentialCenter credentialCenter = new CredentialCenter();
+        HashMap<String, String> map = credentialCenter.readProperties();
+
+        mail = map.get("email");
+        pass = map.get("password");
+
+        String host = "pop.gmail.com";// change accordingly
+        String mailStoreType = "pop3";
+        String userName = mail;// change accordingly
+        String password = pass;// change accordingly
+        String subject = SubjectNotificationRuleNumberOfAborts.getMessage();
+        checkEmail(host, mailStoreType, userName, password, subject );
+
+    }
 }
