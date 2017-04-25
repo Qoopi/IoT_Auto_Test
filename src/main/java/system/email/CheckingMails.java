@@ -1,8 +1,10 @@
 package system.email;
 
+import org.junit.Assert;
 import system.readers.CredentialCenter;
 
 import javax.mail.*;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -44,6 +46,9 @@ public class CheckingMails {
             Message[] messages = emailFolder.getMessages();
             System.out.println("messages.length---" + messages.length);
 
+            boolean found = false;
+
+            Date date = new Date();
             for (int i = 0, n = messages.length; i < n; i++) {
                 Message message = messages[i];
                 System.out.println("---------------------------------");
@@ -55,9 +60,14 @@ public class CheckingMails {
 
 //                Assert.assertTrue(message.getSubject().contains(subject));
                if (message.getSubject().contains(subject)){
-                    System.out.println("hello, you suck dicks!");
+                   System.out.println("Message with suitable Subject was found");
+                   if (message.getSentDate().getTime()>(System.currentTimeMillis()-60000)){
+                       System.out.println("Message was sent lesser then 60 sec ago");
+                       found = true;
+                   }
                 }
             }
+            Assert.assertTrue(found);
 
             // close the store and folder objects
             emailFolder.close(false);
