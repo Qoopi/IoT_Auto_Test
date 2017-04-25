@@ -9,6 +9,7 @@ public enum EmailINBOX implements CharSequence {
     SubjectNotificationRule("Abnormal Vibrations"),
     SubjectNotificationRuleNumberOfAlarms("Number of Alarms above threshold"),
     SubjectNotificationRuleNumberOfAborts("Number of Aborts above threshold"),
+    SubjectNotificationRuleEveryWorning("Every Warning VPV"),
 
     SubjectReportListVPVMonthly("Vacuum Pump Vibration Report - Optimized for Printing - Monthly"),
     SubjectReportListVPVWeekly("Vacuum Pump Vibration Report - Optimized for Printing - Weekly"),
