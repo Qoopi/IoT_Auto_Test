@@ -18,11 +18,7 @@ public class ReportsTest {
     public void reportSendNowCheck(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.skedlerReportCreate();
-        try {
-            Thread.sleep(30000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        requestManagerAPI.sleep(30000);
         requestManagerAPI.skedlerReportSendNow();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.checkLong(SubjectReportListVPVWeekly.getMessage());

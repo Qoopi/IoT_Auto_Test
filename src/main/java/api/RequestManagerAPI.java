@@ -10,8 +10,6 @@ import system.http.JSONHandler;
 import java.util.ArrayList;
 import java.util.Map;
 
-import static jodd.util.ThreadUtil.sleep;
-
 /**
  * Created by user on 20.04.2017.
  */
@@ -200,6 +198,14 @@ public class RequestManagerAPI extends JSONManagerAPI{
                 Assert.assertTrue(false);
                 System.out.println("ERR: error message found in response body");
             }
+        }
+    }
+
+    public void sleep(int ms){
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

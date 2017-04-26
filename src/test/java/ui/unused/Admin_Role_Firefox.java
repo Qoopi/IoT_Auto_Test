@@ -57,7 +57,7 @@ public class Admin_Role_Firefox {
     }
 
     @Features("Regression")
-    @Stories("[OSF-53] Equipment, columns menu checkEmail")
+    @Stories("[OSF-53] Equipment, columns menu check")
     @Test(priority = 3)
     public void checkUpperRightMenuInEquipment() {
         Dashboard dashboard = new Dashboard();
@@ -113,7 +113,7 @@ public class Admin_Role_Firefox {
         dashboard.closeMenuFF();
     }
     @Features("Regression")
-    @Stories("Notifications list default columns checkEmail")
+    @Stories("Notifications list default columns check")
     @Test(priority = 7)
     public void notificationsListDefaultColumns() {
 
@@ -125,7 +125,7 @@ public class Admin_Role_Firefox {
     }
 
     @Features("Regression")
-    @Stories("Notifications lists, dropdown menu checkEmail")
+    @Stories("Notifications lists, dropdown menu check")
     @Test(priority = 8)
     public void NotificationsListRightMenu() {
         Dashboard dash = new Dashboard();
@@ -162,7 +162,7 @@ public class Admin_Role_Firefox {
     }
 
     @Features("Regression")
-    @Stories("Report list additions columns in dropdown menu checkEmail")
+    @Stories("Report list additions columns in dropdown menu check")
     @Test(priority = 11)
     public void CheckAdditionalColumns() {
         Dashboard dash = new Dashboard();
@@ -328,7 +328,7 @@ public class Admin_Role_Firefox {
     }
 
     @Features("Regression")
-    @Stories("[OSF-53] Equipment list, default columns checkEmail")
+    @Stories("[OSF-53] Equipment list, default columns check")
     @Test(priority = 22)
     public void checkEquipmentList() {
 
@@ -355,7 +355,7 @@ public class Admin_Role_Firefox {
     }
 
     @Features("Regression")
-    @Stories("[OSF-53] Equipment List, dropdown menu checkEmail")
+    @Stories("[OSF-53] Equipment List, dropdown menu check")
     @Test(priority = 24)
     public void checkUpperRightMenuInEquipmentList() {
         Dashboard dashboard = new Dashboard();

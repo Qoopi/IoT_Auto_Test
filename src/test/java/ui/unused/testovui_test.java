@@ -32,7 +32,7 @@ public class testovui_test {
         dashboard.closeMenu();
     }
     @Features("Regression")
-    @Stories("Notifications Rule, default columns checkEmail")
+    @Stories("Notifications Rule, default columns check")
     @Test(priority = 1)
     public void NotificationsRuleDefault() {
         Dashboard dash = new Dashboard();
@@ -45,7 +45,7 @@ public class testovui_test {
     }
 
     @Features("Regression")
-    @Stories("Notifications Rule, drop down menu with additional columns checkEmail")
+    @Stories("Notifications Rule, drop down menu with additional columns check")
     @Test(priority = 2)
     public void NotificationsRuleDDMCheck() {
         Dashboard dash = new Dashboard();

@@ -49,6 +49,30 @@ public class JSONHandler extends SignAWSv4 {
         return jsonObject;
     }
 
+    public JsonObject reportDelete(String name, String title, String equipments, String filterId, String emails, String userId){
+        //{"filter_name":"Vacuum-Pump-Vibration-Report-List---Optimized-for-Printing---Weekly",
+        // "filterTitle":"Vacuum-Pump-Vibration-Report-List---Optimized-for-Printing---Weekly kov.ossystem@gmail.com",
+        // "equipments":"Thing-000011-i1",
+        // "id":null,
+        // "filterId":"42c02b4f-bfeb-4e55-9ccd-ff30ae53930d",
+        // "emails":"kov.ossystem@gmail.com",
+        // "userId":"bbc046ce-daff-4223-a144-ae453ea8a32b",
+        // "createdAt":null,
+        // "excelIncluded":null}
+        JsonObject jsonObject = JsonBuilderFactory.buildObject()
+                .add("filter_name", name)
+                .add("filterTitle", title)
+                .add("equipments", equipments)
+                .add("id", "")
+                .add("filterId", filterId)
+                .add("emails", emails)
+                .add("userId", userId)
+                .add("createdAt", "")
+                .add("excelIncluded", "")
+                .getJson();
+        return jsonObject;
+    }
+
     public String getIdOfCreatedNotificationRule(String response) {
         JSONObject jsonObject = parseToJSONObject(response);
         String id = jsonObject.get("id").toString();
