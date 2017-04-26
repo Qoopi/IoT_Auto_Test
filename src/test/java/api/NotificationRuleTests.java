@@ -78,7 +78,7 @@ public class NotificationRuleTests {
 
     }
 
-
+    @Features("Number of Alarms above threshold on GPV equipment rule.")
     @Test //не работает по тому что нет возможности симулировать GPV, оставлена проверка "создается ли rule"
     public void alarmCountGPV(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -88,7 +88,7 @@ public class NotificationRuleTests {
         requestManagerAPI.notificationRuleDelete();
 
     }
-
+    @Features("Disconnected rule with VPV equipment.")
     @Test//не работает принципиально, оставлена проверка "создается ли rule"
     public void disconnectedEquipmentVPV(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -99,7 +99,7 @@ public class NotificationRuleTests {
         requestManagerAPI.notificationRuleDelete();
 
     }
-
+    @Features("Connected rule with VPV equipment.")
     @Test//не работает принципиально, оставлена проверка "создается ли rule"
     public void connectedEquipmentVPV(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -111,7 +111,7 @@ public class NotificationRuleTests {
 
     }
 
-
+    @Features("Disconnected rule with GPV equipment.")
     @Test //не работает принципиально, оставлена проверка "создается ли rule"
     public void disconnectedEquipmentGPV(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -121,7 +121,7 @@ public class NotificationRuleTests {
 
         requestManagerAPI.notificationRuleDelete();
     }
-
+    @Features("Connected rule with GPV equipment.")
     @Test //не работает принципиально, оставлена проверка "создается ли rule"
     public void connectedEquipmentGPV() {
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();

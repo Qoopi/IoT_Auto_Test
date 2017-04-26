@@ -2,6 +2,7 @@ package api;
 
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import ru.yandex.qatools.allure.annotations.Features;
 import system.email.CheckingMails;
 
 import static system.constant.EmailINBOX.SubjectReportListVPVWeekly;
@@ -12,6 +13,7 @@ import static system.constant.EmailINBOX.SubjectReportListVPVWeekly;
 @Listeners(ListenerAPI.class)
 public class ReportsTest {
 
+    @Features("Report Send Now function.")
     @Test
     public void reportSendNowCheck(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
