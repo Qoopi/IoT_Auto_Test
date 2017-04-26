@@ -17,6 +17,37 @@ public class JSONHandler extends SignAWSv4 {
     private String defaultDashboardGPVName = "someAutoTestNameGPV";
     private String defaultDashboardGPVDescription = "someAutoTestDescriptionGPV";
 
+    private final String testEmail = "kov.ossystem@gmail.com";
+
+
+    public JsonObject reportCreate(String templateId, String equipment, String name){
+//        String jsonBody = "{\"templateId\":\"Vacuum-Pump-Vibration-Report---Optimized-for-Printing---Daily\",\"emaillist\":\"vasya.ossystem@gmasill.com\"
+// ,\"filter\":\"equipmentId:"+thingGPV+"\",\"filter_name\":\"Vacuum-Pump-Vibration-Report-List---Optimized-for-Printing---Daily\",\"excelEnabled\":false}";
+
+        JsonObject jsonObject = JsonBuilderFactory.buildObject()
+                .add("templateId", templateId)
+                .add("emaillist", testEmail)
+                .add("filter", "equipmentId:"+equipment)
+                .add("filter_name", name)
+                .add("excelEnabled", false)
+                .getJson();
+        return jsonObject;
+    }
+
+    public JsonObject reportSendNow(String id, String templateId, String equipment, String name){
+        // "{\"filterId\":\""+idOfCreatedReport+"\",\"templateId\":\"GPV-Smart-Sensor-Report-15-minutes-activity-1\",\"emaillist\":\"geloksmmm@gmail.com,kov.ossystem@gmail.com\",
+        // \"filter\":\"equipmentId:"+thingGPV+"\",\"filter_name\":\"GPV-Smart-Sensor-Report-List-15-minutes\",\"excelEnabled\":false}";
+
+        JsonObject jsonObject = JsonBuilderFactory.buildObject()
+                .add("filterId" , id)
+                .add("templateId", templateId)
+                .add("emaillist", testEmail)
+                .add("filter", "equipmentId:"+equipment)
+                .add("filter_name", name)
+                .add("excelEnabled", false)
+                .getJson();
+        return jsonObject;
+    }
 
     public String getIdOfCreatedNotificationRule(String response) {
         JSONObject jsonObject = parseToJSONObject(response);
@@ -120,7 +151,7 @@ public class JSONHandler extends SignAWSv4 {
                 .addArray("phones")
                 .addObject().add("value", "+380634953177").add("name", "My Lifecell").end().end()
                 .addArray("emails")
-                .addObject().add("value", "kov.ossystem@gmail.com").add("name", "hhhhhhhhhhhhh").end().end()
+                .addObject().add("value", testEmail).add("name", "hhhhhhhhhhhhh").end().end()
                 .addObject("notifications").add("alwaysSend", false).add("triggered", 0).add("acknowledged", 0).add("sms", false).add("emails", true).end()
                 .addArray("equipmentIds").add(equipment).end()
                 .add("channel", 0)
@@ -144,7 +175,7 @@ public class JSONHandler extends SignAWSv4 {
                 .addArray("phones")
                 .addObject().add("value", "+380634953177").add("name", "My Lifecell").end().end()
                 .addArray("emails")
-                .addObject().add("value", "kov.ossystem@gmail.com").add("name", "hhhhhhhhhhhhh").end().end()
+                .addObject().add("value", testEmail).add("name", "hhhhhhhhhhhhh").end().end()
                 .addObject("notifications").add("alwaysSend", false).add("triggered", 0).add("acknowledged", 0).add("sms", false).add("emails", true).end()
                 .addArray("equipmentIds").add(equipment).end()
                 .add("channel", 0)
@@ -170,7 +201,7 @@ public class JSONHandler extends SignAWSv4 {
                 .add("notificationType", 0)
                 .add("type", 0)
                 .addArray("phones").addObject().add("value", "+380634953177").add("name", "My Lifecell").end().end()
-                .addArray("emails").addObject().add("value", "kov.ossystem@gmail.com").add("name", "hhhhhhhhhhhhh").end().end()
+                .addArray("emails").addObject().add("value", testEmail).add("name", "hhhhhhhhhhhhh").end().end()
                 .addObject("notifications").add("alwaysSend", false).add("triggered", 10).add("acknowledged", 15).add("globalSettings", 0).add("sms", false).add("emails", false).end()
                 .addArray("equipmentIds").add("Thing-090011-0").end()
                 .add("channel", 0)

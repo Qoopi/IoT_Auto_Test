@@ -4,7 +4,6 @@ import ru.yandex.qatools.allure.annotations.Step;
 import system.http.JSONHandler;
 
 import static system.constant.EmailINBOX.*;
-import static system.constant.Things.ThingGPV;
 import static system.constant.Things.ThingGPVBUC;
 import static system.constant.Things.ThingVPV11;
 
@@ -163,4 +162,18 @@ public class JSONManagerAPI extends JSONHandler{
         return equipmentOnOff(ThingGPVBUC.getValue(),true);
     }
 
+    private String reportTemplateId = "Vacuum-Pump-Vibration-Report---Optimized-for-Printing---Weekly";
+    private String reportTemplateName = "Vacuum-Pump-Vibration-Report-List---Optimized-for-Printing---Weekly";
+
+    public String JSONReportCreate(){
+        return reportCreate(reportTemplateId, ThingVPV11.getValue(), reportTemplateName).toString();
+    }
+
+    public String JSONReportSendNow(String id){
+        return reportSendNow(id, reportTemplateId, ThingVPV11.getValue(), reportTemplateName).toString();
+    }
+
+    public String JSONReportDelete(){
+        return null;
+    }
 }

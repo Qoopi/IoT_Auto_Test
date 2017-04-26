@@ -78,75 +78,56 @@ public class NotificationRuleTests {
     }
 
 
-    //    @Test //не работает по тому что нет возможности симулировать GPV
+    @Test //не работает по тому что нет возможности симулировать GPV, оставлена проверка "создается ли rule"
     public void alarmCountGPV(){
-        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.JSONRuleAlarmCountGPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
-        requestManagerAPI.checkNotificationRuleNotTriggered();
-//        mqttManagerAPI.trigger
-        requestManagerAPI.checkNotificationRuleTriggered();
+
         requestManagerAPI.notificationRuleDelete();
 
     }
 
-    //    @Test//не работает принципиально
+    @Test//не работает принципиально, оставлена проверка "создается ли rule"
     public void disconnectedEquipmentVPV(){
-        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.equipmentChangeState(requestManagerAPI.JSONEquipmentConnectVPV());
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.JSONRuleDisconnectedVPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
-        requestManagerAPI.checkNotificationRuleNotTriggered();
-        mqttManagerAPI.triggerVPVConnected();
-        requestManagerAPI.checkNotificationRuleNotTriggered();
-        mqttManagerAPI.triggerVPVDisconected();
-        requestManagerAPI.checkNotificationRuleTriggeredLong();
+
         requestManagerAPI.notificationRuleDelete();
 
     }
 
-    //    @Test//не работает принципиально
+    @Test//не работает принципиально, оставлена проверка "создается ли rule"
     public void connectedEquipmentVPV(){
-        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.equipmentChangeState(requestManagerAPI.JSONEquipmentDisconnectVPV());
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.JSONRuleConnectedVPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
-        requestManagerAPI.checkNotificationRuleNotTriggered();
-        mqttManagerAPI.triggerVPVDisconected();
-        requestManagerAPI.checkNotificationRuleNotTriggered();
-        mqttManagerAPI.triggerVPVConnected();
-        requestManagerAPI.checkNotificationRuleTriggeredLong();
+
         requestManagerAPI.notificationRuleDelete();
 
     }
 
 
-    //    @Test //не работает принципиально
+    @Test //не работает принципиально, оставлена проверка "создается ли rule"
     public void disconnectedEquipmentGPV(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.equipmentChangeState(requestManagerAPI.JSONEquipmentConnectGPV());
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.JSONRuleDisconnectedGPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
-        requestManagerAPI.checkNotificationRuleNotTriggered();
 
-
-        requestManagerAPI.checkNotificationRuleTriggered();
         requestManagerAPI.notificationRuleDelete();
     }
 
-    //    @Test //не работает принципиально
+    @Test //не работает принципиально, оставлена проверка "создается ли rule"
     public void connectedEquipmentGPV() {
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.equipmentChangeState(requestManagerAPI.JSONEquipmentDisconnectGPV());
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.JSONRuleConnectedGPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
-        requestManagerAPI.checkNotificationRuleNotTriggered();
 
-
-        requestManagerAPI.checkNotificationRuleTriggered();
         requestManagerAPI.notificationRuleDelete();
     }
 

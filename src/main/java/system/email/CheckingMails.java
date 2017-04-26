@@ -12,7 +12,8 @@ import java.util.Properties;
  * Created by Kutafin Oleg on 24.04.2017.
  */
 public class CheckingMails {
-    public static void checkEmail(String host, String storeType, String userName, String password, String subject) {
+    public static boolean checkEmail(String host, String storeType, String userName, String password, String subject) {
+        boolean found = false;
         try {
 
             // create properties field
@@ -28,7 +29,7 @@ public class CheckingMails {
                     return new PasswordAuthentication(userName, password);
                 }
             });
-             //emailSession.setDebug(true);
+            //emailSession.setDebug(true);
 
             // create the POP3 store object and connect with the pop server
             Store store = emailSession.getStore("pop3s");
@@ -43,7 +44,7 @@ public class CheckingMails {
             Message[] messages = emailFolder.getMessages();
             System.out.println("messages.length---" + messages.length);
 
-            boolean found = false;
+            found = false;
 
             for (int i = 0, n = messages.length; i < n; i++) {
                 Message message = messages[i];
@@ -52,19 +53,18 @@ public class CheckingMails {
                 System.out.println("Subject: " + message.getSubject());
                 System.out.println("From: " + message.getFrom()[0]);
                 System.out.println("Text: " + message.getContent().toString());
-                System.out.println("Send at: "+message.getSentDate());
+                System.out.println("Send at: " + message.getSentDate());
 
 //                Assert.assertTrue(message.getSubject().contains(subject));
-               if (message.getSubject().contains(subject)){
-                   System.out.println("Message with suitable Subject was found");
-                   if (message.getSentDate().getTime()>(System.currentTimeMillis()-60000)){
-                       System.out.println(message.getSentDate().getTime()+">"+(System.currentTimeMillis()-60000));
-                       System.out.println("Message was sent lesser then 60 sec ago");
-                       found = true;
-                   }
+                if (message.getSubject().contains(subject)) {
+                    System.out.println("Message with suitable Subject was found");
+                    if (message.getSentDate().getTime() > (System.currentTimeMillis() - 60000)) {
+                        System.out.println(message.getSentDate().getTime() + ">" + (System.currentTimeMillis() - 60000));
+                        System.out.println("Message was sent lesser then 60 sec ago");
+                        found = true;
+                    }
                 }
             }
-            Assert.assertTrue(found);
 
             // close the store and folder objects
             emailFolder.close(false);
@@ -77,6 +77,7 @@ public class CheckingMails {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return found;
     }
     @Step("Checking if notification on e-mail.")
     public void check(String subject) {
@@ -95,7 +96,42 @@ public class CheckingMails {
         String mailStoreType = "pop3";
         String userName = mail;// change accordingly
         String password = pass;// change accordingly
-        checkEmail(host, mailStoreType, userName, password, subject);
+        Assert.assertTrue(checkEmail(host, mailStoreType, userName, password, subject));
+
+    }
+
+    @Step("Checking if notification on e-mail.")
+    public void checkLong(String subject){
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        CredentialCenter credentialCenter = new CredentialCenter();
+        HashMap<String, String> map = credentialCenter.readProperties();
+
+        String mail = map.get("email");
+        String pass = map.get("password");
+
+        String host = "pop.gmail.com";// change accordingly
+        String mailStoreType = "pop3";
+        String userName = mail;// change accordingly
+        String password = pass;// change accordingly
+        boolean found = false;
+        found = checkEmail(host, mailStoreType, userName, password, subject);
+        int counter = 0;
+        while(!found){
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            found = checkEmail(host, mailStoreType, userName, password, subject);
+            counter++;
+            if (counter>3 || found)
+                return;
+        }
+        Assert.assertTrue(found);
 
     }
 
