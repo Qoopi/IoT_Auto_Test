@@ -30,7 +30,7 @@ public class RequestManagerAPI extends JSONManagerAPI{
         messagesEnableGatlingReport = false;
     }
 
-
+    @Step("Deleting all notifications.")
     public void notificationListDeleteAll(){
         ArrayList ids = getIdsOfAllNotifications(notificationListRead().asString());
         String jsonBody = notificationListDeleteAllJSON(ids);
@@ -39,7 +39,7 @@ public class RequestManagerAPI extends JSONManagerAPI{
         checkStatusCode(response);
         checkErrorInResponseBody(response);
     }
-
+    @Step("Changing state of equipment Connected/Disconnected")
     public Response equipmentChangeState(String jsonBody){
         Map<String, String> authHeaders = allHeaders(HTTPMethod.PUT.getValue(), equipmentAdmin, jsonBody);
         Response response = createRequestWithHeaders(authHeaders, jsonBody).put(equipmentAdmin).getResponse();
@@ -48,7 +48,7 @@ public class RequestManagerAPI extends JSONManagerAPI{
         return response;
 
     }
-
+    @Step("Creating rule.")
     public Response notificationRuleCreate(String jsonBody){
         Map<String, String> authHeaders = allHeaders(HTTPMethod.POST.getValue(), notificationRule, jsonBody);
         Response response = createRequestWithHeaders(authHeaders, jsonBody).post(notificationRule).getResponse();

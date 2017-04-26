@@ -1,6 +1,7 @@
 package system.email;
 
 import org.junit.Assert;
+import ru.yandex.qatools.allure.annotations.Step;
 import system.readers.CredentialCenter;
 
 import javax.mail.*;
@@ -77,7 +78,7 @@ public class CheckingMails {
             e.printStackTrace();
         }
     }
-
+    @Step("Checking if notification on e-mail.")
     public void check(String subject) {
         try {
             Thread.sleep(10000);
