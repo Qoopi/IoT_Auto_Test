@@ -120,7 +120,7 @@ public class CheckingMails {
         boolean found = false;
         found = checkEmail(host, mailStoreType, userName, password, subject);
         int counter = 0;
-        while(!found){
+        while(!found && counter<3){
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {
@@ -128,8 +128,6 @@ public class CheckingMails {
             }
             found = checkEmail(host, mailStoreType, userName, password, subject);
             counter++;
-            if (counter>3 || found)
-                return;
         }
         Assert.assertTrue(found);
 
