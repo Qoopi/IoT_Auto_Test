@@ -79,7 +79,7 @@ public class CheckingMails {
         }
         return found;
     }
-    @Step("Checking if notification on e-mail.")
+    @Step("Checking if notification send on e-mail.")
     public void check(String subject) {
         try {
             Thread.sleep(10000);
