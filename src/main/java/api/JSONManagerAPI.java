@@ -14,8 +14,8 @@ import static system.constant.Things.ThingVPV11;
 public class JSONManagerAPI extends JSONHandler{
 
 
-    @Step("Creating Abnormal Vibration rule on Pump D11.")
-    public String JSONRuleAbnormalVibrationVPV(){
+    @Step("Creating JSON for Abnormal Vibration rule with Pump D11.")
+    public String jsonRuleAbnormalVibrationVPV(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleAbnormalVibrationsVPV.getMessage(),
                 "Pump D11",
@@ -29,8 +29,8 @@ public class JSONManagerAPI extends JSONHandler{
                 1
         ).toString();
     }
-    @Step("Creating rule Number of Alarms above threshold on BUC ARTRobot.")
-    public String JSONRuleAlarmCountGPV(){
+    @Step("Creating JSON for Number of Alarms above threshold on BUC ARTRobot.")
+    public String jsonRuleAlarmCountGPV(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleNumberOfAlarms.getMessage(),
                 "BUC ARTRobot",
@@ -44,8 +44,8 @@ public class JSONManagerAPI extends JSONHandler{
                 0
         ).toString();
     }
-    @Step("Creating rule Number of Alarms above threshold on Pump D11.")
-    public String JSONRuleAlarmCountVPV(){
+    @Step("Creating JSON for Number of Alarms above threshold on Pump D11.")
+    public String jsonRuleAlarmCountVPV(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleNumberOfAlarms.getMessage(),
                 "PUMP D11",
@@ -59,8 +59,8 @@ public class JSONManagerAPI extends JSONHandler{
                 0
         ).toString();
     }
-    @Step("Creating rule Number of Aborts above threshold on Pump D11.")
-    public String JSONRuleAbortsCountVPV(){
+    @Step("Creating JSON for Number of Aborts above threshold on Pump D11.")
+    public String jsonRuleAbortsCountVPV(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleNumberOfAborts.getMessage(),
                 "PUMP D11",
@@ -74,8 +74,8 @@ public class JSONManagerAPI extends JSONHandler{
                 0
         ).toString();
     }
-    @Step("Creating Disconnected rule for PUMP D11.")
-    public String JSONRuleDisconnectedVPV(){
+    @Step("Creating JSON for Disconnected rule for PUMP D11.")
+    public String jsonRuleDisconnectedVPV(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleDisconnectedVPV.getMessage(),
                 "PUMP D11",
@@ -89,8 +89,8 @@ public class JSONManagerAPI extends JSONHandler{
                 0
         ).toString();
     }
-    @Step("Creating Disconnected rule for BUC ARTRobot.")
-    public String JSONRuleDisconnectedGPV(){
+    @Step("Creating JSON for Disconnected rule for BUC ARTRobot.")
+    public String jsonRuleDisconnectedGPV(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleDisconnectedGPV.getMessage(),
                 "BUC ARTRobot",
@@ -104,8 +104,8 @@ public class JSONManagerAPI extends JSONHandler{
                 0
         ).toString();
     }
-    @Step("Creating Connected rule for PUMP D11.")
-    public String JSONRuleConnectedVPV(){
+    @Step("Creating JSON for Connected rule for PUMP D11.")
+    public String jsonRuleConnectedVPV(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleConnectedVPV.getMessage(),
                 "PUMP D11",
@@ -119,8 +119,8 @@ public class JSONManagerAPI extends JSONHandler{
                 0
         ).toString();
     }
-    @Step("Creating Connected rule for BUC ARTRobot.")
-    public String JSONRuleConnectedGPV(){
+    @Step("Creating JSON for Connected rule for BUC ARTRobot.")
+    public String jsonRuleConnectedGPV(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleConnectedGPV.getMessage(),
                 "BUC ARTRobot",
@@ -134,8 +134,8 @@ public class JSONManagerAPI extends JSONHandler{
                 0
         ).toString();
     }
-    @Step("Creating Every Warning rule on Pump D11.")
-    public String JSONRuleEveryWarningVPV(){
+    @Step("Creating JSON for Every Warning rule for Pump D11.")
+    public String jsonRuleEveryWarningVPV(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleEveryWarning.getMessage(),
                 "PUMP D11",
@@ -150,16 +150,16 @@ public class JSONManagerAPI extends JSONHandler{
         ).toString();
     }
 
-    public String JSONEquipmentDisconnectVPV(){
+    public String jsonEquipmentDisconnectVPV(){
         return equipmentOnOff(ThingVPV11.getValue(),false);
     }
-    public String JSONEquipmentConnectVPV(){
+    public String jsonEquipmentConnectVPV(){
         return equipmentOnOff(ThingVPV11.getValue(),true);
     }
-    public String JSONEquipmentDisconnectGPV(){
+    public String jsonEquipmentDisconnectGPV(){
         return equipmentOnOff(ThingGPVBUC.getValue(),false);
     }
-    public String JSONEquipmentConnectGPV(){
+    public String jsonEquipmentConnectGPV(){
         return equipmentOnOff(ThingGPVBUC.getValue(),true);
     }
 

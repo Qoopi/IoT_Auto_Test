@@ -3,6 +3,7 @@ package api;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import ru.yandex.qatools.allure.annotations.Features;
 import system.email.CheckingMails;
 
 import static system.constant.EmailINBOX.*;
@@ -18,12 +19,12 @@ public class NotificationRuleTests {
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
        requestManagerAPI.notificationListDeleteAll();
     }
-
+    @Features("Abnormal Vibration rule.")
     @Test
     public void abnormalVibrationVPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-        requestManagerAPI.notificationRuleCreate(requestManagerAPI.JSONRuleAbnormalVibrationVPV());
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleAbnormalVibrationVPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
         mqttManagerAPI.triggerVPVD11AbnormalVibration();
@@ -32,12 +33,12 @@ public class NotificationRuleTests {
         checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
         requestManagerAPI.notificationRuleDelete();
     }
-
+    @Features("Every Warning on VPV rule.")
     @Test
     public void everyWarningVPVAbnormalVibration(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-        requestManagerAPI.notificationRuleCreate(requestManagerAPI.JSONRuleEveryWarningVPV());
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleEveryWarningVPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
         mqttManagerAPI.triggerVPVD11AbnormalVibration();
@@ -46,12 +47,12 @@ public class NotificationRuleTests {
         checkingMails.check(SubjectNotificationRuleEveryWarning.getMessage());
         requestManagerAPI.notificationRuleDelete();
     }
-
+    @Features("Number of Alarms above threshold on VPV equipment rule.")
     @Test
     public void alarmCountVPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-        requestManagerAPI.notificationRuleCreate(requestManagerAPI.JSONRuleAlarmCountVPV());
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleAlarmCountVPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
         mqttManagerAPI.triggerVPVAlarmCount();
@@ -61,12 +62,12 @@ public class NotificationRuleTests {
         requestManagerAPI.notificationRuleDelete();
 
     }
-
+    @Features("Number of Abnormal above threshold on VPV equipment rule.")
     @Test
     public void abortCountVPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-        requestManagerAPI.notificationRuleCreate(requestManagerAPI.JSONRuleAbortsCountVPV());
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleAbortsCountVPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
         mqttManagerAPI.triggerVPVAbortCount();
@@ -82,7 +83,7 @@ public class NotificationRuleTests {
     public void alarmCountGPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-        requestManagerAPI.notificationRuleCreate(requestManagerAPI.JSONRuleAlarmCountGPV());
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleAlarmCountGPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
 //        mqttManagerAPI.trigger
@@ -95,8 +96,8 @@ public class NotificationRuleTests {
     public void disconnectedEquipmentVPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-        requestManagerAPI.equipmentChangeState(requestManagerAPI.JSONEquipmentConnectVPV());
-        requestManagerAPI.notificationRuleCreate(requestManagerAPI.JSONRuleDisconnectedVPV());
+        requestManagerAPI.equipmentChangeState(requestManagerAPI.jsonEquipmentConnectVPV());
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleDisconnectedVPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
         mqttManagerAPI.triggerVPVConnected();
@@ -111,8 +112,8 @@ public class NotificationRuleTests {
     public void connectedEquipmentVPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-        requestManagerAPI.equipmentChangeState(requestManagerAPI.JSONEquipmentDisconnectVPV());
-        requestManagerAPI.notificationRuleCreate(requestManagerAPI.JSONRuleConnectedVPV());
+        requestManagerAPI.equipmentChangeState(requestManagerAPI.jsonEquipmentDisconnectVPV());
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleConnectedVPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
         mqttManagerAPI.triggerVPVDisconected();
@@ -127,8 +128,8 @@ public class NotificationRuleTests {
     //    @Test //не работает принципиально
     public void disconnectedEquipmentGPV(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-        requestManagerAPI.equipmentChangeState(requestManagerAPI.JSONEquipmentConnectGPV());
-        requestManagerAPI.notificationRuleCreate(requestManagerAPI.JSONRuleDisconnectedGPV());
+        requestManagerAPI.equipmentChangeState(requestManagerAPI.jsonEquipmentConnectGPV());
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleDisconnectedGPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
 
@@ -140,8 +141,8 @@ public class NotificationRuleTests {
     //    @Test //не работает принципиально
     public void connectedEquipmentGPV() {
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-        requestManagerAPI.equipmentChangeState(requestManagerAPI.JSONEquipmentDisconnectGPV());
-        requestManagerAPI.notificationRuleCreate(requestManagerAPI.JSONRuleConnectedGPV());
+        requestManagerAPI.equipmentChangeState(requestManagerAPI.jsonEquipmentDisconnectGPV());
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleConnectedGPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
 

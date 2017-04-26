@@ -57,18 +57,18 @@ public class RequestManagerAPI extends JSONManagerAPI{
         checkErrorInResponseBody(response);
         return response;
     }
-    @Step("Check if Rule created")
+    @Step("Check if rule created.")
     public void checkNotificationRuleIsCreated(){
         Response response = notificationRulesRead();
         checkStatusCode(response);
         checkErrorInResponseBody(response);
         Assert.assertTrue(response.asString().contains(idOfCreatedNotificationRule));
     }
-    @Step("Check if Rule not triggered")
+    @Step("Check if Rule not triggered.")
     public void checkNotificationRuleNotTriggered(){
         Assert.assertTrue(!notificationListRead().asString().contains(idOfCreatedNotificationRule));
     }
-    @Step("Check if Rule triggered")
+    @Step("Check if rule triggered.")
     public void checkNotificationRuleTriggered(){
         if(notificationListRead().asString().contains(idOfCreatedNotificationRule)){
             Assert.assertTrue(true);
@@ -78,7 +78,7 @@ public class RequestManagerAPI extends JSONManagerAPI{
             Assert.assertTrue(notificationListRead().asString().contains(idOfCreatedNotificationRule));
         }
     }
-
+    @Step("Check if rule triggered.")
     public void checkNotificationRuleTriggeredLong(){
         if(notificationListRead().asString().contains(idOfCreatedNotificationRule)){
             Assert.assertTrue(true);
