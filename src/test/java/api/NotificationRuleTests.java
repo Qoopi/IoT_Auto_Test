@@ -19,7 +19,7 @@ public class NotificationRuleTests {
        requestManagerAPI.notificationListDeleteAll();
     }
 
-    @Test//работает ок
+    @Test
     public void abnormalVibrationVPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -33,7 +33,7 @@ public class NotificationRuleTests {
         requestManagerAPI.notificationRuleDelete();
     }
 
-    @Test//похоже, работает
+    @Test
     public void everyWarningVPVAbnormalVibration(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
