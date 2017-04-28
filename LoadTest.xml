@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Load testing" parallel="methods" thread-count="2000">
 
-    <!--<test name="Load Dashboard Page">-->
+    <!--<test name="LDashboardDevoard Page">-->
         <!--<parameter name="browserName" value="chrome"/>-->
         <!--<parameter name="useGrid" value="false"></parameter>-->
         <!--<classes>-->
@@ -10,21 +10,21 @@
         <!--</classes>-->
     <!--</test>-->
 
-    <test name="Emulate Charts Refreshing Load VPV">
-        <parameter name="browserName" value="chrome"/>
-        <parameter name="useGrid" value="false"></parameter>
-        <classes>
-            <class name="load.LoadChartsRefreshingVPV"/>
-        </classes>
-    </test>
-
-    <!--<test name="Emulate Charts Refreshing Load GPV">-->
+    <!--<test name="Emulate Charts Refreshing Load VPV">-->
         <!--<parameter name="browserName" value="chrome"/>-->
         <!--<parameter name="useGrid" value="false"></parameter>-->
         <!--<classes>-->
-            <!--<class name="load.LoadChartsRefreshingGPV"/>-->
+            <!--<class name="load.LoadChartsRefreshingVPV"/>-->
         <!--</classes>-->
     <!--</test>-->
+
+    <test name="Emulate Charts Refreshing Load GPV">
+        <parameter name="browserName" value="chrome"/>
+        <parameter name="useGrid" value="false"></parameter>
+        <classes>
+            <class name="load.LoadChartsRefreshingGPV"/>
+        </classes>
+    </test>
 
     <!--<test name="Emulate Charts Refreshing Load GPV Burst">-->
         <!--<parameter name="browserName" value="chrome"/>-->

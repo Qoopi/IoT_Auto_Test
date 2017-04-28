@@ -138,9 +138,11 @@ public class Dashboard{
             } catch (AWTException e) {
                 e.printStackTrace();
             }
-            r.keyPress(KeyEvent.VK_ESCAPE);
-            r.keyRelease(KeyEvent.VK_ESCAPE);
-            waits_asserts.sleep(500);
+            if(r!=null) {
+                r.keyPress(KeyEvent.VK_ESCAPE);
+                r.keyRelease(KeyEvent.VK_ESCAPE);
+                waits_asserts.sleep(500);
+            }
         }
         else{
             System.out.println("Sorry, looks like menu is already closed");

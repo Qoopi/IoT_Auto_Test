@@ -11,6 +11,7 @@ import ui.utils.WebDriverManager;
 
 import java.util.HashMap;
 
+import static system.constant.URLs.HttpsDashboardDev;
 import static system.http.RequestSender.awsCredentials;
 
 
@@ -38,7 +39,7 @@ public class LogInPage {
     @Step("Get on Start Page")
     public void getToIoTPage() {
         // open start page
-        driver.get("https://dashboard.dev.iotsyst.com/");                    //dev
+        driver.get(HttpsDashboardDev.getValue());                    //dev
         //driver.get("https://dashboard.wstaging.iotsyst.com");              // stage
 
         // checking out that we are ou the right page
@@ -67,7 +68,7 @@ public class LogInPage {
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"naviCrumb\"]", "Dashboard");
     }
 
-    @Step("Authorise with second Google Acc, as regular")
+    @Step("Authorise with second Google Acc, as regular user")
     public void enterGoogleCred2() {
         //Click on button "Login with Google acc"|
         driver.findElement(By.xpath("//*[@id=\"grey-background\"]/div[2]/div/div/div[3]/div/div[2]/div/a/div")).click();
@@ -89,7 +90,7 @@ public class LogInPage {
     public void openNewDriver() {
         driver.close();
         WebDriver driver = new ChromeDriver();
-        driver.get("https://dashboard.dev.iotsyst.com/#/?_k=1ccout");
+        driver.get(HttpsDashboardDev.getValue("/#/?_k=1ccout"));
     }
 
     @Step("Get back on log in page ")

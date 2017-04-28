@@ -22,5 +22,6 @@ public class ReportsTest {
         requestManagerAPI.skedlerReportSendNow();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.checkLong(SubjectReportListVPVWeekly.getMessage());
+        requestManagerAPI.skedlerReportDelete();
     }
 }

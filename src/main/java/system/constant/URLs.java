@@ -13,9 +13,12 @@ public enum URLs {
     EquipmentAdmin(HttpsApiGateway.getValue()+"/dev/equipment_admin"),
     Report(HttpsApiGateway.getValue()+"/dev/report"),
     AuthenticationRefresh(HttpsApiGateway.getValue()+"/dev/authentication/refresh"),
+    Dashboard(HttpsApiGateway.getValue()+"/dev/dashboard"),
+    Chart(HttpsApiGateway.getValue("/dev/chart")),
 
     MQTTGateway("a2awmps9ermju9.iot.us-east-1.amazonaws.com"),
-    Dashboard("dashboard.dev.iotsyst.com");
+    DashboardDev("dashboard.dev.iotsyst.com"),
+    HttpsDashboardDev(HTTPS.getValue()+"dashboard.dev.iotsyst.com");
 
     private final String value;
 
@@ -28,6 +31,6 @@ public enum URLs {
     }
 
     public String getValue(String suffix){
-        return value+"/"+suffix;
+        return value+suffix;
     }
 }

@@ -10,7 +10,7 @@ public class Workbench {
 
     @Test
     public void test1(){
-        System.out.println(URLs.Dashboard.getValue());
+        System.out.println(URLs.DashboardDev.getValue());
         System.out.println(Things.ThingGPV.getValue());
     }
 }

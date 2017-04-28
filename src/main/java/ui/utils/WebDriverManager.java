@@ -4,7 +4,7 @@ package ui.utils;
 import org.openqa.selenium.WebDriver;
 
 public class WebDriverManager {
-    private static final ThreadLocal<WebDriver> webDriver = new ThreadLocal<WebDriver>();
+    private static final ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
 
     public static WebDriver getDriver() {
         return webDriver.get();

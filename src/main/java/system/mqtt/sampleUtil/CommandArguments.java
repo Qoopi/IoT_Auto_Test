@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class CommandArguments {
 
-    private final Map<String, String> arguments = new HashMap<String, String>();
+    private final Map<String, String> arguments = new HashMap<>();
 
     private CommandArguments(String[] args) {
         String name = null;

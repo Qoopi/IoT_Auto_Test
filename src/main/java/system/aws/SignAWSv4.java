@@ -1,5 +1,6 @@
 package system.aws;
 
+import org.testng.annotations.Test;
 import system.aws.objects.AWSURI;
 import system.constant.URLs;
 import system.http.RequestSender;
@@ -72,21 +73,27 @@ public class SignAWSv4 extends RequestSender {
         map.put("Connection", "keep-alive");
         map.put("Cache-Control", "no-cache");
         map.put("Pragma", "no-cache");
-        map.put("Referer", "https://"+URLs.Dashboard.getValue()+"/");
+        map.put("Referer", "https://"+URLs.DashboardDev.getValue()+"/");
         map.put("Accept", "*/*");
         map.put("Content-Type", "application/json");
         map.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36");
         map.put("Accept-Language", "en-US,en;q=0.8");
         map.put("Accept-Encoding", "gzip, deflate, sdch, br");
-        map.put("Origin", "https://"+URLs.Dashboard.getValue());
+        map.put("Origin", "https://"+URLs.DashboardDev.getValue());
 
         return map;
+    }
+
+    @Test
+    public void testOfParser(){
+        String method = "GET";
+        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread";
+        parseForCanonicalRequest(method, url);
     }
 
 
     private AWSURI parseForCanonicalRequest(String method, String url){
         AWSURI awsuri = new AWSURI();
-
         URL uri = null;
         try {
             uri = new URL(url);

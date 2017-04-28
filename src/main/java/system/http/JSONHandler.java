@@ -54,7 +54,7 @@ public class JSONHandler extends SignAWSv4 {
         // "filterTitle":"Vacuum-Pump-Vibration-Report-List---Optimized-for-Printing---Weekly kov.ossystem@gmail.com",
         // "equipments":"Thing-000011-i1",
         // "id":null,
-        // "filterId":"42c02b4f-bfeb-4e55-9ccd-ff30ae53930d",
+        // "filterId":"173ba9ae-6abb-40fa-b194-479403c58b4c",
         // "emails":"kov.ossystem@gmail.com",
         // "userId":"bbc046ce-daff-4223-a144-ae453ea8a32b",
         // "createdAt":null,
@@ -95,8 +95,8 @@ public class JSONHandler extends SignAWSv4 {
     public ArrayList<String> getIdsOfAllNotifications(String response){
         JSONArray jsonArray = parseToJSONArray(response);
         ArrayList<String> ids = new ArrayList<>();
-        for (int i = 0; i < jsonArray.size(); i ++){
-            JSONObject jsonObject = parseToJSONObject(jsonArray.get(i).toString());
+        for (Object aJsonArray : jsonArray) {
+            JSONObject jsonObject = parseToJSONObject(aJsonArray.toString());
             String id = jsonObject.get("id").toString();
             ids.add(id);
         }
