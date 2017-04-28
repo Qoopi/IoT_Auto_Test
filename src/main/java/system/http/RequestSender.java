@@ -28,6 +28,16 @@ public class RequestSender {
     public static AWSCredentials awsCredentials = new AWSCredentials();
     private static Date startDate = null;
 
+    //these three booleans controls console output messages
+    protected boolean messagesEnableGatlingReport = true; //should be used with debug messages off (if you want load.gatling reports to work)
+    protected boolean messagesEnableErrorDebugResponse = false;
+    protected boolean messagesEnableAllDebugResponse = false;
+    private boolean messagesReplaceTimeStampsInUrls = true; //should be on, if you want to generate small and nimble load.gatling reports
+
+
+    public RequestSender() {
+    }
+
     public static Date getStartDate() {
         return startDate;
     }
@@ -43,16 +53,6 @@ public class RequestSender {
             requestSender.createEmptyRequestWithHeaders(signAWSv4.allHeaders(HTTPMethod.GET.getValue(), AuthenticationRefresh.getValue())).get(AuthenticationRefresh.getValue());
             setStartDate();
         }
-    }
-
-
-    //these three booleans controls console output messages
-    protected boolean messagesEnableGatlingReport = true; //should be used with debug messages off (if you want load.gatling reports to work)
-    protected boolean messagesEnableErrorDebugResponse = false;
-    protected boolean messagesEnableAllDebugResponse = false;
-    private boolean messagesReplaceTimeStampsInUrls = true; //should be on, if you want to generate small and nimble load.gatling reports
-
-    public RequestSender() {
     }
 
     public RequestSender createEmptyRequestWithHeaders(Map<String, ?> map) {
