@@ -6,6 +6,14 @@ package system.constant;
 public enum URLs {
     HTTPS("https://"),
     ApiGateway("60sglz9l5h.execute-api.us-east-1.amazonaws.com"),
+    HttpsApiGateway(HTTPS.getValue()+ApiGateway.getValue()),
+    NotificationRule(HttpsApiGateway.getValue()+"/dev/rule"),
+    NotificationUnread(HttpsApiGateway.getValue()+"/dev/notification?status=unread"),
+    Notification(HttpsApiGateway.getValue()+"/dev/notification"),
+    EquipmentAdmin(HttpsApiGateway.getValue()+"/dev/equipment_admin"),
+    Report(HttpsApiGateway.getValue()+"/dev/report"),
+    AuthenticationRefresh(HttpsApiGateway.getValue()+"/dev/authentication/refresh"),
+
     MQTTGateway("a2awmps9ermju9.iot.us-east-1.amazonaws.com"),
     Dashboard("dashboard.dev.iotsyst.com");
 

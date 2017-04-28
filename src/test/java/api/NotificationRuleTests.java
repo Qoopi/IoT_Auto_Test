@@ -17,7 +17,7 @@ public class NotificationRuleTests {
     @AfterClass
     public void afterTest(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-       requestManagerAPI.notificationListDeleteAll();
+        requestManagerAPI.notificationListDeleteAll();
     }
     @Features("Abnormal Vibration rule.")
     @Test

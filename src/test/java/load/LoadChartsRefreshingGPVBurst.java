@@ -1,7 +1,7 @@
 package load;
 
 import load.utils.GatlingReportAdapter;
-import load.utils.LoadListener;
+import load.utils.ListenerLoad;
 import load.utils.RequestManager;
 import load.utils.ThreadLaunchDelayer;
 import org.testng.annotations.AfterClass;
@@ -10,9 +10,9 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 
-@Listeners(LoadListener.class)
+@Listeners(ListenerLoad.class)
 public class LoadChartsRefreshingGPVBurst {
-    private final int threads = 10;
+    private final int threads = 5;
     private final int newThreadLaunchDelayMs = 5000;
     private final int tenMinutesCyclesCount = 1;
 

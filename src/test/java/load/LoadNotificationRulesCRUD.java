@@ -1,7 +1,7 @@
 package load;
 
 import load.utils.GatlingReportAdapter;
-import load.utils.LoadListener;
+import load.utils.ListenerLoad;
 import load.utils.RequestManager;
 import load.utils.ThreadLaunchDelayer;
 import org.testng.annotations.Listeners;
@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 /**
  * Created by user on 05.04.2017.
  */
-@Listeners(LoadListener.class)
+@Listeners(ListenerLoad.class)
 public class LoadNotificationRulesCRUD {
     private final int threads = 5;//required 100
     private final int newThreadLaunchDelayMs = 5000;//required 5000

@@ -63,7 +63,7 @@ public class GatlingReportAdapter {
                     System.out.println(responseOK);
                 }
                 else{
-                    if (response.asString().contains("\"expired\":false")){
+                    if (response.asString().contains("\"expired\":false") || response.asString().contains("\"expired\":true,\"accessKeyId\"")){
                         System.out.println(responseOK);
                     }
                     else{

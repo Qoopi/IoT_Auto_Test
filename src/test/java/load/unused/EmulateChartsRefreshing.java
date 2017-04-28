@@ -1,6 +1,6 @@
 package load.unused;
 
-import load.utils.LoadListener;
+import load.utils.ListenerLoad;
 import load.utils.RequestManager;
 import load.utils.ThreadLaunchDelayer;
 import org.testng.annotations.AfterClass;
@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
  * Created by alex00x6 on 28.03.2017.
  */
 
-@Listeners(LoadListener.class)
+@Listeners(ListenerLoad.class)
 public class EmulateChartsRefreshing {
     //The quantity of both requests is summed and multiplied by 2 (for this test configuration)
     //For instance 100 threads of Distant and 400 Actual will give 1000 threads total

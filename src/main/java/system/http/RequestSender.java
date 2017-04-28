@@ -5,23 +5,46 @@ import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.config.SSLConfig;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
-import org.apache.http.conn.ssl.SSLSocketFactory;
-import system.aws.objects.AWSCredentials;
 import load.utils.GatlingReportAdapter;
+import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import system.aws.SignAWSv4;
+import system.aws.objects.AWSCredentials;
+import system.constant.HTTPMethod;
 
 import javax.net.ssl.SSLContext;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.Map;
 
 import static com.jayway.restassured.RestAssured.given;
+import static system.constant.URLs.AuthenticationRefresh;
 
 public class RequestSender {
     private RequestSpecification requestSpecification = null;
     public Response response = null;
     public static AWSCredentials awsCredentials = new AWSCredentials();
+    private static Date startDate = null;
+
+    public static Date getStartDate() {
+        return startDate;
+    }
+
+    public static void setStartDate() {
+        RequestSender.startDate = new Date();
+    }
+
+    public static void checkExpired(){
+        if (startDate.getTime()<(System.currentTimeMillis()-360000)){
+            SignAWSv4 signAWSv4 = new SignAWSv4();
+            RequestSender requestSender = new RequestSender();
+            requestSender.createEmptyRequestWithHeaders(signAWSv4.allHeaders(HTTPMethod.GET.getValue(), AuthenticationRefresh.getValue())).get(AuthenticationRefresh.getValue());
+            setStartDate();
+        }
+    }
+
 
     //these three booleans controls console output messages
     protected boolean messagesEnableGatlingReport = true; //should be used with debug messages off (if you want load.gatling reports to work)
@@ -170,7 +193,7 @@ public class RequestSender {
     }
 
     private void checkExpiredCredentials(Response response, String url) {
-        if (url.contains("notification?status=unread")) {
+        if (url.contains("authentication/refresh")) {
             if (response.asString().contains("\"expired\":true")) {
                 JSONParser parser = new JSONParser();
                 JSONObject json = null;
@@ -179,11 +202,10 @@ public class RequestSender {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                JSONObject creds = (JSONObject) json.get("creds");
                 //write new creds to credential storage
-                awsCredentials.setAccessKeyId(creds.get("accessKeyId").toString());
-                awsCredentials.setSecretAccessKey(creds.get("secretAccessKey").toString());
-                awsCredentials.setSessionToken(creds.get("sessionToken").toString());
+                awsCredentials.setAccessKeyId(json.get("accessKeyId").toString());
+                awsCredentials.setSecretAccessKey(json.get("secretAccessKey").toString());
+                awsCredentials.setSessionToken(json.get("sessionToken").toString());
             }
         }
     }

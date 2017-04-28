@@ -52,6 +52,7 @@ public class CheckingMails {
                 System.out.println("Email Number " + (i + 1));
                 System.out.println("Subject: " + message.getSubject());
                 System.out.println("From: " + message.getFrom()[0]);
+                System.out.println("Text: " + message.getContent());
                 System.out.println("Text: " + message.getContent().toString());
                 System.out.println("Send at: " + message.getSentDate());
 

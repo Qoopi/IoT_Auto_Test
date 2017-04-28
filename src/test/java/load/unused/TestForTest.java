@@ -2,14 +2,14 @@ package load.unused;
 
 import api.MQTTManagerAPI;
 import com.amazonaws.services.iot.client.*;
-import load.utils.LoadListener;
+import load.utils.ListenerLoad;
 import load.utils.ThreadLaunchDelayer;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import system.mqtt.MQTTConnector;
 import system.mqtt.pubSub.TestTopicListener;
 
-@Listeners(LoadListener.class)
+@Listeners(ListenerLoad.class)
 public class TestForTest {
     private final int threads = 10;
 

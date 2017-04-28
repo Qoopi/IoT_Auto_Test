@@ -1,12 +1,12 @@
 package load.unused;
 
-import load.utils.LoadListener;
+import load.utils.ListenerLoad;
 import load.utils.RequestManager;
 import load.utils.ThreadLaunchDelayer;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-@Listeners(LoadListener.class)
+@Listeners(ListenerLoad.class)
 public class LoadDashboardPage {
     private final int threadsDashboardPage = 20;
     private final int testOperationTimeMins = 1;

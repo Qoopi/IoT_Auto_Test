@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import system.http.RequestSender;
 import ui.pageObjets.LogInPage;
 import ui.utils.WaitsAsserts;
 import ui.utils.WebDriverFactory;
@@ -15,7 +16,7 @@ import ui.utils.WebDriverManager;
 public class ListenerAPI implements ITestListener{
     @Override
     public void onTestStart(ITestResult result) {
-
+    RequestSender.checkExpired();
     }
 
     @Override
@@ -48,6 +49,7 @@ public class ListenerAPI implements ITestListener{
         WebDriverManager.setWebDriver(driver);
 
         getCreds();
+        RequestSender.setStartDate();
     }
 
     @Override

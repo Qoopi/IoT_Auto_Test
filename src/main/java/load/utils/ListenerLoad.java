@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import system.http.RequestSender;
 import ui.pageObjets.LogInPage;
 import ui.utils.WaitsAsserts;
 import ui.utils.WebDriverFactory;
@@ -15,12 +16,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
-public class LoadListener implements ITestListener {
+public class ListenerLoad implements ITestListener {
     private FileOutputStream fos = null;
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
         //gatlingInfoPrintUserStart();
+        RequestSender.checkExpired();
     }
 
     @Override
@@ -68,6 +70,7 @@ public class LoadListener implements ITestListener {
             e.printStackTrace();
         }
 
+        RequestSender.setStartDate();
         GatlingReportAdapter gatling = new GatlingReportAdapter();
         gatling.gatlingInfoPrintTestStart();
     }

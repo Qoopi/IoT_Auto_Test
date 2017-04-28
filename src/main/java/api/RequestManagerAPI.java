@@ -4,11 +4,12 @@ import com.jayway.restassured.response.Response;
 import org.testng.Assert;
 import ru.yandex.qatools.allure.annotations.Step;
 import system.constant.HTTPMethod;
-import system.constant.URLs;
 import system.http.JSONHandler;
 
 import java.util.ArrayList;
 import java.util.Map;
+
+import static system.constant.URLs.*;
 
 /**
  * Created by user on 20.04.2017.
@@ -17,12 +18,11 @@ public class RequestManagerAPI extends JSONManagerAPI{
     private static String idOfCreatedNotificationRule = null;
     private static String idOfCreatedReport = null;
     private Response responseApi = null;
-    private static final String uri = URLs.HTTPS.getValue()+ URLs.ApiGateway.getValue();
-    private static final String notificationRule = uri+"/dev/rule";
-    private static final String notificationUnread = uri+"/dev/notification?status=unread";
-    private static final String notification = uri+"/dev/notification";
-    private static final String equipmentAdmin = uri+"/dev/equipment_admin";
-    private static final String report = uri+"/dev/report";
+    private static final String notificationRule = NotificationRule.getValue();
+    private static final String notificationUnread = NotificationUnread.getValue();
+    private static final String notification = Notification.getValue();
+    private static final String equipmentAdmin = EquipmentAdmin.getValue();
+    private static final String report = Report.getValue();
 
     public RequestManagerAPI() {
         messagesEnableAllDebugResponse = true;
@@ -192,7 +192,7 @@ public class RequestManagerAPI extends JSONManagerAPI{
         if (!response.asString().contains("error") && !response.asString().contains("exception") && !response.asString().contains("expired") && !response.asString().contains("timed out")) {
             Assert.assertTrue(true);
         } else {
-            if (response.asString().contains("\"expired\":false")) {
+            if (response.asString().contains("\"expired\":false") || response.asString().contains("\"expired\":true,\"accessKeyId\"")) {
                 Assert.assertTrue(true);
             } else {
                 Assert.assertTrue(false);

@@ -1,6 +1,7 @@
 package load.utils;
 
 import system.http.JSONHandler;
+import system.http.RequestSender;
 
 import java.util.Map;
 
@@ -55,6 +56,8 @@ public class RequestTemplates extends JSONHandler {
             notificationUnreadHeaders = authHeaders(httpGET, notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
+
+            RequestSender.checkExpired();
         }
     }
 
@@ -103,6 +106,8 @@ public class RequestTemplates extends JSONHandler {
             notificationUnreadHeaders = authHeaders(httpGET, notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
+
+            RequestSender.checkExpired();
         }
     }
 
@@ -150,6 +155,8 @@ public class RequestTemplates extends JSONHandler {
             chartUpdateHeaders = authHeaders(httpGET, chartUpdateUrl);
             createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
+
+            RequestSender.checkExpired();
         }
     }
 
@@ -187,6 +194,8 @@ public class RequestTemplates extends JSONHandler {
             notificationUnreadHeaders = authHeaders(httpGET, notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
+
+            RequestSender.checkExpired();
         }
 
     }
@@ -231,6 +240,8 @@ public class RequestTemplates extends JSONHandler {
             chartUpdateHeaders = authHeaders(httpGET, chartUpdateUrl);
             createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
+
+            RequestSender.checkExpired();
         }
 
     }

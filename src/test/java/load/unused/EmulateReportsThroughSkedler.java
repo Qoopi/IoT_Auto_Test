@@ -1,6 +1,6 @@
 package load.unused;
 
-import load.utils.LoadListener;
+import load.utils.ListenerLoad;
 import load.utils.RequestManager;
 import load.utils.ThreadLaunchDelayer;
 import org.testng.annotations.Listeners;
@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
  * Created by user on 03.04.2017.
  */
 
-@Listeners(LoadListener.class)
+@Listeners(ListenerLoad.class)
 public class EmulateReportsThroughSkedler {
     private final int threadsDashboardPage = 20;
     private final int newThreadLaunchDelayMs = 500;
