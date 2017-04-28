@@ -1,9 +1,9 @@
 package system.http;
 
-import system.constant.URLs;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.conn.ssl.X509HostnameVerifier;
 import org.apache.http.params.HttpParams;
+import system.constant.URLs;
 
 import javax.net.ssl.SNIHostName;
 import javax.net.ssl.SSLContext;

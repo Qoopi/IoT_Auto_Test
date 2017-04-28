@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import ru.yandex.qatools.allure.annotations.Step;
+import system.readers.CredentialCenter;
 import ui.utils.SessionStorage;
 import ui.utils.WaitsAsserts;
 import ui.utils.WebDriverManager;
-import system.readers.CredentialCenter;
 
 import java.util.HashMap;
 

@@ -3,9 +3,9 @@ package ui.pageObjets.administration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ru.yandex.qatools.allure.annotations.Step;
+import ui.utils.UiUtils;
 import ui.utils.WaitsAsserts;
 import ui.utils.WebDriverManager;
-import ui.utils.UiUtils;
 
 
 public class UserList {

@@ -1,6 +1,6 @@
+import org.testng.annotations.Test;
 import system.constant.Things;
 import system.constant.URLs;
-import org.testng.annotations.Test;
 
 /**
  * Created by user on 19.04.2017.

@@ -1,9 +1,6 @@
 #!/usr/bin/env python
-from datetime import datetime
 import hashlib
 import hmac
-import requests
-import sys
 
 
 def sign(key, msg):

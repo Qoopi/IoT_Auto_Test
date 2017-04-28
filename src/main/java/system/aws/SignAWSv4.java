@@ -1,7 +1,7 @@
 package system.aws;
 
-import system.constant.URLs;
 import system.aws.objects.AWSURI;
+import system.constant.URLs;
 import system.http.RequestSender;
 
 import javax.crypto.Mac;

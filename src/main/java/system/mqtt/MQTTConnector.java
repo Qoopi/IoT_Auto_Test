@@ -1,7 +1,10 @@
 package system.mqtt;
 
 
-import com.amazonaws.services.iot.client.*;
+import com.amazonaws.services.iot.client.AWSIotException;
+import com.amazonaws.services.iot.client.AWSIotMqttClient;
+import com.amazonaws.services.iot.client.AWSIotQos;
+import com.amazonaws.services.iot.client.AWSIotTopic;
 import system.constant.URLs;
 import system.http.RequestSender;
 import system.mqtt.pubSub.TestTopicListener;

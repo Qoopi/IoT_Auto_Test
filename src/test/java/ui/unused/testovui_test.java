@@ -6,8 +6,8 @@ import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
 import ui.pageObjets.DDMenus;
 import ui.pageObjets.DDMenusChrome;
-import ui.pageObjets.dashboard.Dasboards.Dashboard;
 import ui.pageObjets.LogInPage;
+import ui.pageObjets.dashboard.Dasboards.Dashboard;
 import ui.pageObjets.dashboard.Notifications.Notifications;
 import ui.utils.TestListener;
 
