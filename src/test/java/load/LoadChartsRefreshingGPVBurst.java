@@ -2,7 +2,7 @@ package load;
 
 import load.utils.GatlingReportAdapter;
 import load.utils.ListenerLoad;
-import load.utils.RequestManager;
+import load.utils.RequestManagerLoad;
 import load.utils.ThreadLaunchDelayer;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -18,14 +18,14 @@ public class LoadChartsRefreshingGPVBurst {
 
     @BeforeClass
     public void createDashboardGPV(){
-        RequestManager requestManager = new RequestManager();
-        requestManager.dashboardCreateCanvasGPV();
+        RequestManagerLoad requestManagerLoad = new RequestManagerLoad();
+        requestManagerLoad.dashboardCreateCanvasGPV();
     }
 
     @AfterClass
     public void deleteDashboardGPV(){
-        RequestManager requestManager = new RequestManager();
-        requestManager.dashboardDeleteCanvasGPV();
+        RequestManagerLoad requestManagerLoad = new RequestManagerLoad();
+        requestManagerLoad.dashboardDeleteCanvasGPV();
     }
 
     @Test(threadPoolSize = threads, invocationCount = threads)
@@ -33,7 +33,7 @@ public class LoadChartsRefreshingGPVBurst {
         ThreadLaunchDelayer.delay(newThreadLaunchDelayMs);
         GatlingReportAdapter gatling = new GatlingReportAdapter();
         gatling.gatlingInfoPrintUserStart();
-        RequestManager requestManager = new RequestManager();
-        requestManager.canvasGPVDashboardRefreshCycleBurst(tenMinutesCyclesCount);
+        RequestManagerLoad requestManagerLoad = new RequestManagerLoad();
+        requestManagerLoad.canvasGPVDashboardRefreshCycleBurst(tenMinutesCyclesCount);
     }
 }

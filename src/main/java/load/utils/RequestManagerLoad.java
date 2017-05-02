@@ -15,7 +15,7 @@ import java.util.Map;
 import static system.constant.URLs.*;
 import static ui.utils.WaitsAsserts.sleep;
 
-public class RequestManager extends RequestTemplates{
+public class RequestManagerLoad extends RequestTemplates{
     private static ThreadLocal<String> idOfCreatedNotificationRule = new ThreadLocal<>();
     private static ThreadLocal<String> idOfCreatedReport = new ThreadLocal<>();
     private static String idOfCreatedVPVDashboard = null;
@@ -127,9 +127,9 @@ public class RequestManager extends RequestTemplates{
         JSONHandler jsonHandler = new JSONHandler();
         String body = jsonHandler.dashboardCreateCanvasVPVJSONDefault();
         Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(HTTPMethod.POST.getValue(), Dashboard.getValue(), body);
+        Map<String, String> authHeaders = authHeaders(HTTPMethod.POST.getValue(), LoadDashboard.getValue(), body);
 
-        String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(Dashboard.getValue(), false).extractAllResponseAsString();
+        String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(LoadDashboard.getValue(), false).extractAllResponseAsString();
         idOfCreatedVPVDashboard = getIdOfCreatedDashboard(response);
     }
 
@@ -137,9 +137,9 @@ public class RequestManager extends RequestTemplates{
         JSONHandler jsonHandler = new JSONHandler();
         String body = jsonHandler.dashboardCreateCanvasGPVJSONDefault();
         Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(HTTPMethod.POST.getValue(), Dashboard.getValue(), body);
+        Map<String, String> authHeaders = authHeaders(HTTPMethod.POST.getValue(), LoadDashboard.getValue(), body);
 
-        String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(Dashboard.getValue(), false).extractAllResponseAsString();
+        String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(LoadDashboard.getValue(), false).extractAllResponseAsString();
         idOfCreatedGPVDashboard = getIdOfCreatedDashboard(response);
     }
 
@@ -190,9 +190,9 @@ public class RequestManager extends RequestTemplates{
 
         Map<String, String> standardHeaders = standardHeaders();
         long oldDate = System.currentTimeMillis()-898581;//almost 15 min nazad
-        String chartUpdate = Chart.getValue()+"/"+thingGPV+"?startDate="+oldDate;
-        String chartUpdate1 = Chart.getValue()+"/"+thingGPV+"?startDate=";
-        String dashboardInfo = Dashboard.getValue()+"/"+idOfCreatedGPVDashboard;
+        String chartUpdate = LoadChart.getValue()+"/"+thingGPV+"?startDate="+oldDate;
+        String chartUpdate1 = LoadChart.getValue()+"/"+thingGPV+"?startDate=";
+        String dashboardInfo = LoadDashboard.getValue()+"/"+idOfCreatedGPVDashboard;
         Map<String, String> chartUpdateHeaders = null;
 
         for(int i1 = 0; i1<tenMinuteCyclesCount; i1++) {
@@ -201,7 +201,7 @@ public class RequestManager extends RequestTemplates{
                 createEmptyRequestWithHeaders(standardHeaders).options(chartUpdate);
                 createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdate);
             }
-            canvasGPVChartRefreshTemplateActualTime(operatingTimeMinsLowLoad, chartUpdate1, dashboardInfo, NotificationUnread.getValue());
+            canvasGPVChartRefreshTemplateActualTime(operatingTimeMinsLowLoad, chartUpdate1, dashboardInfo, LoadNotificationUnread.getValue());
         }
     }
 

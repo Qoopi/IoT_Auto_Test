@@ -94,12 +94,12 @@ public class ListenerLoad implements ITestListener {
 
     private void getCreds(){
         LogInPage log = new LogInPage();
-        log.getToIoTPage();
+        log.getToIoTPageLoad();
         log.enterGoogleCred();
         log.getRequestSigns();
-        RequestManager requestManager = new RequestManager();
-//        requestManager.writeCredsTofile();
-        requestManager.setUpBaseApiGateway();
+        RequestManagerLoad requestManagerLoad = new RequestManagerLoad();
+//        requestManagerLoad.writeCredsTofile();
+        requestManagerLoad.setUpBaseApiGateway();
     }
 
 }

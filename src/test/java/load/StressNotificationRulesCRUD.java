@@ -2,7 +2,7 @@ package load;
 
 import load.utils.GatlingReportAdapter;
 import load.utils.ListenerLoad;
-import load.utils.RequestManager;
+import load.utils.RequestManagerLoad;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -15,7 +15,7 @@ public class StressNotificationRulesCRUD {
     public void notificationRulesCRUD(){
         GatlingReportAdapter gatling = new GatlingReportAdapter();
         gatling.gatlingInfoPrintUserStart();
-        RequestManager requestManager = new RequestManager();
-        requestManager.notificationRuleCRUD(timeOfTestRunMins);
+        RequestManagerLoad requestManagerLoad = new RequestManagerLoad();
+        requestManagerLoad.notificationRuleCRUD(timeOfTestRunMins);
     }
 }

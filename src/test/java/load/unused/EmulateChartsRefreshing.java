@@ -1,7 +1,7 @@
 package load.unused;
 
 import load.utils.ListenerLoad;
-import load.utils.RequestManager;
+import load.utils.RequestManagerLoad;
 import load.utils.ThreadLaunchDelayer;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -23,50 +23,50 @@ public class EmulateChartsRefreshing {
 
     @BeforeClass
     public void createDashboards(){
-        RequestManager requestManager = new RequestManager();
-        requestManager.dashboardCreateCanvasGPV();
-        requestManager.dashboardCreateCanvasVPV();
+        RequestManagerLoad requestManagerLoad = new RequestManagerLoad();
+        requestManagerLoad.dashboardCreateCanvasGPV();
+        requestManagerLoad.dashboardCreateCanvasVPV();
     }
 
     @AfterClass
     public void deleteDashboards(){
-        RequestManager requestManager = new RequestManager();
-        requestManager.dashboardDeleteCanvasGPV();
-        requestManager.dashboardDeleteCanvasVPV();
+        RequestManagerLoad requestManagerLoad = new RequestManagerLoad();
+        requestManagerLoad.dashboardDeleteCanvasGPV();
+        requestManagerLoad.dashboardDeleteCanvasVPV();
     }
 
     @Test
     public void checkNewCreds(){
-        RequestManager requestManager = new RequestManager();
-        requestManager.checkExpiredCredentials(testOperationTimeMins);
+        RequestManagerLoad requestManagerLoad = new RequestManagerLoad();
+        requestManagerLoad.checkExpiredCredentials(testOperationTimeMins);
     }
 
     @Test(threadPoolSize = threadsDistantRequest, invocationCount = threadsDistantRequest)
     public void refreshVPVDashboardLong(){
         ThreadLaunchDelayer.delay(newThreadLaunchDelayMs);
-        RequestManager requestManager = new RequestManager();
-        requestManager.canvasVPVDashboardRefreshCycleOldTimestamp(testOperationTimeMins);
+        RequestManagerLoad requestManagerLoad = new RequestManagerLoad();
+        requestManagerLoad.canvasVPVDashboardRefreshCycleOldTimestamp(testOperationTimeMins);
     }
 
     @Test(threadPoolSize = threadsActualRequest, invocationCount = threadsActualRequest)
     public void refreshVPVDashboardShort(){
         ThreadLaunchDelayer.delay(newThreadLaunchDelayMs);
-        RequestManager requestManager = new RequestManager();
-        requestManager.canvasVPVDashboardRefreshCycleProperTimestamp(testOperationTimeMins);
+        RequestManagerLoad requestManagerLoad = new RequestManagerLoad();
+        requestManagerLoad.canvasVPVDashboardRefreshCycleProperTimestamp(testOperationTimeMins);
     }
 
     @Test(threadPoolSize = threadsDistantRequest, invocationCount = threadsDistantRequest)
     public void refreshGPVDashboardLong(){
         ThreadLaunchDelayer.delay(newThreadLaunchDelayMs);
-        RequestManager requestManager = new RequestManager();
-        requestManager.canvasGPVDashboardRefreshCycleOldTimestamp(testOperationTimeMins);
+        RequestManagerLoad requestManagerLoad = new RequestManagerLoad();
+        requestManagerLoad.canvasGPVDashboardRefreshCycleOldTimestamp(testOperationTimeMins);
     }
 
     @Test(threadPoolSize = threadsActualRequest, invocationCount = threadsActualRequest)
     public void refreshGPVDashboardShort(){
         ThreadLaunchDelayer.delay(newThreadLaunchDelayMs);
-        RequestManager requestManager = new RequestManager();
-        requestManager.canvasGPVDashboardRefreshCycleProperTimestamp(testOperationTimeMins);
+        RequestManagerLoad requestManagerLoad = new RequestManagerLoad();
+        requestManagerLoad.canvasGPVDashboardRefreshCycleProperTimestamp(testOperationTimeMins);
     }
 
 }

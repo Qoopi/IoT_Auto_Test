@@ -1,7 +1,7 @@
 package load.unused;
 
 import load.utils.ListenerLoad;
-import load.utils.RequestManager;
+import load.utils.RequestManagerLoad;
 import load.utils.ThreadLaunchDelayer;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -16,8 +16,8 @@ public class EmulateCRUD {
     @Test(threadPoolSize = threads, invocationCount = threads)
     public void notificationRulesCRUD(){
         ThreadLaunchDelayer.delay(newThreadLaunchDelayMs);
-        RequestManager requestManager = new RequestManager();
-        requestManager.notificationRuleCRUD(1, 10000, 10000);
+        RequestManagerLoad requestManagerLoad = new RequestManagerLoad();
+        requestManagerLoad.notificationRuleCRUD(1, 10000, 10000);
     }
 
 

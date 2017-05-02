@@ -2,7 +2,7 @@ package load;
 
 import load.utils.GatlingReportAdapter;
 import load.utils.ListenerLoad;
-import load.utils.RequestManager;
+import load.utils.RequestManagerLoad;
 import load.utils.ThreadLaunchDelayer;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -23,7 +23,7 @@ public class LoadNotificationRulesCRUD {
         ThreadLaunchDelayer.delay(newThreadLaunchDelayMs);
         GatlingReportAdapter gatling = new GatlingReportAdapter();
         gatling.gatlingInfoPrintUserStart();
-        RequestManager requestManager = new RequestManager();
-        requestManager.notificationRuleCRUD(timeOfTestRunMins, pauseBetweenRequestsMs, pauseBetweenCyclesMs);
+        RequestManagerLoad requestManagerLoad = new RequestManagerLoad();
+        requestManagerLoad.notificationRuleCRUD(timeOfTestRunMins, pauseBetweenRequestsMs, pauseBetweenCyclesMs);
     }
 }

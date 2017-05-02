@@ -1,6 +1,5 @@
 package system.aws;
 
-import org.testng.annotations.Test;
 import system.aws.objects.AWSURI;
 import system.constant.URLs;
 import system.http.RequestSender;
@@ -17,6 +16,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
+
+import static system.constant.URLs.ApiGateway;
+import static system.constant.URLs.LoadApiGateway;
 
 
 public class SignAWSv4 extends RequestSender {
@@ -73,24 +75,16 @@ public class SignAWSv4 extends RequestSender {
         map.put("Connection", "keep-alive");
         map.put("Cache-Control", "no-cache");
         map.put("Pragma", "no-cache");
-        map.put("Referer", "https://"+URLs.DashboardDev.getValue()+"/");
+        map.put("Referer", "https://"+URLs.DevDashboardApp.getValue()+"/");
         map.put("Accept", "*/*");
         map.put("Content-Type", "application/json");
         map.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36");
         map.put("Accept-Language", "en-US,en;q=0.8");
         map.put("Accept-Encoding", "gzip, deflate, sdch, br");
-        map.put("Origin", "https://"+URLs.DashboardDev.getValue());
+        map.put("Origin", "https://"+URLs.DevDashboardApp.getValue());
 
         return map;
     }
-
-    @Test
-    public void testOfParser(){
-        String method = "GET";
-        String url = "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/notification?status=unread";
-        parseForCanonicalRequest(method, url);
-    }
-
 
     private AWSURI parseForCanonicalRequest(String method, String url){
         AWSURI awsuri = new AWSURI();
@@ -107,12 +101,21 @@ public class SignAWSv4 extends RequestSender {
             queryString=uri.getQuery();
         }
 
-        if (!url.contains(URLs.ApiGateway.getValue())){
+        String serviceName = null;
+        String regionName = null;
+
+        if(url.contains(ApiGateway.getValue())){
+            serviceName =  "execute-api";
+            regionName = "us-east-1";
+        }
+        if (url.contains(LoadApiGateway.getValue())){
+            serviceName =  "execute-api";
+            regionName = "eu-west-1";
+        }
+        if (!url.contains(ApiGateway.getValue()) && !url.contains(LoadApiGateway.getValue())){
             System.out.println("Looks like you using unknown URL, check it!");
         }
 
-        String serviceName = "execute-api";
-        String regionName = "us-east-1";
 
         awsuri.setMethod(method);
         awsuri.setCanonicalUri(path);

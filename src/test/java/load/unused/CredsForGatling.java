@@ -1,7 +1,7 @@
 package load.unused;
 
 import load.utils.ListenerLoad;
-import load.utils.RequestManager;
+import load.utils.RequestManagerLoad;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -14,7 +14,7 @@ public class CredsForGatling {
 
     @Test
     public void checkNewCreds(){
-        RequestManager requestManager = new RequestManager();
-        requestManager.checkExpiredCredentials(testOperationTimeMins);
+        RequestManagerLoad requestManagerLoad = new RequestManagerLoad();
+        requestManagerLoad.checkExpiredCredentials(testOperationTimeMins);
     }
 }

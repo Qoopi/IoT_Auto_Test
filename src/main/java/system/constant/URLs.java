@@ -17,8 +17,22 @@ public enum URLs {
     Chart(HttpsApiGateway.getValue("/dev/chart")),
 
     MQTTGateway("a2awmps9ermju9.iot.us-east-1.amazonaws.com"),
-    DashboardDev("dashboard.dev.iotsyst.com"),
-    HttpsDashboardDev(HTTPS.getValue()+"dashboard.dev.iotsyst.com");
+    DevDashboardApp("dashboard.dev.iotsyst.com"),
+    HttpsDashboardDev(HTTPS.getValue()+"dashboard.dev.iotsyst.com"),
+
+
+    LoadDashboardApp("d12pl6fd8zs84c.cloudfront.net"),
+    HttpsLoadDashboardApp(HTTPS.getValue()+"d12pl6fd8zs84c.cloudfront.net"),
+    LoadApiGateway("oshk5hrphl.execute-api.eu-west-1.amazonaws.com"),
+    HttpsLoadApiGateway(HTTPS.getValue()+LoadApiGateway.getValue()),
+    LoadNotificationRule(HttpsLoadApiGateway.getValue()+"/loadtest/rule"),
+    LoadNotificationUnread(HttpsLoadApiGateway.getValue()+"/loadtest/notification?status=unread"),
+    LoadNotification(HttpsLoadApiGateway.getValue()+"/loadtest/notification"),
+    LoadEquipmentAdmin(HttpsLoadApiGateway.getValue()+"/loadtest/equipment_admin"),
+    LoadReport(HttpsLoadApiGateway.getValue()+"/loadtest/report"),
+    LoadAuthenticationRefresh(HttpsLoadApiGateway.getValue()+"/loadtest/authentication/refresh"),
+    LoadDashboard(HttpsLoadApiGateway.getValue()+"/loadtest/dashboard"),
+    LoadChart(HttpsLoadApiGateway.getValue("/loadtest/chart")),;
 
     private final String value;
 

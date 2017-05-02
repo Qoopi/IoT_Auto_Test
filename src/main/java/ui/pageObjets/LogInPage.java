@@ -11,7 +11,7 @@ import ui.utils.WebDriverManager;
 
 import java.util.HashMap;
 
-import static system.constant.URLs.HttpsDashboardDev;
+import static system.constant.URLs.*;
 import static system.http.RequestSender.awsCredentials;
 
 
@@ -41,6 +41,15 @@ public class LogInPage {
         // open start page
         driver.get(HttpsDashboardDev.getValue());                    //dev
         //driver.get("https://dashboard.wstaging.iotsyst.com");              // stage
+
+        // checking out that we are ou the right page
+        waits_asserts.assertByTitle(driver, "IoT Systems App");
+    }
+
+    @Step("Get on Start Page")
+    public void getToIoTPageLoad() {
+        // open start page
+        driver.get(HttpsLoadDashboardApp.getValue());                    //load
 
         // checking out that we are ou the right page
         waits_asserts.assertByTitle(driver, "IoT Systems App");
