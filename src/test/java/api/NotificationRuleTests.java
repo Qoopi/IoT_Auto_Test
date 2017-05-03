@@ -81,6 +81,7 @@ public class NotificationRuleTests {
     @Features("Number of Alarms above threshold on GPV equipment rule.")
     @Test //не работает по тому что нет возможности симулировать GPV, оставлена проверка "создается ли rule"
     public void alarmCountGPV(){
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleAlarmCountGPV());
         requestManagerAPI.checkNotificationRuleIsCreated();

@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Load testing" parallel="methods" thread-count="2000">
 
-    <!--<test name="LDashboardDevoard Page">-->
+    <!--<test name="DashboardDevoard Page">-->
         <!--<parameter name="browserName" value="chrome"/>-->
         <!--<parameter name="useGrid" value="false"></parameter>-->
         <!--<classes>-->

@@ -279,6 +279,15 @@ public class JSONHandler extends SignAWSv4 {
         return jsonObject;
     }
 
+    public JsonObject dashboardCreate(int dashboardType, String equipmentId, String name, String description){
+        JsonObject jsonObject = JsonBuilderFactory.buildObject()
+                .add("type", dashboardType)
+                .addArray("equipmentIds").add(equipmentId).end()
+                .add("name", name).add("description", description).getJson();
+        return jsonObject;
+
+    }
+
     public String dashboardDeleteJSON(String id) {
         JsonObject jsonObject = JsonBuilderFactory.buildObject()
                 .addArray("items").addObject().add("id", id).getJson();

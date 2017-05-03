@@ -12,19 +12,19 @@
     <!--</test>-->
 
 
-    <test name="test">
-    <parameter name="browserName" value="chrome"></parameter>
-    <parameter name="useGrid" value="false"></parameter>
-    <classes>
-        <class name="api.NotificationRuleTests"/>
-    </classes>
-</test>
+    <!--<test name="test">-->
+    <!--<parameter name="browserName" value="chrome"></parameter>-->
+    <!--<parameter name="useGrid" value="false"></parameter>-->
+    <!--<classes>-->
+        <!--<class name="api.NotificationRuleTests"/>-->
+    <!--</classes>-->
+<!--</test>-->
 
     <test name="test1">
         <parameter name="browserName" value="chrome"></parameter>
         <parameter name="useGrid" value="false"></parameter>
         <classes>
-            <class name="api.ReportsTest"/>
+            <class name="Workbench"/>
         </classes>
     </test>
 

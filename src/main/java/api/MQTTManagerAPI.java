@@ -46,6 +46,25 @@ public class MQTTManagerAPI extends MQTTConnector {
         mqttPublish(topic, payloadNormal);
     }
 
+    public void triggerGPV(){
+        String topic = "Data/UID/LID/GID/TID/1/v1.0/Datastreams(529)";
+        String payload = "{\"result\":20,\"resultTime\":\"2017-05-03T07:50:31\",\"Datastream\":{\"@iot.id\":529,\"ObservedProperty\":{\"@iot.id\":1}}}";
+//        String payload = "{\"result\":20,\"resultTime\":\"2017-05-03T07:52:21\",\"Datastream\":{\"@iot.id\":529}}";
+        for (int i = 0; i<500; i++){
+            mqttPublish(topic, payload);
+        }
+    }
+
+    public void triggerGPV2(){
+        String topic = "Data/UID/LID/GID/TID/1/v1.0/Datastreams(529)";
+        String payload = "{\"result\":true,\"resultTime\":\"2017-05-03T07:23:31\",\"Datastream\":{\"@iot.id\":530,\"ObservedProperty\":{\"@iot.id\":2}}}";
+//        String payload = "{\"result\":20,\"resultTime\":\"2017-05-03T07:52:21\",\"Datastream\":{\"@iot.id\":529}}";
+        mqttPublish(topic, payload);
+        mqttPublish(topic, payload);
+        mqttPublish(topic, payload);
+        mqttPublish(topic, payload);
+    }
+
     public void readVPVD11(){
         String topic = VPVD11Heartbeat.getValue();
         mqttSubscribe(59000, topic);

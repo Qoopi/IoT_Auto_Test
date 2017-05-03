@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 @Listeners(ListenerLoad.class)
 public class LoadChartsRefreshingGPV {
-    private final int threads = 10;
+    private final int threads = 1;
     private final int newThreadLaunchDelayMs = 5000;
     private final int tenMinutesCyclesCount = 2;
 

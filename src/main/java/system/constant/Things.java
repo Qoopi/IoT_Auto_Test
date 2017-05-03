@@ -9,6 +9,13 @@ public enum Things {
     ThingVPV11("Thing-000011-i1"),
     ThingVPV12("Thing-000012-i2"),
     ThingVPV13("Thing-000013-i4"),
+
+    LoadThingGPV("Thing-000021-0"),
+    LoadThingVPV("Thing-000023-0"),
+
+    ThingVPVForDashboard(""),
+    ThingGPVForDashboard(""),
+
     ChannelVPV("channelIdx=1");
 
     private final String value;

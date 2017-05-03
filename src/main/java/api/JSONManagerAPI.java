@@ -174,6 +174,17 @@ public class JSONManagerAPI extends JSONHandler{
     }
 
     public String JSONReportDelete(){
+        System.out.println("DELETING OF SKEDLER RULERS IS NOT IMPLEMENTED");
         return null;
     }
+
+
+    public String jsonDashboardCreateVPVCanvas(){
+        int dashboardType = 0;
+        String equipmentId = "";
+        String name = "";
+        String description = "";
+        return dashboardCreate(dashboardType, equipmentId, name, description).toString();
+    }
+
 }

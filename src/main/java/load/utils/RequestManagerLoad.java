@@ -22,8 +22,8 @@ public class RequestManagerLoad extends RequestTemplates{
     private static String idOfCreatedGPVDashboard = null;
 
 
-    private static final String thingGPV = Things.ThingGPV.getValue();
-    private static final String thingVPV = Things.ThingVPV13.getValue();
+    private static final String thingGPV = Things.LoadThingGPV.getValue();
+    private static final String thingVPV = Things.LoadThingVPV.getValue();
     private static final String channelVPV = Things.ChannelVPV.getValue();
 
     private static final String chart = LoadChart.getValue();
