@@ -1,10 +1,12 @@
 package api;
 
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 /**
  * Created by user on 03.05.2017.
  */
+@Listeners(ListenerAPI.class)
 public class DashboardTests {
 
     @Test

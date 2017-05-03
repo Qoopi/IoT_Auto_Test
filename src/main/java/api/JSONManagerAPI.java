@@ -6,6 +6,7 @@ import system.http.JSONHandler;
 import static system.constant.EmailINBOX.*;
 import static system.constant.Things.ThingGPVBUC;
 import static system.constant.Things.ThingVPV11;
+import static system.constant.Things.ThingVPVForDashboard;
 
 /**
  * Created by user on 20.04.2017.
@@ -180,10 +181,10 @@ public class JSONManagerAPI extends JSONHandler{
 
 
     public String jsonDashboardCreateVPVCanvas(){
-        int dashboardType = 0;
-        String equipmentId = "";
-        String name = "";
-        String description = "";
+        int dashboardType = 7;
+        String equipmentId = ThingVPVForDashboard.getValue();
+        String name = "Auto-test name";
+        String description = "Auto-test desc";
         return dashboardCreate(dashboardType, equipmentId, name, description).toString();
     }
 

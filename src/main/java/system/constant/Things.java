@@ -13,7 +13,7 @@ public enum Things {
     LoadThingGPV("Thing-000021-0"),
     LoadThingVPV("Thing-000023-0"),
 
-    ThingVPVForDashboard(""),
+    ThingVPVForDashboard(ThingVPV11.getValue()),
     ThingGPVForDashboard(""),
 
     ChannelVPV("channelIdx=1");
