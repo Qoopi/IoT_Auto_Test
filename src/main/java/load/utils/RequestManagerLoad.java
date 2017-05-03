@@ -4,7 +4,6 @@ package load.utils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import system.constant.HTTPMethod;
 import system.constant.Things;
 import system.http.JSONHandler;
 
@@ -12,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Map;
 
+import static system.constant.HTTPMethod.*;
 import static system.constant.URLs.*;
 import static ui.utils.WaitsAsserts.sleep;
 
@@ -26,14 +26,19 @@ public class RequestManagerLoad extends RequestTemplates{
     private static final String thingVPV = Things.ThingVPV13.getValue();
     private static final String channelVPV = Things.ChannelVPV.getValue();
 
+    private static final String chart = LoadChart.getValue();
+    private static final String dashboard = LoadDashboard.getValue();
+    private static final String notificationRule = LoadNotificationRule.getValue();
+    private static final String notificationUnread = LoadNotificationUnread.getValue();
+
 
     public void getChart(int repeats, int timeBetweenRequests){
         long startDate = 1490189802247L;
-        String url = Chart.getValue()+"/"+thingVPV+"?"+channelVPV+"&startDate="+startDate+"&type=2";
+        String url = chart+"/"+thingVPV+"?"+channelVPV+"&startDate="+startDate+"&type=2";
         Map<String,?> standardHeaders = standardHeaders();
 
         for (int i = 0; i<repeats; i++) {
-            Map<String, ?> authHeaders = authHeaders(HTTPMethod.GET.getValue(), url);
+            Map<String, ?> authHeaders = authHeaders(GET.getValue(), url);
 
             createEmptyRequestWithHeaders(authHeaders).addHeaders(standardHeaders).get(url);
             sleep(timeBetweenRequests);
@@ -45,26 +50,26 @@ public class RequestManagerLoad extends RequestTemplates{
         JSONHandler jsonHandler = new JSONHandler();
         String jsonBody = jsonHandler.notificationRuleCreateJSONDefault();
         Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(HTTPMethod.POST.getValue(), NotificationRule.getValue(), jsonBody);
+        Map<String, String> authHeaders = authHeaders(POST.getValue(), notificationRule, jsonBody);
 
-        String response = createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).post(NotificationRule.getValue()).extractAllResponseAsString();
+        String response = createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).post(notificationRule).extractAllResponseAsString();
         idOfCreatedNotificationRule.set(getIdOfCreatedNotificationRule(response));
     }
 
     private void notificationRulesRead(){
         Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(HTTPMethod.GET.getValue(), NotificationRule.getValue());
+        Map<String, String> authHeaders = authHeaders(GET.getValue(), notificationRule);
 
-        createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders).get(NotificationRule.getValue());
+        createEmptyRequestWithHeaders(standardHeaders).addHeaders(authHeaders).get(notificationRule);
     }
 
     private void notificationRuleUpdate(){
         JSONHandler jsonHandler = new JSONHandler();
         String jsonBody = jsonHandler.notificationRuleUpdateJSON(idOfCreatedNotificationRule.get());
         Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(HTTPMethod.PUT.getValue(), NotificationRule.getValue(), jsonBody);
+        Map<String, String> authHeaders = authHeaders(PUT.getValue(), notificationRule, jsonBody);
 
-        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).put(NotificationRule.getValue());
+        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).put(notificationRule);
     }
 
     private void notificationRuleDelete(){
@@ -72,9 +77,9 @@ public class RequestManagerLoad extends RequestTemplates{
         String jsonBody = jsonHandler.notificationRuleDeleteJSON(idOfCreatedNotificationRule.get());
 
         Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(HTTPMethod.DELETE.getValue(), NotificationRule.getValue(), jsonBody);
+        Map<String, String> authHeaders = authHeaders(DELETE.getValue(), notificationRule, jsonBody);
 
-        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).delete(NotificationRule.getValue());
+        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).delete(notificationRule);
     }
 
 
@@ -109,9 +114,9 @@ public class RequestManagerLoad extends RequestTemplates{
         Map<String,?> standardHeaders = standardHeaders();
 
         for (int i = 0; i<operatingTimeMins; i++) {
-            Map<String,?> authHeaders = authHeaders(HTTPMethod.GET.getValue(), NotificationUnread.getValue());
+            Map<String,?> authHeaders = authHeaders(GET.getValue(), notificationUnread);
 
-            createEmptyRequestWithHeaders(authHeaders).addHeaders(standardHeaders).get(NotificationUnread.getValue());
+            createEmptyRequestWithHeaders(authHeaders).addHeaders(standardHeaders).get(notificationUnread);
             String jsonString = response.asString();
 
             if (jsonString.contains("\"expired\":true")) {
@@ -127,9 +132,9 @@ public class RequestManagerLoad extends RequestTemplates{
         JSONHandler jsonHandler = new JSONHandler();
         String body = jsonHandler.dashboardCreateCanvasVPVJSONDefault();
         Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(HTTPMethod.POST.getValue(), LoadDashboard.getValue(), body);
+        Map<String, String> authHeaders = authHeaders(POST.getValue(), dashboard, body);
 
-        String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(LoadDashboard.getValue(), false).extractAllResponseAsString();
+        String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(dashboard, false).extractAllResponseAsString();
         idOfCreatedVPVDashboard = getIdOfCreatedDashboard(response);
     }
 
@@ -137,9 +142,9 @@ public class RequestManagerLoad extends RequestTemplates{
         JSONHandler jsonHandler = new JSONHandler();
         String body = jsonHandler.dashboardCreateCanvasGPVJSONDefault();
         Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(HTTPMethod.POST.getValue(), LoadDashboard.getValue(), body);
+        Map<String, String> authHeaders = authHeaders(POST.getValue(), dashboard, body);
 
-        String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(LoadDashboard.getValue(), false).extractAllResponseAsString();
+        String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(dashboard, false).extractAllResponseAsString();
         idOfCreatedGPVDashboard = getIdOfCreatedDashboard(response);
     }
 
@@ -156,9 +161,9 @@ public class RequestManagerLoad extends RequestTemplates{
         String jsonBody = jsonHandler.dashboardDeleteJSON(id);
 
         Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(HTTPMethod.DELETE.getValue(), Dashboard.getValue(), jsonBody);
+        Map<String, String> authHeaders = authHeaders(DELETE.getValue(), dashboard, jsonBody);
 
-        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).delete(Dashboard.getValue(), false);
+        createRequestWithHeaders(standardHeaders, jsonBody).addHeaders(authHeaders).delete(dashboard, false);
 
     }
 
@@ -168,19 +173,19 @@ public class RequestManagerLoad extends RequestTemplates{
 
         Map<String, String> standardHeaders = standardHeaders();
         long oldDate = 1490627550017L;
-        String chartUpdate = Chart.getValue()+"/"+thingVPV+"?"+channelVPV+"&startDate=" + oldDate + "&type=2";
-        String chartUpdate1 = Chart.getValue()+"/"+thingVPV+"?"+channelVPV+"&startDate=";
+        String chartUpdate = chart+"/"+thingVPV+"?"+channelVPV+"&startDate=" + oldDate + "&type=2";
+        String chartUpdate1 = chart+"/"+thingVPV+"?"+channelVPV+"&startDate=";
         String chartUpdate2 = "&type=2";
-        String dashboardInfo = Dashboard.getValue()+"/"+idOfCreatedVPVDashboard;
+        String dashboardInfo = dashboard+"/"+idOfCreatedVPVDashboard;
         Map<String, String> chartUpdateHeaders = null;
 
         for(int i1 = 0; i1<tenMinuteCyclesCount; i1++) {
             for (int i = 0; i < repeatsHighLoad; i++) {
-                chartUpdateHeaders = authHeaders(HTTPMethod.GET.getValue(), chartUpdate);
+                chartUpdateHeaders = authHeaders(GET.getValue(), chartUpdate);
                 createEmptyRequestWithHeaders(standardHeaders).options(chartUpdate);
                 createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdate);
             }
-            canvasVPVChartRefreshTemplateActualTime(operatingTimeMinsLowLoad, chartUpdate1, chartUpdate2, dashboardInfo, NotificationUnread.getValue());
+            canvasVPVChartRefreshTemplateActualTime(operatingTimeMinsLowLoad, chartUpdate1, chartUpdate2, dashboardInfo, notificationUnread);
         }
     }
 
@@ -190,18 +195,18 @@ public class RequestManagerLoad extends RequestTemplates{
 
         Map<String, String> standardHeaders = standardHeaders();
         long oldDate = System.currentTimeMillis()-898581;//almost 15 min nazad
-        String chartUpdate = LoadChart.getValue()+"/"+thingGPV+"?startDate="+oldDate;
-        String chartUpdate1 = LoadChart.getValue()+"/"+thingGPV+"?startDate=";
-        String dashboardInfo = LoadDashboard.getValue()+"/"+idOfCreatedGPVDashboard;
+        String chartUpdate = chart+"/"+thingGPV+"?startDate="+oldDate;
+        String chartUpdate1 = chart+"/"+thingGPV+"?startDate=";
+        String dashboardInfo = dashboard+"/"+idOfCreatedGPVDashboard;
         Map<String, String> chartUpdateHeaders = null;
 
         for(int i1 = 0; i1<tenMinuteCyclesCount; i1++) {
             for (int i = 0; i < repeatsHighLoad; i++) {
-                chartUpdateHeaders = authHeaders(HTTPMethod.GET.getValue(), chartUpdate);
+                chartUpdateHeaders = authHeaders(GET.getValue(), chartUpdate);
                 createEmptyRequestWithHeaders(standardHeaders).options(chartUpdate);
                 createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdate);
             }
-            canvasGPVChartRefreshTemplateActualTime(operatingTimeMinsLowLoad, chartUpdate1, dashboardInfo, LoadNotificationUnread.getValue());
+            canvasGPVChartRefreshTemplateActualTime(operatingTimeMinsLowLoad, chartUpdate1, dashboardInfo, notificationUnread);
         }
     }
 
@@ -211,18 +216,18 @@ public class RequestManagerLoad extends RequestTemplates{
 
         Map<String, String> standardHeaders = standardHeaders();
         long oldDate = System.currentTimeMillis()-898581;//almost 15 min nazad
-        String chartUpdate = Chart.getValue()+"/"+thingGPV+"?startDate="+oldDate;
-        String chartUpdate1 = Chart.getValue()+"/"+thingGPV+"?startDate=";
-        String dashboardInfo = Dashboard.getValue()+"/"+idOfCreatedGPVDashboard;
+        String chartUpdate = chart+"/"+thingGPV+"?startDate="+oldDate;
+        String chartUpdate1 = chart+"/"+thingGPV+"?startDate=";
+        String dashboardInfo = dashboard+"/"+idOfCreatedGPVDashboard;
         Map<String, String> chartUpdateHeaders = null;
 
         for(int i1 = 0; i1<tenMinuteCyclesCount; i1++) {
             for (int i = 0; i < repeatsHighLoad; i++) {
-                chartUpdateHeaders = authHeaders(HTTPMethod.GET.getValue(), chartUpdate);
+                chartUpdateHeaders = authHeaders(GET.getValue(), chartUpdate);
                 createEmptyRequestWithHeaders(standardHeaders).options(chartUpdate);
                 createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdate);
             }
-            canvasGPVChartRefreshTemplateBurst(operatingTimeMinsLowLoad, chartUpdate1, dashboardInfo, NotificationUnread.getValue());
+            canvasGPVChartRefreshTemplateBurst(operatingTimeMinsLowLoad, chartUpdate1, dashboardInfo, notificationUnread);
         }
     }
 
@@ -230,20 +235,20 @@ public class RequestManagerLoad extends RequestTemplates{
         //в зависимости от времени меняется startDate
         //в зависимости от юзера и дашборда меняется chartUpdate и dashboardInfo
         long startDate = 1490627550017L;
-        String chartUpdate = Chart.getValue()+"/"+thingVPV+"?"+channelVPV+"&startDate=" + startDate + "&type=2";
-        String dashboardInfo = Dashboard.getValue()+"/"+idOfCreatedVPVDashboard;
+        String chartUpdate = chart+"/"+thingVPV+"?"+channelVPV+"&startDate=" + startDate + "&type=2";
+        String dashboardInfo = dashboard+"/"+idOfCreatedVPVDashboard;
 
-        canvasVPVChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, NotificationUnread.getValue());
+        canvasVPVChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
     }
 
     public void canvasVPVDashboardRefreshCycleProperTimestamp(int operatingTimeMins) {
         //в зависимости от времени меняется startDate
         //в зависимости от юзера и дашборда меняется chartUpdate и dashboardInfo
         long oneSecEarlier = System.currentTimeMillis()-1000;
-        String chartUpdate = Chart.getValue()+"/"+thingVPV+"?"+channelVPV+"&startDate=" + oneSecEarlier + "&type=2";
-        String dashboardInfo = Dashboard.getValue()+"/"+idOfCreatedVPVDashboard;
+        String chartUpdate = chart+"/"+thingVPV+"?"+channelVPV+"&startDate=" + oneSecEarlier + "&type=2";
+        String dashboardInfo = dashboard+"/"+idOfCreatedVPVDashboard;
 
-        canvasVPVChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, NotificationUnread.getValue());
+        canvasVPVChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
     }
 
 
@@ -251,20 +256,20 @@ public class RequestManagerLoad extends RequestTemplates{
         //в зависимости от времени меняется startDate
         //в зависимости от юзера и дашборда меняется chartUpdate и dashboardInfo
         long startDate = 1490627550017L;
-        String chartUpdate = Chart.getValue()+"/"+thingGPV+"?startDate=" + startDate;
-        String dashboardInfo = Dashboard.getValue()+"/"+idOfCreatedGPVDashboard;
+        String chartUpdate = chart+"/"+thingGPV+"?startDate=" + startDate;
+        String dashboardInfo = dashboard+"/"+idOfCreatedGPVDashboard;
 
-        canvasGPVChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, NotificationUnread.getValue());
+        canvasGPVChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
     }
 
     public void canvasGPVDashboardRefreshCycleProperTimestamp(int operatingTimeMins) {
         //в зависимости от времени меняется startDate
         //в зависимости от юзера и дашборда меняется chartUpdate и dashboardInfo
         long oneSecEarlier = System.currentTimeMillis()-1000;
-        String chartUpdate = Chart.getValue()+"/"+thingGPV+"?startDate=" + oneSecEarlier;
-        String dashboardInfo = Dashboard.getValue()+"/"+idOfCreatedGPVDashboard;
+        String chartUpdate = chart+"/"+thingGPV+"?startDate=" + oneSecEarlier;
+        String dashboardInfo = dashboard+"/"+idOfCreatedGPVDashboard;
 
-        canvasGPVChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, NotificationUnread.getValue());
+        canvasGPVChartRefreshTemplate(operatingTimeMins, chartUpdate, dashboardInfo, notificationUnread);
     }
 
     public void kibanaDashboardRefreshCycle(){ //NOT FINISHED YET!
@@ -283,11 +288,11 @@ public class RequestManagerLoad extends RequestTemplates{
         Map<String, String> dashboardInfoHeaders = null;
         Map<String, String> chartUpdateHeaders = null;
 
-        dashboardInfoHeaders = authHeaders(HTTPMethod.GET.getValue(), dashboardInfoUrl);
-        notificationUnreadHeaders = authHeaders(HTTPMethod.GET.getValue(), NotificationUnread.getValue());
+        dashboardInfoHeaders = authHeaders(GET.getValue(), dashboardInfoUrl);
+        notificationUnreadHeaders = authHeaders(GET.getValue(), notificationUnread);
 
-        createEmptyRequestWithHeaders(standardHeaders).options(NotificationUnread.getValue());
-        createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(NotificationUnread.getValue());
+        createEmptyRequestWithHeaders(standardHeaders).options(notificationUnread);
+        createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnread);
         createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
         createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
 
@@ -295,13 +300,13 @@ public class RequestManagerLoad extends RequestTemplates{
             for (int i = 0; i < 2; i++) {
                 sleep(29200);
                 //2 req dash inf here (0.8 sec cut for response)
-                dashboardInfoHeaders = authHeaders(HTTPMethod.GET.getValue(), dashboardInfoUrl);
+                dashboardInfoHeaders = authHeaders(GET.getValue(), dashboardInfoUrl);
                 createEmptyRequestWithHeaders(standardHeaders).options(dashboardInfoUrl);
                 createEmptyRequestWithHeaders(standardHeaders).addHeaders(dashboardInfoHeaders).get(dashboardInfoUrl);
             }
-            notificationUnreadHeaders = authHeaders(HTTPMethod.GET.getValue(), NotificationUnread.getValue());
-            createEmptyRequestWithHeaders(standardHeaders).options(NotificationUnread.getValue());
-            createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(NotificationUnread.getValue());
+            notificationUnreadHeaders = authHeaders(GET.getValue(), notificationUnread);
+            createEmptyRequestWithHeaders(standardHeaders).options(notificationUnread);
+            createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnread);
         }
 
     }
