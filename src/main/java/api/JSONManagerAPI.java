@@ -179,12 +179,14 @@ public class JSONManagerAPI extends JSONHandler{
         return null;
     }
 
+    private static final String dashboardName = "Auto-test name";
+    private static final String dashboardDescription = "Auto-test description";
 
     public String jsonDashboardCreateVPVCanvas(){
         int dashboardType = 7;
         String equipmentId = ThingVPVForDashboard.getValue();
-        String name = "Auto-test name";
-        String description = "Auto-test desc";
+        String name = dashboardName;
+        String description = dashboardDescription;
         return dashboardCreate(dashboardType, equipmentId, name, description).toString();
     }
 
