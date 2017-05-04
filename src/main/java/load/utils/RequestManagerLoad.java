@@ -145,10 +145,9 @@ public class RequestManagerLoad extends RequestTemplates{
     public void dashboardCreateCanvasGPV(){
         JSONHandler jsonHandler = new JSONHandler();
         String body = jsonHandler.dashboardCreateCanvasGPVJSONDefault();
-        Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(POST.getValue(), dashboard, body);
+        Map<String, String> authHeaders = allHeaders(POST.getValue(), dashboard, body);
 
-        String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(dashboard, false).extractAllResponseAsString();
+        String response = createRequestWithHeaders(authHeaders, body).post(dashboard, false).extractAllResponseAsString();
         idOfCreatedGPVDashboard = getIdOfCreatedDashboard(response);
     }
 
@@ -156,10 +155,9 @@ public class RequestManagerLoad extends RequestTemplates{
         equipCounter++;
         JSONHandler jsonHandler = new JSONHandler();
         String body = jsonHandler.dashboardCreateCanvasGPVJSONDefault(thingGPV100, thingGPV100);
-        Map<String, String> standardHeaders = standardHeaders();
-        Map<String, String> authHeaders = authHeaders(POST.getValue(), dashboard, body);
+        Map<String, String> authHeaders = allHeaders(POST.getValue(), dashboard, body);
 
-        String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(dashboard, false).extractAllResponseAsString();
+        String response = createRequestWithHeaders(authHeaders, body).post(dashboard, false).extractAllResponseAsString();
         idOfCreatedGPVDashboard100 = getIdOfCreatedDashboard(response);
     }
 
