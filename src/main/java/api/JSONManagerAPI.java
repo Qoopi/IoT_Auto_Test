@@ -177,8 +177,8 @@ public class JSONManagerAPI extends JSONHandler{
         return null;
     }
 
-    private static final String Name = "ЖЫРНЫЙ";
-    private static final String Description = "Ж";
+    private static final String Name = "Automatically Created Dashboard";
+    private static final String Description = "You should not see this one";
     public String jsonDashboardCreateVPVCanvas(){
         int dashboardType = 7;
         String equipmentId = ThingVPVForDashboard.getValue();
