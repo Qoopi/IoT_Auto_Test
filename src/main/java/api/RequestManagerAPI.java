@@ -195,7 +195,7 @@ public class RequestManagerAPI extends JSONManagerAPI{
         if (!response.asString().contains("error") && !response.asString().contains("exception") && !response.asString().contains("expired") && !response.asString().contains("timed out")) {
             Assert.assertTrue(true);
         } else {
-            if (response.asString().contains("\"expired\":false") || response.asString().contains("\"expired\":true,\"accessKeyId\"")) {
+            if (response.asString().contains("\"expired\":false") || response.asString().contains("\"expired\":true,\"accessKeyId\"") || response.asString().contains("Dashboards list is empty")) {
                 Assert.assertTrue(true);
             } else {
                 Assert.assertTrue(false);
