@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 public class LoadChartsRefreshingVPV {
     private final int threads = 1;
     private final int newThreadLaunchDelayMs = 5000;
-    private final int tenMinutesCyclesCount = 2;
+    private final int tenMinutesCyclesCount = 1;
 
     @BeforeClass
     public void createDashboardVPV(){

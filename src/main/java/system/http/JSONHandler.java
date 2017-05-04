@@ -271,6 +271,19 @@ public class JSONHandler extends SignAWSv4 {
         return dashboardCreateCanvasGPVJSON(thingGPV, name, description).toString();
     }
 
+    public String dashboardCreateCanvasGPVJSONDefault(String equipmentId){
+        String name = defaultDashboardGPVName;
+        String description = defaultDashboardGPVDescription;
+
+        return dashboardCreateCanvasGPVJSON(equipmentId, name, description).toString();
+    }
+
+    public String dashboardCreateCanvasGPVJSONDefault(String equipmentId, String description){
+        String name = defaultDashboardGPVName;
+
+        return dashboardCreateCanvasGPVJSON(equipmentId, name, description).toString();
+    }
+
     private JsonObject dashboardCreateCanvasGPVJSON(String thingGPV, String name, String description){
         JsonObject jsonObject = JsonBuilderFactory.buildObject()
                 .add("type", 9)

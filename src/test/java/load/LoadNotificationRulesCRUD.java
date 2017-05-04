@@ -12,11 +12,11 @@ import org.testng.annotations.Test;
  */
 @Listeners(ListenerLoad.class)
 public class LoadNotificationRulesCRUD {
-    private final int threads = 5;//required 100
-    private final int newThreadLaunchDelayMs = 5000;//required 5000
+    private final int threads = 100;//required 100
+    private final int newThreadLaunchDelayMs = 500;//required 5000
     private final int pauseBetweenRequestsMs = 10000;//required 10000
     private final int pauseBetweenCyclesMs = 10000;//required 10000
-    private final int timeOfTestRunMins = 1;//required 30
+    private final int timeOfTestRunMins = 10;//required 30
 
     @Test(threadPoolSize = threads, invocationCount = threads)
     public void notificationRulesCRUD(){

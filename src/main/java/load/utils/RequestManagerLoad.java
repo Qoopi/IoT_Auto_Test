@@ -21,6 +21,10 @@ public class RequestManagerLoad extends RequestTemplates{
     private static String idOfCreatedVPVDashboard = null;
     private static String idOfCreatedGPVDashboard = null;
 
+    private static int equipCounter = 1;
+    private String idOfCreatedGPVDashboard100 = null;
+    private String thingGPV100 = "Thing-9000"+equipCounter+"-0";;
+
 
     private static final String thingGPV = Things.LoadThingGPV.getValue();
     private static final String thingVPV = Things.LoadThingVPV.getValue();
@@ -148,6 +152,17 @@ public class RequestManagerLoad extends RequestTemplates{
         idOfCreatedGPVDashboard = getIdOfCreatedDashboard(response);
     }
 
+    public void dashboardCreateCanvasGPV100(){
+        equipCounter++;
+        JSONHandler jsonHandler = new JSONHandler();
+        String body = jsonHandler.dashboardCreateCanvasGPVJSONDefault(thingGPV100, thingGPV100);
+        Map<String, String> standardHeaders = standardHeaders();
+        Map<String, String> authHeaders = authHeaders(POST.getValue(), dashboard, body);
+
+        String response = createRequestWithHeaders(authHeaders, body).addHeaders(standardHeaders).post(dashboard, false).extractAllResponseAsString();
+        idOfCreatedGPVDashboard100 = getIdOfCreatedDashboard(response);
+    }
+
     public void dashboardDeleteCanvasVPV(){
         deleteCanvasDashboardById(idOfCreatedVPVDashboard);
     }
@@ -155,6 +170,11 @@ public class RequestManagerLoad extends RequestTemplates{
     public void dashboardDeleteCanvasGPV(){
         deleteCanvasDashboardById(idOfCreatedGPVDashboard);
     }
+
+    public void dashboardDeleteCanvasGPV100() {
+        deleteCanvasDashboardById(idOfCreatedGPVDashboard100);
+    }
+
 
     private void deleteCanvasDashboardById(String id){
         JSONHandler jsonHandler = new JSONHandler();
@@ -189,6 +209,7 @@ public class RequestManagerLoad extends RequestTemplates{
         }
     }
 
+
     public void canvasGPVDashboardLoadRefreshCycle(int tenMinuteCyclesCount){
         int repeatsHighLoad = 1;
         int operatingTimeMinsLowLoad = 9;//should be 9
@@ -198,6 +219,27 @@ public class RequestManagerLoad extends RequestTemplates{
         String chartUpdate = chart+"/"+thingGPV+"?startDate="+oldDate;
         String chartUpdate1 = chart+"/"+thingGPV+"?startDate=";
         String dashboardInfo = dashboard+"/"+idOfCreatedGPVDashboard;
+        Map<String, String> chartUpdateHeaders = null;
+
+        for(int i1 = 0; i1<tenMinuteCyclesCount; i1++) {
+            for (int i = 0; i < repeatsHighLoad; i++) {
+                chartUpdateHeaders = authHeaders(GET.getValue(), chartUpdate);
+                createEmptyRequestWithHeaders(standardHeaders).options(chartUpdate);
+                createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdate);
+            }
+            canvasGPVChartRefreshTemplateActualTime(operatingTimeMinsLowLoad, chartUpdate1, dashboardInfo, notificationUnread);
+        }
+    }
+
+    public void canvasGPVDashboardLoadRefreshCycle100(int tenMinuteCyclesCount){
+        int repeatsHighLoad = 1;
+        int operatingTimeMinsLowLoad = 9;//should be 9
+
+        Map<String, String> standardHeaders = standardHeaders();
+        long oldDate = System.currentTimeMillis()-898581;//almost 15 min nazad
+        String chartUpdate = chart+"/"+thingGPV100+"?startDate="+oldDate;
+        String chartUpdate1 = chart+"/"+thingGPV100+"?startDate=";
+        String dashboardInfo = dashboard+"/"+idOfCreatedGPVDashboard100;
         Map<String, String> chartUpdateHeaders = null;
 
         for(int i1 = 0; i1<tenMinuteCyclesCount; i1++) {
