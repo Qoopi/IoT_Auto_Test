@@ -4,9 +4,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 import system.http.JSONHandler;
 
 import static system.constant.EmailINBOX.*;
-import static system.constant.Things.ThingGPVBUC;
-import static system.constant.Things.ThingVPV11;
-import static system.constant.Things.ThingVPVForDashboard;
+import static system.constant.Things.*;
 
 /**
  * Created by user on 20.04.2017.
@@ -179,14 +177,49 @@ public class JSONManagerAPI extends JSONHandler{
         return null;
     }
 
-    private static final String dashboardName = "Auto-test name";
-    private static final String dashboardDescription = "Auto-test description";
-
+    private static final String Name = "ЖЫРНЫЙ";
+    private static final String Description = "Ж";
     public String jsonDashboardCreateVPVCanvas(){
         int dashboardType = 7;
         String equipmentId = ThingVPVForDashboard.getValue();
-        String name = dashboardName;
-        String description = dashboardDescription;
+        String name = Name;
+        String description = Description;
+        return dashboardCreate(dashboardType, equipmentId, name, description).toString();
+    }
+
+    public String jsonDashboardCreateVPVKibana(){
+        int dashboardType = 6;
+        String equipmentId = ThingVPVForDashboard.getValue();
+        String name = Name;
+        String description = Description;
+        return dashboardCreate(dashboardType, equipmentId, name, description).toString();
+    }
+    public String jsonDashboardCreateGPVKibana025(){
+        int dashboardType = 4;
+        String equipmentId = ThingGPVForDashboard.getValue();
+        String name = Name;
+        String description = Description;
+        return dashboardCreate(dashboardType, equipmentId, name, description).toString();
+    }
+    public String jsonDashboardCreateGPVKibana0255(){
+        int dashboardType = 5;
+        String equipmentId = ThingGPVForDashboard.getValue();
+        String name = Name;
+        String description = Description;
+        return dashboardCreate(dashboardType, equipmentId, name, description).toString();
+    }
+    public String jsonDashboardCreateGPVCanvas025(){
+        int dashboardType = 8;
+        String equipmentId = ThingGPVForDashboard.getValue();
+        String name = Name;
+        String description = Description;
+        return dashboardCreate(dashboardType, equipmentId, name, description).toString();
+    }
+    public String jsonDashboardCreateGPVCanvas0255(){
+        int dashboardType = 9;
+        String equipmentId = ThingGPVForDashboard.getValue();
+        String name = Name;
+        String description = Description;
         return dashboardCreate(dashboardType, equipmentId, name, description).toString();
     }
 

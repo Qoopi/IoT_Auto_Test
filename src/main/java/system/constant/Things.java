@@ -14,7 +14,7 @@ public enum Things {
     LoadThingVPV("Thing-000023-0"),
 
     ThingVPVForDashboard(ThingVPV11.getValue()),
-    ThingGPVForDashboard(""),
+    ThingGPVForDashboard(ThingGPVBUC.getValue()),
 
     ChannelVPV("channelIdx=1");
 
