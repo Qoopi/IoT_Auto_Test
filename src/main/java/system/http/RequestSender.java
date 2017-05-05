@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.Map;
 
 import static com.jayway.restassured.RestAssured.given;
+import static system.constant.HTTPMethod.*;
 import static system.constant.URLs.AuthenticationRefresh;
 
 public class RequestSender {
@@ -243,4 +244,49 @@ public class RequestSender {
                 SSLConfig.sslConfig().sslSocketFactory(customSslFactory));
         RestAssured.config.getHttpClientConfig().reuseHttpClientInstance();
     }
+
+    public Response sendAmazonRequest(String method, String url){
+        SignAWSv4 signAWSv4 = new SignAWSv4();
+        Map<String, String> headers;
+        Response response = null;
+
+        switch (method){
+            case "GET":
+                headers = signAWSv4.allHeaders(GET.getValue(), url);
+                response = createEmptyRequestWithHeaders(headers).get(url).getResponse();
+                break;
+            case "OPTIONS":
+                headers = signAWSv4.allHeaders(OPTIONS.getValue(), url);
+                response = createEmptyRequestWithHeaders(headers).options(url).getResponse();
+                break;
+            case "DELETE":
+                headers = signAWSv4.allHeaders(DELETE.getValue(), url);
+                response = createEmptyRequestWithHeaders(headers).delete(url).getResponse();
+                break;
+        }
+        return response;
+    }
+
+    public Response sendAmazonRequest(String method, String url, String body){
+        SignAWSv4 signAWSv4 = new SignAWSv4();
+        Map<String, String> headers = null;
+        Response response = null;
+
+        switch (method){
+            case "POST":
+                headers = signAWSv4.allHeaders(POST.getValue(), url, body);
+                response = createRequestWithHeaders(headers, body).post(url).getResponse();
+                break;
+            case "PUT":
+                headers = signAWSv4.allHeaders(PUT.getValue(), url, body);
+                response = createRequestWithHeaders(headers, body).put(url).getResponse();
+                break;
+            case "DELETE":
+                headers = signAWSv4.allHeaders(DELETE.getValue(), url, body);
+                response = createRequestWithHeaders(headers, body).delete(url).getResponse();
+                break;
+        }
+        return response;
+    }
+
 }
