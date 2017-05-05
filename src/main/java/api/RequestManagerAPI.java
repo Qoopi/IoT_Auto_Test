@@ -39,15 +39,13 @@ public class RequestManagerAPI extends JSONManagerAPI{
         Response response = sendAmazonRequest(PUT.getValue(), Report.getValue(), jsonBody);
         //тут сделать парс json и запись id в variable
         idOfCreatedReport = getIdOfCreatedReport(response.asString());
-        checkStatusCode(response);
-        checkErrorInResponseBody(response);
+        checkResponse(response);
     }
 
     public void skedlerReportSendNow(){
         String jsonBody = JSONReportSendNow(idOfCreatedReport);
         Response response = sendAmazonRequest(POST.getValue(), Report.getValue(), jsonBody);
-        checkStatusCode(response);
-        checkErrorInResponseBody(response);
+        checkResponse(response);
     }
 
     public void skedlerReportDelete(){
@@ -55,8 +53,7 @@ public class RequestManagerAPI extends JSONManagerAPI{
         //get body from test account
         //{"filter_name":"GPV-Smart-Sensor-Report-List-15-minutes","filterTitle":"GPV-Smart-Sensor-Report-List-15-minutes hom.ossystem@gmail.com","equipments":"Thing-090035-0","id":null,"filterId":"7e15db45-45f3-4f41-8979-bd35787be667","emails":"hom.ossystem@gmail.com","userId":"0315f51c-67ab-4390-bdd1-46bd9d3fd038","createdAt":null,"excelIncluded":null}
         Response response = sendAmazonRequest(DELETE.getValue(), Report.getValue(), jsonBody);
-        checkStatusCode(response);
-        checkErrorInResponseBody(response);
+        checkResponse(response);
     }
 
 
@@ -65,14 +62,12 @@ public class RequestManagerAPI extends JSONManagerAPI{
         ArrayList<String> ids = getIdsOfAllNotifications(notificationListRead().asString());
         String jsonBody = notificationListDeleteAllJSON(ids);
         Response response = sendAmazonRequest(DELETE.getValue(), Notification.getValue(), jsonBody);
-        checkStatusCode(response);
-        checkErrorInResponseBody(response);
+        checkResponse(response);
     }
     @Step("Changing state of equipment Connected/Disconnected")
     public Response equipmentChangeState(String jsonBody){
         Response response = sendAmazonRequest(PUT.getValue(), EquipmentAdmin.getValue(), jsonBody);
-        checkStatusCode(response);
-        checkErrorInResponseBody(response);
+        checkResponse(response);
         return response;
 
     }
@@ -80,15 +75,13 @@ public class RequestManagerAPI extends JSONManagerAPI{
     public Response notificationRuleCreate(String jsonBody){
         Response response = sendAmazonRequest(POST.getValue(), NotificationRule.getValue(), jsonBody);
         idOfCreatedNotificationRule = getIdOfCreatedNotificationRule(response.asString());
-        checkStatusCode(response);
-        checkErrorInResponseBody(response);
+        checkResponse(response);
         return response;
     }
     @Step("Check if rule created.")
     public void checkNotificationRuleIsCreated(){
         Response response = notificationRulesRead();
-        checkStatusCode(response);
-        checkErrorInResponseBody(response);
+        checkResponse(response);
         Assert.assertTrue(response.asString().contains(idOfCreatedNotificationRule));
     }
     @Step("Check if Rule not triggered.")
@@ -125,30 +118,26 @@ public class RequestManagerAPI extends JSONManagerAPI{
     public Response notificationGetUnread(){
         Map<String, String> headers = allHeaders(GET.getValue(), NotificationUnread.getValue());
         Response response = createEmptyRequestWithHeaders(headers).get(NotificationUnread.getValue()).getResponse();
-        checkStatusCode(response);
-        checkErrorInResponseBody(response);
+        checkResponse(response);
         return response;
     }
 
     public Response notificationRulesRead(){
         Response response = sendAmazonRequest(GET.getValue(), NotificationRule.getValue());
-        checkStatusCode(response);
-        checkErrorInResponseBody(response);
+        checkResponse(response);
         return response;
     }
 
     public Response notificationListRead(){
         Response response = sendAmazonRequest(GET.getValue(), Notification.getValue());
-        checkStatusCode(response);
-        checkErrorInResponseBody(response);
+        checkResponse(response);
         return response;
     }
 
 
     public Response notificationRuleUpdate(String jsonBody){
         Response response = sendAmazonRequest(PUT.getValue(), NotificationRule.getValue(), jsonBody);
-        checkStatusCode(response);
-        checkErrorInResponseBody(response);
+        checkResponse(response);
         return response;
     }
 
@@ -156,16 +145,14 @@ public class RequestManagerAPI extends JSONManagerAPI{
         JSONHandler jsonHandler = new JSONHandler();
         String jsonBody = jsonHandler.notificationRuleDeleteJSON(idOfNotificationRule);
         Response response = sendAmazonRequest(DELETE.getValue(), NotificationRule.getValue(), jsonBody);
-        checkStatusCode(response);
-        checkErrorInResponseBody(response);
+        checkResponse(response);
     }
     @Step("Deleting notifications")
     public void notificationRuleDelete(){
         JSONHandler jsonHandler = new JSONHandler();
         String jsonBody = jsonHandler.notificationRuleDeleteJSON(idOfCreatedNotificationRule);
         Response response = sendAmazonRequest(DELETE.getValue(), NotificationRule.getValue(), jsonBody);
-        checkStatusCode(response);
-        checkErrorInResponseBody(response);
+        checkResponse(response);
     }
 
     private void checkStatusCode(Response response){
@@ -187,6 +174,11 @@ public class RequestManagerAPI extends JSONManagerAPI{
         }
     }
 
+    private void checkResponse(Response response){
+        checkStatusCode(response);
+        checkErrorInResponseBody(response);
+    }
+
     public void sleep(int ms){
         try {
             Thread.sleep(ms);
@@ -201,8 +193,7 @@ public class RequestManagerAPI extends JSONManagerAPI{
         String jsonBody = jsonHandler.dashboardDeleteJSON(id);
 
         Response response = sendAmazonRequest(DELETE.getValue(), dashboard, jsonBody);
-        checkStatusCode(response);
-        checkErrorInResponseBody(response);
+        checkResponse(response);
     }
 
     private Response dashboardsGet(){
@@ -211,15 +202,13 @@ public class RequestManagerAPI extends JSONManagerAPI{
 
     public void dashboardCreate(String body){
         Response response = sendAmazonRequest(POST.getValue(), dashboard, body);
-        checkStatusCode(response);
-        checkErrorInResponseBody(response);
+        checkResponse(response);
         idOfCreatedDashboard = getIdOfCreatedDashboard(response.asString());
     }
 
     public void checkDashboardCreated(){
         Response response = dashboardsGet();
-        checkStatusCode(response);
-        checkErrorInResponseBody(response);
+        checkResponse(response);
         Assert.assertTrue(response.asString().contains(idOfCreatedDashboard));
         Assert.assertTrue(response.asString().contains(thingVPVForDashboard) || response.asString().contains(thingGPVForDashboard));
     }
@@ -238,8 +227,7 @@ public class RequestManagerAPI extends JSONManagerAPI{
 
     public void checkDashboardDeleted(){
         Response response = dashboardsGet();
-        checkStatusCode(response);
-        checkErrorInResponseBody(response);
+        checkResponse(response);
         Assert.assertFalse(response.asString().contains(idOfCreatedDashboard));
     }
 
