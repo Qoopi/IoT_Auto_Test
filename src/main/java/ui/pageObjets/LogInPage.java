@@ -27,14 +27,12 @@ public class LogInPage {
     public LogInPage() {
         this.driver = WebDriverManager.getDriver();
         CredentialCenter credentialCenter = new CredentialCenter();
-        HashMap<String, String> map = credentialCenter.readProperties();
+        HashMap<String, String> map = credentialCenter.readEnv();
 
-//        mail = map.get("email");
-//        pass = map.get("password");
-//        mail2 = map.get("email2");
-//        pass2 = map.get("password2");
-        mail = System.getenv("test_email");
-        pass = System.getenv("test_password");
+        mail = map.get("email");
+        pass = map.get("password");
+        mail2 = map.get("email2");
+        pass2 = map.get("password2");
     }
 
 

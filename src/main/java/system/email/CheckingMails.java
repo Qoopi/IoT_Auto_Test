@@ -88,7 +88,7 @@ public class CheckingMails {
             e.printStackTrace();
         }
         CredentialCenter credentialCenter = new CredentialCenter();
-        HashMap<String, String> map = credentialCenter.readProperties();
+        HashMap<String, String> map = credentialCenter.readEnv();
 
         String mail = map.get("email");
         String pass = map.get("password");
@@ -109,7 +109,7 @@ public class CheckingMails {
             e.printStackTrace();
         }
         CredentialCenter credentialCenter = new CredentialCenter();
-        HashMap<String, String> map = credentialCenter.readProperties();
+        HashMap<String, String> map = credentialCenter.readEnv();
 
         String mail = map.get("email");
         String pass = map.get("password");

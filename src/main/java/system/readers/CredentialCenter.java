@@ -44,4 +44,13 @@ public class CredentialCenter {
 
         return credentials;
     }
+
+    public HashMap<String, String> readEnv() {
+        credentials = new HashMap<>();
+        credentials.put("email", System.getenv("test_email"));
+        credentials.put("password", System.getenv("test_password"));
+        credentials.put("email2", System.getenv("test_email2"));
+        credentials.put("password2", System.getenv("test_password2"));
+        return credentials;
+    }
 }
