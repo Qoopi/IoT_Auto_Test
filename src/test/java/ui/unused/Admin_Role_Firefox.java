@@ -1,4 +1,4 @@
-package UI.unused;
+package ui.unused;
 
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;

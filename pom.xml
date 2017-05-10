@@ -37,6 +37,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -50,7 +51,6 @@
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-
                     <suiteXmlFiles>
                         <!-- TestNG suite XML files -->
                         <suiteXmlFile>${test.xml.file}</suiteXmlFile>
@@ -64,35 +64,6 @@
                         <version>${aspectj.version}</version>
                     </dependency>
                 </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <id>copy</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>[ groupId ]</groupId>
-                                    <artifactId>[ artifactId ]</artifactId>
-                                    <version>[ version ]</version>
-                                    <type>[ packaging ]</type>
-                                    <classifier> [classifier - optional] </classifier>
-                                    <overWrite>[ true or false ]</overWrite>
-                                    <outputDirectory>[ output directory ]</outputDirectory>
-                                    <destFileName>[ filename ]</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                            <!-- other configurations here -->
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
