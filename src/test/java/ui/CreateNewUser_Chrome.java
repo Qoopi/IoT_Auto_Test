@@ -1,4 +1,4 @@
-package ui;
+package UI;
 
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
