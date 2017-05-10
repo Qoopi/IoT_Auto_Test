@@ -82,6 +82,7 @@ public class LogInPage {
 
         waits_asserts.assertXpathVisible(driver, "//*[@id=\"passwordNext\"]/content/span");
         driver.findElement(By.xpath("//*[@id=\"passwordNext\"]/content/span")).click();
+
         //Checkout of where we are
         //waits_asserts.assertTextByXpath(driver, "//*[@id=\"root\"]/div/div[1]/div/div[3]/div/div[2]/div[1]/div/p[2]/span", "Administrator");
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"naviCrumb\"]", "Dashboard");
