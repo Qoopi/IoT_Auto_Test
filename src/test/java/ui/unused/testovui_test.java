@@ -9,10 +9,10 @@ import ui.pageObjets.DDMenusChrome;
 import ui.pageObjets.LogInPage;
 import ui.pageObjets.dashboard.Dasboards.Dashboard;
 import ui.pageObjets.dashboard.Notifications.Notifications;
-import ui.utils.TestListener;
+import ui.utils.ListenerUi;
 
 
-@Listeners(TestListener.class)
+@Listeners(ListenerUi.class)
 public class testovui_test {
     @Test
     public void LogIn() {

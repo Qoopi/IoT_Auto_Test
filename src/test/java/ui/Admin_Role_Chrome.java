@@ -14,10 +14,10 @@ import ui.pageObjets.dashboard.Dasboards.Dashboard;
 import ui.pageObjets.dashboard.Equipments.Equipment;
 import ui.pageObjets.dashboard.Notifications.Notifications;
 import ui.pageObjets.dashboard.Reports;
-import ui.utils.TestListener;
+import ui.utils.ListenerUi;
 
 
-@Listeners(TestListener.class)
+@Listeners(ListenerUi.class)
 public class Admin_Role_Chrome {
 
     @BeforeTest

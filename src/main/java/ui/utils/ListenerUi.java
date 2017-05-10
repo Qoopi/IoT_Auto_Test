@@ -14,7 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class TestListener implements ITestListener {
+public class ListenerUi implements ITestListener {
     UiUtils utils= new UiUtils();
     private String params;
 

@@ -29,10 +29,12 @@ public class LogInPage {
         CredentialCenter credentialCenter = new CredentialCenter();
         HashMap<String, String> map = credentialCenter.readProperties();
 
-        mail = map.get("email");
-        pass = map.get("password");
-        mail2 = map.get("email2");
-        pass2 = map.get("password2");
+//        mail = map.get("email");
+//        pass = map.get("password");
+//        mail2 = map.get("email2");
+//        pass2 = map.get("password2");
+        mail = System.getenv("test_email");
+        pass = System.getenv("test_password");
     }
 
 
