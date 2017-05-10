@@ -36,6 +36,13 @@ public class WaitsAsserts {
         String anElementTile = driver.findElement(By.xpath(xpath)).getText();
         assertTrue(anElementTile.contains(text));
     }
+
+    public void assertXpathVisible(WebDriver driver, String xpath){
+        WebDriverWait wait = new WebDriverWait(driver, 50 );
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+        assertTrue(driver.findElement(By.xpath(xpath)).isDisplayed());
+    }
+
     public void waitForVisibilityByXpath(WebDriver driver, String xpath) {
         WebDriverWait wait = new WebDriverWait(driver, 50 );
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));

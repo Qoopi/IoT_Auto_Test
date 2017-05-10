@@ -59,9 +59,15 @@ public class LogInPage {
     public void enterGoogleCred() {
         //Click on button "Login with Google acc"|
 //        driver.findElement(By.xpath("//*[@id=\"grey-background\"]/div[2]/div/div/div[3]/div/div[2]/div/a/div")).click();
+
+        waits_asserts.assertXpathVisible(driver, "//*[@id=\"btn-google\"]");
+
         driver.findElement(By.xpath("//*[@id=\"btn-google\"]")).click();
         //Google acc login
 //        driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys(mail);
+
+        waits_asserts.assertXpathVisible(driver, "//*[@id=\"identifierId\"]");
+
         driver.findElement(By.xpath("//*[@id=\"identifierId\"]")).sendKeys(mail);
 //        driver.findElement(By.xpath("//*[@id=\"next\"]")).click();
         driver.findElement(By.xpath("//*[@id=\"identifierNext\"]/content/span")).click();
