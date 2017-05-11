@@ -26,13 +26,13 @@
         <!--</classes>-->
     <!--</test>-->
 
-    <test name="Emulate Charts Refreshing Load GPV 100 Equips and Dashboards">
-        <parameter name="browserName" value="chrome"/>
-        <parameter name="useGrid" value="false"></parameter>
-        <classes>
-            <class name="load.LoadChartsRefreshingGPV100"/>
-        </classes>
-    </test>
+    <!--<test name="Emulate Charts Refreshing Load GPV 100 Equips and Dashboards">-->
+        <!--<parameter name="browserName" value="chrome"/>-->
+        <!--<parameter name="useGrid" value="false"></parameter>-->
+        <!--<classes>-->
+            <!--<class name="load.LoadChartsRefreshingGPV100"/>-->
+        <!--</classes>-->
+    <!--</test>-->
 
     <!--<test name="Emulate Charts Refreshing Load GPV Burst">-->
         <!--<parameter name="browserName" value="chrome"/>-->
@@ -42,13 +42,13 @@
         <!--</classes>-->
     <!--</test>-->
 
-    <!--<test name="Emulate Notification rule CRUD Load">-->
-        <!--<parameter name="browserName" value="chrome"/>-->
-        <!--<parameter name="useGrid" value="false"></parameter>-->
-        <!--<classes>-->
-            <!--<class name="load.LoadNotificationRulesCRUD"/>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="Emulate Notification rule CRUD Load">
+        <parameter name="browserName" value="chrome"/>
+        <parameter name="useGrid" value="false"></parameter>
+        <classes>
+            <class name="load.LoadNotificationRulesCRUD"/>
+        </classes>
+    </test>
 
     <!--<test name="Emulate CRUD Stress">-->
         <!--<parameter name="browserName" value="chrome"/>-->

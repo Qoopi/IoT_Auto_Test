@@ -154,7 +154,7 @@ public class JSONHandler extends SignAWSv4 {
         String name = "Abnormal auto-test rule";
         String description = "some description";
         int type = 0;
-        String equipment = "Thing-090011-0";
+        String equipment = "Thing-90094-0";
         int threshold = 0;
         String trigger = "";
         String operation = ">=";

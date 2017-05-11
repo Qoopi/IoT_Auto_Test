@@ -102,6 +102,7 @@ public class RequestManagerLoad extends RequestTemplates{
             sleep(timeBetweenRequestsMills);
             notificationRuleDelete();
             sleep(timeBetweenCyclesMills);
+            checkExpiredLoad();
         }
     }
 
@@ -155,7 +156,6 @@ public class RequestManagerLoad extends RequestTemplates{
     }
 
     public void dashboardCreateCanvasGPV100(){
-        System.out.println(thingGPV100);
         equipCounter++;
         JSONHandler jsonHandler = new JSONHandler();
         String body = jsonHandler.dashboardCreateCanvasGPVJSONDefault(thingGPV100, thingGPV100);

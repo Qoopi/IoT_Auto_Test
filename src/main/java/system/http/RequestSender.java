@@ -21,7 +21,7 @@ import java.util.Map;
 
 import static com.jayway.restassured.RestAssured.given;
 import static system.constant.HTTPMethod.*;
-import static system.constant.URLs.AuthenticationRefresh;
+import static system.constant.URLs.*;
 
 public class RequestSender {
     private RequestSpecification requestSpecification = null;
@@ -52,6 +52,15 @@ public class RequestSender {
             SignAWSv4 signAWSv4 = new SignAWSv4();
             RequestSender requestSender = new RequestSender();
             requestSender.createEmptyRequestWithHeaders(signAWSv4.allHeaders(HTTPMethod.GET.getValue(), AuthenticationRefresh.getValue())).get(AuthenticationRefresh.getValue());
+            setStartDate();
+        }
+    }
+
+    public static void checkExpiredLoad(){
+        if (startDate.getTime()<(System.currentTimeMillis()-360000)){
+            SignAWSv4 signAWSv4 = new SignAWSv4();
+            RequestSender requestSender = new RequestSender();
+            requestSender.createEmptyRequestWithHeaders(signAWSv4.allHeaders(HTTPMethod.GET.getValue(), LoadAuthenticationRefresh.getValue())).get(LoadAuthenticationRefresh.getValue());
             setStartDate();
         }
     }

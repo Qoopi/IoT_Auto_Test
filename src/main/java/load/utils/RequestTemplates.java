@@ -57,7 +57,7 @@ public class RequestTemplates extends JSONHandler {
             createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
 
-            RequestSender.checkExpired();
+            RequestSender.checkExpiredLoad();
         }
     }
 
@@ -107,7 +107,7 @@ public class RequestTemplates extends JSONHandler {
             createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
 
-            RequestSender.checkExpired();
+            RequestSender.checkExpiredLoad();
         }
     }
 
@@ -156,7 +156,7 @@ public class RequestTemplates extends JSONHandler {
             createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
 
-            RequestSender.checkExpired();
+            RequestSender.checkExpiredLoad();
         }
     }
 
@@ -195,7 +195,7 @@ public class RequestTemplates extends JSONHandler {
             createEmptyRequestWithHeaders(standardHeaders).options(notificationUnreadUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(notificationUnreadHeaders).get(notificationUnreadUrl);
 
-            RequestSender.checkExpired();
+            RequestSender.checkExpiredLoad();
         }
 
     }
@@ -241,7 +241,7 @@ public class RequestTemplates extends JSONHandler {
             createEmptyRequestWithHeaders(standardHeaders).options(chartUpdateUrl);
             createEmptyRequestWithHeaders(standardHeaders).addHeaders(chartUpdateHeaders).get(chartUpdateUrl);
 
-            RequestSender.checkExpired();
+            RequestSender.checkExpiredLoad();
         }
 
     }
