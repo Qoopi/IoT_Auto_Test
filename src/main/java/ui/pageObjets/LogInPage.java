@@ -85,7 +85,7 @@ public class LogInPage {
 //        driver.findElement(By.xpath("//*[@id=\"signIn\"]")).click();
 
         //delete this, after travis success
-        driver.findElement(By.xpath("//*[@id=\"challenge\"]/content/div/div[2]/input")).sendKeys("geloksmmm@gmail.com");
+//        driver.findElement(By.xpath("//*[@id=\"challenge\"]/content/div/div[2]/input")).sendKeys("geloksmmm@gmail.com");
 
         waits_asserts.assertXpathVisible(driver, "//*[@id=\"passwordNext\"]/content/span");
         driver.findElement(By.xpath("//*[@id=\"passwordNext\"]/content/span")).click();
