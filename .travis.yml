@@ -18,4 +18,4 @@ before_script:
 
 script:
   # perform build and run commands here
-  - mvn test
+  - mvn test site
