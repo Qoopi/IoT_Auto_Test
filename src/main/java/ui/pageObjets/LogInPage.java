@@ -77,11 +77,12 @@ public class LogInPage {
         waits_asserts.assertXpathVisible(driver, "//*[@id=\"identifierNext\"]/content/span");
         driver.findElement(By.xpath("//*[@id=\"identifierNext\"]/content/span")).click();
 
-        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"Passwd\"]");
-        driver.findElement(By.xpath("//*[@id=\"Passwd\"]")).sendKeys(pass2);
+//        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"Passwd\"]");
+//        driver.findElement(By.xpath("//*[@id=\"Passwd\"]")).sendKeys(pass2);
+
 //        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"password\"]/div[1]/div/div[1]/div");
 //        waits_asserts.assertXpathVisible(driver, "//*[@id=\"password\"]/div[1]/div/div[1]/div");
-//        driver.findElement(By.xpath("//*[@id=\"password\"]/div[1]/div/div[1]/input")).sendKeys(pass2);
+        driver.findElement(By.xpath("//*[@id=\"password\"]/div[1]/div/div[1]/input")).sendKeys(pass2);
 //        driver.findElement(By.xpath("//*[@id=\"signIn\"]")).click();
 
         //delete this, after travis success
@@ -100,7 +101,7 @@ public class LogInPage {
     @Step("Authorise with second Google Acc, as regular user")
     public void enterGoogleCred2() {
         //Click on button "Login with Google acc"|
-        driver.findElement(By.xpath("//*[@id=\"grey-background\"]/div[2]/div/div/div[3]/div/div[2]/div/a/div")).click();
+        driver.findElement(By.xpath("//*[@id=\"btn-google\"]")).click();
         //Google acc login
         driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys(mail2);
         driver.findElement(By.xpath("//*[@id=\"next\"]")).click();
