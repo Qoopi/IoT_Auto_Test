@@ -65,7 +65,7 @@ public class ListenerAPI implements ITestListener{
     private void getCreds(){
         LogInPage log = new LogInPage();
         log.getToIoTPage();
-        log.enterGoogleCred();
+        log.enterGoogleCred2();
         log.getRequestSigns();
         RequestManagerAPI requestManager = new RequestManagerAPI();
         requestManager.setUpBaseApiGateway();
