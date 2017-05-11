@@ -168,7 +168,7 @@ class LoadPageToBrowser extends Simulation {
     val uri7 = "https://oshk5hrphl.execute-api.eu-west-1.amazonaws.com/loadtest"
     val uri8 = "https://use.fontawesome.com"
 
-	val scn = scenario("LoadPageToBrowser")
+	val scn = scenario("LoadPageToBrowser")exec( during(20 minutes){
 		.exec(http("request_0")
 			.get("/loadtest/authentication/callback/custom-google?state=2b1af532731c1c2314c92a1abb1f5658c1c6515f9576df193828266c5b8e0f5e6adb4bd792f31466dae9ba35bf60b896&code=4/sCePjMR4e7wY6hdp_R1mbFcpSQWyDNjce8Pshd60Yfg")
 			.headers(headers_0))
