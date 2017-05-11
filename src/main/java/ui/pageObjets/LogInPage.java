@@ -36,10 +36,6 @@ public class LogInPage {
 
         System.out.println(mail);
         System.out.println(mail2);
-        System.out.println("Using payload named:");
-        System.out.println(pass);
-        System.out.println(pass2);
-
     }
 
 
