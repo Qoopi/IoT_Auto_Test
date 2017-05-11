@@ -25,8 +25,7 @@ public class RequestManagerLoad extends RequestTemplates{
 
     private static int equipCounter = 0;
     private String idOfCreatedGPVDashboard100 = null;
-    private String equip = new DecimalFormat("000").format(equipCounter);
-    private String thingGPV100 = "Thing-90"+equip+"-0";
+    private String thingGPV100 = "Thing-90"+new DecimalFormat("000").format(equipCounter)+"-0";
 
 
     private static final String thingGPV = Things.LoadThingGPV.getValue();
