@@ -87,6 +87,7 @@ public class LogInPage {
 
         //delete this, after travis success
 //        driver.findElement(By.xpath("//*[@id=\"challenge\"]/content/div/div[2]/input")).sendKeys("geloksmmm@gmail.com");
+        driver.findElement(By.cssSelector("#challenge > content:nth-child(1) > div:nth-child(6) > div:nth-child(3)")).click();
         driver.findElement(By.cssSelector("#challenge > content:nth-child(1) > div:nth-child(6) > div:nth-child(3)")).sendKeys("geloksmmm@gmail.com");
         driver.findElement(By.cssSelector("#submit")).click();
 
