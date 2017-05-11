@@ -9,6 +9,8 @@ import system.http.JSONHandler;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Map;
 
 import static system.constant.HTTPMethod.*;
@@ -21,9 +23,10 @@ public class RequestManagerLoad extends RequestTemplates{
     private static String idOfCreatedVPVDashboard = null;
     private static String idOfCreatedGPVDashboard = null;
 
-    private static int equipCounter = 1;
+    private static int equipCounter = 0;
     private String idOfCreatedGPVDashboard100 = null;
-    private String thingGPV100 = "Thing-9000"+equipCounter+"-0";;
+    private String equip = new DecimalFormat("000").format(equipCounter);
+    private String thingGPV100 = "Thing-90"+equip+"-0";
 
 
     private static final String thingGPV = Things.LoadThingGPV.getValue();
@@ -152,6 +155,7 @@ public class RequestManagerLoad extends RequestTemplates{
     }
 
     public void dashboardCreateCanvasGPV100(){
+        System.out.println(thingGPV100);
         equipCounter++;
         JSONHandler jsonHandler = new JSONHandler();
         String body = jsonHandler.dashboardCreateCanvasGPVJSONDefault(thingGPV100, thingGPV100);

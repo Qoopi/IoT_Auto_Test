@@ -9,7 +9,7 @@ class LoadPageToBrowser extends Simulation {
 
 	val httpProtocol = http
 		.baseURL("https://oshk5hrphl.execute-api.eu-west-1.amazonaws.com")
-		.inferHtmlResources()
+		.inferHtmlResources().disableCaching
 
 	val headers_0 = Map(
 		"accept" -> "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -168,92 +168,92 @@ class LoadPageToBrowser extends Simulation {
     val uri7 = "https://oshk5hrphl.execute-api.eu-west-1.amazonaws.com/loadtest"
     val uri8 = "https://use.fontawesome.com"
 
-	val scn = scenario("LoadPageToBrowser")exec( during(20 minutes){
-		.exec(http("request_0")
+	val scn = scenario("LoadPageToBrowser")exec( during(20 minutes) {
+		exec(http("request_0")
 			.get("/loadtest/authentication/callback/custom-google?state=2b1af532731c1c2314c92a1abb1f5658c1c6515f9576df193828266c5b8e0f5e6adb4bd792f31466dae9ba35bf60b896&code=4/sCePjMR4e7wY6hdp_R1mbFcpSQWyDNjce8Pshd60Yfg")
 			.headers(headers_0))
-		.pause(1)
-		.exec(http("request_1")
-			.get("http://" + uri2 + "/paths.json")
-			.headers(headers_1)
-			.resources(http("request_2")
-			.get(uri8 + "/webfontloader/1.6.24/webfontloader.js")
-			.headers(headers_2)
-			.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0002_response.txt"))),
-            http("request_3")
-			.get(uri5 + "")
-			.headers(headers_3)
-			.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0003_response.txt"))),
-            http("request_4")
-			.options("/loadtest/menu")
-			.headers(headers_4),
-            http("request_5")
-			.get("https://" + uri2 + "/iotLogo_white.png?a0274f9")
-			.headers(headers_5)
-			.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0005_response.txt"))),
-            http("request_6")
-			.options("/loadtest/global_settings")
-			.headers(headers_4),
-            http("request_7")
-			.get(uri1 + "/fonts/Material-Design-Iconic-Font.woff2?v=2.2.0")
-			.headers(headers_7)
-			.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0007_response.txt"))),
-            http("request_8")
-			.get("http://" + uri2 + "/99fc0816a09395454061301fefa42bf1.ttf?a0274f9")
-			.headers(headers_8)
-			.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0008_response.txt"))),
-            http("request_9")
-			.get("http://" + uri2 + "/54a91b0619ccf9373d525109268219dc.ttf?a0274f9")
-			.headers(headers_8)
-			.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0009_response.txt"))),
-            http("request_10")
-			.get(uri8 + "/05f7c8a54f.css")
-			.headers(headers_10)
-			.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0010_response.txt"))),
+			.pause(1)
+			.exec(http("request_1")
+				.get("http://" + uri2 + "/paths.json")
+				.headers(headers_1)
+				.resources(http("request_2")
+					.get(uri8 + "/webfontloader/1.6.24/webfontloader.js")
+					.headers(headers_2)
+					.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0002_response.txt"))),
+					http("request_3")
+						.get(uri5 + "")
+						.headers(headers_3)
+						.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0003_response.txt"))),
+					http("request_4")
+						.options("/loadtest/menu")
+						.headers(headers_4),
+					http("request_5")
+						.get("https://" + uri2 + "/iotLogo_white.png?a0274f9")
+						.headers(headers_5)
+						.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0005_response.txt"))),
+					http("request_6")
+						.options("/loadtest/global_settings")
+						.headers(headers_4),
+					http("request_7")
+						.get(uri1 + "/fonts/Material-Design-Iconic-Font.woff2?v=2.2.0")
+						.headers(headers_7)
+						.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0007_response.txt"))),
+					http("request_8")
+						.get("http://" + uri2 + "/99fc0816a09395454061301fefa42bf1.ttf?a0274f9")
+						.headers(headers_8)
+						.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0008_response.txt"))),
+					http("request_9")
+						.get("http://" + uri2 + "/54a91b0619ccf9373d525109268219dc.ttf?a0274f9")
+						.headers(headers_8)
+						.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0009_response.txt"))),
+					http("request_10")
+						.get(uri8 + "/05f7c8a54f.css")
+						.headers(headers_10)
+						.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0010_response.txt"))),
 
-            http("request_13")
-			.get(uri8 + "/releases/v4.6.3/css/font-awesome-css.min.css")
-			.headers(headers_10)
-			.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0013_response.txt"))),
-            http("request_14")
-			.get(uri3 + "/embeddable/config")
-			.headers(headers_14)
-			.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0014_response.txt"))),
-            http("request_15")
-			.options("/loadtest/profile")
-			.headers(headers_4),
-            http("request_16")
-			.get(uri8 + "/releases/v4.6.3/fonts/fontawesome-webfont.woff2")
-			.headers(headers_16)
-			.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0016_response.txt"))),
-            http("request_18")
-			.get(uri3 + "/embeddable_blip?data=eyJwYWdlVmlldyI6eyJyZWZlcnJlciI6Imh0dHA6Ly9kMTJwbDZmZDh6czg0Yy5jbG91ZGZyb250Lm5ldC8iLCJ0aW1lIjo1ODIsImxvYWRUaW1lIjo4MDMuMjM1MDAwMDAwMDAwMSwibmF2aWdhdG9yTGFuZ3VhZ2UiOiJydSIsInBhZ2VUaXRsZSI6IklvVCBTeXN0ZW1zIEFwcCIsInVzZXJBZ2VudCI6Ik1vemlsbGEvNS4wIChXaW5kb3dzIE5UIDEwLjA7IFdpbjY0OyB4NjQpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS81OC4wLjMwMjkuOTYgU2FmYXJpLzUzNy4zNiIsImhlbHBDZW50ZXJEZWR1cCI6ZmFsc2V9LCJidWlkIjoiZTFlNjMzMzgzMDJmNzQxNTI5ODRjZmU1YjJhZDkyMTAiLCJzdWlkIjoiNjMwZGI2ZDllODY3YjRhMmQ2MDQ2ZDMzYTMwZTU1N2YiLCJ2ZXJzaW9uIjoiZGMwOTdmMyIsInRpbWVzdGFtcCI6IjIwMTctMDUtMTFUMDY6MTc6MjAuNzI5WiIsInVybCI6Imh0dHA6Ly9kMTJwbDZmZDh6czg0Yy5jbG91ZGZyb250Lm5ldC8jL2Rhc2hib2FyZD9faz12eXNiMXEifQ%3D%3D")
-			.headers(headers_14),
-            http("request_19")
-			.get(uri3 + "/embeddable_blip?data=eyJzZXR0aW5ncyI6eyJ3ZWJXaWRnZXQiOnsiY29sb3IiOnsidGhlbWUiOiIjMjE5NkYzIn0sImxhdW5jaGVyIjp7ImxhYmVsIjp7IioiOiJSZXBvcnQgYW4gaXNzdWUifX0sInBvc2l0aW9uIjp7Imhvcml6b250YWwiOiJsZWZ0IiwidmVydGljYWwiOiJib3R0b20ifX19LCJidWlkIjoiZTFlNjMzMzgzMDJmNzQxNTI5ODRjZmU1YjJhZDkyMTAiLCJzdWlkIjoiNjMwZGI2ZDllODY3YjRhMmQ2MDQ2ZDMzYTMwZTU1N2YiLCJ2ZXJzaW9uIjoiZGMwOTdmMyIsInRpbWVzdGFtcCI6IjIwMTctMDUtMTFUMDY6MTc6MjAuNzQzWiIsInVybCI6Imh0dHA6Ly9kMTJwbDZmZDh6czg0Yy5jbG91ZGZyb250Lm5ldC8jL2Rhc2hib2FyZD9faz12eXNiMXEifQ%3D%3D")
-			.headers(headers_14),
-            http("request_20")
-			.options(uri3 + "/embeddable/identify")
-			.headers(headers_20),
-            http("request_21")
-			.get(uri4 + "?sz=50")
-			.headers(headers_21)
-			.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0021_response.txt"))),
-            http("request_22")
-			.options("/loadtest/notification?status=unread")
-			.headers(headers_4),
-            http("request_23")
-			.options("/loadtest/dashboard/e5673aa1-5db8-472e-9305-332feb7b34d9")
-			.headers(headers_4),
-            http("request_24")
-			.options("/loadtest/equipment_models?availables=true")
-			.headers(headers_4),
-            http("request_28")
-			.post(uri3 + "/embeddable/identify")
-			.headers(headers_28)
-			.body(RawFileBody("LoadPageToBrowser_0028_request.txt"))
-			.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0028_response.txt"))))
-			.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0001_response.txt"))))
-
+					http("request_13")
+						.get(uri8 + "/releases/v4.6.3/css/font-awesome-css.min.css")
+						.headers(headers_10)
+						.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0013_response.txt"))),
+					http("request_14")
+						.get(uri3 + "/embeddable/config")
+						.headers(headers_14)
+						.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0014_response.txt"))),
+					http("request_15")
+						.options("/loadtest/profile")
+						.headers(headers_4),
+					http("request_16")
+						.get(uri8 + "/releases/v4.6.3/fonts/fontawesome-webfont.woff2")
+						.headers(headers_16)
+						.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0016_response.txt"))),
+					http("request_18")
+						.get(uri3 + "/embeddable_blip?data=eyJwYWdlVmlldyI6eyJyZWZlcnJlciI6Imh0dHA6Ly9kMTJwbDZmZDh6czg0Yy5jbG91ZGZyb250Lm5ldC8iLCJ0aW1lIjo1ODIsImxvYWRUaW1lIjo4MDMuMjM1MDAwMDAwMDAwMSwibmF2aWdhdG9yTGFuZ3VhZ2UiOiJydSIsInBhZ2VUaXRsZSI6IklvVCBTeXN0ZW1zIEFwcCIsInVzZXJBZ2VudCI6Ik1vemlsbGEvNS4wIChXaW5kb3dzIE5UIDEwLjA7IFdpbjY0OyB4NjQpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS81OC4wLjMwMjkuOTYgU2FmYXJpLzUzNy4zNiIsImhlbHBDZW50ZXJEZWR1cCI6ZmFsc2V9LCJidWlkIjoiZTFlNjMzMzgzMDJmNzQxNTI5ODRjZmU1YjJhZDkyMTAiLCJzdWlkIjoiNjMwZGI2ZDllODY3YjRhMmQ2MDQ2ZDMzYTMwZTU1N2YiLCJ2ZXJzaW9uIjoiZGMwOTdmMyIsInRpbWVzdGFtcCI6IjIwMTctMDUtMTFUMDY6MTc6MjAuNzI5WiIsInVybCI6Imh0dHA6Ly9kMTJwbDZmZDh6czg0Yy5jbG91ZGZyb250Lm5ldC8jL2Rhc2hib2FyZD9faz12eXNiMXEifQ%3D%3D")
+						.headers(headers_14),
+					http("request_19")
+						.get(uri3 + "/embeddable_blip?data=eyJzZXR0aW5ncyI6eyJ3ZWJXaWRnZXQiOnsiY29sb3IiOnsidGhlbWUiOiIjMjE5NkYzIn0sImxhdW5jaGVyIjp7ImxhYmVsIjp7IioiOiJSZXBvcnQgYW4gaXNzdWUifX0sInBvc2l0aW9uIjp7Imhvcml6b250YWwiOiJsZWZ0IiwidmVydGljYWwiOiJib3R0b20ifX19LCJidWlkIjoiZTFlNjMzMzgzMDJmNzQxNTI5ODRjZmU1YjJhZDkyMTAiLCJzdWlkIjoiNjMwZGI2ZDllODY3YjRhMmQ2MDQ2ZDMzYTMwZTU1N2YiLCJ2ZXJzaW9uIjoiZGMwOTdmMyIsInRpbWVzdGFtcCI6IjIwMTctMDUtMTFUMDY6MTc6MjAuNzQzWiIsInVybCI6Imh0dHA6Ly9kMTJwbDZmZDh6czg0Yy5jbG91ZGZyb250Lm5ldC8jL2Rhc2hib2FyZD9faz12eXNiMXEifQ%3D%3D")
+						.headers(headers_14),
+					http("request_20")
+						.options(uri3 + "/embeddable/identify")
+						.headers(headers_20),
+					http("request_21")
+						.get(uri4 + "?sz=50")
+						.headers(headers_21)
+						.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0021_response.txt"))),
+					http("request_22")
+						.options("/loadtest/notification?status=unread")
+						.headers(headers_4),
+					http("request_23")
+						.options("/loadtest/dashboard/e5673aa1-5db8-472e-9305-332feb7b34d9")
+						.headers(headers_4),
+					http("request_24")
+						.options("/loadtest/equipment_models?availables=true")
+						.headers(headers_4),
+					http("request_28")
+						.post(uri3 + "/embeddable/identify")
+						.headers(headers_28)
+						.body(RawFileBody("LoadPageToBrowser_0028_request.txt"))
+						.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0028_response.txt"))))
+				.check(bodyBytes.is(RawFileBody("LoadPageToBrowser_0001_response.txt"))))
+	})
 	setUp(scn.inject(splitUsers(100) into(atOnceUsers(1)) separatedBy(5 seconds))).protocols(httpProtocol)
 }
