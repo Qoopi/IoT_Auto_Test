@@ -67,7 +67,7 @@ public class LogInPage {
 //        driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys(mail);
 
         waits_asserts.assertXpathVisible(driver, "//*[@id=\"identifierId\"]");
-        driver.findElement(By.xpath("//*[@id=\"identifierId\"]")).sendKeys(mail);
+        driver.findElement(By.xpath("//*[@id=\"identifierId\"]")).sendKeys(mail2);
 
 //        driver.findElement(By.xpath("//*[@id=\"next\"]")).click();
 
@@ -79,7 +79,7 @@ public class LogInPage {
 
 //        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"password\"]/div[1]/div/div[1]/div");
 //        waits_asserts.assertXpathVisible(driver, "//*[@id=\"password\"]/div[1]/div/div[1]/div");
-        driver.findElement(By.xpath("//*[@id=\"password\"]/div[1]/div/div[1]/input")).sendKeys(pass);
+        driver.findElement(By.xpath("//*[@id=\"password\"]/div[1]/div/div[1]/input")).sendKeys(pass2);
 //        driver.findElement(By.xpath("//*[@id=\"signIn\"]")).click();
 
         //delete this, after travis success
