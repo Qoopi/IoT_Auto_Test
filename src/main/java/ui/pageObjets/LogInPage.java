@@ -88,8 +88,9 @@ public class LogInPage {
         //delete this, after travis success
 //        driver.findElement(By.xpath("//*[@id=\"challenge\"]/content/div/div[2]/input")).sendKeys("geloksmmm@gmail.com");
 //        driver.findElement(By.cssSelector("#challenge > content:nth-child(1) > div:nth-child(6) > div:nth-child(3)")).click();
-        driver.findElement(By.xpath("//*[@name=\"email\"])")).click();
-        driver.findElement(By.xpath("//*[@name=\"email\"])")).sendKeys("geloksmmm@gmail.com");
+        //The string '//*[@name="email"])' is not a valid XPath expression.
+        driver.findElement(By.xpath("//*[@name=\"email\"]")).click();
+        driver.findElement(By.xpath("//*[@name=\"email\"]")).sendKeys("geloksmmm@gmail.com");
         driver.findElement(By.id("submit")).click();
 //
 //        driver.findElement(By.cssSelector("#challenge > content:nth-child(1) > div:nth-child(6) > div:nth-child(3)")).sendKeys("geloksmmm@gmail.com");
