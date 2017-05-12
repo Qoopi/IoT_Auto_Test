@@ -1,4 +1,4 @@
-package ui;
+package tests.testsui.unused;
 
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
 import ui.pageObjets.DDMenus;
-import ui.pageObjets.DDMenusChrome;
+import ui.pageObjets.DDMenusFirefox;
 import ui.pageObjets.LogInPage;
 import ui.pageObjets.administration.Requests;
 import ui.pageObjets.administration.UserList;
@@ -15,16 +15,19 @@ import ui.pageObjets.dashboard.Equipments.Equipment;
 import ui.pageObjets.dashboard.Notifications.Notifications;
 import ui.pageObjets.dashboard.Reports;
 import ui.utils.ListenerUi;
+import ui.utils.UiUtils;
 
 
 @Listeners(ListenerUi.class)
-public class Admin_Role_Chrome {
+public class Admin_Role_Firefox {
 
     @BeforeTest
     public void LogIn() {
         LogInPage log = new LogInPage();
         log.getToIoTPage();
-        log.enterGoogleCred();
+        log.enterGoogleCred2();
+        UiUtils uiUtils = new UiUtils();
+        uiUtils.changeFocusFF();
     }
     @Features("Regression")
     @Stories("[OSF-53] Equipment, what element is active in DDMenu")
@@ -33,9 +36,9 @@ public class Admin_Role_Chrome {
         Dashboard dashboard = new Dashboard();
         dashboard.openEquipment();
         dashboard.openMenu();
-        DDMenus ddm = new DDMenusChrome();
+        DDMenus ddm = new DDMenusFirefox();
         ddm.checkMenuEquipment();
-        dashboard.closeMenu();
+       // dashboard.closeMenuFF();
     }
     @Features("Regression")
     @Stories("[OSF-53] Equipment view")
@@ -67,7 +70,7 @@ public class Admin_Role_Chrome {
         equipment.checkEquipmentGroupInMenu();
         equipment.checkEquipmentUpdatedAtInMenu();
         equipment.checkEquipmentCreatedInMenu();
-        dashboard.closeMenu();
+        dashboard.closeMenuFF();
 
     }
 
@@ -81,7 +84,7 @@ public class Admin_Role_Chrome {
 
         dashboard.openMenu();
         equipment.addCreatedColumn();
-        log.refresh();
+        //log.refresh();
         dashboard.openMenu();
         equipment.dismissCreated();
     }
@@ -91,6 +94,7 @@ public class Admin_Role_Chrome {
     @Test(priority = 5)
     public void viewEquipInfo() {
         Equipment equipment = new Equipment();
+
         equipment.viewEquip();
         equipment.checkEquipment();
 
@@ -104,9 +108,9 @@ public class Admin_Role_Chrome {
         dashboard.openNotifications();
         dashboard.openNotificationsList();
         dashboard.openMenu();
-        DDMenus ddm = new DDMenusChrome();
+        DDMenus ddm = new DDMenusFirefox();
         ddm.checkMenuNotificationList();
-        dashboard.closeMenu();
+        dashboard.closeMenuFF();
     }
     @Features("Regression")
     @Stories("Notifications list default columns check")
@@ -141,9 +145,9 @@ public class Admin_Role_Chrome {
         Dashboard dashboard = new Dashboard();
         dashboard.openReports();
         dashboard.openMenu();
-        DDMenus ddm = new DDMenusChrome();
+        DDMenus ddm = new DDMenusFirefox();
         ddm.checkMenuReports();
-        dashboard.closeMenu();
+        dashboard.closeMenuFF();
     }
     @Features("Regression")
     @Stories("Report list default columns testing")
@@ -152,7 +156,7 @@ public class Admin_Role_Chrome {
         Dashboard dash = new Dashboard();
         Reports reports = new Reports();
 
-        dash.openReports();
+        //dash.openReports();
         reports.checkReportTitleColumn();
         reports.checkReportScheduleColumn();
     }
@@ -170,7 +174,7 @@ public class Admin_Role_Chrome {
         reports.checkRecipientsColumnInDropDownMenu();
         reports.checkExcelIncludedColumnInDropDownMenu();
         reports.checkEquipmentItemsColumnInDropDownMenu();
-        dash.closeMenu();
+        dash.closeMenuFF();
     }
 
     @Features("Regression")
@@ -214,9 +218,9 @@ public class Admin_Role_Chrome {
         dashboard.openAdministration();
         dashboard.openUserList();
         dashboard.openMenu();
-        DDMenus ddm = new DDMenusChrome();
+        DDMenus ddm = new DDMenusFirefox();
         ddm.checkMenuAdministrationUserList();
-        dashboard.closeMenu();
+        dashboard.closeMenuFF();
     }
 
     @Features("Regression")
@@ -229,7 +233,7 @@ public class Admin_Role_Chrome {
         dashboard.openMenu();
         userList.checkingColumnsInPompUpMenu();
         userList.defaultColumnsCheck();
-        dashboard.closeMenu();
+        dashboard.closeMenuFF();
     }
 
     @Features("Regression")
@@ -318,9 +322,9 @@ public class Admin_Role_Chrome {
         dashboard.openAdministration();
         dashboard.openEquipmentListAsAdmin();
         dashboard.openMenu();
-        DDMenus ddm = new DDMenusChrome();
+        DDMenus ddm = new DDMenusFirefox();
         ddm.checkMenuAdministrationEquipmentList();
-        dashboard.closeMenu();
+        dashboard.closeMenuFF();
     }
 
     @Features("Regression")
@@ -365,7 +369,7 @@ public class Admin_Role_Chrome {
         equipment.checkEquipmentActiveInMenu();
         equipment.checkEquipmentUpdatedAtInMenu();
         equipment.checkEquipmentCreatedInMenu();
-        dashboard.closeMenu();
+        dashboard.closeMenuFF();
     }
 
     @Features("Regression")

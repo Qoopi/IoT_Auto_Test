@@ -1,4 +1,4 @@
-package load.unused;
+package tests.testsload.unused;
 
 import api.MQTTManagerAPI;
 import com.amazonaws.services.iot.client.*;

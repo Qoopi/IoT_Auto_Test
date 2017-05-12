@@ -1,4 +1,4 @@
-package load;
+package tests.testsload;
 
 import load.utils.GatlingReportAdapter;
 import load.utils.ListenerLoad;

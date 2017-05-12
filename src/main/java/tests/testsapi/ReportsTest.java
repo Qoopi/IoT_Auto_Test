@@ -1,5 +1,7 @@
-package api;
+package tests.testsapi;
 
+import api.ListenerAPI;
+import api.RequestManagerAPI;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;

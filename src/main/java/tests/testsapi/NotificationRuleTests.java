@@ -1,5 +1,8 @@
-package api;
+package tests.testsapi;
 
+import api.ListenerAPI;
+import api.MQTTManagerAPI;
+import api.RequestManagerAPI;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;

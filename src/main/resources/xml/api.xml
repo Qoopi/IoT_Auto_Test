@@ -4,19 +4,19 @@
     <!--parallel is 'none', single GPV/VPV equipment is used-->
     <test name="Notification Rules">
         <classes>
-            <class name="api.NotificationRuleTests"/>
+            <class name="tests.testsapi.NotificationRuleTests"/>
         </classes>
     </test>
 
     <test name="Skedler Reports">
         <classes>
-            <class name="api.ReportsTest"/>
+            <class name="tests.testsapi.ReportsTest"/>
         </classes>
     </test>
 
     <test name="Dashboards">
         <classes>
-            <class name="api.DashboardTests"/>
+            <class name="tests.testsapi.DashboardTests"/>
         </classes>
     </test>
 

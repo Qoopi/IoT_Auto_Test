@@ -10,6 +10,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -44,24 +45,29 @@ public class WebDriverFactory {
             if (SystemUtils.IS_OS_WINDOWS) {
                 System.out.println("OS is Windows");
                 if (browserName.toLowerCase().contains("firefox")) {
-                    System.setProperty("webdriver.gecko.driver", "src/main/resources/selenium/windows/geckodriver32.exe");
+                    System.setProperty("webdriver.gecko.driver", "geckodriver32.exe");
+//                    System.setProperty("webdriver.gecko.driver", "selenium/windows/geckodriver32.exe");
                     driver = new FirefoxDriver();
                 }
                 if (browserName.toLowerCase().contains("ie32")) {
                     System.setProperty("webdriver.ie.driver", "IEDriverServer32.exe");
+//                    System.setProperty("webdriver.ie.driver", "IEDriverServer32.exe");
                     driver = new InternetExplorerDriver();
                 }
                 if (browserName.toLowerCase().contains("ie64")) {
                     System.setProperty("webdriver.ie.driver", "IEDriverServer64.exe");
+//                    System.setProperty("webdriver.ie.driver", "IEDriverServer64.exe");
                     driver = new InternetExplorerDriver();
                 }
 
                 if (browserName.toLowerCase().contains("chrome")) {
-                    System.setProperty("webdriver.chrome.driver", "src/main/resources/selenium/windows/chromedriver.exe");
+                    System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+//                    System.setProperty("webdriver.chrome.driver", "selenium/windows/chromedriver.exe");
                     driver = new ChromeDriver();
                 }
                 if (browserName.toLowerCase().contains("edge")) {
-                    System.setProperty("webdriver.edge.driver", "src/main/resources/selenium/windows/MicrosoftWebDriver.exe");
+                    System.setProperty("webdriver.edge.driver", "MicrosoftWebDriver.exe");
+//                    System.setProperty("webdriver.edge.driver", "selenium/windows/MicrosoftWebDriver.exe");
                     driver = new EdgeDriver();
                 }
             }
@@ -70,11 +76,13 @@ public class WebDriverFactory {
             System.out.println("OS is Linux");
             System.out.println("The local driver configuration for linux is not fully implemented yet ");
             if (browserName.toLowerCase().contains("chrome")) {
-                System.setProperty("webdriver.chrome.driver", "src/main/resources/selenium/linux/chromedriver");
+                System.setProperty("webdriver.chrome.driver", "chromedriver");
+//                System.setProperty("webdriver.chrome.driver", "selenium/linux/chromedriver");
                 driver = new ChromeDriver();
             }
             if (browserName.toLowerCase().contains("firefox")) {
-                System.setProperty("webdriver.gecko.driver", "src/main/resources/selenium/linux/geckodriver");
+                System.setProperty("webdriver.gecko.driver", "geckodriver");
+//                System.setProperty("webdriver.gecko.driver", "selenium/linux/geckodriver");
                 driver = new FirefoxDriver();
             }
         }

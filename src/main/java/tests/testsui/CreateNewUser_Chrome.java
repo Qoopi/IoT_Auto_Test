@@ -1,4 +1,4 @@
-package ui.unused;
+package tests.testsui;
 
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -9,7 +9,7 @@ import ui.utils.ListenerUi;
 
 @Listeners(ListenerUi.class)
 
-public class CreateNewUser_Firefox {
+public class CreateNewUser_Chrome {
     @Features("Create New User")
     @Stories("User")
     @Test
