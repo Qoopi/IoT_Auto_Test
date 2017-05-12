@@ -85,22 +85,14 @@ public class LogInPage {
         waits_asserts.assertXpathVisible(driver, "//*[@id=\"passwordNext\"]/content/span");
         driver.findElement(By.xpath("//*[@id=\"passwordNext\"]/content/span")).click();
 
-        //delete this, after travis success
-//        driver.findElement(By.xpath("//*[@id=\"challenge\"]/content/div/div[2]/input")).sendKeys("geloksmmm@gmail.com");
-//        driver.findElement(By.cssSelector("#challenge > content:nth-child(1) > div:nth-child(6) > div:nth-child(3)")).click();
-        //The string '//*[@name="email"])' is not a valid XPath expression.
+        //comment these 3 lines after travis success
+        //these steps for entering recovery email, when google wants you to confirm your identity
+        //only for accounts with recovery emails and without phone number
         driver.findElement(By.xpath("//*[@name=\"email\"]")).click();
         driver.findElement(By.xpath("//*[@name=\"email\"]")).sendKeys("geloksmmm@gmail.com");
         driver.findElement(By.id("submit")).click();
-//
-//        driver.findElement(By.cssSelector("#challenge > content:nth-child(1) > div:nth-child(6) > div:nth-child(3)")).sendKeys("geloksmmm@gmail.com");
-//        driver.findElement(By.cssSelector("#submit")).click();
-
-
-
 
         //Checkout of where we are
-        //waits_asserts.assertTextByXpath(driver, "//*[@id=\"root\"]/div/div[1]/div/div[3]/div/div[2]/div[1]/div/p[2]/span", "Administrator");
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"naviCrumb\"]", "Dashboard");
     }
 
