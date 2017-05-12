@@ -131,7 +131,6 @@ public class CheckingMails {
             counter++;
         }
         Assert.assertTrue(found);
-
     }
 
 }

@@ -85,12 +85,12 @@ public class LogInPage {
         waits_asserts.assertXpathVisible(driver, "//*[@id=\"passwordNext\"]/content/span");
         driver.findElement(By.xpath("//*[@id=\"passwordNext\"]/content/span")).click();
 
-        //comment these 3 lines after travis success
-        //these steps for entering recovery email, when google wants you to confirm your identity
-        //only for accounts with recovery emails and without phone number
-        driver.findElement(By.xpath("//*[@name=\"email\"]")).click();
-        driver.findElement(By.xpath("//*[@name=\"email\"]")).sendKeys("geloksmmm@gmail.com");
-        driver.findElement(By.id("submit")).click();
+//        //comment these 3 lines after travis success
+//        //these steps for entering recovery email, when google wants you to confirm your identity
+//        //only for accounts with recovery emails and without phone number
+//        driver.findElement(By.xpath("//*[@name=\"email\"]")).click();
+//        driver.findElement(By.xpath("//*[@name=\"email\"]")).sendKeys("geloksmmm@gmail.com");
+//        driver.findElement(By.id("submit")).click();
 
         //Checkout of where we are
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"naviCrumb\"]", "Dashboard");
