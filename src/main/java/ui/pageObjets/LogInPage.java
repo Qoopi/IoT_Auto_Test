@@ -57,30 +57,19 @@ public class LogInPage {
 
     @Step("Authorise with Google Acc, as admin")
     public void enterGoogleCred() {
-        //Click on button "Login with Google acc"|
-//        driver.findElement(By.xpath("//*[@id=\"grey-background\"]/div[2]/div/div/div[3]/div/div[2]/div/a/div")).click();
+        //Click on button "Login with Google acc"
 
         waits_asserts.assertXpathVisible(driver, "//*[@id=\"btn-google\"]");
         driver.findElement(By.xpath("//*[@id=\"btn-google\"]")).click();
 
         //Google acc login
-//        driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys(mail);
-
         waits_asserts.assertXpathVisible(driver, "//*[@id=\"identifierId\"]");
         driver.findElement(By.xpath("//*[@id=\"identifierId\"]")).sendKeys(mail2);
-
-//        driver.findElement(By.xpath("//*[@id=\"next\"]")).click();
 
         waits_asserts.assertXpathVisible(driver, "//*[@id=\"identifierNext\"]/content/span");
         driver.findElement(By.xpath("//*[@id=\"identifierNext\"]/content/span")).click();
 
-//        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"Passwd\"]");
-//        driver.findElement(By.xpath("//*[@id=\"Passwd\"]")).sendKeys(pass2);
-
-//        waits_asserts.waitForVisibilityByXpath(driver, "//*[@id=\"password\"]/div[1]/div/div[1]/div");
-//        waits_asserts.assertXpathVisible(driver, "//*[@id=\"password\"]/div[1]/div/div[1]/div");
         driver.findElement(By.xpath("//*[@id=\"password\"]/div[1]/div/div[1]/input")).sendKeys(pass2);
-//        driver.findElement(By.xpath("//*[@id=\"signIn\"]")).click();
 
         waits_asserts.assertXpathVisible(driver, "//*[@id=\"passwordNext\"]/content/span");
         driver.findElement(By.xpath("//*[@id=\"passwordNext\"]/content/span")).click();
@@ -92,7 +81,7 @@ public class LogInPage {
 //        driver.findElement(By.xpath("//*[@name=\"email\"]")).sendKeys("geloksmmm@gmail.com");
 //        driver.findElement(By.id("submit")).click();
 
-        //Checkout of where we are
+        //Check where we are
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"naviCrumb\"]", "Dashboard");
     }
 

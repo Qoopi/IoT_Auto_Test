@@ -4,8 +4,6 @@ dist: trusty
 
 addons:
   apt:
-#    sources:
-#      - google-chrome # if your project contains tests need to be run on chrome include these lines
     packages:
       - google-chrome-stable
 
@@ -17,4 +15,4 @@ before_script:
 
 script:
   # perform build and run commands here
-  - mvn test
+  - mvn clean test
