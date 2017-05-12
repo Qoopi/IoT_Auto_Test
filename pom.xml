@@ -15,10 +15,11 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <allure.version>1.4.23.HOTFIX1</allure.version>
+        <allure.version>2.5</allure.version>
+        <allure.adapter.version>1.5.2</allure.adapter.version>
         <aspectj.version>1.8.9</aspectj.version>
         <compiler.version>1.8</compiler.version>
-        <test.xml.file>api.xml</test.xml.file>
+        <test.xml.file>testng.xml</test.xml.file>
     </properties>
 
     <reporting>
@@ -27,7 +28,7 @@
             <plugin>
                 <groupId>ru.yandex.qatools.allure</groupId>
                 <artifactId>allure-maven-plugin</artifactId>
-                <version>2.5</version>
+                <version>${allure.version}</version>
             </plugin>
         </plugins>
     </reporting>
@@ -39,8 +40,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.5</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${compiler.version}</source>
+                    <target>${compiler.version}</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -56,7 +57,6 @@
                         <suiteXmlFile>${test.xml.file}</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
-
                 <dependencies>
                     <dependency>
                         <groupId>org.aspectj</groupId>
@@ -113,11 +113,11 @@
         </dependency>
 
 
-        <dependency>
-            <groupId>org.apache.jmeter</groupId>
-            <artifactId>ApacheJMeter_http</artifactId>
-            <version>3.1</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.jmeter</groupId>-->
+            <!--<artifactId>ApacheJMeter_http</artifactId>-->
+            <!--<version>3.1</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -141,18 +141,18 @@
             <version>2.9.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.uncommons</groupId>
-            <artifactId>reportng</artifactId>
-            <version>1.1.4</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.testng</groupId>
-                    <artifactId>testng</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.uncommons</groupId>-->
+            <!--<artifactId>reportng</artifactId>-->
+            <!--<version>1.1.4</version>-->
+            <!--<scope>test</scope>-->
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<groupId>org.testng</groupId>-->
+                    <!--<artifactId>testng</artifactId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>com.google.inject</groupId>
@@ -170,7 +170,7 @@
         <dependency>
             <groupId>ru.yandex.qatools.allure</groupId>
             <artifactId>allure-testng-adaptor</artifactId>
-            <version>${allure.version}</version>
+            <version>${allure.adapter.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>junit</groupId>
@@ -183,12 +183,12 @@
             <artifactId>testng</artifactId>
             <version>6.10</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.jmeter</groupId>
-            <artifactId>ApacheJMeter</artifactId>
-            <version>3.1</version>
-            <scope>test</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.jmeter</groupId>-->
+            <!--<artifactId>ApacheJMeter</artifactId>-->
+            <!--<version>3.1</version>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>

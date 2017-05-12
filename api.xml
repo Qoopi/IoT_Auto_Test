@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="API tests">
-    <!--parallel is none, single GPV/VPV equipment is used-->
+    <!--parallel is 'none', single GPV/VPV equipment is used-->
     <test name="Notification Rules">
-        <parameter name="browserName" value="chrome"></parameter>
-        <parameter name="useGrid" value="false"></parameter>
         <classes>
             <class name="api.NotificationRuleTests"/>
         </classes>
     </test>
 
     <test name="Skedler Reports">
-        <parameter name="browserName" value="chrome"></parameter>
-        <parameter name="useGrid" value="false"></parameter>
         <classes>
             <class name="api.ReportsTest"/>
         </classes>
     </test>
 
     <test name="Dashboards">
-        <parameter name="browserName" value="chrome"></parameter>
-        <parameter name="useGrid" value="false"></parameter>
         <classes>
             <class name="api.DashboardTests"/>
         </classes>
