@@ -17,6 +17,7 @@ public class Main {
         List<String> suites = Lists.newArrayList();
         suites.add("testng.xml");//path to xml..
         testng.setTestSuites(suites);
+        testng.setVerbose(2);
         testng.run();
     }
 }
