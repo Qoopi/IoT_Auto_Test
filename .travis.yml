@@ -20,6 +20,7 @@ script:
   # build project
 #  - mvn clean package -DskipTests
   # run tests from builded .jar
+  - cd target
   - chmod +x iot-auto-fat.jar
   - java -version
   - java -jar iot-auto-fat.jar
