@@ -7,16 +7,17 @@ addons:
     packages:
       - google-chrome-stable
       - oracle-java8-installer
+      - oracle-java8-set-default
 
 before_script:
 #4 lines below are needed to be able to run tests in travis
-  - chmod +x src/main/resources/selenium/linux/chromedriver
+#  - chmod +x src/main/resources/selenium/linux/chromedriver
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start &
   - sleep 3
 
 script:
   # build project
-  - mvn clean package -DskipTests
+#  - mvn clean package -DskipTests
   # run tests from builded .jar
   - java -jar iot-auto-fat.jar
