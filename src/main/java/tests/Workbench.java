@@ -1,8 +1,6 @@
 package tests;
 
-import api.ListenerAPI;
-import api.MQTTManagerAPI;
-import org.testng.annotations.Listeners;
+import mechanics.api.MQTTManagerAPI;
 import org.testng.annotations.Test;
 
 /**
