@@ -1,3 +1,11 @@
+global:
+  - secure: A7fOVs2FwXsECNAo4B6HtiSjVADC7G+7FNM2O1fwELEtkzMkHUHXaWKsx0q/17JJRQr9pUWXtVLqfDOJDdBwgKJ7jyPzIHM0+bKFVoSGO5+u5vL4hz+RXg8X7/m4Lm8i8my5OpWOaX6B9ruhkDRwbmk1z3zM07eLpziTAUWaU29BZpS/f07QAjkA+e/qMsqYaMAbWIuXyxbVt2QHC8dIKPNwPmJ2Oxl15mZIibrVBnlGV9E8p2s8vHtYTEaCLfmGvZl3flt+A0mZg07q3SJhixYGgQW2WoTePV5DLuwYvjtVMoT1cK1Fqa04miG4+Qk86mzwidMRMzxzO2CWk40EOl0fvqEiHMO93OHbN5bn1zIm+neHxzy30ozXAo1olu/R0xn4DZDBTMPQ5WY6Lg65lA5kyuT4mxFgUkVgTQ2sCfs0WIebYWzXvFXaSEGy44uU4Ecssu76IAjHs8YVoiWrrUDi47r7PV64cw4ESUYG1Ay4G68rf+kkXOEtTLvG+H5DRJLph9O9ljgNd07cfitjf6cv7EAMdRCeTeaa6WbHP0BJ0G38qox80TBymQSPYRgXp4Uh3seuGD61LVqfyOdsZinhedxx0p53/4CeXBEMKCo+xaTDNnuXJCIG0mMdmluOlnzxYbGnAMr5jYcrmOlssSLQCp6uh6RFB97hH8Xsfwk=
+  - secure: d4CYpvNzJcckKngPkc/Eu3cNOncoQOa0EmyWsBRg6T5kPnhSgBfFjEketP4dBjOBoz0AsIf0lefjLJDxqoTbkchuGR+ljuLab37NdcQJti2h+8HjsccfoW/E4GidB0htb53QErd1QrnYsF1iHeAVzNPLzQ4WXBRfOz19oFoD3pibVFmETF5Ss9y883+o7o7KNjNBZ1C6ukMAzvhInmBDF64gyjBr1kFsbypRdhmgEHMBA6LyCD29P4E+2d/LRk9igJx01ADkBcSiCXWcD+CydUmUKjMej6psbukU1B9njupxGTcuNBRUGwtvYDSXpK2Mxu1c8D2OOFnmSvI6T015h2guLBmN6FwiEC0KMPKpYliJZpBErQuNPsqb+kUu530vsd2Wrk1kYjPEZb3X+X9bygW7K09TCNOfs9SNR7oiBFK/w9MdVmzC009n9ElkJzP0eKc4z/iaSRZUwWKxgA4RKwIFjpmzA2WXCPx5yMghEeX+pXamOhFqS5bNgOVD47QmW93Y32BpqAuYYhvs9guoGzartiC+UpRFPlgRD4xqjsCJoqKgDGocRDVd2fo/xyZMmr3+O1iKo/abk14ec0OLqhx1FuF6Wq0bqlTjB3IjLb1jJFu98id+NUV6z9Dms71qr3ay6FVch8thPANhhFM5BRFIUPxzXMIUd0URYXY2kjo=
+
+branches:
+ only:
+   - master
+
 language: java
 
 dist: trusty
@@ -11,10 +19,21 @@ addons:
 
 script:
 #virtual framebuffer for ui part of the test
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start &
-  - sleep 5
+#  - export DISPLAY=:99.0
+#  - sh -e /etc/init.d/xvfb start &
+#  - sleep 5
 # run tests from builded .jar
-  - cd target
-  - chmod +x iot-auto-fat.jar
-  - java -jar iot-auto-fat.jar
+#  - cd target
+#  - chmod +x iot-auto-fat.jar
+#  - java -jar iot-auto-fat.jar
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY_ID
+    secret_access_key: $AWS_SECRET_ACCESS_KEY
+    bucket: "iotsyst.builds"
+    skip_cleanup: true
+    local_dir: iot-auto-fat.jar
+    upload-dir: dashboard/auto_tests
+    on:
+      all_branches: true
