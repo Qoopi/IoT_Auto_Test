@@ -4,13 +4,13 @@
 
     <test name="Admin Role Chrome Test">
         <classes>
-            <class name="mechanics.ui.Admin_Role_Chrome"/>
+            <class name="tests.ui.Admin_Role_Chrome"/>
         </classes>
     </test>
 
     <test name="Create new user Chrome">
          <classes>
-             <class name="mechanics.ui.CreateNewUser_Chrome"/>
+             <class name="tests.ui.CreateNewUser_Chrome"/>
          </classes>
      </test>
 

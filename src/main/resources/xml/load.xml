@@ -5,37 +5,37 @@
 
     <test name="Emulate Charts Refreshing Load VPV">
         <classes>
-            <class name="mechanics.load.LoadChartsRefreshingVPV"/>
+            <class name="tests.load.LoadChartsRefreshingVPV"/>
         </classes>
     </test>
 
     <test name="Emulate Charts Refreshing Load GPV">
         <classes>
-            <class name="mechanics.load.LoadChartsRefreshingGPV"/>
+            <class name="tests.load.LoadChartsRefreshingGPV"/>
         </classes>
     </test>
 
     <test name="Emulate Charts Refreshing Load GPV 100 Equips and Dashboards">
         <classes>
-            <class name="mechanics.load.LoadChartsRefreshingGPV100"/>
+            <class name="tests.load.LoadChartsRefreshingGPV100"/>
         </classes>
     </test>
 
     <test name="Emulate Charts Refreshing Load GPV Burst">
         <classes>
-            <class name="mechanics.load.LoadChartsRefreshingGPVBurst"/>
+            <class name="tests.load.LoadChartsRefreshingGPVBurst"/>
         </classes>
     </test>
 
     <test name="Emulate Notification rule CRUD Load">
         <classes>
-            <class name="mechanics.load.LoadNotificationRulesCRUD"/>
+            <class name="tests.load.LoadNotificationRulesCRUD"/>
         </classes>
     </test>
 
     <test name="Emulate CRUD Stress">
         <classes>
-            <class name="mechanics.load.StressNotificationRulesCRUD"/>
+            <class name="tests.load.StressNotificationRulesCRUD"/>
         </classes>
     </test>
 </suite>

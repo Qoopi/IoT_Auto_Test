@@ -51,7 +51,7 @@ public class MQTTManagerAPI extends MQTTConnector {
         String payload = "{\n" +
                 "  \"result\": [\n" +
                 "    true,\n" +
-                "    6666\n" +
+                "    266\n" +
                 "  ],\n" +
                 "  \"resultTime\": \"2017-05-15T12:36:15\",\n" +
                 "  \"MultiDatastream\": {\n" +
@@ -66,7 +66,7 @@ public class MQTTManagerAPI extends MQTTConnector {
                 "    ]\n" +
                 "  }\n" +
                 "}";
-        for (int i = 0; i<500; i++){
+        for (int i = 0; i<3; i++){
             mqttPublish(topic, payload);
         }
     }

@@ -7,7 +7,6 @@
         <suite-file path="api.xml"/>
         <!--<suite-file path="load.xml"/>-->
         <!--<suite-file path="ui.xml"/>-->
-        <!--<suite-file path="fortest.xml"/>-->
     </suite-files>
 </suite>
 
