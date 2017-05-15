@@ -23,8 +23,8 @@ public class Unpack {
             unpackFile("MicrosoftWebDriver.exe", "/selenium/windows/MicrosoftWebDriver.exe");
         }
         if (SystemUtils.IS_OS_LINUX) {
-            unpackFile("chromedriver", "/selenium/linux/chromedriver");
-            unpackFile("geckodriver", "/selenium/linux/geckodriver");
+            unpackFile("chromedriver", "/selenium/linux/chromedriver", true);
+            unpackFile("geckodriver", "/selenium/linux/geckodriver", true);
         }
         unpackFile("api.xml", "/xml/api.xml");
         unpackFile("ui.xml", "/xml/ui.xml");
@@ -41,6 +41,20 @@ public class Unpack {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+    }
+
+    private void unpackFile(String newFile, String resourceFile, boolean setExecutable){
+        File file = new File(new File(newFile).getAbsolutePath());
+        if (!file.exists()) {
+            InputStream link = (getClass().getResourceAsStream(resourceFile));
+            try {
+                Files.copy(link, file.getAbsoluteFile().toPath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            file.setExecutable(true);
         }
 
     }
