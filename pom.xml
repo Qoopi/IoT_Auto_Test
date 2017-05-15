@@ -12,7 +12,6 @@
     <name>Selenium</name>
     <url>http://maven.apache.org</url>
 
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <allure.version>2.5</allure.version>
@@ -34,6 +33,7 @@
     </reporting>
 
     <build>
+            <finalName>iot_auto</finalName>
             <!-- create a complete jar for testing in other environments -->
         <plugins>
             <!--<plugin>-->
@@ -85,6 +85,8 @@
                             <mainClass>Main</mainClass>
                         </manifest>
                     </archive>
+                    <finalName>iot-auto-fat</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
                 <executions>
                     <execution>
@@ -176,12 +178,6 @@
             <version>2.0.3</version>
         </dependency>
 
-
-        <!--<dependency>-->
-            <!--<groupId>org.apache.jmeter</groupId>-->
-            <!--<artifactId>ApacheJMeter_http</artifactId>-->
-            <!--<version>3.1</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -247,12 +243,6 @@
             <artifactId>testng</artifactId>
             <version>6.10</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.apache.jmeter</groupId>-->
-            <!--<artifactId>ApacheJMeter</artifactId>-->
-            <!--<version>3.1</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
