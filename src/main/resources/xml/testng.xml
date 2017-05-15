@@ -4,10 +4,10 @@
     <parameter name="browserName" value="chrome"></parameter>
     <parameter name="useGrid" value="false"></parameter>
     <suite-files>
-        <!--<suite-file path="api.xml"/>-->
+        <suite-file path="api.xml"/>
         <!--<suite-file path="load.xml"/>-->
         <!--<suite-file path="ui.xml"/>-->
-        <suite-file path="fortest.xml"/>
+        <!--<suite-file path="fortest.xml"/>-->
     </suite-files>
 </suite>
 
