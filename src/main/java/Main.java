@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Alex Storm on 12.05.2017.
  */
-public class main {
+public class Main {
     public static void main(String[] args) {
         Unpack unpack = new Unpack();
         unpack.unpackOnStart();
