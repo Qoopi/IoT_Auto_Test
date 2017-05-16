@@ -38,7 +38,7 @@ public class NotificationRuleTests {
     }
     @Features("Every Warning on VPV rule.")
     @Test
-    public void everyWarningVPVAbnormalVibration(){
+    public void sendNotificationOnAlarmOrAbortVPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleEveryWarningVPV());
@@ -47,7 +47,21 @@ public class NotificationRuleTests {
         mqttManagerAPI.triggerVPVD11AbnormalVibration();
         requestManagerAPI.checkNotificationRuleTriggered();
         CheckingMails checkingMails = new CheckingMails();
-        checkingMails.check(SubjectNotificationRuleEveryWarning.getMessage());
+        checkingMails.check(SubjectNotificationRuleEveryWarningVPV.getMessage());
+        requestManagerAPI.notificationRuleDelete();
+    }
+    @Features("Every Warning on GPV rule.")
+    @Test
+    public void sendNotificationOnAlarmGPV(){
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
+        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleEveryWarningGPV());
+        requestManagerAPI.checkNotificationRuleIsCreated();
+        requestManagerAPI.checkNotificationRuleNotTriggered();
+        mqttManagerAPI.triggerGPV();
+        requestManagerAPI.checkNotificationRuleTriggeredLong();
+        CheckingMails checkingMails = new CheckingMails();
+        checkingMails.check(SubjectNotificationRuleEveryWarningGPV.getMessage());
         requestManagerAPI.notificationRuleDelete();
     }
     @Features("Number of Alarms above threshold on VPV equipment rule.")
@@ -80,18 +94,22 @@ public class NotificationRuleTests {
         requestManagerAPI.notificationRuleDelete();
 
     }
-
     @Features("Number of Alarms above threshold on GPV equipment rule.")
-    @Test //не работает по тому что нет возможности симулировать GPV, оставлена проверка "создается ли rule"
+    @Test
     public void alarmCountGPV(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleAlarmCountGPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
-
+        requestManagerAPI.checkNotificationRuleNotTriggered();
+        mqttManagerAPI.triggerGPV();
+        requestManagerAPI.checkNotificationRuleTriggeredLong();
+        CheckingMails checkingMails = new CheckingMails();
+        checkingMails.check(SubjectNotificationRuleNumberOfAlarms.getMessage());
         requestManagerAPI.notificationRuleDelete();
 
     }
+
     @Features("Disconnected rule with VPV equipment.")
     @Test//не работает принципиально, оставлена проверка "создается ли rule"
     public void disconnectedEquipmentVPV(){
