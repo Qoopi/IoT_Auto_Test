@@ -1,5 +1,4 @@
 language: java
-
 env:
   global:
    - secure: "GQCYJKzcPUvv+T+pz+C4Gg6OXPn91aSBuhuzKoAfZQ9OJr99KejS/NTpk1IYJsSaZOk4p7XARQj/AJtVEAekpLiDQUu/wTFg0F/l3tEGL4OdHyO3VhXzTeEb8O9D6X7etgZFijkYXB0K8XQ5afp/F43ckc9Yp06MLqp+TDGYrG1lAID3uv+NZ4y2TMa4Ky0pqfdnH6jxJi0t0IljXVdX7UJxFCdP49W6JlzpZN6lipakyzHTd7bc9INtZ2UpuGIW5CQ1YUoLWfj4EZ+cEVY1LsEOlGlLW6pl4XhVSN2R0Ih1pw0mIe1krU9xwRogh3mav2AIvU5x3xmNyZFYhJPB3oIlqqQhAVRukN+XxCxxCmXX3TGcNWXO5elxYA4sDlhXaLWpfe9hYw7wLtBAPDo6rPnZIMJmQgwNCsklEpWYRxiAMtjj+piaHe8CE31Z3nus+hL4Bl6dTaoxv2AuXXuS9qE7qWwKbfc9OuocU0/t4t3KWH5cSpRCZwItP8vb1RzDqVFR3mscL7q0YnhmVvdEnhPYy2oyFAv8G9VcPD6oJj6TQAoA91HlqpDQIJLJNXQ9cE7PCM5GJ5B7Ki7tgNXPogTQXVa3gIiEtfJwFDmj1Ni9K1zgAWzFzseerDHjbaXDOErkFCZUIPsqs8Dzgqe3Yic0QgFYvkq2Ex9xFF/Qu98="
@@ -7,17 +6,13 @@ env:
 branches:
  only:
    - jar-inprogress
-
-#sudo: required
 dist: trusty
-
 addons:
   apt:
     packages:
       - google-chrome-stable
       - oracle-java8-installer
       - oracle-java8-set-default
-
 script:
 #virtual framebuffer for ui part of the test
 #  - export DISPLAY=:99.0
@@ -36,7 +31,7 @@ deploy:
     secret_access_key: $AWS_SECRET_ACCESS_KEY
     bucket: "iotsyst.builds"
     skip_cleanup: true
-    local_dir: iot-auto-fat.jar
+    local_dir: target
     upload-dir: dashboard/auto_tests
     on:
       all_branches: true
