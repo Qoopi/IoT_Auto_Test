@@ -15,8 +15,8 @@ public class Workbench {
     @Test
     public void test1(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
-        mqttManagerAPI.triggerGPV();
-//        mqttManagerAPI.triggerGPV2();
+        mqttManagerAPI.triggerGPVLong();
+//        mqttManagerAPI.triggerGPV();
     }
 
 //    @Test

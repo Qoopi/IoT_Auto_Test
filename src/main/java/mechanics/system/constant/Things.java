@@ -5,7 +5,7 @@ package mechanics.system.constant;
  */
 public enum Things {
     ThingGPV("Thing-090035-0"),
-    ThingGPVBUC("Thing-090154-0"),
+    ThingGPVBUC("Thing-090175-0"),
     ThingVPV11("Thing-000011-i1"),
     ThingVPV12("Thing-000012-i2"),
     ThingVPV13("Thing-000013-i4"),

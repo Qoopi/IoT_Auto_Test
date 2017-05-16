@@ -27,11 +27,11 @@ public class JSONManagerAPI extends JSONHandler{
                 1
         ).toString();
     }
-    @Step("Creating JSON for Number of Alarms above threshold on BUC ARTRobot.")
+    @Step("Creating JSON for Number of Alarms above threshold on Test OSS.")
     public String jsonRuleAlarmCountGPV(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleNumberOfAlarms.getMessage(),
-                "BUC ARTRobot",
+                "Test OSS",
                 3,
                 ThingGPVBUC.getValue(),
                 "",
@@ -135,7 +135,7 @@ public class JSONManagerAPI extends JSONHandler{
     @Step("Creating JSON for Every Warning rule for Pump D11.")
     public String jsonRuleEveryWarningVPV(){
         return notificationRuleCreateJSON(
-                SubjectNotificationRuleEveryWarning.getMessage(),
+                SubjectNotificationRuleEveryWarningVPV.getMessage(),
                 "PUMP D11",
                 8,
                 ThingVPV11.getValue(),
@@ -147,6 +147,22 @@ public class JSONManagerAPI extends JSONHandler{
                 0
         ).toString();
     }
+    @Step("Creating JSON for Every Warning rule for Test OSS.")
+    public String jsonRuleEveryWarningGPV(){
+        return notificationRuleCreateJSON(
+                SubjectNotificationRuleEveryWarningGPV.getMessage(),
+                "Test OSS",
+                9,
+                ThingGPVBUC.getValue(),
+                0,
+                "",
+                ">=",
+                0,
+                0,
+                0
+        ).toString();
+    }
+
 
     public String jsonEquipmentDisconnectVPV(){
         return equipmentOnOff(ThingVPV11.getValue(),false);

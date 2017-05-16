@@ -12,7 +12,8 @@ public enum EmailINBOX implements CharSequence {
     SubjectNotificationRuleDisconnectedGPV("Disconnected Equipment GPV"),
     SubjectNotificationRuleConnectedVPV("Connected Equipment VPV"),
     SubjectNotificationRuleConnectedGPV("Connected Equipment GPV"),
-    SubjectNotificationRuleEveryWarning("Every Warning VPV"),
+    SubjectNotificationRuleEveryWarningVPV("Every Warning VPV"),
+    SubjectNotificationRuleEveryWarningGPV("Every Warning GPV"),
 
     SubjectReportListVPVMonthly("Vacuum Pump Vibration Report - Optimized for Printing - Monthly"),
     SubjectReportListVPVWeekly("Vacuum Pump Vibration Report - Optimized for Printing - Weekly"),
