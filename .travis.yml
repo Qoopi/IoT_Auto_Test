@@ -24,6 +24,7 @@ script:
 #  - java -jar iot-auto-fat.jar
   - echo $AWS_ACCESS_KEY_ID
   - echo $AWS_SECRET_ACCESS_KEY
+  - ls
 
 deploy:
   - provider: s3
@@ -31,7 +32,7 @@ deploy:
     secret_access_key: $AWS_SECRET_ACCESS_KEY
     bucket: "iotsyst.builds"
     skip_cleanup: true
-    local_dir: target
+    local_dir: iot-auto-fat.jar
     upload-dir: dashboard/auto_tests
     on:
       all_branches: true
