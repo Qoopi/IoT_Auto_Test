@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import ru.yandex.qatools.allure.annotations.Step;
-import mechanics.system.readers.CredentialCenter;
+import mechanics.system.readers.Credentials;
 import mechanics.ui.utils.SessionStorage;
 import mechanics.ui.utils.WaitsAsserts;
 import mechanics.ui.utils.WebDriverManager;
@@ -20,14 +20,14 @@ public class LogInPage {
     private WebDriver driver;
 
     private String mail = null;
-    private String mail2 = null;
     private String pass = null;
+    private String mail2 = null;
     private String pass2 = null;
 
     public LogInPage() {
         this.driver = WebDriverManager.getDriver();
-        CredentialCenter credentialCenter = new CredentialCenter();
-        HashMap<String, String> map = credentialCenter.getCredentials();
+        Credentials credentials = new Credentials();
+        HashMap<String, String> map = credentials.getCredentials();
 
         mail = map.get("test_email");
         pass = map.get("test_password");

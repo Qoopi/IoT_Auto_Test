@@ -2,22 +2,22 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="API tests">
     <!--parallel is 'none', single GPV/VPV equipment is used-->
-   <!-- <test name="Notification Rules">
+    <test name="Notification Rules">
         <classes>
             <class name="tests.api.NotificationRuleTests"/>
         </classes>
     </test>
 
-    <test name="Skedler Reports">
-        <classes>
-            <class name="tests.api.ReportsTest"/>
-        </classes>
-    </test>
+    <!--<test name="Skedler Reports">-->
+        <!--<classes>-->
+            <!--<class name="tests.api.ReportsTest"/>-->
+        <!--</classes>-->
+    <!--</test>-->
 
-    <test name="Dashboards">
-        <classes>
-            <class name="tests.api.DashboardTests"/>
-        </classes>
-    </test>-->
+    <!--<test name="Dashboards">-->
+        <!--<classes>-->
+            <!--<class name="tests.api.DashboardTests"/>-->
+        <!--</classes>-->
+    <!--</test>-->
 
 </suite>

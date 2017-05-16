@@ -11,7 +11,7 @@ import java.util.Properties;
  * Created by user on 31.03.2017.
  */
 
-public class CredentialCenter {
+public class Credentials {
 
     private Properties prop = new Properties();
     private InputStream input = null;

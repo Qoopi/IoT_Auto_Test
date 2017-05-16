@@ -1,6 +1,7 @@
 package mechanics.system.readers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import mechanics.system.constant.AssembledUrls;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -23,40 +24,52 @@ public class Variables {
     //if yes
     //if true
     private final String pathToFolder = "variables";
-
-
+    private HashMap<String, String> json = null;
 
 
     @Test
     public void test(){
-        findStageJson("dev");
+        findAndAssembleStage("dev");
+    }
+
+    public void findAndAssembleStage(String stage){
+        findStageJson(stage);
+        assembleUrls();
+    }
+
+    private void assembleUrls(){
+        AssembledUrls assembledUrls = new AssembledUrls();
+        assembledUrls.setApiUrl(json.get("API_URL"));
+        assembledUrls.setApiUrlMin(json.get("API_URL_MIN"));
+        assembledUrls.setIotEndpoint(json.get("iotEndpoint"));
+        assembledUrls.setRedirectClientURI(json.get("redirectClientURI"));
+        assembledUrls.assemble();
     }
 
 
-    public HashMap<String, String> findStageJson(String stage){
+    private boolean findStageJson(String stage){
         boolean found = false;
-        HashMap<String, String> json = null;
         ArrayList<String> files = readFolderContent(pathToFolder);
         for (int i = 0; i < files.size(); i++){
             json = simpleJsonFileToMap(files.get(i));
             if (json != null && json.get("stage") != null && json.get("stage").equals(stage)) {
                 found = true;
                 System.out.println("Found suitable .json file for specified stage '"+stage+"' in folder '"+pathToFolder+"'");
-//                printMap(json);
-                return json;
+                return found;
             }
             else{
                 json = null;
             }
         }
-        if (!found){
+        if (!found || json==null){
             System.out.println("ERR: Can't find suitable .json file for specified stage '"+stage+"' in folder '"+pathToFolder+"'");
         }
-        return json;
+        return found;
     }
 
 
     private void printMap(HashMap<String, String> map){
+        assert map!=null;
         for (HashMap.Entry<String, String> entry : map.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();

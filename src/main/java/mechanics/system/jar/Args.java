@@ -1,6 +1,7 @@
 package mechanics.system.jar;
 
 import com.beust.jcommander.Parameter;
+import mechanics.system.readers.Variables;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,12 @@ public class Args {
     @Parameter(names = {"-region", "-r"}, description = "Region of test environment", echoInput = true)
     private String groups;
 
+    public void setStage(){
+        Variables variables = new Variables();
+        variables.findAndAssembleStage(stage);
+    }
+
     public void print() {
-        System.out.printf(stage +" "+ groups);
+        System.out.println("stage: "+stage);
     }
 }

@@ -2,7 +2,7 @@ package mechanics.system.email;
 
 import org.junit.Assert;
 import ru.yandex.qatools.allure.annotations.Step;
-import mechanics.system.readers.CredentialCenter;
+import mechanics.system.readers.Credentials;
 
 import javax.mail.*;
 import java.util.HashMap;
@@ -87,8 +87,8 @@ public class CheckingMails {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        CredentialCenter credentialCenter = new CredentialCenter();
-        HashMap<String, String> map = credentialCenter.getCredentials();
+        Credentials credentials = new Credentials();
+        HashMap<String, String> map = credentials.getCredentials();
 
         String mail = map.get("test_email");
         String pass = map.get("test_password");
@@ -108,8 +108,8 @@ public class CheckingMails {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        CredentialCenter credentialCenter = new CredentialCenter();
-        HashMap<String, String> map = credentialCenter.getCredentials();
+        Credentials credentials = new Credentials();
+        HashMap<String, String> map = credentials.getCredentials();
 
         String mail = map.get("test_email");
         String pass = map.get("test_password");
