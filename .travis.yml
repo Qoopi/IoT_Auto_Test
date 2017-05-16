@@ -17,6 +17,7 @@ branches:
 
 language: java
 
+sudo: required
 dist: trusty
 
 addons:
