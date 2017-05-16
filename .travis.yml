@@ -30,7 +30,8 @@ deploy:
     secret_access_key: $AWS_SECRET_ACCESS_KEY
     bucket: "iotsyst.builds"
     skip_cleanup: true
-    local_dir: /home/travis/build/Qoopi/IoT_Auto_Test/target/*.jar
+#    local_dir: /home/travis/build/Qoopi/IoT_Auto_Test/target/*.jar
+    file: /home/travis/build/Qoopi/IoT_Auto_Test/target/iot-auto-fat.jar
     upload-dir: dashboard/auto_tests
     on:
       all_branches: true
