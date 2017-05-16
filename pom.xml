@@ -135,6 +135,13 @@
         </plugins>
     </build>
     <dependencies>
+        <!--commandline args parser-->
+        <dependency>
+            <groupId>com.beust</groupId>
+            <artifactId>jcommander</artifactId>
+            <version>1.69</version>
+        </dependency>
+
         <!--don't touch these 2 dependencies,system.mqttmqtt will break-->
         <dependency>
             <groupId>com.amazonaws</groupId>
