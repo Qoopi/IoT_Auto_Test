@@ -18,7 +18,7 @@ branches:
  only:
    - jar-inprogress
 
-sudo: required
+#sudo: required
 dist: trusty
 
 addons:
@@ -37,6 +37,8 @@ script:
   - cd target
 #  - chmod +x iot-auto-fat.jar
 #  - java -jar iot-auto-fat.jar
+  - echo $AWS_ACCESS_KEY_ID
+  - echo $AWS_SECRET_ACCESS_KEY
 
 deploy:
   - provider: s3
