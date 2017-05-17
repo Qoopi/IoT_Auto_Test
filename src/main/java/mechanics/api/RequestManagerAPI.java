@@ -22,10 +22,10 @@ public class RequestManagerAPI extends JSONManagerAPI{
     private Response responseApi = null;
 
 
-    private static final String dashboard = AssembledUrls.dashboard;
+    private static String dashboard = AssembledUrls.dashboard;
 
-    private static final String thingVPVForDashboard = AssembledEquipments.equipmentVpv;
-    private static final String thingGPVForDashboard = AssembledEquipments.equipmentGpv;
+    private static String thingVPVForDashboard = AssembledEquipments.equipmentVpv;
+    private static String thingGPVForDashboard = AssembledEquipments.equipmentGpv;
 
     public RequestManagerAPI() {
         messagesEnableAllDebugResponse = true;

@@ -42,8 +42,6 @@ public class Credentials {
             // get the properties value and save them in Map
             credentials.put("test_email", prop.getProperty("test_email"));
             credentials.put("test_password", prop.getProperty("test_password"));
-            credentials.put("test_email2", prop.getProperty("test_email2"));
-            credentials.put("test_password2", prop.getProperty("test_password2"));
         } catch (IOException io) {
             io.printStackTrace();
         } finally {
@@ -63,8 +61,6 @@ public class Credentials {
         credentials = new HashMap<>();
         credentials.put("test_email", System.getenv("test_email"));
         credentials.put("test_password", System.getenv("test_password"));
-        credentials.put("test_email2", System.getenv("test_email2"));
-        credentials.put("test_password2", System.getenv("test_password2"));
         return credentials;
     }
 }

@@ -10,8 +10,8 @@ import static mechanics.system.constant.EmailInbox.*;
  * Created by user on 20.04.2017.
  */
 public class JSONManagerAPI extends JSONHandler{
-    private static final String thingVpv = AssembledEquipments.equipmentVpv;
-    private static final String thingGpv = AssembledEquipments.equipmentGpv;
+    private static String thingVpv = AssembledEquipments.equipmentVpv;
+    private static String thingGpv = AssembledEquipments.equipmentGpv;
 
 
 

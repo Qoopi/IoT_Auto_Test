@@ -17,9 +17,9 @@ public class JSONHandler extends SignAWSv4 {
     private String defaultDashboardGPVName = "someAutoTestNameGPV";
     private String defaultDashboardGPVDescription = "someAutoTestDescriptionGPV";
 
-    private final String testEmail = "kov.iot.sys@gmail.com";
-    private final String thingVpv = AssembledEquipments.equipmentVpv;
-    private final String thingGpv = AssembledEquipments.equipmentGpv;
+    private String testEmail = "kov.iot.sys@gmail.com";
+    private String thingVpv = AssembledEquipments.equipmentVpv;
+    private String thingGpv = AssembledEquipments.equipmentGpv;
 
 
     public JsonObject reportCreate(String templateId, String equipment, String name){

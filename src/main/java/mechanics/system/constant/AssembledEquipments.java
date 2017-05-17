@@ -12,27 +12,28 @@ public class AssembledEquipments {
     public static String equipmentVpvChannel;
     public static String equipmentVpvData;
 
-    public static void setEquipmentGpv(String equipmentGpv) {
+
+    public void setEquipmentGpv(String equipmentGpv) {
         AssembledEquipments.equipmentGpv = equipmentGpv;
     }
 
-    public static void setEquipmentGpvData(String equipmentGpvData) {
+    public void setEquipmentGpvData(String equipmentGpvData) {
         AssembledEquipments.equipmentGpvData = equipmentGpvData;
     }
 
-    public static void setEquipmentGpvMultiDatastreamId(String equipmentGpvMultiDatastreamId) {
+    public void setEquipmentGpvMultiDatastreamId(String equipmentGpvMultiDatastreamId) {
         AssembledEquipments.equipmentGpvMultiDatastreamId = equipmentGpvMultiDatastreamId;
     }
 
-    public static void setEquipmentVpv(String equipmentVpv) {
+    public void setEquipmentVpv(String equipmentVpv) {
         AssembledEquipments.equipmentVpv = equipmentVpv;
     }
 
-    public static void setEquipmentVpvChannel(String equipmentVpvChannel) {
+    public void setEquipmentVpvChannel(String equipmentVpvChannel) {
         AssembledEquipments.equipmentVpvChannel = equipmentVpvChannel;
     }
 
-    public static void setEquipmentVpvData(String equipmentVpvData) {
+    public void setEquipmentVpvData(String equipmentVpvData) {
         AssembledEquipments.equipmentVpvData = equipmentVpvData;
     }
 }

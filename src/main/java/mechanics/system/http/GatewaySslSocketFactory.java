@@ -14,7 +14,7 @@ import java.net.Socket;
 import java.util.Collections;
 
 public class GatewaySslSocketFactory extends SSLSocketFactory {
-    private static final String host = AssembledUrls.apiUrlMin;
+    private static String host = AssembledUrls.apiUrlMin;
     private static final String protocol = "TLSv1.2";
 
     public GatewaySslSocketFactory(SSLContext sslContext, X509HostnameVerifier hostnameVerifier) {

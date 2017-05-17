@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
-//        String[] ar = {"-stage", "dev"};
+//        String[] args1 = {"-stage", "dev"};
         Args argv = new Args();
         JCommander.newBuilder()
                 .addObject(argv)
@@ -22,11 +22,6 @@ public class Main {
                 .parse(args);
         argv.print();
         argv.setStage();
-
-        System.out.println(AssembledUrls.authenticationRefresh);
-        System.out.println(AssembledUrls.chart);
-        System.out.println(AssembledUrls.iotEndpoint);
-
 
         Unpack unpack = new Unpack();
         unpack.unpackOnStart();

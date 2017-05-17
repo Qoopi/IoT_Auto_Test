@@ -27,14 +27,14 @@ public class RequestManagerLoad extends RequestTemplates{
     private String thingGPV100 = "Thing-90"+new DecimalFormat("000").format(equipCounter)+"-0";
 
 
-    private static final String thingGPV = AssembledEquipments.equipmentGpv;
-    private static final String thingVPV = AssembledEquipments.equipmentVpv;
-    private static final String channelVPV = AssembledEquipments.equipmentVpvChannel;
+    private static String thingGPV = AssembledEquipments.equipmentGpv;
+    private static String thingVPV = AssembledEquipments.equipmentVpv;
+    private static String channelVPV = AssembledEquipments.equipmentVpvChannel;
 
-    private static final String chart = AssembledUrls.chart;
-    private static final String dashboard = AssembledUrls.dashboard;
-    private static final String notificationRule = AssembledUrls.notificationRule;
-    private static final String notificationUnread = AssembledUrls.notificationUnread;
+    private static String chart = AssembledUrls.chart;
+    private static String dashboard = AssembledUrls.dashboard;
+    private static String notificationRule = AssembledUrls.notificationRule;
+    private static String notificationUnread = AssembledUrls.notificationUnread;
 
 
     public void getChart(int repeats, int timeBetweenRequests){

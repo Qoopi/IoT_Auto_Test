@@ -3,7 +3,7 @@ package mechanics.system.constant;
 /**
  * Created by user on 19.04.2017.
  */
-public enum Things {
+public enum ArchivedThings {
     ThingGPV("Thing-090035-0"),
     ThingGPVBUC("Thing-090175-0"),
     ThingVPV11("Thing-000011-i1"),
@@ -20,7 +20,7 @@ public enum Things {
 
     private final String value;
 
-    Things(String s) {
+    ArchivedThings(String s) {
         value = s;
     }
 

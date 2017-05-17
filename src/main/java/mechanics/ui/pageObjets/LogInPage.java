@@ -21,8 +21,6 @@ public class LogInPage {
 
     private String mail = null;
     private String pass = null;
-    private String mail2 = null;
-    private String pass2 = null;
 
     public LogInPage() {
         this.driver = WebDriverManager.getDriver();
@@ -31,8 +29,6 @@ public class LogInPage {
 
         mail = map.get("test_email");
         pass = map.get("test_password");
-        mail2 = map.get("test_email2");
-        pass2 = map.get("test_password2");
     }
 
 
@@ -90,10 +86,10 @@ public class LogInPage {
         //Click on button "Login with Google acc"|
         driver.findElement(By.xpath("//*[@id=\"btn-google\"]")).click();
         //Google acc login
-        driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys(mail2);
+        driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys(mail);
         driver.findElement(By.xpath("//*[@id=\"next\"]")).click();
         waits_asserts.waitForVisibilityByCSS(driver, "#Passwd");
-        driver.findElement(By.cssSelector("#Passwd")).sendKeys(pass2);
+        driver.findElement(By.cssSelector("#Passwd")).sendKeys(pass);
         driver.findElement(By.xpath("//*[@id=\"signIn\"]")).click();
         waits_asserts.assertTextByXpath(driver, "//*[@id=\"naviCrumb\"]", "Dashboard");
     }
