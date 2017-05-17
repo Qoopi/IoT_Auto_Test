@@ -14,10 +14,10 @@
         <!--</classes>-->
     <!--</test>-->
 
-    <!--<test name="Dashboards">-->
-        <!--<classes>-->
-            <!--<class name="tests.api.DashboardTests"/>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="Dashboards">
+        <classes>
+            <class name="tests.api.DashboardTests"/>
+        </classes>
+    </test>
 
 </suite>

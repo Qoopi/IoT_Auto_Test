@@ -16,8 +16,6 @@ public class DashboardTests {
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.dashboardCreate(requestManagerAPI.jsonDashboardCreateVPVCanvas());
         requestManagerAPI.checkDashboardCreated();
-//        requestManagerAPI.dashboardUpdate(requestManagerAPI.jsonDashboardUpdateVPVCanvas());
-//        requestManagerAPI.checkDashboardUpdated(requestManagerAPI.jsonDashboardUpdatedVPVCanvas());
         requestManagerAPI.dashboardDelete();
         requestManagerAPI.checkDashboardDeleted();
     }

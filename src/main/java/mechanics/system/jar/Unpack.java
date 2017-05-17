@@ -46,7 +46,6 @@ public class Unpack {
                 e.printStackTrace();
             }
         }
-
     }
 
     private void unpackFile(String newFile, String resourceFile, boolean setExecutable){

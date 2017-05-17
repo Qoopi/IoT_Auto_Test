@@ -21,16 +21,15 @@ public class Main {
                 .build()
                 .parse(args);
         argv.print();
-        argv.setStage();
-
         Unpack unpack = new Unpack();
         unpack.unpackOnStart();
+        argv.setStage();
         TestListenerAdapter tla = new TestListenerAdapter();
         TestNG testng = new TestNG();
         List<String> suites = Lists.newArrayList();
-        suites.add("xml/testng.xml");//path to xml..
+        suites.add("xml/testng.xml");//path to main .xml
         testng.setTestSuites(suites);
-        testng.setVerbose(2);
+        testng.setVerbose(1);
         testng.run();
     }
 }
