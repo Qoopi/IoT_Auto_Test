@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import mechanics.system.email.CheckingMails;
 
-import static mechanics.system.constant.EmailINBOX.*;
+import static mechanics.system.constant.EmailInbox.*;
 
 /**
  * Created by user on 20.04.2017.

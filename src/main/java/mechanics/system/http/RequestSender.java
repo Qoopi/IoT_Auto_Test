@@ -6,6 +6,7 @@ import com.jayway.restassured.config.SSLConfig;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 import mechanics.load.utils.GatlingReportAdapter;
+import mechanics.system.constant.AssembledUrls;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -21,7 +22,6 @@ import java.util.Map;
 
 import static com.jayway.restassured.RestAssured.given;
 import static mechanics.system.constant.HTTPMethod.*;
-import static mechanics.system.constant.URLs.*;
 
 public class RequestSender {
     private RequestSpecification requestSpecification = null;
@@ -51,7 +51,7 @@ public class RequestSender {
         if (startDate.getTime()<(System.currentTimeMillis()-360000)){
             SignAWSv4 signAWSv4 = new SignAWSv4();
             RequestSender requestSender = new RequestSender();
-            requestSender.createEmptyRequestWithHeaders(signAWSv4.allHeaders(HTTPMethod.GET.getValue(), AuthenticationRefresh.getValue())).get(AuthenticationRefresh.getValue());
+            requestSender.createEmptyRequestWithHeaders(signAWSv4.allHeaders(HTTPMethod.GET.getValue(), AssembledUrls.authenticationRefresh)).get(AssembledUrls.authenticationRefresh);
             setStartDate();
         }
     }
@@ -60,7 +60,7 @@ public class RequestSender {
         if (startDate.getTime()<(System.currentTimeMillis()-360000)){
             SignAWSv4 signAWSv4 = new SignAWSv4();
             RequestSender requestSender = new RequestSender();
-            requestSender.createEmptyRequestWithHeaders(signAWSv4.allHeaders(HTTPMethod.GET.getValue(), LoadAuthenticationRefresh.getValue())).get(LoadAuthenticationRefresh.getValue());
+            requestSender.createEmptyRequestWithHeaders(signAWSv4.allHeaders(HTTPMethod.GET.getValue(), AssembledUrls.authenticationRefresh)).get(AssembledUrls.authenticationRefresh);
             setStartDate();
         }
     }

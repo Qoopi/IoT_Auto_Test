@@ -1,13 +1,13 @@
 package mechanics.system.http;
 
 import com.google.gson.JsonObject;
+import mechanics.system.constant.AssembledEquipments;
 import org.jglue.fluentjson.JsonBuilderFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import mechanics.system.aws.SignAWSv4;
-import mechanics.system.constant.Things;
 
 import java.util.ArrayList;
 
@@ -17,8 +17,9 @@ public class JSONHandler extends SignAWSv4 {
     private String defaultDashboardGPVName = "someAutoTestNameGPV";
     private String defaultDashboardGPVDescription = "someAutoTestDescriptionGPV";
 
-//    private final String testEmail = "kov.ossystem@gmail.com";
     private final String testEmail = "kov.iot.sys@gmail.com";
+    private final String thingVpv = AssembledEquipments.equipmentVpv;
+    private final String thingGpv = AssembledEquipments.equipmentGpv;
 
 
     public JsonObject reportCreate(String templateId, String equipment, String name){
@@ -246,26 +247,24 @@ public class JSONHandler extends SignAWSv4 {
     }
 
     public String dashboardCreateCanvasVPVJSONDefault(){
-        String thingVPV1 = Things.ThingVPV13.getValue();
-        String thingVPV2 = Things.ThingVPV12.getValue();
-        String thingVPV3 = Things.ThingVPV11.getValue();
+        String thingVPV1 = thingVpv;
         String name = defaultDashboardVPVName;
         String description = defaultDashboardVPVDescription;
 
-        return dashboardCreateCanvasVPVJSON(thingVPV1, thingVPV2, thingVPV3, name, description).toString();
+        return dashboardCreateCanvasVPVJSON(thingVPV1, name, description).toString();
     }
 
-    private JsonObject dashboardCreateCanvasVPVJSON(String thingVPV1, String thingVPV2, String thingVPV3, String name, String description){
+    private JsonObject dashboardCreateCanvasVPVJSON(String thingVPV1, String name, String description){
         JsonObject jsonObject = JsonBuilderFactory.buildObject()
                 .add("type", 7)
-                .addArray("equipmentIds").add(thingVPV1).add(thingVPV2).add(thingVPV3).end()
+                .addArray("equipmentIds").add(thingVPV1).end()
                 .add("name", name)
                 .add("description", description).getJson();
         return jsonObject;
     }
 
     public String dashboardCreateCanvasGPVJSONDefault(){
-        String thingGPV = Things.ThingGPV.getValue();
+        String thingGPV = thingGpv;
         String name = defaultDashboardGPVName;
         String description = defaultDashboardGPVDescription;
 

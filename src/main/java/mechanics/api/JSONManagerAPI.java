@@ -1,15 +1,18 @@
 package mechanics.api;
 
+import mechanics.system.constant.AssembledEquipments;
 import ru.yandex.qatools.allure.annotations.Step;
 import mechanics.system.http.JSONHandler;
 
-import static mechanics.system.constant.EmailINBOX.*;
-import static mechanics.system.constant.Things.*;
+import static mechanics.system.constant.EmailInbox.*;
 
 /**
  * Created by user on 20.04.2017.
  */
 public class JSONManagerAPI extends JSONHandler{
+    private static final String thingVpv = AssembledEquipments.equipmentVpv;
+    private static final String thingGpv = AssembledEquipments.equipmentGpv;
+
 
 
     @Step("Creating JSON for Abnormal Vibration rule with Pump D11.")
@@ -18,7 +21,7 @@ public class JSONManagerAPI extends JSONHandler{
                 SubjectNotificationRuleAbnormalVibrationsVPV.getMessage(),
                 "Pump D11",
                 0,
-                ThingVPV11.getValue(),
+                thingVpv,
                 0,
                 "",
                 ">=",
@@ -33,7 +36,7 @@ public class JSONManagerAPI extends JSONHandler{
                 SubjectNotificationRuleNumberOfAlarms.getMessage(),
                 "Test OSS",
                 3,
-                ThingGPVBUC.getValue(),
+                thingGpv,
                 "",
                 "",
                 ">=",
@@ -48,7 +51,7 @@ public class JSONManagerAPI extends JSONHandler{
                 SubjectNotificationRuleNumberOfAlarms.getMessage(),
                 "PUMP D11",
                 3,
-                ThingVPV11.getValue(),
+                thingVpv,
                 "",
                 "",
                 ">=",
@@ -63,7 +66,7 @@ public class JSONManagerAPI extends JSONHandler{
                 SubjectNotificationRuleNumberOfAborts.getMessage(),
                 "PUMP D11",
                 2,
-                ThingVPV11.getValue(),
+                thingVpv,
                 "",
                 "",
                 ">=",
@@ -78,7 +81,7 @@ public class JSONManagerAPI extends JSONHandler{
                 SubjectNotificationRuleDisconnectedVPV.getMessage(),
                 "PUMP D11",
                 4,
-                ThingVPV11.getValue(),
+                thingVpv,
                 0,
                 "0",
                 "",
@@ -93,7 +96,7 @@ public class JSONManagerAPI extends JSONHandler{
                 SubjectNotificationRuleDisconnectedGPV.getMessage(),
                 "BUC ARTRobot",
                 4,
-                ThingGPVBUC.getValue(),
+                thingGpv,
                 0,
                 "0",
                 "",
@@ -108,7 +111,7 @@ public class JSONManagerAPI extends JSONHandler{
                 SubjectNotificationRuleConnectedVPV.getMessage(),
                 "PUMP D11",
                 4,
-                ThingVPV11.getValue(),
+                thingVpv,
                 0,
                 "1",
                 "",
@@ -123,7 +126,7 @@ public class JSONManagerAPI extends JSONHandler{
                 SubjectNotificationRuleConnectedGPV.getMessage(),
                 "BUC ARTRobot",
                 4,
-                ThingGPVBUC.getValue(),
+                thingGpv,
                 0,
                 "1",
                 "",
@@ -138,7 +141,7 @@ public class JSONManagerAPI extends JSONHandler{
                 SubjectNotificationRuleEveryWarningVPV.getMessage(),
                 "PUMP D11",
                 8,
-                ThingVPV11.getValue(),
+                thingVpv,
                 0,
                 "",
                 ">=",
@@ -153,7 +156,7 @@ public class JSONManagerAPI extends JSONHandler{
                 SubjectNotificationRuleEveryWarningGPV.getMessage(),
                 "Test OSS",
                 9,
-                ThingGPVBUC.getValue(),
+                thingGpv,
                 0,
                 "",
                 ">=",
@@ -165,27 +168,27 @@ public class JSONManagerAPI extends JSONHandler{
 
 
     public String jsonEquipmentDisconnectVPV(){
-        return equipmentOnOff(ThingVPV11.getValue(),false);
+        return equipmentOnOff(thingVpv,false);
     }
     public String jsonEquipmentConnectVPV(){
-        return equipmentOnOff(ThingVPV11.getValue(),true);
+        return equipmentOnOff(thingVpv,true);
     }
     public String jsonEquipmentDisconnectGPV(){
-        return equipmentOnOff(ThingGPVBUC.getValue(),false);
+        return equipmentOnOff(thingGpv,false);
     }
     public String jsonEquipmentConnectGPV(){
-        return equipmentOnOff(ThingGPVBUC.getValue(),true);
+        return equipmentOnOff(thingGpv,true);
     }
 
     private String reportTemplateId = "Vacuum-Pump-Vibration-Report---Optimized-for-Printing---Weekly";
     private String reportTemplateName = "Vacuum-Pump-Vibration-Report-List---Optimized-for-Printing---Weekly";
 
     public String JSONReportCreate(){
-        return reportCreate(reportTemplateId, ThingVPV11.getValue(), reportTemplateName).toString();
+        return reportCreate(reportTemplateId, thingVpv, reportTemplateName).toString();
     }
 
     public String JSONReportSendNow(String id){
-        return reportSendNow(id, reportTemplateId, ThingVPV11.getValue(), reportTemplateName).toString();
+        return reportSendNow(id, reportTemplateId, thingVpv, reportTemplateName).toString();
     }
 
     public String JSONReportDelete(){
@@ -197,7 +200,7 @@ public class JSONManagerAPI extends JSONHandler{
     private static final String Description = "You should not see this one";
     public String jsonDashboardCreateVPVCanvas(){
         int dashboardType = 7;
-        String equipmentId = ThingVPVForDashboard.getValue();
+        String equipmentId = thingVpv;
         String name = Name;
         String description = Description;
         return dashboardCreate(dashboardType, equipmentId, name, description).toString();
@@ -205,35 +208,35 @@ public class JSONManagerAPI extends JSONHandler{
 
     public String jsonDashboardCreateVPVKibana(){
         int dashboardType = 6;
-        String equipmentId = ThingVPVForDashboard.getValue();
+        String equipmentId = thingVpv;
         String name = Name;
         String description = Description;
         return dashboardCreate(dashboardType, equipmentId, name, description).toString();
     }
     public String jsonDashboardCreateGPVKibana025(){
         int dashboardType = 4;
-        String equipmentId = ThingGPVForDashboard.getValue();
+        String equipmentId = thingGpv;
         String name = Name;
         String description = Description;
         return dashboardCreate(dashboardType, equipmentId, name, description).toString();
     }
     public String jsonDashboardCreateGPVKibana0255(){
         int dashboardType = 5;
-        String equipmentId = ThingGPVForDashboard.getValue();
+        String equipmentId = thingGpv;
         String name = Name;
         String description = Description;
         return dashboardCreate(dashboardType, equipmentId, name, description).toString();
     }
     public String jsonDashboardCreateGPVCanvas025(){
         int dashboardType = 8;
-        String equipmentId = ThingGPVForDashboard.getValue();
+        String equipmentId = thingGpv;
         String name = Name;
         String description = Description;
         return dashboardCreate(dashboardType, equipmentId, name, description).toString();
     }
     public String jsonDashboardCreateGPVCanvas0255(){
         int dashboardType = 9;
-        String equipmentId = ThingGPVForDashboard.getValue();
+        String equipmentId = thingGpv;
         String name = Name;
         String description = Description;
         return dashboardCreate(dashboardType, equipmentId, name, description).toString();

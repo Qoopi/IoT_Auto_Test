@@ -1,7 +1,7 @@
 package mechanics.system.aws;
 
 import mechanics.system.aws.objects.AWSURI;
-import mechanics.system.constant.URLs;
+import mechanics.system.constant.AssembledUrls;
 import mechanics.system.http.RequestSender;
 
 import javax.crypto.Mac;
@@ -16,9 +16,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
-
-import static mechanics.system.constant.URLs.ApiGateway;
-import static mechanics.system.constant.URLs.LoadApiGateway;
 
 
 public class SignAWSv4 extends RequestSender {
@@ -75,13 +72,13 @@ public class SignAWSv4 extends RequestSender {
         map.put("Connection", "keep-alive");
         map.put("Cache-Control", "no-cache");
         map.put("Pragma", "no-cache");
-        map.put("Referer", "https://"+URLs.DevDashboardApp.getValue()+"/");
+        map.put("Referer", AssembledUrls.redirectClientURI+"/");
         map.put("Accept", "*/*");
         map.put("Content-Type", "application/json");
         map.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36");
         map.put("Accept-Language", "en-US,en;q=0.8");
         map.put("Accept-Encoding", "gzip, deflate, sdch, br");
-        map.put("Origin", "https://"+URLs.DevDashboardApp.getValue());
+        map.put("Origin", AssembledUrls.redirectClientURI);
 
         return map;
     }

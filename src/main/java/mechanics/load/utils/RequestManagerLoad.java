@@ -1,10 +1,11 @@
 package mechanics.load.utils;
 
 
+import mechanics.system.constant.AssembledEquipments;
+import mechanics.system.constant.AssembledUrls;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import mechanics.system.constant.Things;
 import mechanics.system.http.JSONHandler;
 
 import java.io.FileNotFoundException;
@@ -13,7 +14,6 @@ import java.text.DecimalFormat;
 import java.util.Map;
 
 import static mechanics.system.constant.HTTPMethod.*;
-import static mechanics.system.constant.URLs.*;
 import static mechanics.ui.utils.WaitsAsserts.sleep;
 
 public class RequestManagerLoad extends RequestTemplates{
@@ -27,14 +27,14 @@ public class RequestManagerLoad extends RequestTemplates{
     private String thingGPV100 = "Thing-90"+new DecimalFormat("000").format(equipCounter)+"-0";
 
 
-    private static final String thingGPV = Things.LoadThingGPV.getValue();
-    private static final String thingVPV = Things.LoadThingVPV.getValue();
-    private static final String channelVPV = Things.ChannelVPV.getValue();
+    private static final String thingGPV = AssembledEquipments.equipmentGpv;
+    private static final String thingVPV = AssembledEquipments.equipmentVpv;
+    private static final String channelVPV = AssembledEquipments.equipmentVpvChannel;
 
-    private static final String chart = LoadChart.getValue();
-    private static final String dashboard = LoadDashboard.getValue();
-    private static final String notificationRule = LoadNotificationRule.getValue();
-    private static final String notificationUnread = LoadNotificationUnread.getValue();
+    private static final String chart = AssembledUrls.chart;
+    private static final String dashboard = AssembledUrls.dashboard;
+    private static final String notificationRule = AssembledUrls.notificationRule;
+    private static final String notificationUnread = AssembledUrls.notificationUnread;
 
 
     public void getChart(int repeats, int timeBetweenRequests){

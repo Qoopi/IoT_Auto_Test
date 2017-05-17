@@ -5,14 +5,14 @@ import com.amazonaws.services.iot.client.AWSIotException;
 import com.amazonaws.services.iot.client.AWSIotMqttClient;
 import com.amazonaws.services.iot.client.AWSIotQos;
 import com.amazonaws.services.iot.client.AWSIotTopic;
-import mechanics.system.constant.URLs;
+import mechanics.system.constant.AssembledUrls;
 import mechanics.system.http.RequestSender;
 import mechanics.system.mqtt.pubSub.TestTopicListener;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MQTTConnector {
-    private String clientEndpoint = URLs.MQTTGateway.getValue();
+    private String clientEndpoint = AssembledUrls.iotEndpoint;
 
     //THIS ONE IS WORKING
     public void mqttSubscribe(int openConnectionTimeMs, String topic){

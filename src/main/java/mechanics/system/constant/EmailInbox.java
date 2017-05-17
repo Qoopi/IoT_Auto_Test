@@ -3,7 +3,7 @@ package mechanics.system.constant;
 /**
  * Created by Kutafin Oleg on 24.04.2017.
  */
-public enum EmailINBOX implements CharSequence {
+public enum EmailInbox implements CharSequence {
 
     SubjectNotificationRuleAbnormalVibrationsVPV("Abnormal Vibration VPV"),
     SubjectNotificationRuleNumberOfAlarms("Number of Alarms above threshold"),
@@ -24,7 +24,7 @@ public enum EmailINBOX implements CharSequence {
 
     private final String Message;
 
-    EmailINBOX(String m) {Message = m;}
+    EmailInbox(String m) {Message = m;}
 
     public String getMessage(){
         return Message;

@@ -1,5 +1,6 @@
 package mechanics.ui.pageObjets;
 
+import mechanics.system.constant.AssembledUrls;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,7 +12,6 @@ import mechanics.ui.utils.WebDriverManager;
 
 import java.util.HashMap;
 
-import static mechanics.system.constant.URLs.*;
 import static mechanics.system.http.RequestSender.awsCredentials;
 
 
@@ -39,7 +39,7 @@ public class LogInPage {
     @Step("Get on Start Page")
     public void getToIoTPage() {
         // open start page
-        driver.get(HttpsDashboardDev.getValue());                    //dev
+        driver.get(AssembledUrls.redirectClientURI);                    //dev
         //driver.get("https://dashboard.wstaging.iotsyst.com");              // stage
 
         // checking out that we are ou the right page
@@ -49,7 +49,7 @@ public class LogInPage {
     @Step("Get on Start Page")
     public void getToIoTPageLoad() {
         // open start page
-        driver.get(HttpsLoadDashboardApp.getValue());                    //load
+        driver.get(AssembledUrls.redirectClientURI);                    //load
 
         // checking out that we are ou the right page
         waits_asserts.assertByTitle(driver, "IoT Systems App");
@@ -107,7 +107,7 @@ public class LogInPage {
     public void openNewDriver() {
         driver.close();
         WebDriver driver = new ChromeDriver();
-        driver.get(HttpsDashboardDev.getValue("/#/?_k=1ccout"));
+        driver.get(AssembledUrls.redirectClientURI+"#/?_k=1ccout");
     }
 
     @Step("Get back on log in page ")

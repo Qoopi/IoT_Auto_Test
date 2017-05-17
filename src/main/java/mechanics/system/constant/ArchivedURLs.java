@@ -3,7 +3,7 @@ package mechanics.system.constant;
 /**
  * Created by user on 19.04.2017.
  */
-public enum URLs {
+public enum ArchivedURLs {
     HTTPS("https://"),
     ApiGateway("60sglz9l5h.execute-api.us-east-1.amazonaws.com"),
     HttpsApiGateway(HTTPS.getValue()+ApiGateway.getValue()),
@@ -36,7 +36,7 @@ public enum URLs {
 
     private final String value;
 
-    URLs(String s) {
+    ArchivedURLs(String s) {
         value = s;
     }
 

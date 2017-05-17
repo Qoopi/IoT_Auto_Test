@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import mechanics.system.email.CheckingMails;
 
-import static mechanics.system.constant.EmailINBOX.SubjectReportListVPVWeekly;
+import static mechanics.system.constant.EmailInbox.SubjectReportListVPVWeekly;
 
 /**
  * Created by user on 26.04.2017.

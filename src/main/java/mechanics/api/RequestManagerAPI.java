@@ -1,6 +1,8 @@
 package mechanics.api;
 
 import com.jayway.restassured.response.Response;
+import mechanics.system.constant.AssembledEquipments;
+import mechanics.system.constant.AssembledUrls;
 import org.testng.Assert;
 import ru.yandex.qatools.allure.annotations.Step;
 import mechanics.system.http.JSONHandler;
@@ -9,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import static mechanics.system.constant.HTTPMethod.*;
-import static mechanics.system.constant.URLs.*;
-import static mechanics.system.constant.Things.*;
 
 /**
  * Created by user on 20.04.2017.
@@ -22,10 +22,10 @@ public class RequestManagerAPI extends JSONManagerAPI{
     private Response responseApi = null;
 
 
-    private static final String dashboard = Dashboard.getValue();
+    private static final String dashboard = AssembledUrls.dashboard;
 
-    private static final String thingVPVForDashboard = ThingVPVForDashboard.getValue();
-    private static final String thingGPVForDashboard = ThingGPVForDashboard.getValue();
+    private static final String thingVPVForDashboard = AssembledEquipments.equipmentVpv;
+    private static final String thingGPVForDashboard = AssembledEquipments.equipmentGpv;
 
     public RequestManagerAPI() {
         messagesEnableAllDebugResponse = true;
@@ -36,7 +36,7 @@ public class RequestManagerAPI extends JSONManagerAPI{
     public void skedlerReportCreate(){
         //TODO вынести JSONы для репортов в JsonManagerAPI
         String jsonBody = JSONReportCreate();
-        Response response = sendAmazonRequest(PUT.getValue(), Report.getValue(), jsonBody);
+        Response response = sendAmazonRequest(PUT.getValue(), AssembledUrls.report, jsonBody);
         //тут сделать парс json и запись id в variable
         idOfCreatedReport = getIdOfCreatedReport(response.asString());
         checkResponse(response);
@@ -44,7 +44,7 @@ public class RequestManagerAPI extends JSONManagerAPI{
 
     public void skedlerReportSendNow(){
         String jsonBody = JSONReportSendNow(idOfCreatedReport);
-        Response response = sendAmazonRequest(POST.getValue(), Report.getValue(), jsonBody);
+        Response response = sendAmazonRequest(POST.getValue(), AssembledUrls.report, jsonBody);
         checkResponse(response);
     }
 
@@ -52,7 +52,7 @@ public class RequestManagerAPI extends JSONManagerAPI{
         String jsonBody = "";
         //get body from test account
         //{"filter_name":"GPV-Smart-Sensor-Report-List-15-minutes","filterTitle":"GPV-Smart-Sensor-Report-List-15-minutes hom.ossystem@gmail.com","equipments":"Thing-090035-0","id":null,"filterId":"7e15db45-45f3-4f41-8979-bd35787be667","emails":"hom.ossystem@gmail.com","userId":"0315f51c-67ab-4390-bdd1-46bd9d3fd038","createdAt":null,"excelIncluded":null}
-        Response response = sendAmazonRequest(DELETE.getValue(), Report.getValue(), jsonBody);
+        Response response = sendAmazonRequest(DELETE.getValue(), AssembledUrls.report, jsonBody);
         checkResponse(response);
     }
 
@@ -61,19 +61,19 @@ public class RequestManagerAPI extends JSONManagerAPI{
     public void notificationListDeleteAll(){
         ArrayList<String> ids = getIdsOfAllNotifications(notificationListRead().asString());
         String jsonBody = notificationListDeleteAllJSON(ids);
-        Response response = sendAmazonRequest(DELETE.getValue(), Notification.getValue(), jsonBody);
+        Response response = sendAmazonRequest(DELETE.getValue(), AssembledUrls.notification, jsonBody);
         checkResponse(response);
     }
     @Step("Changing state of equipment Connected/Disconnected")
     public Response equipmentChangeState(String jsonBody){
-        Response response = sendAmazonRequest(PUT.getValue(), EquipmentAdmin.getValue(), jsonBody);
+        Response response = sendAmazonRequest(PUT.getValue(), AssembledUrls.equipmentAdmin, jsonBody);
         checkResponse(response);
         return response;
 
     }
     @Step("Creating rule.")
     public Response notificationRuleCreate(String jsonBody){
-        Response response = sendAmazonRequest(POST.getValue(), NotificationRule.getValue(), jsonBody);
+        Response response = sendAmazonRequest(POST.getValue(), AssembledUrls.notificationRule, jsonBody);
         idOfCreatedNotificationRule = getIdOfCreatedNotificationRule(response.asString());
         checkResponse(response);
         return response;
@@ -116,27 +116,27 @@ public class RequestManagerAPI extends JSONManagerAPI{
     }
 
     public Response notificationGetUnread(){
-        Map<String, String> headers = allHeaders(GET.getValue(), NotificationUnread.getValue());
-        Response response = createEmptyRequestWithHeaders(headers).get(NotificationUnread.getValue()).getResponse();
+        Map<String, String> headers = allHeaders(GET.getValue(), AssembledUrls.notificationUnread);
+        Response response = createEmptyRequestWithHeaders(headers).get(AssembledUrls.notificationUnread).getResponse();
         checkResponse(response);
         return response;
     }
 
     public Response notificationRulesRead(){
-        Response response = sendAmazonRequest(GET.getValue(), NotificationRule.getValue());
+        Response response = sendAmazonRequest(GET.getValue(), AssembledUrls.notificationRule);
         checkResponse(response);
         return response;
     }
 
     public Response notificationListRead(){
-        Response response = sendAmazonRequest(GET.getValue(), Notification.getValue());
+        Response response = sendAmazonRequest(GET.getValue(), AssembledUrls.notification);
         checkResponse(response);
         return response;
     }
 
 
     public Response notificationRuleUpdate(String jsonBody){
-        Response response = sendAmazonRequest(PUT.getValue(), NotificationRule.getValue(), jsonBody);
+        Response response = sendAmazonRequest(PUT.getValue(), AssembledUrls.notificationRule, jsonBody);
         checkResponse(response);
         return response;
     }
@@ -144,14 +144,14 @@ public class RequestManagerAPI extends JSONManagerAPI{
     public void notificationRuleDelete(String idOfNotificationRule){
         JSONHandler jsonHandler = new JSONHandler();
         String jsonBody = jsonHandler.notificationRuleDeleteJSON(idOfNotificationRule);
-        Response response = sendAmazonRequest(DELETE.getValue(), NotificationRule.getValue(), jsonBody);
+        Response response = sendAmazonRequest(DELETE.getValue(), AssembledUrls.notificationRule, jsonBody);
         checkResponse(response);
     }
     @Step("Deleting notifications")
     public void notificationRuleDelete(){
         JSONHandler jsonHandler = new JSONHandler();
         String jsonBody = jsonHandler.notificationRuleDeleteJSON(idOfCreatedNotificationRule);
-        Response response = sendAmazonRequest(DELETE.getValue(), NotificationRule.getValue(), jsonBody);
+        Response response = sendAmazonRequest(DELETE.getValue(), AssembledUrls.notificationRule, jsonBody);
         checkResponse(response);
     }
 
