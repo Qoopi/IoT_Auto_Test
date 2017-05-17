@@ -14,7 +14,6 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
-//        String[] args1 = {"-stage", "dev"};
         Args argv = new Args();
         JCommander.newBuilder()
                 .addObject(argv)
@@ -31,5 +30,9 @@ public class Main {
         testng.setTestSuites(suites);
         testng.setVerbose(1);
         testng.run();
+        //if any test fails - exit code is 1
+        if (testng.hasFailure() || testng.hasFailureWithinSuccessPercentage() || testng.hasSkip()){
+            System.exit(1);
+        }
     }
 }
