@@ -104,16 +104,45 @@ public class SignAWSv4 extends RequestSender {
         String serviceName = null;
         String regionName = null;
 
-        if(url.contains(ApiGateway.getValue())){
-            serviceName =  "execute-api";
-            regionName = "us-east-1";
+        if (uri.getHost().contains(".execute-api.")){
+            serviceName="execute-api";
         }
-        if (url.contains(LoadApiGateway.getValue())){
-            serviceName =  "execute-api";
-            regionName = "eu-west-1";
+        if(uri.getHost().contains(".es.")){
+            serviceName="es";
         }
-        if (!url.contains(ApiGateway.getValue()) && !url.contains(LoadApiGateway.getValue())){
+
+
+        if (uri.getHost().contains(".us-east-1.")){
+            regionName="us-east-1";
+        }
+        if (uri.getHost().contains(".us-east-2.")){
+            regionName="us-east-2";
+        }
+        if (uri.getHost().contains(".us-west-1.")){
+            regionName="us-west-1";
+        }
+        if (uri.getHost().contains(".us-west-2.")){
+            regionName="us-west-2";
+        }
+        if (uri.getHost().contains(".eu-central-1.")){
+            regionName="eu-central-1";
+        }
+        if (uri.getHost().contains(".eu-west-1.")){
+            regionName="eu-west-1";
+        }
+        if (uri.getHost().contains(".eu-west-2.")){
+            regionName="eu-west-2";
+        }
+
+
+        if (serviceName==null || regionName==null){
             System.out.println("Looks like you using unknown URL, check it!");
+            if (serviceName==null){
+                System.out.println("ERR: Unknown amazon service name");
+            }
+            if (regionName==null){
+                System.out.println("ERR: Unknown amazon region name");
+            }
         }
 
 

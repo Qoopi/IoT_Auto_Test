@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
+//        String[] ar = {"-stage", "dev"};
         Args argv = new Args();
         JCommander.newBuilder()
                 .addObject(argv)
@@ -27,14 +28,14 @@ public class Main {
         System.out.println(AssembledUrls.iotEndpoint);
 
 
-//        Unpack unpack = new Unpack();
-//        unpack.unpackOnStart();
-//        TestListenerAdapter tla = new TestListenerAdapter();
-//        TestNG testng = new TestNG();
-//        List<String> suites = Lists.newArrayList();
-//        suites.add("testng.xml");//path to xml..
-//        testng.setTestSuites(suites);
-//        testng.setVerbose(2);
-//        testng.run();
+        Unpack unpack = new Unpack();
+        unpack.unpackOnStart();
+        TestListenerAdapter tla = new TestListenerAdapter();
+        TestNG testng = new TestNG();
+        List<String> suites = Lists.newArrayList();
+        suites.add("xml/testng.xml");//path to xml..
+        testng.setTestSuites(suites);
+        testng.setVerbose(2);
+        testng.run();
     }
 }

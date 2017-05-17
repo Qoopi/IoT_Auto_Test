@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class WebDriverFactory {
-    private static final String unpackedPrefix = "";
+    private static final String unpackedPrefix = "selenium/";
     private static final String windowsPathPrefix = "src/main/resources/selenium/windows/";
     private static final String linuxPathPrefix = "src/main/resources/selenium/linux/";
 

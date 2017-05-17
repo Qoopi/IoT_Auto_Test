@@ -26,12 +26,6 @@ public class Variables {
     private final String pathToFolder = "variables";
     private HashMap<String, String> json = null;
 
-
-    @Test
-    public void test(){
-        findAndAssembleStage("dev");
-    }
-
     public void findAndAssembleStage(String stage){
         findStageJson(stage);
         assembleUrls();

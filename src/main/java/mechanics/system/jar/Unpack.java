@@ -1,6 +1,7 @@
 package mechanics.system.jar;
 
 import org.apache.commons.lang3.SystemUtils;
+import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,24 +17,27 @@ public class Unpack {
 
     public void unpackOnStart(){
         if (SystemUtils.IS_OS_WINDOWS) {
-            unpackFile("chromedriver.exe", "/selenium/windows/chromedriver.exe");
-            unpackFile("geckodriver32.exe", "/selenium/windows/geckodriver32.exe");
-            unpackFile("IEDriverServer32.exe", "/selenium/windows/IEDriverServer32.exe");
-            unpackFile("IEDriverServer64.exe", "/selenium/windows/IEDriverServer64.exe");
-            unpackFile("MicrosoftWebDriver.exe", "/selenium/windows/MicrosoftWebDriver.exe");
+            unpackFile("selenium/chromedriver.exe", "/selenium/windows/chromedriver.exe");
+            unpackFile("selenium/geckodriver32.exe", "/selenium/windows/geckodriver32.exe");
+            unpackFile("selenium/IEDriverServer32.exe", "/selenium/windows/IEDriverServer32.exe");
+            unpackFile("selenium/IEDriverServer64.exe", "/selenium/windows/IEDriverServer64.exe");
+            unpackFile("selenium/MicrosoftWebDriver.exe", "/selenium/windows/MicrosoftWebDriver.exe");
         }
         if (SystemUtils.IS_OS_LINUX) {
-            unpackFile("chromedriver", "/selenium/linux/chromedriver", true);
-            unpackFile("geckodriver", "/selenium/linux/geckodriver", true);
+            unpackFile("selenium/chromedriver", "/selenium/linux/chromedriver", true);
+            unpackFile("selenium/geckodriver", "/selenium/linux/geckodriver", true);
         }
-        unpackFile("api.xml", "/xml/api.xml");
-        unpackFile("ui.xml", "/xml/ui.xml");
-        unpackFile("load.xml", "/xml/load.xml");
-        unpackFile("testng.xml", "/xml/testng.xml");
+        unpackFile("xml/api.xml", "/xml/api.xml");
+        unpackFile("xml/ui.xml", "/xml/ui.xml");
+        unpackFile("xml/load.xml", "/xml/load.xml");
+        unpackFile("xml/testng.xml", "/xml/testng.xml");
     }
 
     private void unpackFile(String newFile, String resourceFile){
         File file = new File(new File(newFile).getAbsolutePath());
+        if (!file.getAbsoluteFile().getParentFile().exists()){
+            file.getAbsoluteFile().getParentFile().mkdirs();
+        }
         if (!file.exists()) {
             InputStream link = (getClass().getResourceAsStream(resourceFile));
             try {
@@ -47,6 +51,9 @@ public class Unpack {
 
     private void unpackFile(String newFile, String resourceFile, boolean setExecutable){
         File file = new File(new File(newFile).getAbsolutePath());
+        if (!file.getAbsoluteFile().getParentFile().exists()){
+            file.getAbsoluteFile().getParentFile().mkdirs();
+        }
         if (!file.exists()) {
             InputStream link = (getClass().getResourceAsStream(resourceFile));
             try {
