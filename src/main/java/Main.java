@@ -40,7 +40,7 @@ public class Main {
         testng.run();
         //if any test fails - exit code is 1
         if (testng.hasFailure() || testng.hasFailureWithinSuccessPercentage() || testng.hasSkip()) {
-            System.exit(1);
+            System.exit(2);
         }
     }
 }

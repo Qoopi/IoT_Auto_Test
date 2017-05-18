@@ -17,11 +17,7 @@ import static mechanics.system.constant.EmailInbox.*;
 @Listeners(ListenerAPI.class)
 public class NotificationRuleTests {
 
-    @AfterClass
-    public void afterTest(){
-        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-        requestManagerAPI.notificationListDeleteAll();
-    }
+
     @Features("Abnormal Vibration rule.")
     @Test
     public void abnormalVibrationVPV(){
@@ -34,6 +30,7 @@ public class NotificationRuleTests {
         requestManagerAPI.checkNotificationRuleTriggered();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
+        requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
     }
     @Features("Every Warning on VPV rule.")
@@ -48,6 +45,7 @@ public class NotificationRuleTests {
         requestManagerAPI.checkNotificationRuleTriggered();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.check(SubjectNotificationRuleEveryWarningVPV.getMessage());
+        requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
     }
     @Features("Every Warning on GPV rule.")
@@ -62,6 +60,7 @@ public class NotificationRuleTests {
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.check(SubjectNotificationRuleEveryWarningGPV.getMessage());
+        requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
     }
     @Features("Number of Alarms above threshold on VPV equipment rule.")
@@ -76,6 +75,7 @@ public class NotificationRuleTests {
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.check(SubjectNotificationRuleNumberOfAlarms.getMessage());
+        requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
 
     }
@@ -91,6 +91,7 @@ public class NotificationRuleTests {
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.check(SubjectNotificationRuleNumberOfAborts.getMessage());
+        requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
 
     }
@@ -106,6 +107,7 @@ public class NotificationRuleTests {
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.check(SubjectNotificationRuleNumberOfAlarms.getMessage());
+        requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
 
     }
