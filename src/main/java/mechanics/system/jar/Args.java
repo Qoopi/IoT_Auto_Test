@@ -16,15 +16,12 @@ public class Args {
     @Parameter(names = { "-stage", "-s" }, description = "Environment to test: dev/stage", echoInput = true)
     private String stage;
 
-    @Parameter(names = {"-region", "-r"}, description = "Region of test environment", echoInput = true)
-    private String groups;
-
     public void setStage(){
         Variables variables = new Variables();
         variables.findAndAssembleStage(stage);
     }
 
     public void print() {
-        System.out.println("stage: "+stage);
+        System.out.println("Stage: "+stage);
     }
 }

@@ -1,7 +1,5 @@
 import com.beust.jcommander.JCommander;
-import mechanics.system.constant.AssembledUrls;
 import mechanics.system.jar.Args;
-import mechanics.system.readers.Variables;
 import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
 import org.testng.collections.Lists;
@@ -15,11 +13,21 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         Args argv = new Args();
-        JCommander.newBuilder()
-                .addObject(argv)
-                .build()
-                .parse(args);
-        argv.print();
+        if (args.length == 0) {
+            String[] defArgs = {"-stage", "dev"};
+            JCommander.newBuilder()
+                    .addObject(argv)
+                    .build()
+                    .parse(defArgs);
+            System.out.print("No arguments found, using default - ");
+            argv.print();
+        } else {
+            JCommander.newBuilder()
+                    .addObject(argv)
+                    .build()
+                    .parse(args);
+            argv.print();
+        }
         Unpack unpack = new Unpack();
         unpack.unpackOnStart();
         argv.setStage();
@@ -31,7 +39,7 @@ public class Main {
         testng.setVerbose(1);
         testng.run();
         //if any test fails - exit code is 1
-        if (testng.hasFailure() || testng.hasFailureWithinSuccessPercentage() || testng.hasSkip()){
+        if (testng.hasFailure() || testng.hasFailureWithinSuccessPercentage() || testng.hasSkip()) {
             System.exit(1);
         }
     }
