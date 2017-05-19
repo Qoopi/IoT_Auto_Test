@@ -9,19 +9,30 @@ import org.testng.annotations.Test;
 /**
  * Created by user on 19.04.2017.
  */
-//@Listeners(ListenerAPI.class)
+@Listeners(ListenerAPI.class)
 public class Workbench {
 
-    @Test
+
     public void test3(){
         Assert.assertTrue(false);
     }
 
-
+//    @Test
     public void test1(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         mqttManagerAPI.triggerGPVLong();
-//        mqttManagerAPI.triggerGPV();
+    }
+
+    @Test
+    public void testMqttPublish(){
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
+        mqttManagerAPI.triggerVPVAbnormalVibration();
+    }
+
+//    @Test
+    public void testMqttSubscribe(){
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
+        mqttManagerAPI.readGPV();
     }
 
 //    @Test

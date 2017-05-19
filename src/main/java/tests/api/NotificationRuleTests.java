@@ -3,7 +3,6 @@ package tests.api;
 import mechanics.api.ListenerAPI;
 import mechanics.api.MQTTManagerAPI;
 import mechanics.api.RequestManagerAPI;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
@@ -26,7 +25,7 @@ public class NotificationRuleTests {
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleAbnormalVibrationVPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
-        mqttManagerAPI.triggerVPVD11AbnormalVibration();
+        mqttManagerAPI.triggerVPVAbnormalVibration();
         requestManagerAPI.checkNotificationRuleTriggered();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
@@ -41,7 +40,7 @@ public class NotificationRuleTests {
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleEveryWarningVPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
-        mqttManagerAPI.triggerVPVD11AbnormalVibration();
+        mqttManagerAPI.triggerVPVAbnormalVibration();
         requestManagerAPI.checkNotificationRuleTriggered();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.check(SubjectNotificationRuleEveryWarningVPV.getMessage());

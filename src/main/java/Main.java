@@ -1,15 +1,10 @@
 import com.beust.jcommander.JCommander;
 import mechanics.system.jar.Args;
-import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
 import org.testng.collections.Lists;
 import mechanics.system.jar.Unpack;
-import ru.yandex.qatools.allure.*;
-import ru.yandex.qatools.allure.config.AllureConfig;
 import ru.yandex.qatools.allure.report.AllureReportBuilder;
 import ru.yandex.qatools.allure.report.AllureReportBuilderException;
-import ru.yandex.qatools.allure.testng.AllureTestListener;
-import ru.yandex.qatools.allure.utils.AllureShutdownHook;
 
 import java.io.File;
 import java.util.List;
@@ -21,7 +16,7 @@ public class Main {
     public static void main(String[] args) {
         Args argv = new Args();
         if (args.length == 0) {
-            String[] defArgs = {"-stage", "dev"};
+            String[] defArgs = {"-stage", "wstaging"};
             JCommander.newBuilder()
                     .addObject(argv)
                     .build()
@@ -38,17 +33,19 @@ public class Main {
         Unpack unpack = new Unpack();
         unpack.unpackOnStart();
         argv.setStage();
-//        AllureTestListener atl = new AllureTestListener();
-//        TestListenerAdapter tla = new TestListenerAdapter();
+
+        System.setProperty("allure.results.directory", "allure");
+
         TestNG testng = new TestNG();
         List<String> suites = Lists.newArrayList();
         suites.add("xml/testng.xml");//path to main .xml
+        testng.setUseDefaultListeners(false);
         testng.setTestSuites(suites);
-        testng.setVerbose(1);
+        testng.setVerbose(10);
         testng.run();
 
-        File output = new File("target/allure-report/");
-        File results = new File("target/allure-results/");
+        File output = new File("allure/allure-report/");
+        File results = new File("allure");
         System.out.println(output.getAbsolutePath());
         try {
             AllureReportBuilder allureReportBuilder = new AllureReportBuilder(output);
@@ -61,7 +58,7 @@ public class Main {
 
         //if any test fails - exit code is 1
         if (testng.hasFailure() || testng.hasFailureWithinSuccessPercentage() || testng.hasSkip()) {
-            System.exit(2);
+            System.exit(1);
         }
     }
 }

@@ -152,7 +152,7 @@ public class TestForTest {
     @Test
     public void mqttPublisher(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
-        mqttManagerAPI.triggerVPVD11AbnormalVibration();
+        mqttManagerAPI.triggerVPVAbnormalVibration();
     }
 
 
