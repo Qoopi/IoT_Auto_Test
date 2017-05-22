@@ -28,7 +28,6 @@ script:
 #  - java -jar iot-auto-fat.jar
   - mkdir upload
   - cp -v iot-auto-fat.jar upload/iot-auto-fat.jar
-
 deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY_ID
