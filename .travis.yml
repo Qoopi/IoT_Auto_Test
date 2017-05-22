@@ -13,6 +13,8 @@ addons:
       - google-chrome-stable
       - oracle-java8-installer
       - oracle-java8-set-default
+install:
+  - mvn package -DskipTests
 script:
 #uncomment all lines below to be able to launch tests from travis-ci environment
 #  - export DISPLAY=:99.0
