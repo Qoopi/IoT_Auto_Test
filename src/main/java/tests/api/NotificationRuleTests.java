@@ -26,7 +26,7 @@ public class NotificationRuleTests {
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
         mqttManagerAPI.triggerVPVAbnormalVibration();
-        requestManagerAPI.checkNotificationRuleTriggered();
+        requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
         requestManagerAPI.notificationListDeleteAll();
@@ -41,7 +41,7 @@ public class NotificationRuleTests {
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
         mqttManagerAPI.triggerVPVAbnormalVibration();
-        requestManagerAPI.checkNotificationRuleTriggered();
+        requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.check(SubjectNotificationRuleEveryWarningVPV.getMessage());
         requestManagerAPI.notificationListDeleteAll();

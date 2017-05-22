@@ -135,11 +135,18 @@
         </plugins>
     </build>
     <dependencies>
+        <!--allure and aspectj required for allure reports-->
         <dependency>
             <groupId>ru.yandex.qatools.allure</groupId>
             <artifactId>allure-report-builder</artifactId>
             <version>2.3</version>
         </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+
 
 
 

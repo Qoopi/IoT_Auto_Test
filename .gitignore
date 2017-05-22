@@ -7,3 +7,7 @@ target
 results/
 loadReports/*.log
 *.properties
+allure
+xml
+variables
+selenium

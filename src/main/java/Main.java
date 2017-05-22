@@ -34,7 +34,9 @@ public class Main {
         unpack.unpackOnStart();
         argv.setStage();
 
-        System.setProperty("allure.results.directory", "allure");
+        long time = System.currentTimeMillis();
+
+        System.setProperty("allure.results.directory", "reports/allure_"+time);
 
         TestNG testng = new TestNG();
         List<String> suites = Lists.newArrayList();
@@ -44,8 +46,8 @@ public class Main {
         testng.setVerbose(10);
         testng.run();
 
-        File output = new File("allure/allure-report/");
-        File results = new File("allure");
+        File output = new File("reports/allure_"+time+"/allure-report/");
+        File results = new File("reports/allure_"+time);
         System.out.println(output.getAbsolutePath());
         try {
             AllureReportBuilder allureReportBuilder = new AllureReportBuilder(output);
