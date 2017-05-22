@@ -1,4 +1,7 @@
 language: java
+cache:
+  directories:
+  - $HOME/.m2
 env:
   global:
    - secure: "tixXAHJdxWWDrIXQEXh3HX6dLPDgtypaO2cGL2x+nBKK0MZLYPZ79BGitzLTBXVjpPBp7Yd09SiHlW/pNMO4Fz2Yhzgn6FxFHERm7tEg7D4gvU7myF7FYXeYDyZ9ZxF/dnc+fgc9S6kS9MHiiIg7RspqjKQhRXZvo2AuLWeB9dLatP/o745wLnskg0cGIc+wxoIUlR9MMMAJSVqjS2dsLbsE36QML8s4EkDXQ9qzpotbSyywb+o+QImyJVl3qaqyXv/dI1Q+2xGQgFObGfs9Rkphpt5FdmJbtOHRG97hpJksUNSG2skd0AlDdbl6iqGGKIEmYLyIjLlqiWRBJS1BkUQs7m8XB9cmnHJmmLu0LSq5tx3YpwU05OQJTx1WyjzutN3H1nGLeXMxnoyomkCxTch791fLq4cmTwnpBTEHhdayAkeBIJk2Wj1j+ZvDpnS5HlAVfRePM1eOlJfH4U1jkU0gpxFbPnNTjRQb60FbGhqkTXdg1GJPode2XMWFOo4pVObRkzsLtBdmhl+dVq/48K/bP6d8A1TrBQovgnEMzPIZKqW+TN/Tmr6ycWd33+OxF5tfyWmcSAZKP+9wrlfmSnCqmDlIf7GQDcOHq6QKa9+FwxQx47KIBdYy5tPhtikoocpv2CbnEOCceU+mgPyRNq5UDW93YLeZxdd3wyDklA0="
@@ -17,12 +20,12 @@ install:
   - mvn package -DskipTests
 script:
 #uncomment all lines below to be able to launch tests from travis-ci environment
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start &
-  - sleep 5
+#  - export DISPLAY=:99.0
+#  - sh -e /etc/init.d/xvfb start &
+#  - sleep 5
   - cd target
-  - chmod +x iot-auto-fat.jar
-  - java -jar iot-auto-fat.jar
+#  - chmod +x iot-auto-fat.jar
+#  - java -jar iot-auto-fat.jar
   - mkdir upload
   - cp -v iot-auto-fat.jar upload/iot-auto-fat.jar
 
