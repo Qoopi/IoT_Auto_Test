@@ -26,6 +26,20 @@ public class Args {
     @Parameter(names = {"-grid", "-g"}, description = "Use selenium grid?")
     public static boolean grid = false;
 
+    @Parameter(names = {"-help", "-h"}, help = true)
+    private boolean help;
+
+    public void help(){
+        if (help){
+            System.out.println("'-s' or '-stage'   - sets stage to run on (dev/prod/etc.)");
+            System.out.println("'-f' or '-file'    - sets test suite .xml file (in folder xml/), default is testng.xml");
+            System.out.println("'-b' or '-browser' - sets browser to run UI part of the test, default is chrome");
+            System.out.println("'-g' or '-grid'    - with value 'true' enables selenium grid connection, default is false");
+            System.out.println("'-h' or '-help'    - displays this message");
+            System.exit(0);
+        }
+    }
+
     public void setStage(){
         Variables variables = new Variables();
         variables.findAndAssembleStage(stage);

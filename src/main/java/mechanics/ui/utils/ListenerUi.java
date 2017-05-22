@@ -92,10 +92,8 @@ public class ListenerUi implements ITestListener {
 
         String browserName = Args.browser;
         Boolean useGrid = Args.grid;
-
         WebDriver driver = WebDriverFactory.createInstance(browserName, useGrid);
         WebDriverManager.setWebDriver(driver);
-
 
         UiUtils util = new UiUtils();
         String currentDate = util.getTime();

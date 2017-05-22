@@ -19,6 +19,7 @@ public class Main {
                 .addObject(argv)
                 .build()
                 .parse(args);
+        argv.help();
         argv.print();
 
         Unpack unpack = new Unpack();
