@@ -31,10 +31,16 @@ public class Main {
 
         TestNG testng = new TestNG();
         List<String> suites = Lists.newArrayList();
-        suites.add("xml/" + argv.file);
+        if (new File("xml/"+Args.file).exists()){
+            suites.add("xml/" + Args.file);
+        }
+        else{
+            System.out.println("ERR: XML File 'xml/"+Args.file+"' not found");
+            System.exit(1);
+        }
         testng.setUseDefaultListeners(false);
         testng.setTestSuites(suites);
-        testng.setVerbose(10);
+        testng.setVerbose(2);
         testng.run();
 
         File output = new File("reports/allure_" + time + "/allure-report/");

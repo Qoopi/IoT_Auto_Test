@@ -107,6 +107,10 @@ public class Variables {
     }
 
     private ArrayList<String> readFolderContent(String folderPath){
+        if (!new File(folderPath).isDirectory() || !new File(folderPath).exists()){
+            System.out.println("ERR: Folder '"+folderPath+"' doesn't exist");
+            System.exit(1);
+        }
         ArrayList<String> files = new ArrayList<>();
         File curDir = new File(folderPath);
         File[] filesList = curDir.listFiles();

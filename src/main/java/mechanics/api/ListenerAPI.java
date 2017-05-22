@@ -1,5 +1,6 @@
 package mechanics.api;
 
+import mechanics.system.jar.Args;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -42,10 +43,9 @@ public class ListenerAPI implements ITestListener{
     @Override
     public void onStart(ITestContext context) {
         //for browser launch
-        String browserName = context.getCurrentXmlTest().getParameter("browserName");
-        String useGrid = context.getCurrentXmlTest().getParameter("useGrid");
-        Boolean boo = useGrid.contentEquals("true");
-        WebDriver driver = WebDriverFactory.createInstance(browserName, boo);
+        String browserName = Args.browser;
+        Boolean useGrid = Args.grid;
+        WebDriver driver = WebDriverFactory.createInstance(browserName, useGrid);
         WebDriverManager.setWebDriver(driver);
 
         getCreds();

@@ -1,5 +1,6 @@
 package mechanics.ui.utils;
 
+import mechanics.system.jar.Args;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -85,11 +86,14 @@ public class ListenerUi implements ITestListener {
     @Override
     public void onStart(ITestContext iTestContext) {
         System.out.println("============Starting testing process============");
-        String browserName = iTestContext.getCurrentXmlTest().getParameter("browserName");
-        String useGrid = iTestContext.getCurrentXmlTest().getParameter("useGrid");
-        Boolean boo = useGrid.contentEquals("true");
+//        String browserName = iTestContext.getCurrentXmlTest().getParameter("browserName");
+//        String useGrid = iTestContext.getCurrentXmlTest().getParameter("useGrid");
+//        Boolean boo = useGrid.contentEquals("true");
 
-        WebDriver driver = WebDriverFactory.createInstance(browserName, boo);
+        String browserName = Args.browser;
+        Boolean useGrid = Args.grid;
+
+        WebDriver driver = WebDriverFactory.createInstance(browserName, useGrid);
         WebDriverManager.setWebDriver(driver);
 
 

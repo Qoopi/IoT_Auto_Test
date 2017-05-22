@@ -31,6 +31,7 @@ public class Unpack {
         unpackFile("xml/ui.xml", "/xml/ui.xml");
         unpackFile("xml/load.xml", "/xml/load.xml");
         unpackFile("xml/testng.xml", "/xml/testng.xml");
+        unpackFile("xml/fortest.xml", "/xml/fortest.xml");
     }
 
     private void unpackFile(String newFile, String resourceFile){

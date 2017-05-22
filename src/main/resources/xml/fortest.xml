@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="test">
-    <!--<test name="test">-->
-        <!--<parameter name="browserName" value="chrome"></parameter>-->
-        <!--<parameter name="useGrid" value="false"></parameter>-->
-        <!--<classes>-->
-            <!--<class name="tests.api.NotificationRuleTests"/>-->
-        <!--</classes>-->
-    <!--</test>-->
     <test name="small">
-        <parameter name="browserName" value="chrome"></parameter>
-        <parameter name="useGrid" value="false"></parameter>
         <classes>
             <class name="tests.Workbench"/>
         </classes>
