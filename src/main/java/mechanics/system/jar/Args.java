@@ -13,8 +13,11 @@ public class Args {
     @Parameter
     private List<String> parameters = new ArrayList<>();
 
-    @Parameter(names = { "-stage", "-s" }, description = "Environment to test: dev/stage", echoInput = true)
-    private String stage;
+    @Parameter(names = { "-stage", "-s" }, description = "Environment to test: dev/stage/other")
+    private String stage = "wstaging";
+
+    @Parameter(names = { "-file", "-f"}, description = "Test suite .xml file in xml/ folder")
+    public String file = "testng.xml";
 
     public void setStage(){
         Variables variables = new Variables();
@@ -23,5 +26,6 @@ public class Args {
 
     public void print() {
         System.out.println("Stage: "+stage);
+        System.out.println("File: "+file);
     }
 }

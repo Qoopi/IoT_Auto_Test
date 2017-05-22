@@ -15,39 +15,30 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         Args argv = new Args();
-        if (args.length == 0) {
-            String[] defArgs = {"-stage", "wstaging"};
-            JCommander.newBuilder()
-                    .addObject(argv)
-                    .build()
-                    .parse(defArgs);
-            System.out.print("No arguments found, using default - ");
-            argv.print();
-        } else {
-            JCommander.newBuilder()
-                    .addObject(argv)
-                    .build()
-                    .parse(args);
-            argv.print();
-        }
+        JCommander.newBuilder()
+                .addObject(argv)
+                .build()
+                .parse(args);
+        argv.print();
+
         Unpack unpack = new Unpack();
         unpack.unpackOnStart();
         argv.setStage();
 
         long time = System.currentTimeMillis();
 
-        System.setProperty("allure.results.directory", "reports/allure_"+time);
+        System.setProperty("allure.results.directory", "reports/allure_" + time);
 
         TestNG testng = new TestNG();
         List<String> suites = Lists.newArrayList();
-        suites.add("xml/testng.xml");//path to main .xml
+        suites.add("xml/" + argv.file);
         testng.setUseDefaultListeners(false);
         testng.setTestSuites(suites);
         testng.setVerbose(10);
         testng.run();
 
-        File output = new File("reports/allure_"+time+"/allure-report/");
-        File results = new File("reports/allure_"+time);
+        File output = new File("reports/allure_" + time + "/allure-report/");
+        File results = new File("reports/allure_" + time);
         System.out.println(output.getAbsolutePath());
         try {
             AllureReportBuilder allureReportBuilder = new AllureReportBuilder(output);
