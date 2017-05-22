@@ -5,7 +5,7 @@ import mechanics.system.http.RequestSender;
 
 import java.util.Map;
 
-import static mechanics.system.constant.HTTPMethod.*;
+import static mechanics.system.constant.HTTPMethod.GET;
 import static mechanics.ui.utils.WaitsAsserts.sleep;
 
 

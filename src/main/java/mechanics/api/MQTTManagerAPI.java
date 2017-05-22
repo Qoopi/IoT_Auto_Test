@@ -1,8 +1,8 @@
 package mechanics.api;
 
 import mechanics.system.constant.AssembledEquipments;
-import ru.yandex.qatools.allure.annotations.Step;
 import mechanics.system.mqtt.MQTTConnector;
+import ru.yandex.qatools.allure.annotations.Step;
 
 
 /**

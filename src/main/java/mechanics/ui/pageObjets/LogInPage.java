@@ -1,14 +1,14 @@
 package mechanics.ui.pageObjets;
 
 import mechanics.system.constant.AssembledUrls;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import ru.yandex.qatools.allure.annotations.Step;
 import mechanics.system.readers.Credentials;
 import mechanics.ui.utils.SessionStorage;
 import mechanics.ui.utils.WaitsAsserts;
 import mechanics.ui.utils.WebDriverManager;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.HashMap;
 

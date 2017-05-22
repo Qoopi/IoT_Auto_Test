@@ -1,13 +1,13 @@
 package mechanics.ui.pageObjets.dashboard.Notifications;
 
 
+import mechanics.ui.utils.WaitsAsserts;
+import mechanics.ui.utils.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.yandex.qatools.allure.annotations.Step;
-import mechanics.ui.utils.WaitsAsserts;
-import mechanics.ui.utils.WebDriverManager;
 
 public class Notifications {
 

@@ -1,12 +1,12 @@
 package mechanics.ui.pageObjets.dashboard;
 
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import ru.yandex.qatools.allure.annotations.Step;
 import mechanics.ui.utils.UiUtils;
 import mechanics.ui.utils.WaitsAsserts;
 import mechanics.ui.utils.WebDriverManager;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import ru.yandex.qatools.allure.annotations.Step;
 
 public class Reports {
     private WaitsAsserts waits_asserts = new WaitsAsserts();

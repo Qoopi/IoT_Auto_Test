@@ -1,13 +1,13 @@
 package tests.load.unused;
 
-import mechanics.api.MQTTManagerAPI;
 import com.amazonaws.services.iot.client.*;
+import mechanics.api.MQTTManagerAPI;
 import mechanics.load.utils.ListenerLoad;
 import mechanics.load.utils.ThreadLaunchDelayer;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
 import mechanics.system.mqtt.MQTTConnector;
 import mechanics.system.mqtt.pubSub.TestTopicListener;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
 
 @Listeners(ListenerLoad.class)
 public class TestForTest {

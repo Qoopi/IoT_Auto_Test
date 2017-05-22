@@ -2,10 +2,10 @@ package tests.api;
 
 import mechanics.api.ListenerAPI;
 import mechanics.api.RequestManagerAPI;
+import mechanics.system.email.CheckingMails;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
-import mechanics.system.email.CheckingMails;
 
 import static mechanics.system.constant.EmailInbox.SubjectReportListVPVWeekly;
 

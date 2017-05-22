@@ -1,14 +1,11 @@
 package mechanics.system.jar;
 
 import org.apache.commons.lang3.SystemUtils;
-import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Created by Alex Storm on 12.05.2017.

@@ -1,10 +1,5 @@
 package tests.ui.unused;
 
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
-import ru.yandex.qatools.allure.annotations.Features;
-import ru.yandex.qatools.allure.annotations.Stories;
 import mechanics.ui.pageObjets.DDMenus;
 import mechanics.ui.pageObjets.DDMenusFirefox;
 import mechanics.ui.pageObjets.LogInPage;
@@ -16,6 +11,11 @@ import mechanics.ui.pageObjets.dashboard.Notifications.Notifications;
 import mechanics.ui.pageObjets.dashboard.Reports;
 import mechanics.ui.utils.ListenerUi;
 import mechanics.ui.utils.UiUtils;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
 
 
 @Listeners(ListenerUi.class)

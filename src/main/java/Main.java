@@ -1,8 +1,8 @@
 import com.beust.jcommander.JCommander;
 import mechanics.system.jar.Args;
+import mechanics.system.jar.Unpack;
 import org.testng.TestNG;
 import org.testng.collections.Lists;
-import mechanics.system.jar.Unpack;
 import ru.yandex.qatools.allure.report.AllureReportBuilder;
 import ru.yandex.qatools.allure.report.AllureReportBuilderException;
 

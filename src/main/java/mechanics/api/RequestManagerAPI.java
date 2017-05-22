@@ -3,9 +3,9 @@ package mechanics.api;
 import com.jayway.restassured.response.Response;
 import mechanics.system.constant.AssembledEquipments;
 import mechanics.system.constant.AssembledUrls;
+import mechanics.system.http.JSONHandler;
 import org.testng.Assert;
 import ru.yandex.qatools.allure.annotations.Step;
-import mechanics.system.http.JSONHandler;
 
 import java.util.ArrayList;
 import java.util.Map;

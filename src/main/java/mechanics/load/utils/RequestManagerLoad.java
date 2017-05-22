@@ -3,10 +3,10 @@ package mechanics.load.utils;
 
 import mechanics.system.constant.AssembledEquipments;
 import mechanics.system.constant.AssembledUrls;
+import mechanics.system.http.JSONHandler;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import mechanics.system.http.JSONHandler;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;

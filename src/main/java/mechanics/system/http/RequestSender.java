@@ -6,14 +6,14 @@ import com.jayway.restassured.config.SSLConfig;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 import mechanics.load.utils.GatlingReportAdapter;
+import mechanics.system.aws.SignAWSv4;
+import mechanics.system.aws.objects.AWSCredentials;
 import mechanics.system.constant.AssembledUrls;
+import mechanics.system.constant.HTTPMethod;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import mechanics.system.aws.SignAWSv4;
-import mechanics.system.aws.objects.AWSCredentials;
-import mechanics.system.constant.HTTPMethod;
 
 import javax.net.ssl.SSLContext;
 import java.security.NoSuchAlgorithmException;

@@ -1,10 +1,10 @@
 package mechanics.ui.pageObjets;
 
-import org.openqa.selenium.WebDriver;
-import ru.yandex.qatools.allure.annotations.Step;
 import mechanics.ui.utils.UiUtils;
 import mechanics.ui.utils.WaitsAsserts;
 import mechanics.ui.utils.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import ru.yandex.qatools.allure.annotations.Step;
 
 /**
  * Created by User on 06.03.2017.

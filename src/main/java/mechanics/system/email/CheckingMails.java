@@ -1,8 +1,8 @@
 package mechanics.system.email;
 
+import mechanics.system.readers.Credentials;
 import org.junit.Assert;
 import ru.yandex.qatools.allure.annotations.Step;
-import mechanics.system.readers.Credentials;
 
 import javax.mail.*;
 import java.util.HashMap;

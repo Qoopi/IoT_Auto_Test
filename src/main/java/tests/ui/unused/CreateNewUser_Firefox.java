@@ -1,11 +1,11 @@
 package tests.ui.unused;
 
+import mechanics.ui.pageObjets.LogInPage;
+import mechanics.ui.utils.ListenerUi;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
-import mechanics.ui.pageObjets.LogInPage;
-import mechanics.ui.utils.ListenerUi;
 
 @Listeners(ListenerUi.class)
 

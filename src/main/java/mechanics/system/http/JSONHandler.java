@@ -1,13 +1,13 @@
 package mechanics.system.http;
 
 import com.google.gson.JsonObject;
+import mechanics.system.aws.SignAWSv4;
 import mechanics.system.constant.AssembledEquipments;
 import org.jglue.fluentjson.JsonBuilderFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import mechanics.system.aws.SignAWSv4;
 
 import java.util.ArrayList;
 

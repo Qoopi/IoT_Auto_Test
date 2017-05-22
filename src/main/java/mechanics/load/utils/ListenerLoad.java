@@ -1,16 +1,16 @@
 package mechanics.load.utils;
 
+import mechanics.system.http.RequestSender;
 import mechanics.system.jar.Args;
+import mechanics.ui.pageObjets.LogInPage;
+import mechanics.ui.utils.WaitsAsserts;
+import mechanics.ui.utils.WebDriverFactory;
+import mechanics.ui.utils.WebDriverManager;
 import org.apache.commons.io.output.TeeOutputStream;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import mechanics.system.http.RequestSender;
-import mechanics.ui.pageObjets.LogInPage;
-import mechanics.ui.utils.WaitsAsserts;
-import mechanics.ui.utils.WebDriverFactory;
-import mechanics.ui.utils.WebDriverManager;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
