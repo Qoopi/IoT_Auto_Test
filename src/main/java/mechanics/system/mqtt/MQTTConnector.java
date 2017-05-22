@@ -19,7 +19,19 @@ public class MQTTConnector {
         String awsSecretAccessKey = RequestSender.awsCredentials.getSecretAccessKey();
         String sessionToken = RequestSender.awsCredentials.getSessionToken();
 
-        AWSIotMqttClient awsIotClient = new AWSIotMqttClient(clientEndpoint, clientId, awsAccessKeyId, awsSecretAccessKey, sessionToken);
+        AWSIotMqttClient awsIotClient;
+        if (sessionToken==null || sessionToken.equals("") || sessionToken.isEmpty()){
+            System.out.println("Launching IoT client without session token.");
+            System.out.println("=========================");
+            awsIotClient = new AWSIotMqttClient(clientEndpoint, clientId, awsAccessKeyId, awsSecretAccessKey);
+        }
+        else{
+            System.out.println("Launching IoT client using session token.");
+            System.out.println("=========================");
+            awsIotClient = new AWSIotMqttClient(clientEndpoint, clientId, awsAccessKeyId, awsSecretAccessKey, sessionToken);
+        }
+
+
         awsIotClient.setConnectionTimeout(openConnectionTimeMs);
         awsIotClient.setKeepAliveInterval(openConnectionTimeMs);
         awsIotClient.setMaxConnectionRetries(connectionRetries);
@@ -56,7 +68,18 @@ public class MQTTConnector {
         String awsSecretAccessKey = RequestSender.awsCredentials.getSecretAccessKey();
         String sessionToken = RequestSender.awsCredentials.getSessionToken();
 
-        AWSIotMqttClient awsIotClient = new AWSIotMqttClient(clientEndpoint, clientId, awsAccessKeyId, awsSecretAccessKey, sessionToken);
+        AWSIotMqttClient awsIotClient;
+        if (sessionToken==null || sessionToken.equals("") || sessionToken.isEmpty()){
+            System.out.println("Launching IoT client without session token.");
+            System.out.println("=========================");
+            awsIotClient = new AWSIotMqttClient(clientEndpoint, clientId, awsAccessKeyId, awsSecretAccessKey);
+        }
+        else{
+            System.out.println("Launching IoT client using session token.");
+            System.out.println("=========================");
+            awsIotClient = new AWSIotMqttClient(clientEndpoint, clientId, awsAccessKeyId, awsSecretAccessKey, sessionToken);
+        }
+
         awsIotClient.setMaxConnectionRetries(connectionRetries);
 
         try {
@@ -70,55 +93,6 @@ public class MQTTConnector {
         } catch (AWSIotException e) {
             e.printStackTrace();
         }
-    }
-
-
-    public void mqttSubscribe(int openConnectionTimeMs, String topic, String topic2){
-        String clientId = ThreadLocalRandom.current().nextInt(9000, 900000 + 1)+"xe";
-        String awsAccessKeyId = RequestSender.awsCredentials.getAccessKeyId();
-        String awsSecretAccessKey = RequestSender.awsCredentials.getSecretAccessKey();
-        String sessionToken = RequestSender.awsCredentials.getSessionToken();
-
-        AWSIotMqttClient awsIotClient = new AWSIotMqttClient(clientEndpoint, clientId, awsAccessKeyId, awsSecretAccessKey, sessionToken);
-        awsIotClient.setConnectionTimeout(openConnectionTimeMs);
-        awsIotClient.setKeepAliveInterval(openConnectionTimeMs);
-        awsIotClient.setMaxConnectionRetries(connectionRetries);
-
-        try {
-            awsIotClient.connect();
-        } catch (AWSIotException e) {
-            e.printStackTrace();
-        }
-
-        AWSIotTopic topicIoT = new TestTopicListener(topic, AWSIotQos.QOS0);
-        AWSIotTopic topicIoT2 = new TestTopicListener(topic2, AWSIotQos.QOS0);
-
-        try {
-            awsIotClient.subscribe(topicIoT2, false);
-            awsIotClient.subscribe(topicIoT, false);
-        } catch (AWSIotException e) {
-            e.printStackTrace();
-        }
-
-
-        System.out.println(awsIotClient.getConnectionStatus().toString());
-        System.out.println(awsIotClient.getConnectionStatus().toString());
-
-        if(openConnectionTimeMs > 60000){
-            int runTimeInMinutes = openConnectionTimeMs/60000;
-
-            for (int i = 0; i < runTimeInMinutes; i++){
-                sleep(60000);
-                awsIotClient.updateCredentials(awsAccessKeyId, awsSecretAccessKey,sessionToken);
-            }
-        }
-
-        try {
-            awsIotClient.disconnect();
-        } catch (AWSIotException e) {
-            e.printStackTrace();
-        }
-
     }
 
     public void sleep(int ms){
