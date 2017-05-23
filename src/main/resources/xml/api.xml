@@ -20,4 +20,10 @@
         </classes>
     </test>
 
+    <test name="Authorization">
+        <classes>
+            <class name="tests.api.AuthTest"/>
+        </classes>
+    </test>
+
 </suite>

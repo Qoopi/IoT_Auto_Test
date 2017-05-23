@@ -45,7 +45,7 @@ public class SignAWSv4 extends RequestSender {
         Date date = new Date();
         AWSURI awsuri = parseForCanonicalRequest(method, url);
         String sign = generateSign(date, awsuri);
-        Map<String, String> map = new HashMap();
+        Map<String, String> map = new HashMap<>();
         String amzDate = getAmzDate(date);
         map.put("x-amz-date", amzDate);
         map.put("Authorization", sign);
@@ -58,7 +58,7 @@ public class SignAWSv4 extends RequestSender {
         AWSURI awsuri = parseForCanonicalRequest(method, url);
         awsuri.setPayload(body);
         String sign = generateSign(date, awsuri);
-        Map<String, String> map = new HashMap();
+        Map<String, String> map = new HashMap<>();
         String amzDate = getAmzDate(date);
         map.put("x-amz-date", amzDate);
         map.put("Authorization", sign);
@@ -68,7 +68,7 @@ public class SignAWSv4 extends RequestSender {
 
 
     public Map<String, String> standardHeaders(){
-        Map<String, String> map = new HashMap();
+        Map<String, String> map = new HashMap<>();
         map.put("Connection", "keep-alive");
         map.put("Cache-Control", "no-cache");
         map.put("Pragma", "no-cache");

@@ -33,6 +33,12 @@ public class RequestManagerAPI extends JSONManagerAPI{
         messagesEnableGatlingReport = false;
     }
 
+
+    public void authenticationRefresh(){
+        Response response = sendAmazonRequest(GET.getValue(), AssembledUrls.authenticationRefresh);
+        checkResponse(response);
+    }
+
     public void skedlerReportCreate(){
         //TODO вынести JSONы для репортов в JsonManagerAPI
         String jsonBody = JSONReportCreate();

@@ -21,15 +21,11 @@ public class Main {
                 .parse(args);
         argv.help();
         argv.print();
-
         Unpack unpack = new Unpack();
         unpack.unpackOnStart();
         argv.setStage();
-
         long time = System.currentTimeMillis();
-
         System.setProperty("allure.results.directory", "reports/allure_" + Args.stage +"_"+ time);
-
         TestNG testng = new TestNG();
         List<String> suites = Lists.newArrayList();
         if (new File("xml/"+Args.file).exists()){
@@ -43,7 +39,6 @@ public class Main {
         testng.setTestSuites(suites);
         testng.setVerbose(2);
         testng.run();
-
         File output = new File("reports/allure_" + Args.stage +"_"+ time + "/allure-report/");
         File results = new File("reports/allure_" + Args.stage+"_"+ time);
         System.out.println(output.getAbsolutePath());
@@ -54,8 +49,6 @@ public class Main {
         } catch (AllureReportBuilderException e) {
             e.printStackTrace();
         }
-
-
         //if any test fails - exit code is 1
         if (testng.hasFailure() || testng.hasFailureWithinSuccessPercentage() || testng.hasSkip()) {
             System.exit(1);

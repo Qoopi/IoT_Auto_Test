@@ -32,19 +32,19 @@ public class AssembledUrls {
     }
 
     public void setApiUrl(String apiUrl) {
-        this.apiUrl = apiUrl;
+        AssembledUrls.apiUrl = apiUrl;
     }
 
     public void setApiUrlMin(String apiUrlMin) {
-        this.apiUrlMin = apiUrlMin;
+        AssembledUrls.apiUrlMin = apiUrlMin;
     }
 
     public void setRedirectClientURI(String redirectClientURI) {
-        this.redirectClientURI = redirectClientURI;
+        AssembledUrls.redirectClientURI = redirectClientURI;
     }
 
     public void setIotEndpoint(String iotEndpoint) {
-        this.iotEndpoint = iotEndpoint;
+        AssembledUrls.iotEndpoint = iotEndpoint;
     }
 
 
