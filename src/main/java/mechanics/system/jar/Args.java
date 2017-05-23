@@ -15,7 +15,7 @@ public class Args {
     private List<String> parameters = new ArrayList<>();
 
     @Parameter(names = { "-stage", "-s" }, description = "Environment to test: dev/stage/other")
-    private static String stage = "dev";
+    public static String stage = "dev";
 
     @Parameter(names = { "-file", "-f"}, description = "Test suite .xml file in xml/ folder")
     public static String file = "testng.xml";

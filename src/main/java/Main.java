@@ -44,8 +44,8 @@ public class Main {
         testng.setVerbose(2);
         testng.run();
 
-        File output = new File("reports/allure_" + time + "/allure-report/");
-        File results = new File("reports/allure_" + time);
+        File output = new File("reports/allure_" + Args.stage +"_"+ time + "/allure-report/");
+        File results = new File("reports/allure_" + Args.stage+"_"+ time);
         System.out.println(output.getAbsolutePath());
         try {
             AllureReportBuilder allureReportBuilder = new AllureReportBuilder(output);
