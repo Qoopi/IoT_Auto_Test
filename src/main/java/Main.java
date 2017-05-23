@@ -28,7 +28,7 @@ public class Main {
 
         long time = System.currentTimeMillis();
 
-        System.setProperty("allure.results.directory", "reports/allure_" + time);
+        System.setProperty("allure.results.directory", "reports/allure_" + Args.stage +"_"+ time);
 
         TestNG testng = new TestNG();
         List<String> suites = Lists.newArrayList();
