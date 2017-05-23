@@ -27,9 +27,10 @@ public class Workbench {
     public void testMqttPublish(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         mqttManagerAPI.triggerVPVAbnormalVibration();
+        mqttManagerAPI.triggerGPVLong();
     }
 
-//    @Test
+    @Test
     public void testMqttSubscribe(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         mqttManagerAPI.readGPV();

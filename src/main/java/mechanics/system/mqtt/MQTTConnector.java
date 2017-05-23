@@ -5,6 +5,7 @@ import com.amazonaws.services.iot.client.*;
 import mechanics.system.constant.AssembledUrls;
 import mechanics.system.http.RequestSender;
 import mechanics.system.mqtt.pubSub.TestTopicListener;
+import org.apache.commons.lang.RandomStringUtils;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -12,9 +13,8 @@ public class MQTTConnector {
     private String clientEndpoint = AssembledUrls.iotEndpoint;
     private final int connectionRetries = 2;
 
-    //THIS ONE IS WORKING
     public void mqttSubscribe(int openConnectionTimeMs, String topic){
-        String clientId = ThreadLocalRandom.current().nextInt(9000, 900000 + 1)+"xe";
+        String clientId = ThreadLocalRandom.current().nextInt(10, 999999 + 1)+"ex";
         String awsAccessKeyId = RequestSender.awsCredentials.getAccessKeyId();
         String awsSecretAccessKey = RequestSender.awsCredentials.getSecretAccessKey();
         String sessionToken = RequestSender.awsCredentials.getSessionToken();
@@ -63,7 +63,7 @@ public class MQTTConnector {
     }
 
     public void mqttPublish(String topic, String payload){
-        String clientId = ThreadLocalRandom.current().nextInt(900, 900000 + 1)+"Pe";
+        String clientId = ThreadLocalRandom.current().nextInt(10, 999999 + 1)+"eP";
         String awsAccessKeyId = RequestSender.awsCredentials.getAccessKeyId();
         String awsSecretAccessKey = RequestSender.awsCredentials.getSecretAccessKey();
         String sessionToken = RequestSender.awsCredentials.getSessionToken();
