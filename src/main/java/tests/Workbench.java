@@ -6,6 +6,7 @@ import mechanics.api.RequestManagerAPI;
 import mechanics.system.aws.SignAWSv4;
 import mechanics.system.constant.AssembledEquipments;
 import mechanics.system.constant.HTTPMethod;
+import mechanics.system.mqtt.PayloadGPV;
 import mechanics.system.mqtt.PayloadVPV;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -17,12 +18,17 @@ import org.testng.annotations.Test;
 //@Listeners(ListenerAPI.class)
 public class Workbench {
 
-    @Test
+//    @Test
     public void builder(){
         String  payloadVPV = PayloadVPV.newBuilder().setAbnormalVibrationMain(666).setId("someid").initialize();
         System.out.println(payloadVPV);
 //        String payload2 = PayloadVPV.newBuilder().setId("ohCock").setMaxDistanceBlower(6666).initialize();
 //        System.out.println(payload2);
+    }
+    @Test
+    public void gpvbuilder(){
+        String payloadGPV = PayloadGPV.newBuilder().setMultiDataStreamId(111).setDistance(666).initialize();
+        System.out.println(payloadGPV);
     }
 
     public void test3(){
