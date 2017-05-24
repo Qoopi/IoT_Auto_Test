@@ -1,5 +1,6 @@
 package tests;
 
+import com.jayway.restassured.response.Response;
 import mechanics.api.ListenerAPI;
 import mechanics.api.MQTTManagerAPI;
 import mechanics.api.RequestManagerAPI;
@@ -15,8 +16,18 @@ import org.testng.annotations.Test;
 /**
  * Created by user on 19.04.2017.
  */
-//@Listeners(ListenerAPI.class)
+@Listeners(ListenerAPI.class)
 public class Workbench {
+
+
+    @Test
+    public void setThresholdVPV(){
+        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        Response response = requestManagerAPI.sendAmazonRequest("GET", "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/equipment_admin");
+        String newBody = requestManagerAPI.getEquipmentObject(response.asString(), "Thing-000011-i1", 999, 999);
+        requestManagerAPI.sendAmazonRequest("PUT", "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/equipment_admin", newBody);
+    }
+
 
 //    @Test
     public void builder(){
@@ -25,7 +36,7 @@ public class Workbench {
 //        String payload2 = PayloadVPV.newBuilder().setId("ohCock").setMaxDistanceBlower(6666).initialize();
 //        System.out.println(payload2);
     }
-    @Test
+//    @Test
     public void gpvbuilder(){
         String payloadGPV = PayloadGPV.newBuilder().setMultiDataStreamId("111").setDistance(666).initialize();
         System.out.println(payloadGPV);
@@ -62,7 +73,7 @@ public class Workbench {
         System.out.println(equipCounter);
     }
 
-    @Test
+//    @Test
     public void authRefresh(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         SignAWSv4 signAWSv4 = new SignAWSv4();

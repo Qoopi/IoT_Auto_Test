@@ -3,11 +3,13 @@ package mechanics.system.http;
 import com.google.gson.JsonObject;
 import mechanics.system.aws.SignAWSv4;
 import mechanics.system.constant.AssembledEquipments;
+import mechanics.system.readers.Credentials;
 import org.jglue.fluentjson.JsonBuilderFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
@@ -17,7 +19,7 @@ public class JSONHandler extends SignAWSv4 {
     private String defaultDashboardGPVName = "someAutoTestNameGPV";
     private String defaultDashboardGPVDescription = "someAutoTestDescriptionGPV";
 
-    private String testEmail = "kov.iot.sys@gmail.com";
+    private String testEmail = new Credentials().getCredentials().get("test_email");
     private String thingVpv = AssembledEquipments.equipmentVpv;
     private String thingGpv = AssembledEquipments.equipmentGpv;
 
@@ -103,6 +105,40 @@ public class JSONHandler extends SignAWSv4 {
             ids.add(id);
         }
         return ids;
+    }
+
+    //костыль, переписать полностью, если нужны будут изменения
+    public String getEquipmentObject(String response, String equipmentId, int newMaxDistanceAlarmLevel, int newMaxDistanceAbortLevel){
+        JSONArray array = parseToJSONArray(response);
+        JSONObject object;
+        String result = null;
+        boolean found = false;
+
+
+        for (int i = 0; i<=array.size()-1; i++) {
+            if (!found){
+                object = (JSONObject) array.get(i);
+            if (object.containsValue(equipmentId)) {
+                JSONArray array1 = (JSONArray) object.get("channels");
+                for (int i1 = 0; i1 <= array1.size() - 1; i1++) {
+                    if (array1.get(i1).toString().contains("maxDistanceAlarmLevel")) {
+                        JSONObject obj = (JSONObject) array1.get(i1);
+                        obj.replace("maxDistanceAlarmLevel", newMaxDistanceAlarmLevel);
+                        array1.set(i1, obj);
+                    }
+                    if (array1.get(i1).toString().contains("maxDistanceAbortLevel")) {
+                        JSONObject obj1 = (JSONObject) array1.get(i1);
+                        obj1.replace("maxDistanceAbortLevel", newMaxDistanceAbortLevel);
+                        array1.set(i1, obj1);
+                    }
+                }
+                object.replace("channels", array1);
+
+                result = "{\"items\": ["+object.toJSONString()+"]}";
+            }
+        }
+        }
+        return result;
     }
 
     private JSONArray parseToJSONArray(String jsonString) {

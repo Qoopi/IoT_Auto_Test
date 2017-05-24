@@ -1,9 +1,12 @@
 package tests.api;
 
+import com.jayway.restassured.response.Response;
 import mechanics.api.ListenerAPI;
 import mechanics.api.MQTTManagerAPI;
 import mechanics.api.RequestManagerAPI;
+import mechanics.system.constant.AssembledEquipments;
 import mechanics.system.email.CheckingMails;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
@@ -16,6 +19,11 @@ import static mechanics.system.constant.EmailInbox.*;
 @Listeners(ListenerAPI.class)
 public class NotificationRuleTests {
 
+    @BeforeClass
+    public void setThresholdVPV(){
+        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        requestManagerAPI.setEquipmentThresholdVPV(AssembledEquipments.equipmentVpv, 75, 120);
+    }
 
     @Features("Abnormal Vibration rule.")
     @Test
