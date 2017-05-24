@@ -11,14 +11,14 @@ import ru.yandex.qatools.allure.annotations.Step;
  * Created by user on 21.04.2017.
  */
 public class MQTTManagerAPI extends MQTTConnector {
-    @Step("Sending payload to Pump D11")
+    @Step("Sending payload to VPV equipment")
     public void triggerVPVAbnormalVibration(){
         String topic = AssembledEquipments.equipmentVpvData;
         String payload = PayloadVPV.newBuilder().setAbnormalVibrationMain(666).setId(AssembledEquipments.equipmentVpv).initialize();
         mqttPublish(topic, payload);
     }
 
-    @Step("Sending payload to Pump D11")
+    @Step("Sending payload to VPV equipment")
     public void triggerVPVAbort(){
         String topic = AssembledEquipments.equipmentVpvData;
         String payload = PayloadVPV.newBuilder().setMaxDistanceMain(666).setId(AssembledEquipments.equipmentVpv).initialize();
@@ -37,7 +37,7 @@ public class MQTTManagerAPI extends MQTTConnector {
         String payload = "{\"expiration\":"+(System.currentTimeMillis()/1000+120)+"}";
         mqttPublish(topic, payload);
     }
-    @Step("Sending payload to Pump D11")
+    @Step("Sending payload to VPV equipment")
     public void triggerVPVAlarmCount(){
         String topic =  AssembledEquipments.equipmentVpvData;
         String payload =PayloadVPV.newBuilder().setId(AssembledEquipments.equipmentVpv).setMaxDistanceMain(80).initialize();
@@ -46,7 +46,7 @@ public class MQTTManagerAPI extends MQTTConnector {
         mqttPublish(topic, payload);
         mqttPublish(topic, payloadNormal);
     }
-    @Step("Sending payload to Pump D11")
+    @Step("Sending payload to VPV equipment")
     public void triggerVPVAbortCount(){
         String topic = AssembledEquipments.equipmentVpvData;
         String payload =PayloadVPV.newBuilder().setId(AssembledEquipments.equipmentVpv).setMaxDistanceMain(170).initialize();

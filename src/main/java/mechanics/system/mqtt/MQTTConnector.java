@@ -5,7 +5,6 @@ import com.amazonaws.services.iot.client.*;
 import mechanics.system.constant.AssembledUrls;
 import mechanics.system.http.RequestSender;
 import mechanics.system.mqtt.pubSub.TestTopicListener;
-import org.apache.commons.lang.RandomStringUtils;
 
 import java.util.concurrent.ThreadLocalRandom;
 
