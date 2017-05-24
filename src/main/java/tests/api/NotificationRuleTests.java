@@ -25,15 +25,120 @@ public class NotificationRuleTests {
         requestManagerAPI.setEquipmentThresholdVPV(AssembledEquipments.equipmentVpv, 75, 120);
     }
 
-    @Features("Abnormal Vibration rule.")
+    @Features("Abnormal Vibration rule with Any channel, sending payload on Main with Abort.")
     @Test
-    public void abnormalVibrationVPV(){
+    public void abnormalVibrationVPVAnyAbortMain(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleAbnormalVibrationVPV());
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleAbnormalVibrationVPVAnyAbort());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
-        mqttManagerAPI.triggerVPVAbnormalVibration();
+        mqttManagerAPI.triggerVPVAbnormalVibrationMainAbort();
+        requestManagerAPI.checkNotificationRuleTriggeredLong();
+        CheckingMails checkingMails = new CheckingMails();
+        checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
+        requestManagerAPI.notificationListDeleteAll();
+        requestManagerAPI.notificationRuleDelete();
+    }
+    @Features("Abnormal Vibration rule with Any channel, sending payload on Main with Alarm.")
+    @Test
+    public void abnormalVibrationVPVAnyAlarmMain(){
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
+        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleAbnormalVibrationVPVAnyAlarm());
+        requestManagerAPI.checkNotificationRuleIsCreated();
+        requestManagerAPI.checkNotificationRuleNotTriggered();
+        mqttManagerAPI.triggerVPVAbnormalVibrationMainAlarm();
+        requestManagerAPI.checkNotificationRuleTriggeredLong();
+        CheckingMails checkingMails = new CheckingMails();
+        checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
+        requestManagerAPI.notificationListDeleteAll();
+        requestManagerAPI.notificationRuleDelete();
+    }
+    @Features("Abnormal Vibration rule with Any channel, sending payload on Blower with Abort.")
+    @Test
+    public void abnormalVibrationVPVAnyAbortBlower(){
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
+        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleAbnormalVibrationVPVAnyAbort());
+        requestManagerAPI.checkNotificationRuleIsCreated();
+        requestManagerAPI.checkNotificationRuleNotTriggered();
+        mqttManagerAPI.triggerVPVAbnormalVibrationBlowerAbort();
+        requestManagerAPI.checkNotificationRuleTriggeredLong();
+        CheckingMails checkingMails = new CheckingMails();
+        checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
+        requestManagerAPI.notificationListDeleteAll();
+        requestManagerAPI.notificationRuleDelete();
+    }
+    @Features("Abnormal Vibration rule with Any channel, sending payload on Blower with Alarm.")
+    @Test
+    public void abnormalVibrationVPVAnyAlarmBlower(){
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
+        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleAbnormalVibrationVPVAnyAlarm());
+        requestManagerAPI.checkNotificationRuleIsCreated();
+        requestManagerAPI.checkNotificationRuleNotTriggered();
+        mqttManagerAPI.triggerVPVAbnormalVibrationBlowerAlarm();
+        requestManagerAPI.checkNotificationRuleTriggeredLong();
+        CheckingMails checkingMails = new CheckingMails();
+        checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
+        requestManagerAPI.notificationListDeleteAll();
+        requestManagerAPI.notificationRuleDelete();
+    }
+    @Features("Abnormal Vibration rule with Main channel, sending payload with Abort.")
+    @Test
+    public void abnormalVibrationVPVMainAbort(){
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
+        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleAbnormalVibrationVPVMainAbort());
+        requestManagerAPI.checkNotificationRuleIsCreated();
+        requestManagerAPI.checkNotificationRuleNotTriggered();
+        mqttManagerAPI.triggerVPVAbnormalVibrationMainAbort();
+        requestManagerAPI.checkNotificationRuleTriggeredLong();
+        CheckingMails checkingMails = new CheckingMails();
+        checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
+        requestManagerAPI.notificationListDeleteAll();
+        requestManagerAPI.notificationRuleDelete();
+    }
+    @Features("Abnormal Vibration rule with Main channel, sending payload with Alarm.")
+    @Test
+    public void abnormalVibrationVPVMainAlarm(){
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
+        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleAbnormalVibrationVPVMainAlarm());
+        requestManagerAPI.checkNotificationRuleIsCreated();
+        requestManagerAPI.checkNotificationRuleNotTriggered();
+        mqttManagerAPI.triggerVPVAbnormalVibrationMainAlarm();
+        requestManagerAPI.checkNotificationRuleTriggeredLong();
+        CheckingMails checkingMails = new CheckingMails();
+        checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
+        requestManagerAPI.notificationListDeleteAll();
+        requestManagerAPI.notificationRuleDelete();
+    }
+    @Features("Abnormal Vibration rule with Blower channel, sending payload with Abort.")
+    @Test
+    public void abnormalVibrationVPVABlowerAbort(){
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
+        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleAbnormalVibrationVPVBlowerAbort());
+        requestManagerAPI.checkNotificationRuleIsCreated();
+        requestManagerAPI.checkNotificationRuleNotTriggered();
+        mqttManagerAPI.triggerVPVAbnormalVibrationBlowerAbort();
+        requestManagerAPI.checkNotificationRuleTriggeredLong();
+        CheckingMails checkingMails = new CheckingMails();
+        checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
+        requestManagerAPI.notificationListDeleteAll();
+        requestManagerAPI.notificationRuleDelete();
+    }
+    @Features("Abnormal Vibration rule with Blower channel, sending payload with Alarm.")
+    @Test
+    public void abnormalVibrationVPVABlowerAlarm(){
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
+        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleAbnormalVibrationVPVBlowerAlarm());
+        requestManagerAPI.checkNotificationRuleIsCreated();
+        requestManagerAPI.checkNotificationRuleNotTriggered();
+        mqttManagerAPI.triggerVPVAbnormalVibrationBlowerAbort();
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
