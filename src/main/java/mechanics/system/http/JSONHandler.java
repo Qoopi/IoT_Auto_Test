@@ -156,6 +156,7 @@ public class JSONHandler extends SignAWSv4 {
         String name = "Abnormal auto-test rule";
         String description = "some description";
         int type = 0;
+        int channel = 0;
         String equipment = "Thing-90094-0";
         int threshold = 0;
         String trigger = "";
@@ -163,11 +164,11 @@ public class JSONHandler extends SignAWSv4 {
         int value = 0;
         int period = 0;
         int sensor = 1;
-        return notificationRuleCreateJSON(name, description, type, equipment, threshold, trigger, operation, value, period, sensor).toString();
+        return notificationRuleCreateJSON(name, description, type, channel, equipment, threshold, trigger, operation, value, period, sensor).toString();
     }
 
 
-    public JsonObject notificationRuleCreateJSON(String name, String description, int type, String equipment, int threshold, String trigger, String operation, int value, int period, int sensor) {
+    public JsonObject notificationRuleCreateJSON(String name, String description, int type,int channel, String equipment, int threshold, String trigger, String operation, int value, int period, int sensor) {
         JsonObject jsonObject = JsonBuilderFactory.buildObject()
                 .add("active", true)
                 .add("name", name)
@@ -180,7 +181,7 @@ public class JSONHandler extends SignAWSv4 {
                 .addObject().add("value", testEmail).add("name", "hhhhhhhhhhhhh").end().end()
                 .addObject("notifications").add("alwaysSend", false).add("triggered", 10).add("acknowledged", 0).add("sms", false).add("emails", true).end()
                 .addArray("equipmentIds").add(equipment).end()
-                .add("channel", 0)
+                .add("channel", channel)
                 .add("frq", 0)
                 .add("threshold", threshold)
                 .add("trigger", trigger)
@@ -191,7 +192,7 @@ public class JSONHandler extends SignAWSv4 {
         return jsonObject;
     }
 
-    public JsonObject notificationRuleCreateJSON(String name, String description, int type, String equipment, String threshold, String trigger, String operation, int value, int period, int sensor) {
+    public JsonObject notificationRuleCreateJSON(String name, String description, int type,String channel, String equipment, String threshold, String trigger, String operation, int value, int period, int sensor) {
         JsonObject jsonObject = JsonBuilderFactory.buildObject()
                 .add("active", true)
                 .add("name", name)
@@ -204,7 +205,7 @@ public class JSONHandler extends SignAWSv4 {
                 .addObject().add("value", testEmail).add("name", "hhhhhhhhhhhhh").end().end()
                 .addObject("notifications").add("alwaysSend", false).add("triggered", 10).add("acknowledged", 0).add("sms", false).add("emails", true).end()
                 .addArray("equipmentIds").add(equipment).end()
-                .add("channel", 0)
+                .add("channel", channel)
                 .add("frq", 0)
                 .add("threshold", threshold)
                 .add("trigger", trigger)

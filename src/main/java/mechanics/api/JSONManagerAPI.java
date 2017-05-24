@@ -15,11 +15,12 @@ public class JSONManagerAPI extends JSONHandler{
 
 
 
-    @Step("Creating JSON for Abnormal Vibration rule with Pump D11.")
-    public String jsonRuleAbnormalVibrationVPV(){
+    @Step("Creating JSON for Abnormal Vibration rule,channel: Any, Abort.")
+    public String jsonRuleAbnormalVibrationVPVAnyAbort(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleAbnormalVibrationsVPV.getMessage(),
-                "Pump D11",
+                "Auto tests rule",
+                0,
                 0,
                 thingVpv,
                 0,
@@ -30,12 +31,93 @@ public class JSONManagerAPI extends JSONHandler{
                 1
         ).toString();
     }
-    @Step("Creating JSON for Number of Alarms above threshold on Test OSS.")
+    @Step("Creating JSON for Abnormal Vibration rule,channel: Any, Alarm.")
+    public String jsonRuleAbnormalVibrationVPVAnyAlarm(){
+        return notificationRuleCreateJSON(
+                SubjectNotificationRuleAbnormalVibrationsVPV.getMessage(),
+                "Auto tests rule",
+                0,
+                0,
+                thingVpv,
+                1,
+                "",
+                ">=",
+                30,
+                0,
+                1
+        ).toString();
+    }
+    @Step("Creating JSON for Abnormal Vibration rule,channel: Main, Abort.")
+    public String jsonRuleAbnormalVibrationVPVMainAbort(){
+        return notificationRuleCreateJSON(
+                SubjectNotificationRuleAbnormalVibrationsVPV.getMessage(),
+                "Auto tests rule",
+                0,
+                1,
+                thingVpv,
+                0,
+                "",
+                ">=",
+                30,
+                0,
+                1
+        ).toString();
+    }
+    @Step("Creating JSON for Abnormal Vibration rule,channel: Main, Alarm.")
+    public String jsonRuleAbnormalVibrationVPVMainAlarm(){
+        return notificationRuleCreateJSON(
+                SubjectNotificationRuleAbnormalVibrationsVPV.getMessage(),
+                "Auto tests rule",
+                0,
+                1,
+                thingVpv,
+                1,
+                "",
+                ">=",
+                30,
+                0,
+                1
+        ).toString();
+    }
+    @Step("Creating JSON for Abnormal Vibration rule,channel: Blower,Abort.")
+    public String jsonRuleAbnormalVibrationVPVBlowerAbort(){
+        return notificationRuleCreateJSON(
+                SubjectNotificationRuleAbnormalVibrationsVPV.getMessage(),
+                "Auto tests rule",
+                0,
+                2,
+                thingVpv,
+                0,
+                "",
+                ">=",
+                30,
+                0,
+                1
+        ).toString();
+    }
+    @Step("Creating JSON for Abnormal Vibration rule,channel: Blower,Alarm.")
+    public String jsonRuleAbnormalVibrationVPVBlowerAlarm(){
+        return notificationRuleCreateJSON(
+                SubjectNotificationRuleAbnormalVibrationsVPV.getMessage(),
+                "Auto tests rule",
+                0,
+                2,
+                thingVpv,
+                0,
+                "",
+                ">=",
+                30,
+                0,
+                1
+        ).toString();
+    }
+    @Step("Creating JSON for Number of Alarms above threshold on GPV equipment.")
     public String jsonRuleAlarmCountGPV(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleNumberOfAlarms.getMessage(),
-                "Test OSS",
+                "Auto tests rule",
                 3,
+                "0",
                 thingGpv,
                 "",
                 "",
@@ -45,12 +127,13 @@ public class JSONManagerAPI extends JSONHandler{
                 0
         ).toString();
     }
-    @Step("Creating JSON for Number of Alarms above threshold on Pump D11.")
+    @Step("Creating JSON for Number of Alarms above threshold on VPV equipment.")
     public String jsonRuleAlarmCountVPV(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleNumberOfAlarms.getMessage(),
-                "PUMP D11",
+                "Auto tests rule",
                 3,
+                "0",
                 thingVpv,
                 "",
                 "",
@@ -60,12 +143,13 @@ public class JSONManagerAPI extends JSONHandler{
                 0
         ).toString();
     }
-    @Step("Creating JSON for Number of Aborts above threshold on Pump D11.")
+    @Step("Creating JSON for Number of Aborts above threshold on Pump equipment.")
     public String jsonRuleAbortsCountVPV(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleNumberOfAborts.getMessage(),
-                "PUMP D11",
+                "Auto tests rule",
                 2,
+                "0",
                 thingVpv,
                 "",
                 "",
@@ -75,12 +159,13 @@ public class JSONManagerAPI extends JSONHandler{
                 0
         ).toString();
     }
-    @Step("Creating JSON for Disconnected rule for PUMP D11.")
+    @Step("Creating JSON for Disconnected rule for VPV equipment.")
     public String jsonRuleDisconnectedVPV(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleDisconnectedVPV.getMessage(),
-                "PUMP D11",
+                "Auto tests rule",
                 4,
+                0,
                 thingVpv,
                 0,
                 "0",
@@ -94,8 +179,9 @@ public class JSONManagerAPI extends JSONHandler{
     public String jsonRuleDisconnectedGPV(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleDisconnectedGPV.getMessage(),
-                "BUC ARTRobot",
+                "Auto tests rule",
                 4,
+                0,
                 thingGpv,
                 0,
                 "0",
@@ -105,12 +191,13 @@ public class JSONManagerAPI extends JSONHandler{
                 0
         ).toString();
     }
-    @Step("Creating JSON for Connected rule for PUMP D11.")
+    @Step("Creating JSON for Connected rule for VPV equipment.")
     public String jsonRuleConnectedVPV(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleConnectedVPV.getMessage(),
-                "PUMP D11",
+                "Auto tests rule",
                 4,
+                0,
                 thingVpv,
                 0,
                 "1",
@@ -120,12 +207,13 @@ public class JSONManagerAPI extends JSONHandler{
                 0
         ).toString();
     }
-    @Step("Creating JSON for Connected rule for BUC ARTRobot.")
+    @Step("Creating JSON for Connected rule for GPV equipment.")
     public String jsonRuleConnectedGPV(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleConnectedGPV.getMessage(),
-                "BUC ARTRobot",
+                "Auto tests rule",
                 4,
+                0,
                 thingGpv,
                 0,
                 "1",
@@ -135,12 +223,13 @@ public class JSONManagerAPI extends JSONHandler{
                 0
         ).toString();
     }
-    @Step("Creating JSON for Every Warning rule for Pump D11.")
+    @Step("Creating JSON for Every Warning rule for VPV equipment.")
     public String jsonRuleEveryWarningVPV(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleEveryWarningVPV.getMessage(),
-                "PUMP D11",
+                "Auto tests rule",
                 8,
+                0,
                 thingVpv,
                 0,
                 "",
@@ -150,12 +239,13 @@ public class JSONManagerAPI extends JSONHandler{
                 0
         ).toString();
     }
-    @Step("Creating JSON for Every Warning rule for Test OSS.")
+    @Step("Creating JSON for Every Warning rule for GPV equipment.")
     public String jsonRuleEveryWarningGPV(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleEveryWarningGPV.getMessage(),
-                "Test OSS",
+                "Auto tests rule",
                 9,
+                0,
                 thingGpv,
                 0,
                 "",

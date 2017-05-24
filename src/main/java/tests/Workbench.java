@@ -1,22 +1,24 @@
 package tests;
 
-import mechanics.api.ListenerAPI;
 import mechanics.api.MQTTManagerAPI;
 import mechanics.api.RequestManagerAPI;
 import mechanics.system.aws.SignAWSv4;
-import mechanics.system.constant.AssembledEquipments;
 import mechanics.system.constant.HTTPMethod;
+import mechanics.system.email.CheckingMails;
 import mechanics.system.mqtt.PayloadGPV;
 import mechanics.system.mqtt.PayloadVPV;
 import org.testng.Assert;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import ru.yandex.qatools.allure.annotations.Features;
+
+import static mechanics.system.constant.EmailInbox.SubjectNotificationRuleAbnormalVibrationsVPV;
 
 /**
  * Created by user on 19.04.2017.
  */
 //@Listeners(ListenerAPI.class)
 public class Workbench {
+
 
 //    @Test
     public void builder(){
@@ -35,7 +37,7 @@ public class Workbench {
         Assert.assertTrue(false);
     }
 
-//    @Test
+    @Test
     public void test1(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         mqttManagerAPI.triggerGPVLong();
@@ -44,7 +46,7 @@ public class Workbench {
 //    @Test
     public void testMqttPublish(){
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
-        mqttManagerAPI.triggerVPVAbnormalVibration();
+        mqttManagerAPI.triggerVPVAbnormalVibrationMainAbort();
         mqttManagerAPI.triggerGPVLong();
     }
 
@@ -62,7 +64,7 @@ public class Workbench {
         System.out.println(equipCounter);
     }
 
-    @Test
+  //  @Test
     public void authRefresh(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         SignAWSv4 signAWSv4 = new SignAWSv4();

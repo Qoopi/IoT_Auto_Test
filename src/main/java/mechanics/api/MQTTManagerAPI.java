@@ -11,12 +11,31 @@ import ru.yandex.qatools.allure.annotations.Step;
  * Created by user on 21.04.2017.
  */
 public class MQTTManagerAPI extends MQTTConnector {
-    @Step("Sending payload to VPV equipment")
-    public void triggerVPVAbnormalVibration(){
+    @Step("Sending payload with Abort to VPV equipment on Main channel")
+    public void triggerVPVAbnormalVibrationMainAbort(){
         String topic = AssembledEquipments.equipmentVpvData;
         String payload = PayloadVPV.newBuilder().setAbnormalVibrationMain(666).setId(AssembledEquipments.equipmentVpv).initialize();
         mqttPublish(topic, payload);
     }
+    @Step("Sending payload with Alarm to VPV equipment on Main channel")
+    public void triggerVPVAbnormalVibrationMainAlarm(){
+        String topic = AssembledEquipments.equipmentVpvData;
+        String payload = PayloadVPV.newBuilder().setAbnormalVibrationMain(80).setId(AssembledEquipments.equipmentVpv).initialize();
+        mqttPublish(topic, payload);
+    }
+    @Step("Sending payload with Abort to VPV equipment on Blower channel")
+    public void triggerVPVAbnormalVibrationBlowerAbort(){
+        String topic = AssembledEquipments.equipmentVpvData;
+        String payload = PayloadVPV.newBuilder().setAbnormalVibrationBlower(666).setId(AssembledEquipments.equipmentVpv).initialize();
+        mqttPublish(topic, payload);
+    }
+    @Step("Sending payload with Abort to VPV equipment on Blower channel")
+    public void triggerVPVAbnormalVibrationBlowerAlarm(){
+        String topic = AssembledEquipments.equipmentVpvData;
+        String payload = PayloadVPV.newBuilder().setAbnormalVibrationBlower(80).setId(AssembledEquipments.equipmentVpv).initialize();
+        mqttPublish(topic, payload);
+    }
+
 
     @Step("Sending payload to VPV equipment")
     public void triggerVPVAbort(){
