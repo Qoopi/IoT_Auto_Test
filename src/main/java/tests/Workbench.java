@@ -4,7 +4,9 @@ import mechanics.api.ListenerAPI;
 import mechanics.api.MQTTManagerAPI;
 import mechanics.api.RequestManagerAPI;
 import mechanics.system.aws.SignAWSv4;
+import mechanics.system.constant.AssembledEquipments;
 import mechanics.system.constant.HTTPMethod;
+import mechanics.system.mqtt.PayloadVPV;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -12,9 +14,16 @@ import org.testng.annotations.Test;
 /**
  * Created by user on 19.04.2017.
  */
-@Listeners(ListenerAPI.class)
+//@Listeners(ListenerAPI.class)
 public class Workbench {
 
+    @Test
+    public void builder(){
+        String  payloadVPV = PayloadVPV.newBuilder().setAbnormalVibrationMain(666).setId("someid").initialize();
+        System.out.println(payloadVPV);
+//        String payload2 = PayloadVPV.newBuilder().setId("ohCock").setMaxDistanceBlower(6666).initialize();
+//        System.out.println(payload2);
+    }
 
     public void test3(){
         Assert.assertTrue(false);

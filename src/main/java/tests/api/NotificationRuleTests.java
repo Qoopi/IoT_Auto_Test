@@ -40,7 +40,7 @@ public class NotificationRuleTests {
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleEveryWarningVPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
-        mqttManagerAPI.triggerVPVAbnormalVibration();
+        mqttManagerAPI.triggerVPVAbort();
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.check(SubjectNotificationRuleEveryWarningVPV.getMessage());
