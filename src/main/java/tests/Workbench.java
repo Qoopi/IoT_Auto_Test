@@ -27,7 +27,7 @@ public class Workbench {
     }
     @Test
     public void gpvbuilder(){
-        String payloadGPV = PayloadGPV.newBuilder().setMultiDataStreamId(111).setDistance(666).initialize();
+        String payloadGPV = PayloadGPV.newBuilder().setMultiDataStreamId("111").setDistance(666).initialize();
         System.out.println(payloadGPV);
     }
 

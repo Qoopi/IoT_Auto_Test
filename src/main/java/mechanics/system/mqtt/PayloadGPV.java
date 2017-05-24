@@ -2,7 +2,6 @@ package mechanics.system.mqtt;
 
 import com.google.gson.JsonObject;
 import org.jglue.fluentjson.JsonBuilderFactory;
-import org.testng.annotations.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,7 +10,7 @@ import java.util.Date;
  * Created by Alex Storm on 24.05.2017.
  */
 public class PayloadGPV {
-    private int multiDataStreamId;
+    private String multiDataStreamId;
     private boolean alarm = false;
     private int distance = 0;
     private String date;
@@ -55,7 +54,7 @@ public class PayloadGPV {
 
         }
 
-        public Builder setMultiDataStreamId(int multiDataStreamId) {
+        public Builder setMultiDataStreamId(String multiDataStreamId) {
             PayloadGPV.this.multiDataStreamId = multiDataStreamId;
             return this;
         }
