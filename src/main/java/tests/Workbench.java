@@ -1,17 +1,13 @@
 package tests;
 
 import com.jayway.restassured.response.Response;
-import mechanics.api.ListenerAPI;
 import mechanics.api.MQTTManagerAPI;
 import mechanics.api.RequestManagerAPI;
 import mechanics.system.aws.SignAWSv4;
-import mechanics.system.constant.AssembledEquipments;
 import mechanics.system.constant.HTTPMethod;
 import mechanics.system.mqtt.PayloadGPV;
 import mechanics.system.mqtt.PayloadVPV;
 import org.testng.Assert;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
 
 /**
  * Created by user on 19.04.2017.
@@ -24,7 +20,7 @@ public class Workbench {
     public void setThresholdVPV(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         Response response = requestManagerAPI.sendAmazonRequest("GET", "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/equipment_admin");
-        String newBody = requestManagerAPI.getEquipmentObject(response.asString(), "Thing-000011-i1", 90, 95, 120, 125);
+        String newBody = requestManagerAPI.changeThresholdVPV(response.asString(), "Thing-000011-i1", 90, 95, 120, 125);
         requestManagerAPI.sendAmazonRequest("PUT", "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/equipment_admin", newBody);
     }
 

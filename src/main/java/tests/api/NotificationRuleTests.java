@@ -20,9 +20,10 @@ import static mechanics.system.constant.EmailInbox.*;
 public class NotificationRuleTests {
 
     @BeforeClass
-    public void setThresholdVPV(){
+    public void setEquipThresholds(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.setEquipmentThresholdVPV(AssembledEquipments.equipmentVpv, 90, 95, 120, 125);
+        requestManagerAPI.setEquipmentThresholdGPV(AssembledEquipments.equipmentGpv, 200);
     }
 
     @Features("Abnormal Vibration rule with Any channel, sending payload on Main with Abort.")
