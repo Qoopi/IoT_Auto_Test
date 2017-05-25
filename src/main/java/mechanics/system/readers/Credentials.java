@@ -19,6 +19,9 @@ public class Credentials {
     private static final String credentialFile = "credentials.properties";
 
     public HashMap<String, String> getCredentials(){
+        if (credentials!=null && !credentials.isEmpty()){
+            return credentials;
+        }
         File f = new File(credentialFile);
         if(f.exists() && !f.isDirectory()) {
             System.out.println("File credentials.properties found, processing...");
