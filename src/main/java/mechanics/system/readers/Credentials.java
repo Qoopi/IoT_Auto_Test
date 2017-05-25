@@ -15,7 +15,7 @@ public class Credentials {
 
     private Properties prop = new Properties();
     private InputStream input = null;
-    public static HashMap<String, String> credentials = null;
+    private static HashMap<String, String> credentials = null;
     private static final String credentialFile = "credentials.properties";
 
     public HashMap<String, String> getCredentials(){

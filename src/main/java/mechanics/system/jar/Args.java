@@ -36,6 +36,7 @@ public class Args {
             System.out.println("'-b' or '-browser' - sets browser to run UI part of the test, default is chrome");
             System.out.println("'-g' or '-grid'    - with value 'true' enables selenium grid connection, default is false");
             System.out.println("'-h' or '-help'    - displays this message");
+            System.out.println("example of launch command: java -javaagent:aspectjweaver.jar -jar iot-auto-fat.jar -s wstaging -f api.xml");
             System.exit(0);
         }
     }
