@@ -99,12 +99,7 @@ public class RequestManagerAPI extends JSONManagerAPI{
         Assert.assertTrue(response.asString().contains(idOfCreatedNotificationRule));
         return response;
     }
-    @Step("Check if rule created.")
-    public Response checkNotificationRuleCreated(){
-        Response response = notificationRulesRead();
-        checkResponse(response);
-        return response;
-    }
+
     @Step("Check if Rule not triggered.")
     public void checkNotificationRuleNotTriggered(){
         Assert.assertTrue(!notificationListRead().asString().contains(idOfCreatedNotificationRule));
@@ -146,6 +141,14 @@ public class RequestManagerAPI extends JSONManagerAPI{
     public Response notificationRulesRead(){
         Response response = sendAmazonRequest(GET.getValue(), AssembledUrls.notificationRule);
         checkResponse(response);
+        return response;
+    }
+
+    public Response notificationRulesRead(boolean checkResponse){
+        Response response = sendAmazonRequest(GET.getValue(), AssembledUrls.notificationRule);
+        if (checkResponse){
+            checkResponse(response);
+        }
         return response;
     }
 
@@ -238,13 +241,13 @@ public class RequestManagerAPI extends JSONManagerAPI{
     private Response dashboardsGet(){
         return sendAmazonRequest(GET.getValue(), dashboard);
     }
-
+    @Step("Creating dashboard.")
     public void dashboardCreate(String body){
         Response response = sendAmazonRequest(POST.getValue(), dashboard, body);
         checkResponse(response);
         idOfCreatedDashboard = getIdOfCreatedDashboard(response.asString());
     }
-
+    @Step("Checking if dashboard is created")
     public void checkDashboardCreated(){
         Response response = dashboardsGet();
         checkResponse(response);
@@ -259,11 +262,11 @@ public class RequestManagerAPI extends JSONManagerAPI{
     public void checkDashboardUpdated(String updatedBody){
 
     }
-
+    @Step("Deleting created dashboard.")
     public void dashboardDelete(){
         dashboardDeleteById(idOfCreatedDashboard);
     }
-
+    @Step("Cheking if Dashboard is deleted.")
     public void checkDashboardDeleted(){
         Response response = dashboardsGet();
         checkResponse(response);

@@ -30,7 +30,7 @@ public class ListenerAPI implements ITestListener{
     public void onTestFailure(ITestResult result) {
         if (RequestManagerAPI.idOfCreatedNotificationRule != null) {
             RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-            Response response = requestManagerAPI.checkNotificationRuleCreated();
+            Response response = requestManagerAPI.notificationRulesRead(false);
             if (response.asString().contains(RequestManagerAPI.idOfCreatedNotificationRule)){
                 requestManagerAPI.notificationRuleDelete(RequestManagerAPI.idOfCreatedNotificationRule);
             }
