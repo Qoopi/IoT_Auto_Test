@@ -1,5 +1,6 @@
 package mechanics.api;
 
+import com.jayway.restassured.response.Response;
 import mechanics.system.http.RequestSender;
 import mechanics.system.jar.Args;
 import mechanics.ui.pageObjets.LogInPage;
@@ -27,7 +28,12 @@ public class ListenerAPI implements ITestListener{
 
     @Override
     public void onTestFailure(ITestResult result) {
-
+    RequestManagerAPI  requestManagerAPI = new RequestManagerAPI();
+    Response response = requestManagerAPI.checkNotificationRuleCreated();
+        if (RequestManagerAPI.idOfCreatedNotificationRule != null && response.asString().contains(RequestManagerAPI.idOfCreatedNotificationRule)){
+            requestManagerAPI.notificationRuleDelete(RequestManagerAPI.idOfCreatedNotificationRule);
+        }
+        requestManagerAPI.notificationListDeleteAllAssertless();
     }
 
     @Override
