@@ -40,7 +40,6 @@ public class RequestManagerAPI extends JSONManagerAPI{
     }
 
     public void skedlerReportCreate(){
-        //TODO вынести JSONы для репортов в JsonManagerAPI
         String jsonBody = JSONReportCreate();
         Response response = sendAmazonRequest(PUT.getValue(), AssembledUrls.report, jsonBody);
         //тут сделать парс json и запись id в variable
@@ -120,7 +119,7 @@ public class RequestManagerAPI extends JSONManagerAPI{
             Assert.assertTrue(true);
         }
         else{
-            sleep(10000);
+            sleep(5000);
             if (notificationListRead().asString().contains(idOfCreatedNotificationRule)){
                 Assert.assertTrue(true);
             }
