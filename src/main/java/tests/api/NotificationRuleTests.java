@@ -38,7 +38,7 @@ public class NotificationRuleTests {
         mqttManagerAPI.triggerVPVAbnormalVibrationMainAbort();
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
-        checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
+        checkingMails.checkLong(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
         requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
     }
@@ -53,7 +53,7 @@ public class NotificationRuleTests {
         mqttManagerAPI.triggerVPVAbnormalVibrationMainAlarm();
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
-        checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
+        checkingMails.checkLong(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
         requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
     }
@@ -68,7 +68,7 @@ public class NotificationRuleTests {
         mqttManagerAPI.triggerVPVAbnormalVibrationBlowerAbort();
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
-        checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
+        checkingMails.checkLong(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
         requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
     }
@@ -83,7 +83,7 @@ public class NotificationRuleTests {
         mqttManagerAPI.triggerVPVAbnormalVibrationBlowerAlarm();
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
-        checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
+        checkingMails.checkLong(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
         requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
     }
@@ -98,7 +98,7 @@ public class NotificationRuleTests {
         mqttManagerAPI.triggerVPVAbnormalVibrationMainAbort();
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
-        checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
+        checkingMails.checkLong(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
         requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
     }
@@ -113,7 +113,7 @@ public class NotificationRuleTests {
         mqttManagerAPI.triggerVPVAbnormalVibrationMainAlarm();
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
-        checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
+        checkingMails.checkLong(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
         requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
     }
@@ -128,7 +128,7 @@ public class NotificationRuleTests {
         mqttManagerAPI.triggerVPVAbnormalVibrationBlowerAbort();
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
-        checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
+        checkingMails.checkLong(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
         requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
     }
@@ -143,7 +143,7 @@ public class NotificationRuleTests {
         mqttManagerAPI.triggerVPVAbnormalVibrationBlowerAbort();
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
-        checkingMails.check(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
+        checkingMails.checkLong(SubjectNotificationRuleAbnormalVibrationsVPV.getMessage());
         requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
     }
@@ -158,7 +158,7 @@ public class NotificationRuleTests {
         mqttManagerAPI.triggerVPVAbort();
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
-        checkingMails.check(SubjectNotificationRuleEveryWarningVPV.getMessage());
+        checkingMails.checkLong(SubjectNotificationRuleEveryWarningVPV.getMessage());
         requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
     }
@@ -173,7 +173,7 @@ public class NotificationRuleTests {
         mqttManagerAPI.triggerGPV();
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
-        checkingMails.check(SubjectNotificationRuleEveryWarningGPV.getMessage());
+        checkingMails.checkLong(SubjectNotificationRuleEveryWarningGPV.getMessage());
         requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
     }
@@ -188,7 +188,7 @@ public class NotificationRuleTests {
         mqttManagerAPI.triggerVPVAlarmCount();
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
-        checkingMails.check(SubjectNotificationRuleNumberOfAlarms.getMessage());
+        checkingMails.checkLong(SubjectNotificationRuleNumberOfAlarms.getMessage());
         requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
 
@@ -204,7 +204,7 @@ public class NotificationRuleTests {
         mqttManagerAPI.triggerVPVAbortCount();
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
-        checkingMails.check(SubjectNotificationRuleNumberOfAborts.getMessage());
+        checkingMails.checkLong(SubjectNotificationRuleNumberOfAborts.getMessage());
         requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
 
@@ -220,7 +220,7 @@ public class NotificationRuleTests {
         mqttManagerAPI.triggerGPV();
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
-        checkingMails.check(SubjectNotificationRuleNumberOfAlarms.getMessage());
+        checkingMails.checkLong(SubjectNotificationRuleNumberOfAlarms.getMessage());
         requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
 
