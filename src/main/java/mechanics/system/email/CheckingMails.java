@@ -104,7 +104,7 @@ public class CheckingMails {
     @Step("Checking if notification on e-mail.")
     public void checkLong(String subject){
         try {
-            Thread.sleep(3000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -121,9 +121,9 @@ public class CheckingMails {
         boolean found = false;
         found = checkEmail(host, mailStoreType, userName, password, subject);
         int counter = 0;
-        while(!found && counter<3){
+        while(!found && counter<6){
             try {
-                Thread.sleep(10000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
