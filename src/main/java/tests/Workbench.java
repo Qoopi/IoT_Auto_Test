@@ -16,15 +16,15 @@ import org.testng.annotations.Test;
 /**
  * Created by user on 19.04.2017.
  */
-@Listeners(ListenerAPI.class)
+//@Listeners(ListenerAPI.class)
 public class Workbench {
 
 
-    @Test
+//    @Test
     public void setThresholdVPV(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         Response response = requestManagerAPI.sendAmazonRequest("GET", "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/equipment_admin");
-        String newBody = requestManagerAPI.getEquipmentObject(response.asString(), "Thing-000011-i1", 999, 999);
+        String newBody = requestManagerAPI.getEquipmentObject(response.asString(), "Thing-000011-i1", 90, 95, 120, 125);
         requestManagerAPI.sendAmazonRequest("PUT", "https://60sglz9l5h.execute-api.us-east-1.amazonaws.com/dev/equipment_admin", newBody);
     }
 
@@ -53,11 +53,11 @@ public class Workbench {
     }
 
 //    @Test
-    public void testMqttPublish(){
-        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
-        mqttManagerAPI.triggerVPVAbnormalVibration();
-        mqttManagerAPI.triggerGPVLong();
-    }
+//    public void testMqttPublish(){
+//        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
+//        mqttManagerAPI.triggerVPVAbnormalVibration();
+//        mqttManagerAPI.triggerGPVLong();
+//    }
 
 //    @Test
     public void testMqttSubscribe(){

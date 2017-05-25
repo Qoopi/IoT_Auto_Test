@@ -22,7 +22,7 @@ public class NotificationRuleTests {
     @BeforeClass
     public void setThresholdVPV(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-        requestManagerAPI.setEquipmentThresholdVPV(AssembledEquipments.equipmentVpv, 75, 120);
+        requestManagerAPI.setEquipmentThresholdVPV(AssembledEquipments.equipmentVpv, 90, 95, 120, 125);
     }
 
     @Features("Abnormal Vibration rule with Any channel, sending payload on Main with Abort.")

@@ -140,10 +140,10 @@ public class RequestManagerAPI extends JSONManagerAPI{
         return response;
     }
 
-    public Response setEquipmentThresholdVPV(String equipmentId, int newMaxDistanceAlarmLevel, int newMaxDistanceAbortLevel){
+    public Response setEquipmentThresholdVPV(String equipmentId,int newMaxDistanceAlarmLevelMain,  int newMaxDistanceAlarmLevelBlower, int newMaxDistanceAbortLevelMain,int newMaxDistanceAbortLevelBlower){
         Response response = sendAmazonRequest(GET.getValue(), AssembledUrls.equipmentAdmin);
         checkResponse(response);
-        String newBody = getEquipmentObject(response.asString(), equipmentId, newMaxDistanceAlarmLevel, newMaxDistanceAbortLevel);
+        String newBody = getEquipmentObject(response.asString(), equipmentId, newMaxDistanceAlarmLevelMain, newMaxDistanceAlarmLevelBlower, newMaxDistanceAbortLevelMain, newMaxDistanceAbortLevelBlower);
         Response response1 = sendAmazonRequest(PUT.getValue(), AssembledUrls.equipmentAdmin, newBody);
         checkResponse(response1);
         return response1;

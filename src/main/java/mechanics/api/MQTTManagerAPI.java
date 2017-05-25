@@ -20,7 +20,7 @@ public class MQTTManagerAPI extends MQTTConnector {
     @Step("Sending payload with Alarm to VPV equipment on Main channel")
     public void triggerVPVAbnormalVibrationMainAlarm(){
         String topic = AssembledEquipments.equipmentVpvData;
-        String payload = PayloadVPV.newBuilder().setAbnormalVibrationMain(80).setId(AssembledEquipments.equipmentVpv).initialize();
+        String payload = PayloadVPV.newBuilder().setAbnormalVibrationMain(91).setId(AssembledEquipments.equipmentVpv).initialize();
         mqttPublish(topic, payload);
     }
     @Step("Sending payload with Abort to VPV equipment on Blower channel")
@@ -32,7 +32,7 @@ public class MQTTManagerAPI extends MQTTConnector {
     @Step("Sending payload with Abort to VPV equipment on Blower channel")
     public void triggerVPVAbnormalVibrationBlowerAlarm(){
         String topic = AssembledEquipments.equipmentVpvData;
-        String payload = PayloadVPV.newBuilder().setAbnormalVibrationBlower(80).setId(AssembledEquipments.equipmentVpv).initialize();
+        String payload = PayloadVPV.newBuilder().setAbnormalVibrationBlower(96).setId(AssembledEquipments.equipmentVpv).initialize();
         mqttPublish(topic, payload);
     }
 
@@ -59,7 +59,7 @@ public class MQTTManagerAPI extends MQTTConnector {
     @Step("Sending payload to VPV equipment")
     public void triggerVPVAlarmCount(){
         String topic =  AssembledEquipments.equipmentVpvData;
-        String payload =PayloadVPV.newBuilder().setId(AssembledEquipments.equipmentVpv).setMaxDistanceMain(80).initialize();
+        String payload =PayloadVPV.newBuilder().setId(AssembledEquipments.equipmentVpv).setMaxDistanceMain(91).initialize();
         String payloadNormal = PayloadVPV.newBuilder().setId(AssembledEquipments.equipmentVpv).initialize();        mqttPublish(topic, payloadNormal);
         mqttPublish(topic, payloadNormal);
         mqttPublish(topic, payload);
