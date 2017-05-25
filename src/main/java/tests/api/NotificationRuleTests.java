@@ -21,6 +21,7 @@ public class NotificationRuleTests {
 
     @BeforeClass
     public void setEquipThresholds(){
+        //may fail if equipment don't have required fields in database.
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.setEquipmentThresholdVPV(AssembledEquipments.equipmentVpv, 90, 95, 120, 125);
         requestManagerAPI.setEquipmentThresholdGPV(AssembledEquipments.equipmentGpv, 200);

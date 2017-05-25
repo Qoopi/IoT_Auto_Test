@@ -177,7 +177,6 @@ public class JSONHandler extends SignAWSv4 {
                 }
             }
         }
-        System.out.println(result);
         return result;
     }
 

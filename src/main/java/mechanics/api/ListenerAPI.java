@@ -28,12 +28,14 @@ public class ListenerAPI implements ITestListener{
 
     @Override
     public void onTestFailure(ITestResult result) {
-    RequestManagerAPI  requestManagerAPI = new RequestManagerAPI();
-    Response response = requestManagerAPI.checkNotificationRuleCreated();
-        if (RequestManagerAPI.idOfCreatedNotificationRule != null && response.asString().contains(RequestManagerAPI.idOfCreatedNotificationRule)){
-            requestManagerAPI.notificationRuleDelete(RequestManagerAPI.idOfCreatedNotificationRule);
+        if (RequestManagerAPI.idOfCreatedNotificationRule != null) {
+            RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+            Response response = requestManagerAPI.checkNotificationRuleCreated();
+            if (response.asString().contains(RequestManagerAPI.idOfCreatedNotificationRule)){
+                requestManagerAPI.notificationRuleDelete(RequestManagerAPI.idOfCreatedNotificationRule);
+            }
+            requestManagerAPI.notificationListDeleteAllAssertless();
         }
-        requestManagerAPI.notificationListDeleteAllAssertless();
     }
 
     @Override
