@@ -16,7 +16,7 @@ import static mechanics.system.constant.HTTPMethod.*;
  * Created by user on 20.04.2017.
  */
 public class RequestManagerAPI extends JSONManagerAPI{
-    private static String idOfCreatedNotificationRule = null;
+    public static String idOfCreatedNotificationRule = null;
     private static String idOfCreatedReport = null;
     private static String idOfCreatedDashboard = null;
     private Response responseApi = null;
@@ -70,6 +70,14 @@ public class RequestManagerAPI extends JSONManagerAPI{
         Response response = sendAmazonRequest(DELETE.getValue(), AssembledUrls.notification, jsonBody);
         checkResponse(response);
     }
+
+    public void notificationListDeleteAllAssertless(){
+        ArrayList<String> ids = getIdsOfAllNotifications(notificationListRead().asString());
+        String jsonBody = notificationListDeleteAllJSON(ids);
+        Response response = sendAmazonRequest(DELETE.getValue(), AssembledUrls.notification, jsonBody);
+        checkStatusCode(response);
+    }
+
     @Step("Changing state of equipment Connected/Disconnected")
     public Response equipmentChangeState(String jsonBody){
         Response response = sendAmazonRequest(PUT.getValue(), AssembledUrls.equipmentAdmin, jsonBody);
@@ -85,10 +93,17 @@ public class RequestManagerAPI extends JSONManagerAPI{
         return response;
     }
     @Step("Check if rule created.")
-    public void checkNotificationRuleIsCreated(){
+    public Response checkNotificationRuleIsCreated(){
         Response response = notificationRulesRead();
         checkResponse(response);
         Assert.assertTrue(response.asString().contains(idOfCreatedNotificationRule));
+        return response;
+    }
+    @Step("Check if rule created.")
+    public Response checkNotificationRuleCreated(){
+        Response response = notificationRulesRead();
+        checkResponse(response);
+        return response;
     }
     @Step("Check if Rule not triggered.")
     public void checkNotificationRuleNotTriggered(){
