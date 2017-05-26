@@ -157,13 +157,18 @@ public class RequestManagerAPI extends JSONManagerAPI{
         return response;
     }
 
-    public Response setEquipmentThresholdVPV(String equipmentId,int newMaxDistanceAlarmLevelMain,  int newMaxDistanceAlarmLevelBlower, int newMaxDistanceAbortLevelMain,int newMaxDistanceAbortLevelBlower){
+    public void setEquipmentThresholdVPV(String equipmentId,int newMaxDistanceAlarmLevelMain,  int newMaxDistanceAlarmLevelBlower, int newMaxDistanceAbortLevelMain,int newMaxDistanceAbortLevelBlower){
         Response response = sendAmazonRequest(GET.getValue(), AssembledUrls.equipmentAdmin);
         checkResponse(response);
         String newBody = changeThresholdVPV(response.asString(), equipmentId, newMaxDistanceAlarmLevelMain, newMaxDistanceAlarmLevelBlower, newMaxDistanceAbortLevelMain, newMaxDistanceAbortLevelBlower);
-        Response response1 = sendAmazonRequest(PUT.getValue(), AssembledUrls.equipmentAdmin, newBody);
-        checkResponse(response1);
-        return response1;
+        if (newBody!=null){
+            Response response1 = sendAmazonRequest(PUT.getValue(), AssembledUrls.equipmentAdmin, newBody);
+            checkResponse(response1);
+        }
+        else {
+            System.out.println("ERR: Can't create request for change equipment threshold. Does the equipment have all the required parameters?");
+            System.out.println("Check if equipment have any thresholds at all.");
+        }
     }
 
     public Response setEquipmentThresholdGPV(String equipmentId, int newMaxDistanceAlarmLevel){
