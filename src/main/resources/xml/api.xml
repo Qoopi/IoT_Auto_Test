@@ -2,9 +2,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="API tests">
     <!--parallel is 'none', single GPV/VPV equipment is used-->
-    <test name="Notification Rules">
+    <test name="Notification Rules on VPV equipment">
         <classes>
-            <class name="tests.api.NotificationRuleTests"/>
+            <class name="tests.api.NotificationRulesVPV"/>
+        </classes>
+    </test>
+
+    <test name="Notification Rules on GPV equipment">
+        <classes>
+            <class name="tests.api.NotificationRulesGPV"/>
         </classes>
     </test>
 
