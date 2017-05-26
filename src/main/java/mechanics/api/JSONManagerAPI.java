@@ -224,7 +224,7 @@ public class JSONManagerAPI extends JSONHandler{
         ).toString();
     }
     @Step("Creating JSON for Every Warning rule for VPV equipment.")
-    public String jsonRuleEveryWarningVPV(){
+    public String jsonRuleEveryWarningVPVAbort(){
         return notificationRuleCreateJSON(
                 SubjectNotificationRuleEveryWarningVPV.getMessage(),
                 "Auto tests rule",
@@ -232,6 +232,22 @@ public class JSONManagerAPI extends JSONHandler{
                 0,
                 thingVpv,
                 0,
+                "",
+                ">=",
+                0,
+                0,
+                0
+        ).toString();
+    }
+    @Step("Creating JSON for Every Warning rule for VPV equipment.")
+    public String jsonRuleEveryWarningVPVAlarm(){
+        return notificationRuleCreateJSON(
+                SubjectNotificationRuleEveryWarningVPV.getMessage(),
+                "Auto tests rule",
+                8,
+                0,
+                thingVpv,
+                1,
                 "",
                 ">=",
                 0,

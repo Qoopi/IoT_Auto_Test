@@ -14,11 +14,11 @@
         </classes>
     </test>
 
-    <!--<test name="Skedler Reports">-->
-        <!--<classes>-->
-            <!--<class name="tests.api.ReportsTest"/>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="Skedler Reports">
+        <classes>
+            <class name="tests.api.ReportsTest"/>
+        </classes>
+    </test>
 
     <test name="Dashboards">
         <classes>

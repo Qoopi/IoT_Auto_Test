@@ -8,7 +8,10 @@ import mechanics.system.email.CheckingMails;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import ru.yandex.qatools.allure.annotations.Description;
 import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.Title;
 
 import static mechanics.system.constant.EmailInbox.SubjectNotificationRuleEveryWarningGPV;
 import static mechanics.system.constant.EmailInbox.SubjectNotificationRuleNumberOfAlarms;
@@ -17,6 +20,8 @@ import static mechanics.system.constant.EmailInbox.SubjectNotificationRuleNumber
  * Created by Alex Storm on 26.05.2017.
  */
 @Listeners(ListenerAPI.class)
+@Title("GPV rules test suite.")
+@Description("Checking rules with GPV equipment.")
 public class NotificationRulesGPV {
 
     @BeforeClass
@@ -26,7 +31,9 @@ public class NotificationRulesGPV {
         requestManagerAPI.setEquipmentThresholdGPV(AssembledEquipments.equipmentGpv, 200);
     }
 
-    @Features("Every Warning on GPV rule.")
+    @Features("GPV rules.")
+    @Stories("Send notification on Alarm (GPV) rule.")
+    @Description("")
     @Test
     public void sendNotificationOnAlarmGPV() {
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
@@ -41,8 +48,9 @@ public class NotificationRulesGPV {
         requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
     }
-
-    @Features("Number of Alarms above threshold on GPV equipment rule.")
+    @Features("GPV rules.")
+    @Stories("Number of Alarms above threshold rule.")
+    @Description("")
     @Test
     public void alarmCountGPV() {
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
@@ -59,8 +67,9 @@ public class NotificationRulesGPV {
 
     }
 
-
-    @Features("Disconnected rule with GPV equipment.")
+    @Features("GPV rules.")
+    @Stories("Disconnected equipment rule.")
+    @Description("")
     @Test //не работает принципиально, оставлена проверка "создается ли rule"
     public void disconnectedEquipmentGPV() {
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -70,8 +79,9 @@ public class NotificationRulesGPV {
 
         requestManagerAPI.notificationRuleDelete();
     }
-
-    @Features("Connected rule with GPV equipment.")
+    @Features("GPV rules.")
+    @Stories("Connected equipment rule.")
+    @Description("")
     @Test //не работает принципиально, оставлена проверка "создается ли rule"
     public void connectedEquipmentGPV() {
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();

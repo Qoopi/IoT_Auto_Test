@@ -46,7 +46,7 @@ public class RequestManagerAPI extends JSONManagerAPI{
         idOfCreatedReport = getIdOfCreatedReport(response.asString());
         checkResponse(response);
     }
-
+    @Step("Sending report now.")
     public void skedlerReportSendNow(){
         String jsonBody = JSONReportSendNow(idOfCreatedReport);
         Response response = sendAmazonRequest(POST.getValue(), AssembledUrls.report, jsonBody);
@@ -186,7 +186,7 @@ public class RequestManagerAPI extends JSONManagerAPI{
         checkResponse(response);
         return response;
     }
-
+    @Step("Deleting rule")
     public void notificationRuleDelete(String idOfNotificationRule){
         JSONHandler jsonHandler = new JSONHandler();
         String jsonBody = jsonHandler.notificationRuleDeleteJSON(idOfNotificationRule);

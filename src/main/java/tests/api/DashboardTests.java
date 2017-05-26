@@ -5,13 +5,17 @@ import mechanics.api.RequestManagerAPI;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.Title;
 
 /**
  * Created by user on 03.05.2017.
  */
 @Listeners(ListenerAPI.class)
+@Title("Dashboards test suite.")
 public class DashboardTests {
-    @Features("CRUD operations with VPV Canvas Dashboard")
+    @Features("CRUD operations with Dashboard.")
+    @Stories("VPV Smart Sensor Dashboard (with zoomable charts, Canvas).")
     @Test
     public void DashboardCRUDVPVCanvas(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -20,7 +24,8 @@ public class DashboardTests {
         requestManagerAPI.dashboardDelete();
         requestManagerAPI.checkDashboardDeleted();
     }
-    @Features("CRUD operations with VPV Kibana Dashboard")
+    @Features("CRUD operations with Dashboard.")
+    @Stories("VPV Smart Sensor Dashboard(Kibana).")
     @Test
     public void DashboardCRUDVPVKibana(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -31,7 +36,8 @@ public class DashboardTests {
         requestManagerAPI.dashboardDelete();
         requestManagerAPI.checkDashboardDeleted();
     }
-    @Features("CRUD operations with GPV Kibana 0,255 Dashboard")
+    @Features("CRUD operations with Dashboard.")
+    @Stories("General Vibrations chart - 0-255 range, Kibana.")
     @Test
     public void DashboardCRUDGPVKibana255(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -42,7 +48,8 @@ public class DashboardTests {
         requestManagerAPI.dashboardDelete();
         requestManagerAPI.checkDashboardDeleted();
     }
-    @Features("CRUD operations with GPV Kibana 0,25 Dashboard")
+    @Features("CRUD operations with Dashboard.")
+    @Stories("General Vibrations chart - 0-25 range, Kibana.")
     @Test
     public void DashboardCRUDGPVKibana25(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -54,7 +61,8 @@ public class DashboardTests {
         requestManagerAPI.checkDashboardDeleted();
     }
 
-    @Features("CRUD operations with GPV Canvas 0,25 Dashboard")
+    @Features("CRUD operations with Dashboard.")
+    @Stories("General Vibrations chart - 0-25 range, Canvas.")
     @Test
     public void DashboardCRUDGPVCanvas25(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -66,7 +74,8 @@ public class DashboardTests {
         requestManagerAPI.checkDashboardDeleted();
 
     }
-    @Features("CRUD operations with GPV Canvas 0,255 Dashboard")
+    @Features("CRUD operations with Dashboard.")
+    @Stories("General Vibrations chart - 0-255 range, Canvas.")
     @Test
     public void DashboardCRUDGPVCanvas255(){
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
