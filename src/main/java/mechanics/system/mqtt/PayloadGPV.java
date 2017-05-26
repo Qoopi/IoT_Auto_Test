@@ -12,7 +12,7 @@ import java.util.Date;
 public class PayloadGPV {
     private String multiDataStreamId;
     private boolean alarm = false;
-    private int distance = 0;
+    private int distance = 1;
     private String date;
 
     private PayloadGPV(){

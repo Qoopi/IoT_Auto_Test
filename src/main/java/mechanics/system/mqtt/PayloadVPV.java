@@ -10,10 +10,10 @@ public class PayloadVPV {
     private String id;
     private String model = "r2d2";
     private String name = "Pump";
-    private int abnormalVibrationMain = 0;
-    private int abnormalVibrationBlower = 0;
-    private int maxDistanceMain = 0;
-    private int maxDistanceBlower = 0;
+    private int abnormalVibrationMain = 1;
+    private int abnormalVibrationBlower = 1;
+    private int maxDistanceMain = 1;
+    private int maxDistanceBlower = 1;
 
 
     private PayloadVPV(){

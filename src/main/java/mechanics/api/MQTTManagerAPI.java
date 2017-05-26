@@ -77,7 +77,7 @@ public class MQTTManagerAPI extends MQTTConnector {
 
     public void triggerGPVLong(){
         String topic = AssembledEquipments.equipmentGpvData;
-        String payload = PayloadGPV.newBuilder().setDistance(666).setMultiDataStreamId(AssembledEquipments.equipmentGpvMultiDatastreamId).setAlarm(true).initialize();
+        String payload = PayloadGPV.newBuilder().setDistance(240).setMultiDataStreamId(AssembledEquipments.equipmentGpvMultiDatastreamId).setAlarm(true).initialize();
         for (int i = 0; i<5; i++){
             mqttPublish(topic, payload);
         }
@@ -85,7 +85,7 @@ public class MQTTManagerAPI extends MQTTConnector {
 
     public void triggerGPV(){
         String topic = AssembledEquipments.equipmentGpvData;
-        String payload = PayloadGPV.newBuilder().setDistance(666).setMultiDataStreamId(AssembledEquipments.equipmentGpvMultiDatastreamId).setAlarm(true).initialize();
+        String payload = PayloadGPV.newBuilder().setDistance(240).setMultiDataStreamId(AssembledEquipments.equipmentGpvMultiDatastreamId).setAlarm(true).initialize();
         mqttPublish(topic, payload);
     }
 
