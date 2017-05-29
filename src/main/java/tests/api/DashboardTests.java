@@ -17,17 +17,18 @@ public class DashboardTests {
     @Features("CRUD operations with Dashboard.")
     @Stories("VPV Smart Sensor Dashboard (with zoomable charts, Canvas).")
     @Test
-    public void DashboardCRUDVPVCanvas(){
+    public void DashboardCRUDVPVCanvas() {
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.dashboardCreate(requestManagerAPI.jsonDashboardCreateVPVCanvas());
         requestManagerAPI.checkDashboardCreated();
         requestManagerAPI.dashboardDelete();
         requestManagerAPI.checkDashboardDeleted();
     }
+
     @Features("CRUD operations with Dashboard.")
     @Stories("VPV Smart Sensor Dashboard(Kibana).")
     @Test
-    public void DashboardCRUDVPVKibana(){
+    public void dashboardCRUDVPVKibana() {
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.dashboardCreate(requestManagerAPI.jsonDashboardCreateVPVKibana());
         requestManagerAPI.checkDashboardCreated();
@@ -36,10 +37,11 @@ public class DashboardTests {
         requestManagerAPI.dashboardDelete();
         requestManagerAPI.checkDashboardDeleted();
     }
+
     @Features("CRUD operations with Dashboard.")
     @Stories("General Vibrations chart - 0-255 range, Kibana.")
     @Test
-    public void DashboardCRUDGPVKibana255(){
+    public void dashboardCRUDGPVKibana255() {
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.dashboardCreate(requestManagerAPI.jsonDashboardCreateGPVKibana0255());
         requestManagerAPI.checkDashboardCreated();
@@ -48,10 +50,11 @@ public class DashboardTests {
         requestManagerAPI.dashboardDelete();
         requestManagerAPI.checkDashboardDeleted();
     }
+
     @Features("CRUD operations with Dashboard.")
     @Stories("General Vibrations chart - 0-25 range, Kibana.")
     @Test
-    public void DashboardCRUDGPVKibana25(){
+    public void dashboardCRUDGPVKibana25() {
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.dashboardCreate(requestManagerAPI.jsonDashboardCreateGPVKibana025());
         requestManagerAPI.checkDashboardCreated();
@@ -64,7 +67,7 @@ public class DashboardTests {
     @Features("CRUD operations with Dashboard.")
     @Stories("General Vibrations chart - 0-25 range, Canvas.")
     @Test
-    public void DashboardCRUDGPVCanvas25(){
+    public void dashboardCRUDGPVCanvas25() {
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.dashboardCreate(requestManagerAPI.jsonDashboardCreateGPVCanvas025());
         requestManagerAPI.checkDashboardCreated();
@@ -74,10 +77,11 @@ public class DashboardTests {
         requestManagerAPI.checkDashboardDeleted();
 
     }
+
     @Features("CRUD operations with Dashboard.")
     @Stories("General Vibrations chart - 0-255 range, Canvas.")
     @Test
-    public void DashboardCRUDGPVCanvas255(){
+    public void dashboardCRUDGPVCanvas255() {
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
         requestManagerAPI.dashboardCreate(requestManagerAPI.jsonDashboardCreateGPVCanvas0255());
         requestManagerAPI.checkDashboardCreated();
@@ -85,5 +89,19 @@ public class DashboardTests {
 //        requestManagerAPI.checkDashboardUpdated(requestManagerAPI.jsonDashboardUpdatedVPVCanvas());
         requestManagerAPI.dashboardDelete();
         requestManagerAPI.checkDashboardDeleted();
+    }
+
+    @Test
+    public void dashboardReceivingDataGPV(){
+        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        requestManagerAPI.checkEquipmentDataGPV();
+
+    }
+
+    @Test
+    public void dashboardReceivingDataVPV(){
+        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        requestManagerAPI.checkEquipmentDataVPV();
+
     }
 }

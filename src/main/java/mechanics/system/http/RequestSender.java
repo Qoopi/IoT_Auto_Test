@@ -47,8 +47,8 @@ public class RequestSender {
         RequestSender.startDate = new Date();
     }
 
-    public static void checkExpired(){
-        if (startDate.getTime()<(System.currentTimeMillis()-360000)){
+    public static void checkExpired() {
+        if (startDate.getTime() < (System.currentTimeMillis() - 360000)) {
             SignAWSv4 signAWSv4 = new SignAWSv4();
             RequestSender requestSender = new RequestSender();
             requestSender.createEmptyRequestWithHeaders(signAWSv4.allHeaders(HTTPMethod.GET.getValue(), AssembledUrls.authenticationRefresh)).get(AssembledUrls.authenticationRefresh);
@@ -56,8 +56,8 @@ public class RequestSender {
         }
     }
 
-    public static void checkExpiredLoad(){
-        if (startDate.getTime()<(System.currentTimeMillis()-360000)){
+    public static void checkExpiredLoad() {
+        if (startDate.getTime() < (System.currentTimeMillis() - 360000)) {
             SignAWSv4 signAWSv4 = new SignAWSv4();
             RequestSender requestSender = new RequestSender();
             requestSender.createEmptyRequestWithHeaders(signAWSv4.allHeaders(HTTPMethod.GET.getValue(), AssembledUrls.authenticationRefresh)).get(AssembledUrls.authenticationRefresh);
@@ -239,7 +239,7 @@ public class RequestSender {
         }
     }
 
-    public void setUpBaseApiGateway(){
+    public void setUpBaseApiGateway() {
         //это вынести по ходу в listener для api/load тестов
         // Use our custom socket factory
         SSLSocketFactory customSslFactory = null;
@@ -254,12 +254,12 @@ public class RequestSender {
         RestAssured.config.getHttpClientConfig().reuseHttpClientInstance();
     }
 
-    public Response sendAmazonRequest(String method, String url){
+    public Response sendAmazonRequest(String method, String url) {
         SignAWSv4 signAWSv4 = new SignAWSv4();
         Map<String, String> headers;
         Response response = null;
 
-        switch (method){
+        switch (method) {
             case "GET":
                 headers = signAWSv4.allHeaders(GET.getValue(), url);
                 response = createEmptyRequestWithHeaders(headers).get(url).getResponse();
@@ -276,12 +276,34 @@ public class RequestSender {
         return response;
     }
 
-    public Response sendAmazonRequest(String method, String url, String body){
+    public Response sendAmazonRequest(String method, String url, boolean print) {
+        SignAWSv4 signAWSv4 = new SignAWSv4();
+        Map<String, String> headers;
+        Response response = null;
+
+        switch (method) {
+            case "GET":
+                headers = signAWSv4.allHeaders(GET.getValue(), url);
+                response = createEmptyRequestWithHeaders(headers).get(url, print).getResponse();
+                break;
+            case "OPTIONS":
+                headers = signAWSv4.allHeaders(OPTIONS.getValue(), url);
+                response = createEmptyRequestWithHeaders(headers).options(url, print).getResponse();
+                break;
+            case "DELETE":
+                headers = signAWSv4.allHeaders(DELETE.getValue(), url);
+                response = createEmptyRequestWithHeaders(headers).delete(url, print).getResponse();
+                break;
+        }
+        return response;
+    }
+
+    public Response sendAmazonRequest(String method, String url, String body) {
         SignAWSv4 signAWSv4 = new SignAWSv4();
         Map<String, String> headers = null;
         Response response = null;
 
-        switch (method){
+        switch (method) {
             case "POST":
                 headers = signAWSv4.allHeaders(POST.getValue(), url, body);
                 response = createRequestWithHeaders(headers, body).post(url).getResponse();
@@ -293,6 +315,28 @@ public class RequestSender {
             case "DELETE":
                 headers = signAWSv4.allHeaders(DELETE.getValue(), url, body);
                 response = createRequestWithHeaders(headers, body).delete(url).getResponse();
+                break;
+        }
+        return response;
+    }
+
+    public Response sendAmazonRequest(String method, String url, String body, boolean print) {
+        SignAWSv4 signAWSv4 = new SignAWSv4();
+        Map<String, String> headers = null;
+        Response response = null;
+
+        switch (method) {
+            case "POST":
+                headers = signAWSv4.allHeaders(POST.getValue(), url, body);
+                response = createRequestWithHeaders(headers, body).post(url, print).getResponse();
+                break;
+            case "PUT":
+                headers = signAWSv4.allHeaders(PUT.getValue(), url, body);
+                response = createRequestWithHeaders(headers, body).put(url, print).getResponse();
+                break;
+            case "DELETE":
+                headers = signAWSv4.allHeaders(DELETE.getValue(), url, body);
+                response = createRequestWithHeaders(headers, body).delete(url, print).getResponse();
                 break;
         }
         return response;

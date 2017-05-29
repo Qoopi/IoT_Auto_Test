@@ -10,8 +10,12 @@ public class AssembledEquipments {
 
     public static String equipmentVpv;
     public static String equipmentVpvChannel;
+    public static String equipmentVpvChartType;
     public static String equipmentVpvData;
 
+    public void setEquipmentVpvChartType(String equipmentVpvChartType) {
+        AssembledEquipments.equipmentVpvChartType = equipmentVpvChartType;
+    }
 
     public void setEquipmentGpv(String equipmentGpv) {
         AssembledEquipments.equipmentGpv = equipmentGpv;

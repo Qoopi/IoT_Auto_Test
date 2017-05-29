@@ -41,6 +41,7 @@ public class Variables {
         assembledEquipments.setEquipmentGpvMultiDatastreamId(equips.get("equipmentGpvMultiDatastreamId"));
         assembledEquipments.setEquipmentVpv(equips.get("equipmentVpv"));
         assembledEquipments.setEquipmentVpvChannel(equips.get("equipmentVpvChannel"));
+        assembledEquipments.setEquipmentVpvChartType(equips.get("equipmentVpvChartType"));
         assembledEquipments.setEquipmentVpvData(equips.get("equipmentVpvData"));
     }
 

@@ -12,25 +12,28 @@ import ru.yandex.qatools.allure.annotations.Step;
  */
 public class MQTTManagerAPI extends MQTTConnector {
     @Step("Sending payload with Abort to VPV equipment on Main channel")
-    public void triggerVPVAbnormalVibrationMainAbort(){
+    public void triggerVPVAbnormalVibrationMainAbort() {
         String topic = AssembledEquipments.equipmentVpvData;
         String payload = PayloadVPV.newBuilder().setAbnormalVibrationMain(666).setId(AssembledEquipments.equipmentVpv).initialize();
         mqttPublish(topic, payload);
     }
+
     @Step("Sending payload with Alarm to VPV equipment on Main channel")
-    public void triggerVPVAbnormalVibrationMainAlarm(){
+    public void triggerVPVAbnormalVibrationMainAlarm() {
         String topic = AssembledEquipments.equipmentVpvData;
         String payload = PayloadVPV.newBuilder().setAbnormalVibrationMain(91).setId(AssembledEquipments.equipmentVpv).initialize();
         mqttPublish(topic, payload);
     }
+
     @Step("Sending payload with Abort to VPV equipment on Blower channel")
-    public void triggerVPVAbnormalVibrationBlowerAbort(){
+    public void triggerVPVAbnormalVibrationBlowerAbort() {
         String topic = AssembledEquipments.equipmentVpvData;
         String payload = PayloadVPV.newBuilder().setAbnormalVibrationBlower(666).setId(AssembledEquipments.equipmentVpv).initialize();
         mqttPublish(topic, payload);
     }
+
     @Step("Sending payload with Abort to VPV equipment on Blower channel")
-    public void triggerVPVAbnormalVibrationBlowerAlarm(){
+    public void triggerVPVAbnormalVibrationBlowerAlarm() {
         String topic = AssembledEquipments.equipmentVpvData;
         String payload = PayloadVPV.newBuilder().setAbnormalVibrationBlower(96).setId(AssembledEquipments.equipmentVpv).initialize();
         mqttPublish(topic, payload);
@@ -38,61 +41,65 @@ public class MQTTManagerAPI extends MQTTConnector {
 
 
     @Step("Sending payload to VPV equipment with Abort")
-    public void triggerVPVAbort(){
+    public void triggerVPVAbort() {
         String topic = AssembledEquipments.equipmentVpvData;
         String payload = PayloadVPV.newBuilder().setMaxDistanceMain(666).setId(AssembledEquipments.equipmentVpv).initialize();
         mqttPublish(topic, payload);
     }
+
     @Step("Sending payload to VPV equipment with Abort")
-    public void triggerVPVAlarm(){
+    public void triggerVPVAlarm() {
         String topic = AssembledEquipments.equipmentVpvData;
         String payload = PayloadVPV.newBuilder().setMaxDistanceMain(100).setId(AssembledEquipments.equipmentVpv).initialize();
         mqttPublish(topic, payload);
     }
 
 
-    public void triggerVPVDisconected(){
+    public void triggerVPVDisconected() {
         String topic = "";
-        String payload = "{\"expiration\":"+(System.currentTimeMillis()/1000-600)+"}";
+        String payload = "{\"expiration\":" + (System.currentTimeMillis() / 1000 - 600) + "}";
         mqttPublish(topic, payload);
     }
 
-    public void triggerVPVConnected(){
+    public void triggerVPVConnected() {
         String topic = "";
-        String payload = "{\"expiration\":"+(System.currentTimeMillis()/1000+120)+"}";
+        String payload = "{\"expiration\":" + (System.currentTimeMillis() / 1000 + 120) + "}";
         mqttPublish(topic, payload);
     }
+
     @Step("Sending payload to VPV equipment")
-    public void triggerVPVAlarmCount(){
-        String topic =  AssembledEquipments.equipmentVpvData;
-        String payload =PayloadVPV.newBuilder().setId(AssembledEquipments.equipmentVpv).setMaxDistanceMain(91).initialize();
-        String payloadNormal = PayloadVPV.newBuilder().setId(AssembledEquipments.equipmentVpv).initialize();        mqttPublish(topic, payloadNormal);
-        mqttPublish(topic, payloadNormal);
-        mqttPublish(topic, payload);
-        mqttPublish(topic, payloadNormal);
-    }
-    @Step("Sending payload to VPV equipment")
-    public void triggerVPVAbortCount(){
+    public void triggerVPVAlarmCount() {
         String topic = AssembledEquipments.equipmentVpvData;
-        String payload =PayloadVPV.newBuilder().setId(AssembledEquipments.equipmentVpv).setMaxDistanceMain(170).initialize();
+        String payload = PayloadVPV.newBuilder().setId(AssembledEquipments.equipmentVpv).setMaxDistanceMain(91).initialize();
+        String payloadNormal = PayloadVPV.newBuilder().setId(AssembledEquipments.equipmentVpv).initialize();
+        mqttPublish(topic, payloadNormal);
+        mqttPublish(topic, payloadNormal);
+        mqttPublish(topic, payload);
+        mqttPublish(topic, payloadNormal);
+    }
+
+    @Step("Sending payload to VPV equipment")
+    public void triggerVPVAbortCount() {
+        String topic = AssembledEquipments.equipmentVpvData;
+        String payload = PayloadVPV.newBuilder().setId(AssembledEquipments.equipmentVpv).setMaxDistanceMain(170).initialize();
         String payloadNormal = PayloadVPV.newBuilder().setId(AssembledEquipments.equipmentVpv).initialize();
         mqttPublish(topic, payloadNormal);
         mqttPublish(topic, payload);
         mqttPublish(topic, payloadNormal);
     }
 
-    public void triggerGPVLong(){
+    public void triggerGPVLong() {
         String topic = AssembledEquipments.equipmentGpvData;
         String payload = PayloadGPV.newBuilder().setDistance(240).setMultiDataStreamId(AssembledEquipments.equipmentGpvMultiDatastreamId).setAlarm(true).initialize();
         String payloadNormal = PayloadGPV.newBuilder().setDistance(1).setMultiDataStreamId(AssembledEquipments.equipmentGpvMultiDatastreamId).setAlarm(false).initialize();
-        for (int i = 0; i<5; i++){
+        for (int i = 0; i < 5; i++) {
             mqttPublish(topic, payloadNormal);
             mqttPublish(topic, payload);
             mqttPublish(topic, payloadNormal);
         }
     }
 
-    public void triggerGPV(){
+    public void triggerGPV() {
         String topic = AssembledEquipments.equipmentGpvData;
         String payload = PayloadGPV.newBuilder().setDistance(300).setMultiDataStreamId(AssembledEquipments.equipmentGpvMultiDatastreamId).setAlarm(false).initialize();
         String payloadNormal = PayloadGPV.newBuilder().setDistance(1).setMultiDataStreamId(AssembledEquipments.equipmentGpvMultiDatastreamId).setAlarm(false).initialize();
@@ -101,7 +108,7 @@ public class MQTTManagerAPI extends MQTTConnector {
         mqttPublish(topic, payloadNormal);
     }
 
-    public void triggerGPVAlarm(){
+    public void triggerGPVAlarm() {
         String topic = AssembledEquipments.equipmentGpvData;
         String payload = PayloadGPV.newBuilder().setMultiDataStreamId(AssembledEquipments.equipmentGpvMultiDatastreamId).setAlarm(true).initialize();
         String payloadNormal = PayloadGPV.newBuilder().setMultiDataStreamId(AssembledEquipments.equipmentGpvMultiDatastreamId).setAlarm(false).initialize();
@@ -110,13 +117,13 @@ public class MQTTManagerAPI extends MQTTConnector {
         mqttPublish(topic, payloadNormal);
     }
 
-    public void readVPVD11(){
+    public void readVPVD11() {
         String topic = AssembledEquipments.equipmentVpvData;
         mqttSubscribe(59000, topic);
 
     }
 
-    public void readGPV(){
+    public void readGPV() {
         String topic = AssembledEquipments.equipmentGpvData;
         mqttSubscribe(59000, topic);
     }

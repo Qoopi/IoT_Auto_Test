@@ -20,6 +20,13 @@ import org.testng.annotations.Test;
 @Listeners(ListenerAPI.class)
 public class Workbench {
 
+    @Test
+    public void testData(){
+        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        requestManagerAPI.checkEquipmentDataGPV();
+        requestManagerAPI.checkEquipmentDataVPV();
+    }
+
 //    @Test
     public void testHeartbeat(){
         String topic = "Heartbeat/U000001/OSS/Lab/FGW/Thing-000025";
@@ -36,7 +43,7 @@ public class Workbench {
         mqttManagerAPI.mqttPublish(topic, payload);
     }
 
-    @Test
+//    @Test
     public void testWidget(){
         String topic = AssembledEquipments.equipmentGpvData;
         String payload = PayloadGPV.newBuilder().setMultiDataStreamId(AssembledEquipments.equipmentGpvMultiDatastreamId).setAlarm(true).initialize();
