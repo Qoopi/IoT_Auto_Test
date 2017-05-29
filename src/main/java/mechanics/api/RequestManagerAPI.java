@@ -5,6 +5,7 @@ import mechanics.system.constant.AssembledEquipments;
 import mechanics.system.constant.AssembledUrls;
 import mechanics.system.http.JSONHandler;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.ArrayList;
@@ -31,6 +32,15 @@ public class RequestManagerAPI extends JSONManagerAPI{
         messagesEnableAllDebugResponse = true;
         messagesEnableErrorDebugResponse = false;
         messagesEnableGatlingReport = false;
+    }
+
+    public void getRoute(String[] routes){
+
+        for (int i =0; i<routes.length; i++){
+            Response response = sendAmazonRequest(GET.getValue(), AssembledUrls.apiUrl+routes[i]);
+            checkResponseSoft(response);
+        }
+
     }
 
 
@@ -207,6 +217,13 @@ public class RequestManagerAPI extends JSONManagerAPI{
                 || response.statusCode() == 207 || response.statusCode() == 208 || response.statusCode() == 209);
     }
 
+    private void checkStatusCodeSoft(Response response){
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(response.statusCode() == 200 || response.statusCode() == 304 || response.statusCode() == 201 || response.statusCode() == 202
+                || response.statusCode() == 203 || response.statusCode() == 204 || response.statusCode() == 205 || response.statusCode() == 206
+                || response.statusCode() == 207 || response.statusCode() == 208 || response.statusCode() == 209);
+    }
+
     private void checkErrorInResponseBody(Response response) {
         if (!response.asString().contains("error") && !response.asString().contains("exception") && !response.asString().contains("expired") && !response.asString().contains("timed out")) {
             Assert.assertTrue(true);
@@ -220,9 +237,27 @@ public class RequestManagerAPI extends JSONManagerAPI{
         }
     }
 
+    private void checkErrorInResponseBodySoft(Response response) {
+        SoftAssert softAssert = new SoftAssert();
+        if (!response.asString().contains("error") && !response.asString().contains("exception") && !response.asString().contains("expired") && !response.asString().contains("timed out")) {
+            softAssert.assertTrue(true);
+        } else {
+            if (response.asString().contains("\"expired\":false") || response.asString().contains("\"expired\":true,\"accessKeyId\"") || response.asString().contains("Dashboards list is empty")) {
+                softAssert.assertTrue(true);
+            } else {
+                softAssert.assertTrue(false);
+                System.out.println("ERR: error message found in response body");
+            }
+        }
+    }
     private void checkResponse(Response response){
         checkStatusCode(response);
         checkErrorInResponseBody(response);
+    }
+
+    private void checkResponseSoft(Response response){
+        checkStatusCodeSoft(response);
+        checkErrorInResponseBodySoft(response);
     }
 
     public void sleep(int ms){
