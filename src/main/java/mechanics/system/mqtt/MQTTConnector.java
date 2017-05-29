@@ -94,6 +94,12 @@ public class MQTTConnector {
         }
     }
 
+    public void mqttPublish(String topic, String payload, int repeats){
+        for (int i = 0; i <repeats; i++){
+            mqttPublish(topic, payload);
+        }
+    }
+
     public void sleep(int ms){
         try {
             Thread.sleep(ms);
