@@ -37,10 +37,16 @@ public class MQTTManagerAPI extends MQTTConnector {
     }
 
 
-    @Step("Sending payload to VPV equipment")
+    @Step("Sending payload to VPV equipment with Abort")
     public void triggerVPVAbort(){
         String topic = AssembledEquipments.equipmentVpvData;
         String payload = PayloadVPV.newBuilder().setMaxDistanceMain(666).setId(AssembledEquipments.equipmentVpv).initialize();
+        mqttPublish(topic, payload);
+    }
+    @Step("Sending payload to VPV equipment with Abort")
+    public void triggerVPVAlarm(){
+        String topic = AssembledEquipments.equipmentVpvData;
+        String payload = PayloadVPV.newBuilder().setMaxDistanceMain(100).setId(AssembledEquipments.equipmentVpv).initialize();
         mqttPublish(topic, payload);
     }
 

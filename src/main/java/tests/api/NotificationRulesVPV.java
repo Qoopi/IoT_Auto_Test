@@ -8,7 +8,10 @@ import mechanics.system.email.CheckingMails;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import ru.yandex.qatools.allure.annotations.Description;
 import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.Title;
 
 import static mechanics.system.constant.EmailInbox.*;
 
@@ -16,6 +19,8 @@ import static mechanics.system.constant.EmailInbox.*;
  * Created by Alex Storm on 26.05.2017.
  */
 @Listeners(ListenerAPI.class)
+@Title("VPV rules test suite.")
+@Description("Checking rules with VPV equipment.")
 public class NotificationRulesVPV {
 
     @BeforeClass
@@ -26,7 +31,9 @@ public class NotificationRulesVPV {
     }
 
 
-    @Features("Abnormal Vibration rule with Any channel, sending payload on Main with Abort.")
+    @Features("VPV rules.")
+    @Stories("Abnormal Vibration rule.")
+    @Description("Rule setup with any channel, sending payload on Main with Abort.")
     @Test
     public void abnormalVibrationVPVAnyAbortMain() {
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
@@ -41,8 +48,9 @@ public class NotificationRulesVPV {
         requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
     }
-
-    @Features("Abnormal Vibration rule with Any channel, sending payload on Main with Alarm.")
+    @Features("VPV rules.")
+    @Stories("Abnormal Vibration rule.")
+    @Description("Rule setup with any channel, sending payload on Main with Alarm.")
     @Test
     public void abnormalVibrationVPVAnyAlarmMain() {
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
@@ -58,7 +66,9 @@ public class NotificationRulesVPV {
         requestManagerAPI.notificationRuleDelete();
     }
 
-    @Features("Abnormal Vibration rule with Any channel, sending payload on Blower with Abort.")
+    @Features("VPV rules.")
+    @Stories("Abnormal Vibration rule.")
+    @Description("Rule setup with any channel, sending payload on Blower with Abort.")
     @Test
     public void abnormalVibrationVPVAnyAbortBlower() {
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
@@ -74,7 +84,9 @@ public class NotificationRulesVPV {
         requestManagerAPI.notificationRuleDelete();
     }
 
-    @Features("Abnormal Vibration rule with Any channel, sending payload on Blower with Alarm.")
+    @Features("VPV rules.")
+    @Stories("Abnormal Vibration rule.")
+    @Description("Rule setup with any channel, sending payload on Blower with Alarm.")
     @Test
     public void abnormalVibrationVPVAnyAlarmBlower() {
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
@@ -90,7 +102,9 @@ public class NotificationRulesVPV {
         requestManagerAPI.notificationRuleDelete();
     }
 
-    @Features("Abnormal Vibration rule with Main channel, sending payload with Abort.")
+    @Features("VPV rules.")
+    @Stories("Abnormal Vibration rule.")
+    @Description("Rule setup with Main channel,sending payload with Abort.")
     @Test
     public void abnormalVibrationVPVMainAbort() {
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
@@ -106,7 +120,9 @@ public class NotificationRulesVPV {
         requestManagerAPI.notificationRuleDelete();
     }
 
-    @Features("Abnormal Vibration rule with Main channel, sending payload with Alarm.")
+    @Features("VPV rules.")
+    @Stories("Abnormal Vibration rule.")
+    @Description("Rule setup with Main channel, sending payload with Alarm.")
     @Test
     public void abnormalVibrationVPVMainAlarm() {
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
@@ -122,7 +138,9 @@ public class NotificationRulesVPV {
         requestManagerAPI.notificationRuleDelete();
     }
 
-    @Features("Abnormal Vibration rule with Blower channel, sending payload with Abort.")
+    @Features("VPV rules.")
+    @Stories("Abnormal Vibration rule.")
+    @Description("Rule setup with Blower channel, sending payload with Abort.")
     @Test
     public void abnormalVibrationVPVABlowerAbort() {
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
@@ -138,7 +156,9 @@ public class NotificationRulesVPV {
         requestManagerAPI.notificationRuleDelete();
     }
 
-    @Features("Abnormal Vibration rule with Blower channel, sending payload with Alarm.")
+    @Features("VPV rules.")
+    @Stories("Abnormal Vibration rule.")
+    @Description("Rule setup with Blower channel, sending payload with Alarm.")
     @Test
     public void abnormalVibrationVPVABlowerAlarm() {
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
@@ -154,12 +174,14 @@ public class NotificationRulesVPV {
         requestManagerAPI.notificationRuleDelete();
     }
 
-    @Features("Every Warning on VPV rule.")
+    @Features("VPV rules.")
+    @Stories("Send Notifications on Alarm or Abort (VPV) rule.")
+    @Description("Rule setup to react on Aborts.")
     @Test
-    public void sendNotificationOnAlarmOrAbortVPV() {
+    public void sendNotificationOnAlarmOrAbortVPVAbort() {
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleEveryWarningVPV());
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleEveryWarningVPVAbort());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
         mqttManagerAPI.triggerVPVAbort();
@@ -169,8 +191,27 @@ public class NotificationRulesVPV {
         requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
     }
+    @Features("VPV rules.")
+    @Stories("Send Notifications on Alarm or Abort (VPV) rule.")
+    @Description("Rule setup to react on Alarms.")
+    @Test
+    public void sendNotificationOnAlarmOrAbortVPVAlarm() {
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
+        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleEveryWarningVPVAlarm());
+        requestManagerAPI.checkNotificationRuleIsCreated();
+        requestManagerAPI.checkNotificationRuleNotTriggered();
+        mqttManagerAPI.triggerVPVAlarm();
+        requestManagerAPI.checkNotificationRuleTriggeredLong();
+        CheckingMails checkingMails = new CheckingMails();
+        checkingMails.checkLong(SubjectNotificationRuleEveryWarningVPV.getMessage());
+        requestManagerAPI.notificationListDeleteAll();
+        requestManagerAPI.notificationRuleDelete();
+    }
 
-    @Features("Number of Alarms above threshold on VPV equipment rule.")
+    @Features("VPV rules.")
+    @Stories("Number of Alarms above threshold rule.")
+    @Description("Rule setup to react on Alarm.")
     @Test
     public void alarmCountVPV() {
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
@@ -187,7 +228,9 @@ public class NotificationRulesVPV {
 
     }
 
-    @Features("Number of Abnormal above threshold on VPV equipment rule.")
+    @Features("VPV rules.")
+    @Stories("Number of Abnormal above threshold rule.")
+    @Description("Rule setup to react in Aborts.")
     @Test
     public void abortCountVPV() {
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
@@ -204,7 +247,9 @@ public class NotificationRulesVPV {
 
     }
 
-    @Features("Disconnected rule with VPV equipment.")
+    @Features("VPV rules.")
+    @Stories("Disconnected equipment rule.")
+    @Description("Rule setup to react on disconnected equipment.")
     @Test//не работает принципиально, оставлена проверка "создается ли rule"
     public void disconnectedEquipmentVPV() {
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
@@ -216,7 +261,9 @@ public class NotificationRulesVPV {
 
     }
 
-    @Features("Connected rule with VPV equipment.")
+    @Features("VPV rules.")
+    @Stories("Disconnected equipment rule.")
+    @Description("Rule setup to react on Connected equipment.")
     @Test//не работает принципиально, оставлена проверка "создается ли rule"
     public void connectedEquipmentVPV() {
         RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
