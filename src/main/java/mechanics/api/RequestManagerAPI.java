@@ -259,6 +259,7 @@ public class RequestManagerAPI extends JSONManagerAPI {
         }
     }
 
+    @Step("Check if response contains error message in body or 4** 5** http status code")
     private void checkResponse(Response response) {
         checkStatusCode(response);
         checkErrorInResponseBody(response);
