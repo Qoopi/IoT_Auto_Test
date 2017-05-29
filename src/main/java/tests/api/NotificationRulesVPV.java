@@ -48,6 +48,7 @@ public class NotificationRulesVPV {
         requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
     }
+
     @Features("VPV rules.")
     @Stories("Abnormal Vibration rule.")
     @Description("Rule setup with any channel, sending payload on Main with Alarm.")
@@ -191,6 +192,7 @@ public class NotificationRulesVPV {
         requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
     }
+
     @Features("VPV rules.")
     @Stories("Send Notifications on Alarm or Abort (VPV) rule.")
     @Description("Rule setup to react on Alarms.")

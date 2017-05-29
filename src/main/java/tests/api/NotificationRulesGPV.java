@@ -48,6 +48,7 @@ public class NotificationRulesGPV {
         requestManagerAPI.notificationListDeleteAll();
         requestManagerAPI.notificationRuleDelete();
     }
+
     @Features("GPV rules.")
     @Stories("Number of Alarms above threshold rule.")
     @Description("")
@@ -79,6 +80,7 @@ public class NotificationRulesGPV {
 
         requestManagerAPI.notificationRuleDelete();
     }
+
     @Features("GPV rules.")
     @Stories("Connected equipment rule.")
     @Description("")
