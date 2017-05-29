@@ -41,7 +41,7 @@ public class NotificationRulesGPV {
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleEveryWarningGPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
-        mqttManagerAPI.triggerGPV();
+        mqttManagerAPI.triggerGPVAlarm();
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.checkLong(SubjectNotificationRuleEveryWarningGPV.getMessage());
@@ -58,7 +58,7 @@ public class NotificationRulesGPV {
         requestManagerAPI.notificationRuleCreate(requestManagerAPI.jsonRuleAlarmCountGPV());
         requestManagerAPI.checkNotificationRuleIsCreated();
         requestManagerAPI.checkNotificationRuleNotTriggered();
-        mqttManagerAPI.triggerGPV();
+        mqttManagerAPI.triggerGPVAlarm();
         requestManagerAPI.checkNotificationRuleTriggeredLong();
         CheckingMails checkingMails = new CheckingMails();
         checkingMails.checkLong(SubjectNotificationRuleNumberOfAlarms.getMessage());

@@ -1,19 +1,76 @@
 package tests;
 
 import com.jayway.restassured.response.Response;
+import mechanics.api.ListenerAPI;
 import mechanics.api.MQTTManagerAPI;
 import mechanics.api.RequestManagerAPI;
 import mechanics.system.aws.SignAWSv4;
+import mechanics.system.constant.AssembledEquipments;
+import mechanics.system.constant.AssembledUrls;
 import mechanics.system.constant.HTTPMethod;
 import mechanics.system.mqtt.PayloadGPV;
 import mechanics.system.mqtt.PayloadVPV;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
 
 /**
  * Created by user on 19.04.2017.
  */
-//@Listeners(ListenerAPI.class)
+@Listeners(ListenerAPI.class)
 public class Workbench {
+
+//    @Test
+    public void testHeartbeat(){
+        String topic = "Heartbeat/U000001/OSS/Lab/FGW/Thing-000025";
+        String payload = "{\"expiration\":"+(System.currentTimeMillis()/1000-600)+"}";
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
+        mqttManagerAPI.mqttPublish(topic, payload);
+    }
+
+//    @Test
+    public void testHeartbeatConnected(){
+        String topic = "Heartbeat/U000001/OSS/Lab/FGW/Thing-000025";
+        String payload = "{\"expiration\":"+(System.currentTimeMillis()/1000+120)+"}";
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
+        mqttManagerAPI.mqttPublish(topic, payload);
+    }
+
+    @Test
+    public void testWidget(){
+        String topic = AssembledEquipments.equipmentGpvData;
+        String payload = PayloadGPV.newBuilder().setMultiDataStreamId(AssembledEquipments.equipmentGpvMultiDatastreamId).setAlarm(true).initialize();
+        MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();
+        mqttManagerAPI.mqttPublish(topic, payload, 5);
+    }
+
+
+//    @Test
+    public void testRoutes() {
+        String[] routes = {
+                "authentication/logout",
+                "authentication/refresh",
+                "authentication/refresh/testapi",
+                "dashboard",
+                "equipment",
+                "equipment_admin",
+                "equipment_models",
+                "frequencytoes",
+                "global_settings",
+                "helloRestconf",
+                "menu",
+                "notification",
+                "profile",
+                "report",
+                "rule",
+                "syncwithis",
+                "templates",
+                "testassumerole",
+                "user"
+        };
+        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
+        requestManagerAPI.getRoute(routes);
+    }
 
 
 //    @Test
