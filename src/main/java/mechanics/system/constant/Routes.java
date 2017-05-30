@@ -8,6 +8,7 @@ public enum Routes {
     NotificationUnread("notification?status=unread"),
     Notification("notification"),
     EquipmentAdmin("equipment_admin"),
+    Equipment("equipment"),
     Report("report"),
     AuthenticationRefresh("authentication/refresh"),
     Dashboard("dashboard"),

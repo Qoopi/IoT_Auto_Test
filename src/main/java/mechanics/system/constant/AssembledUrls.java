@@ -15,6 +15,7 @@ public class AssembledUrls {
     public static String notificationUnread;
     public static String notification;
     public static String equipmentAdmin;
+    public static String equipment;
     public static String report;
     public static String authenticationRefresh;
     public static String dashboard;
@@ -25,6 +26,7 @@ public class AssembledUrls {
         notificationUnread = apiUrl+NotificationUnread.getValue();
         notification = apiUrl+Notification.getValue();
         equipmentAdmin = apiUrl+EquipmentAdmin.getValue();
+        equipment = apiUrl+Equipment.getValue();
         report = apiUrl+Report.getValue();
         authenticationRefresh = apiUrl+AuthenticationRefresh.getValue();
         dashboard = apiUrl+Dashboard.getValue();

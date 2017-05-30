@@ -9,6 +9,7 @@ import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import ru.yandex.qatools.allure.annotations.Attachment;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.ArrayList;
@@ -334,8 +335,22 @@ public class RequestManagerAPI extends JSONManagerAPI {
         checkChartData(response);
     }
 
-    public void checkEquipmentDataVPV() {
-        String url = AssembledUrls.chart + "/" + AssembledEquipments.equipmentVpv + "?" + AssembledEquipments.equipmentVpvChannel + "&startDate=" + (System.currentTimeMillis() - 60000000) + "&" + AssembledEquipments.equipmentVpvChartType;
+    public void checkEquipmentDataVPV(String channel, String type) {
+        String url = AssembledUrls.chart + "/" + AssembledEquipments.equipmentVpv + "?channelIdx="+ channel + "&startDate=" + (System.currentTimeMillis() - 60000000) + "&type="+type;
+        Response response = sendAmazonRequest(GET.getValue(), url, false);
+        checkResponse(response);
+        checkChartData(response);
+    }
+
+    public void checkEquipmentNewDataVPV(String channel, String type) {
+        String url = AssembledUrls.chart + "/" + AssembledEquipments.equipmentVpv + "?channelIdx="+ channel + "&startDate=" + (System.currentTimeMillis() - 600000) + "&type="+type;
+        Response response = sendAmazonRequest(GET.getValue(), url, false);
+        checkResponse(response);
+        checkChartData(response);
+    }
+
+    public void checkEquipmentNewDataGPV() {
+        String url = AssembledUrls.chart + "/" + AssembledEquipments.equipmentGpv + "?startDate=" + (System.currentTimeMillis() - 600000);
         Response response = sendAmazonRequest(GET.getValue(), url, false);
         checkResponse(response);
         checkChartData(response);
@@ -348,4 +363,19 @@ public class RequestManagerAPI extends JSONManagerAPI {
                         response.asString().contains("\"y\":")
         );
     }
+
+    public void checkEquipmentNotDeletedGPV(){
+        String url = AssembledUrls.equipment+"/"+AssembledEquipments.equipmentGpv;
+        Response response = sendAmazonRequest(GET.getValue(), url);
+        checkResponse(response);
+        Assert.assertTrue(response.asString().contains("\"isDeleted\":0"));
+    }
+
+    public void checkEquipmentNotDeletedVPV(){
+        String url = AssembledUrls.equipment+"/"+AssembledEquipments.equipmentVpv;
+        Response response = sendAmazonRequest(GET.getValue(), url);
+        checkResponse(response);
+        Assert.assertTrue(response.asString().contains("\"isDeleted\":0"));
+    }
+
 }

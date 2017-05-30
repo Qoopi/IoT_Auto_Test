@@ -5,6 +5,7 @@ import mechanics.api.RequestManagerAPI;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Step;
 import ru.yandex.qatools.allure.annotations.Stories;
 import ru.yandex.qatools.allure.annotations.Title;
 
@@ -91,17 +92,4 @@ public class DashboardTests {
         requestManagerAPI.checkDashboardDeleted();
     }
 
-    @Test
-    public void dashboardReceivingDataGPV(){
-        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-        requestManagerAPI.checkEquipmentDataGPV();
-
-    }
-
-    @Test
-    public void dashboardReceivingDataVPV(){
-        RequestManagerAPI requestManagerAPI = new RequestManagerAPI();
-        requestManagerAPI.checkEquipmentDataVPV();
-
-    }
 }
