@@ -39,6 +39,13 @@ public class RequestManagerAPI extends JSONManagerAPI {
         messagesEnableGatlingReport = false;
     }
 
+
+    public Response getGlobalSettings(){
+        Response response = sendAmazonRequest(GET.getValue(), AssembledUrls.globalSettings);
+        checkResponse(response);
+        return response;
+    }
+
     public void getRoute(String[] routes) {
 
         for (int i = 0; i < routes.length; i++) {

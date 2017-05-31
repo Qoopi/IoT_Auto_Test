@@ -12,7 +12,8 @@ public enum Routes {
     Report("report"),
     AuthenticationRefresh("authentication/refresh"),
     Dashboard("dashboard"),
-    Chart("chart");
+    Chart("chart"),
+    GlobalSettings("global_settings");
 
     private final String value;
 

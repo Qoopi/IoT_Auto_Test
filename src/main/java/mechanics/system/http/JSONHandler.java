@@ -176,7 +176,7 @@ public class JSONHandler extends SignAWSv4 {
         return jsonObject;
     }
 
-    private JSONObject parseToJSONObject(String jsonString) {
+    protected JSONObject parseToJSONObject(String jsonString) {
         JSONParser parser = new JSONParser();
         JSONObject jsonObject = null;
         try {

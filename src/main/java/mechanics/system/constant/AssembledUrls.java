@@ -10,6 +10,7 @@ public class AssembledUrls {
     public static String apiUrlMin;
     public static String redirectClientURI;
     public static String iotEndpoint;
+    public static String skedlerEndpoint;
 
     public static String notificationRule;
     public static String notificationUnread;
@@ -20,6 +21,7 @@ public class AssembledUrls {
     public static String authenticationRefresh;
     public static String dashboard;
     public static String chart;
+    public static String globalSettings;
 
     public void assemble(){
         notificationRule = apiUrl+NotificationRule.getValue();
@@ -31,6 +33,7 @@ public class AssembledUrls {
         authenticationRefresh = apiUrl+AuthenticationRefresh.getValue();
         dashboard = apiUrl+Dashboard.getValue();
         chart = apiUrl+Chart.getValue();
+        globalSettings = apiUrl+GlobalSettings.getValue();
     }
 
     public void setApiUrl(String apiUrl) {
@@ -49,5 +52,8 @@ public class AssembledUrls {
         AssembledUrls.iotEndpoint = iotEndpoint;
     }
 
+    public void setSkedlerEndpoint(String skedlerEndpoint) {
+        AssembledUrls.skedlerEndpoint = skedlerEndpoint;
+    }
 
 }

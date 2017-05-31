@@ -4,10 +4,13 @@ import com.jayway.restassured.response.Response;
 import mechanics.api.ListenerAPI;
 import mechanics.api.MQTTManagerAPI;
 import mechanics.api.RequestManagerAPI;
+import mechanics.api.json.GlobalSettingsRequest;
+import mechanics.api.json.GlobalSettingsResponse;
 import mechanics.system.aws.SignAWSv4;
 import mechanics.system.constant.AssembledEquipments;
 import mechanics.system.constant.AssembledUrls;
 import mechanics.system.constant.HTTPMethod;
+import mechanics.system.http.RequestSender;
 import mechanics.system.mqtt.PayloadGPV;
 import mechanics.system.mqtt.PayloadVPV;
 import org.testng.Assert;
@@ -19,6 +22,22 @@ import org.testng.annotations.Test;
  */
 @Listeners(ListenerAPI.class)
 public class Workbench {
+
+    @Test
+    public void testGlobalAck(){
+        String url = AssembledUrls.globalSettings;
+        RequestManagerAPI requestSender = new RequestManagerAPI();
+        String body = GlobalSettingsRequest.newBuilder().initialize();
+        GlobalSettingsResponse globalSettingsResponse = new GlobalSettingsResponse();
+        requestSender.sendAmazonRequest("PUT", url, body);
+
+        String body1 = GlobalSettingsRequest.newBuilder().setAcknowledged(31).initialize();
+        requestSender.sendAmazonRequest("PUT", url, body1);
+
+        String body3 = requestSender.sendAmazonRequest("GET", url).asString();
+        globalSettingsResponse.parse(body3);
+        Assert.assertTrue(31==globalSettingsResponse.getAcknowledged());
+    }
 
 //    @Test
     public void testData(){
@@ -51,7 +70,7 @@ public class Workbench {
         mqttManagerAPI.mqttPublish(topic, payload, 5);
     }
 
-    @Test
+//    @Test
     public void subscribe(){
         String topic = "Heartbeat/U000001/OSS/Lab/FGW/Thing-090175";
         MQTTManagerAPI mqttManagerAPI = new MQTTManagerAPI();

@@ -51,6 +51,7 @@ public class Variables {
         assembledUrls.setApiUrlMin(urls.get("API_URL_MIN"));
         assembledUrls.setIotEndpoint(urls.get("iotEndpoint"));
         assembledUrls.setRedirectClientURI(urls.get("redirectClientURI"));
+        assembledUrls.setSkedlerEndpoint(urls.get("skedlerEndpoint"));
         assembledUrls.assemble();
     }
 
