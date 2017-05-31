@@ -276,6 +276,4 @@ public class NotificationRulesVPV {
         requestManagerAPI.notificationRuleDelete();
 
     }
-
-
 }
